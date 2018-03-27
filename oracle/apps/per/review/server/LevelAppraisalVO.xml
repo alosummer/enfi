@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="LevelAppraisalVO"
+   OrderBy="FINAL_MARK DESC"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.LevelAppraisalVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.LevelAppraisalVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT LEVELAPPRAISALEO.APPRAISAL_ID,
+       LEVELAPPRAISALEO.ORGANIZATION_ID,
+       LEVELAPPRAISALEO.APPRAISAL_PERSON_ID,
+       LEVELAPPRAISALEO.COMPANY_ID,
+       LEVELAPPRAISALEO.PROMISER_PERSON_ID,
+       LEVELAPPRAISALEO.WF_ITEM_KEY,
+       LEVELAPPRAISALEO.EFFECTIVE_DATE,
+       LEVELAPPRAISALEO.SIGN_DATE,
+       LEVELAPPRAISALEO.APPRAISAL_GROUP_ID,
+       LEVELAPPRAISALEO.PHASE_ID,
+       LEVELAPPRAISALEO.PERIOD_TYPE_ID,
+       LEVELAPPRAISALEO.APPRAISAL_YEAR,
+       LEVELAPPRAISALEO.PERIOD_ID,
+       LEVELAPPRAISALEO.STATUS_ID,
+       LEVELAPPRAISALEO.ENABLED,
+       LEVELAPPRAISALEO.APPROVAL_NUM,
+       LEVELAPPRAISALEO.CAL_MARK,
+       LEVELAPPRAISALEO.ORI_MARK,
+       LEVELAPPRAISALEO.MOD_MARK,
+       LEVELAPPRAISALEO.FINAL_MARK,
+       LEVELAPPRAISALEO.ORI_LEVEL,
+       LEVELAPPRAISALEO.FINAL_LEVEL,
+       LEVELAPPRAISALEO.ATTRIBUTE_CATEGORY,
+       LEVELAPPRAISALEO.LAST_UPDATE_DATE,
+       LEVELAPPRAISALEO.LAST_UPDATED_BY,
+       LEVELAPPRAISALEO.LAST_UPDATE_LOGIN,
+       LEVELAPPRAISALEO.CREATED_BY,
+       LEVELAPPRAISALEO.CREATION_DATE,
+       LEVELAPPRAISALEO.APPRAISAL_DATE,
+       cux_jxkh_common_pkg.get_packet_num(LEVELAPPRAISALEO.appraisal_group_id,
+                                          LEVELAPPRAISALEO.ORGANIZATION_ID,NVL(LEVELAPPRAISALEO.Sign_Date,SYSDATE)) PACKET_NUM
+  FROM CUX_APPRAISAL_T LEVELAPPRAISALEO
+WHERE LEVELAPPRAISALEO.PHASE_ID IN ('REVIEW','APPEAL')
+AND LevelAppraisalEO.STATUS_ID <> 'CLOSED'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="LevelAppraisalEO"
+      Entity="cux.oracle.apps.per.review.server.LevelAppraisalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+         <Attr Name="_queryOrderBy" Value="FINAL_MARK DESC" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsNotNull="true"
+      EntityAttrName="OrganizationId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORGANIZATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalPersonId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalPersonId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompanyId"
+      EntityAttrName="CompanyId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="COMPANY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiserPersonId"
+      EntityAttrName="PromiserPersonId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="PROMISER_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfItemKey"
+      IsNotNull="true"
+      EntityAttrName="WfItemKey"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="WF_ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EffectiveDate"
+      EntityAttrName="EffectiveDate"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="EFFECTIVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignDate"
+      EntityAttrName="SignDate"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="SIGN_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalGroupId"
+      EntityAttrName="AppraisalGroupId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseId"
+      EntityAttrName="PhaseId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="PHASE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodTypeId"
+      EntityAttrName="PeriodTypeId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="PERIOD_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalYear"
+      EntityAttrName="AppraisalYear"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_YEAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodId"
+      EntityAttrName="PeriodId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="PERIOD_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusId"
+      EntityAttrName="StatusId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="STATUS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Enabled"
+      EntityAttrName="Enabled"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ENABLED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApprovalNum"
+      EntityAttrName="ApprovalNum"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPROVAL_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CalMark"
+      EntityAttrName="CalMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="CAL_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriMark"
+      EntityAttrName="OriMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORI_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModMark"
+      EntityAttrName="ModMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="MOD_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalMark"
+      EntityAttrName="FinalMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="FINAL_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriLevel"
+      EntityAttrName="OriLevel"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORI_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalLevel"
+      EntityAttrName="FinalLevel"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="FINAL_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalDate"
+      EntityAttrName="AppraisalDate"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PacketNum"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PACKET_NUM"
+      Expression="PACKET_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

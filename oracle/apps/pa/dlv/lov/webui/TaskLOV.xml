@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.pa.dlv.lov.server.DlvLovAM">
+   <ui:contents>
+      <oa:table name="TaskLOV" id="TaskVO1">
+         <ui:contents>
+            <oa:messageStyledText id="TaskNumber" dataType="VARCHAR2" prompt="WBS任务编号" viewName="TaskVO1" viewAttr="TaskNumber" maximumLength="100" queryable="true"/>
+            <oa:messageStyledText id="TaskName" dataType="VARCHAR2" prompt="WBS任务名称" viewName="TaskVO1" viewAttr="TaskName" maximumLength="240" queryable="true"/>
+            <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="TaskVO1" viewAttr="ProjectId"/>
+            <oa:formValue id="TaskId" dataType="NUMBER" prompt="TaskId" viewName="TaskVO1" viewAttr="TaskId"/>
+            <oa:formValue id="UnassignedWeight" viewName="TaskVO1" viewAttr="UnassignedWeight" dataType="NUMBER"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="TaskVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.hxc.selfservice.timecard.server.TaskVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT task.task_number || ' ' || task.task_name || '-' ||
+       cux_pa_util_pkg.get_zx(task.task_id) tasknumber
+      ,task.task_name
+      ,task_details taskdetails
+      ,task.task_id taskid
+      ,task.billable_flag
+      ,task.project_id
+      ,task.start_date
+      ,task.completion_date
+      ,task.chargeable_flag
+      ,proj.project_number
+      ,proj.project_details
+FROM   pa_online_tasks_v    task
+      ,pa_online_projects_v proj
+      ,pa_proj_elements     ppe
+WHERE  proj.project_id = task.project_id
+AND    task.task_id = ppe.proj_element_id
+AND    ((nvl(cux_pa_util_pkg.get_project_class(proj.project_number, '项目细分类'),
+             '-1') <> '部门综合管理' AND
+      pa_task_utils.get_wbs_level(task.task_id) > 1) OR
+      (nvl(cux_pa_util_pkg.get_project_class(proj.project_number, '项目细分类'),
+             '-1') = '部门综合管理' AND
+      pa_task_utils.get_wbs_level(task.task_id) >= 1))
+AND    pa_proj_elements_utils.get_task_status_sys_code(ppe.status_code) <>
+       'COMPLETED'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="Tasknumber"
+      IsPersistent="false"
+      Precision="278"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASKNUMBER"
+      Expression="TASKNUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="278" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      Precision="263"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="263" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Taskdetails"
+      IsPersistent="false"
+      Precision="46"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASKDETAILS"
+      Expression="TASKDETAILS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="46" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Taskid"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASKID"
+      Expression="TASKID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BillableFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BILLABLE_FLAG"
+      Expression="BILLABLE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ID"
+      Expression="PROJECT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="START_DATE"
+      Expression="START_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="COMPLETION_DATE"
+      Expression="COMPLETION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChargeableFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHARGEABLE_FLAG"
+      Expression="CHARGEABLE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectNumber"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUMBER"
+      Expression="PROJECT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectDetails"
+      IsPersistent="false"
+      Precision="58"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_DETAILS"
+      Expression="PROJECT_DETAILS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="58" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

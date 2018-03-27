@@ -1,0 +1,550 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AppraisalEmpVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.AppraisalEmpVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.AppraisalEmpVOImpl"
+   DefClass="cux.oracle.apps.per.review.server.AppraisalEmpVODefImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT t.APPRAISAL_ID,
+       t.ORGANIZATION_ID,
+       t.APPRAISAL_PERSON_ID,
+       t.PROMISER_PERSON_ID,
+       t.WF_ITEM_KEY,
+       t.EFFECTIVE_DATE,
+       t.SIGN_DATE,
+       t.APPRAISAL_GROUP_ID,
+       t.PHASE_ID,
+       t.PERIOD_TYPE_ID,
+       t.APPRAISAL_YEAR,
+       t.PERIOD_ID,
+       cux_jxkh_common_pkg.get_appraisal_status(t.APPRAISAL_ID) STATUS_ID,
+       t.ENABLED,
+       t.APPROVAL_NUM,
+       t.CAL_MARK,
+       t.ORI_MARK,
+       t.MOD_MARK,
+       to_number(decode(t.phase_id,
+                        'REVIEW',
+                        decode(t.appraisal_person_id,
+                               fnd_global.EMPLOYEE_ID,
+                               decode(t.status_id,
+                                      'COMPLETED',
+                                      t.FINAL_MARK,'FREEZED',t.FINAL_MARK,'PUBLISHED',t.FINAL_MARK,                                   
+                                      NULL),
+                               t.final_mark),
+                        t.final_mark)) FINAL_MARK,
+       t.ORI_LEVEL,
+       t.FINAL_LEVEL,
+       t.ATTRIBUTE_CATEGORY,
+       t.ATTRIBUTE1,
+       t.ATTRIBUTE2,
+       t.ATTRIBUTE3,
+       t.ATTRIBUTE4,
+       t.ATTRIBUTE5,
+       t.LAST_UPDATE_DATE,
+       t.LAST_UPDATED_BY,
+       t.LAST_UPDATE_LOGIN,
+       t.CREATED_BY,
+       t.CREATION_DATE,
+       org.NAME AS dept_name,
+       l1.meaning AS period_name,
+       l2.meaning AS phase_name,
+       decode(cux_jxkh_common_pkg.get_appraisal_status(t.APPRAISAL_ID),
+              'PROCESSING',
+              '进行中',
+              'SUBMITED',
+              '已提交',
+              'WAITING',
+              '待处理',
+              l3.meaning) AS status_name,
+       p.last_name AS emp_name,
+       p.employee_number,
+       c.last_name AS manager_name,
+       NVL(cux_jxkh_common_pkg.get_changed_job(pa.person_id),paj.NAME) emp_position,
+       NVL(cux_jxkh_common_pkg.get_changed_job(pc.person_id),pcj.NAME) manager_position,
+       cgt.group_name AS emp_group,
+       cux_jxkh_common_pkg.get_appraisal_performer(t.APPRAISAL_ID) AS current_performer,
+       cux_jxkh_common_pkg.is_promiseer_role(t.APPRAISAL_ID) AS is_promisee,
+       t.appraisal_date,
+       t.year,
+       t.company_id
+  FROM CUX_APPRAISAL_T           t,
+       cux_review_group_t        cgt,
+       hr_all_organization_units org,
+       fnd_lookup_values         l1,
+       fnd_lookup_values         l2,
+       fnd_lookup_values         l3,
+       per_all_people_f          p,
+       per_all_people_f          c,
+       per_all_assignments_f     pa,
+       per_all_assignments_f     pc,
+       PER_JOBS_VL               paj,
+       PER_JOBS_VL               pcj
+ WHERE t.Organization_Id = org.Organization_Id
+   AND t.appraisal_group_id = cgt.group_id
+   AND t.PERIOD_type_ID = l1.lookup_code
+   AND l1.lookup_type = 'EPM_PERIOD'
+   AND l1.LANGUAGE = userenv('LANG')
+   AND nvl(l1.start_date_active,t.sign_date) <= t.sign_date
+   AND nvl(l1.end_date_active,t.sign_date) >= t.sign_date
+   AND l1.enabled_flag = 'Y'
+   AND t.PHASE_ID = l2.lookup_code
+   AND l2.lookup_type = 'EPM_PHASE_CLASS'
+   AND l2.LANGUAGE = userenv('LANG')
+   AND nvl(l2.start_date_active, t.sign_date) <= t.sign_date
+   AND nvl(l2.end_date_active, t.sign_date) >= t.sign_date
+   AND l2.enabled_flag = 'Y'
+   AND t.status_id = l3.lookup_code
+   AND l3.lookup_type = 'EPM_FLOW_STATUS'
+   AND l3.LANGUAGE = userenv('LANG')
+   AND nvl(l3.start_date_active, t.sign_date) <= t.sign_date
+   AND nvl(l3.end_date_active, t.sign_date) >= t.sign_date
+   AND l3.enabled_flag = 'Y'
+   AND t.appraisal_person_id = p.person_id
+   AND t.PROMISER_PERSON_ID = c.person_id(+)
+   AND t.PROMISER_PERSON_ID = pc.person_id(+)
+   AND t.sign_date BETWEEN nvl(p.effective_start_date,t.sign_date) AND
+       nvl(p.effective_end_date,t.sign_date)
+   AND t.sign_date BETWEEN nvl(c.effective_start_date(+),t.sign_date) AND
+       nvl(c.effective_end_date(+),t.sign_date)
+   AND t.sign_date BETWEEN nvl(pa.effective_start_date,t.sign_date) AND
+       nvl(pa.effective_end_date,t.sign_date)
+   AND t.sign_date BETWEEN nvl(pc.effective_start_date(+),t.sign_date) AND
+       nvl(pc.effective_end_date(+),t.sign_date)
+   AND pc.PRIMARY_FLAG(+) = 'Y'
+   AND pc.job_id = pcj.job_id(+)
+   AND t.appraisal_person_id = pa.person_id
+   AND pa.PRIMARY_FLAG = 'Y'
+   AND pa.job_id = paj.job_id
+   AND t.appraisal_id > 0
+   AND EXISTS (SELECT 1
+          FROM cux_appraisal_attend caa, fnd_user fu
+         WHERE caa.appraisal_id = t.appraisal_id
+           AND ((caa.person_type = :1 AND
+               caa.person_id = fu.employee_id) OR 2 = :1)
+           AND fu.user_id = fnd_global.USER_ID)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Def|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="AppraisalEO"
+      Entity="cux.oracle.apps.per.review.server.AppraisalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalId"
+      EntityUsage="AppraisalEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsNotNull="true"
+      EntityAttrName="OrganizationId"
+      EntityUsage="AppraisalEO"
+      AliasName="ORGANIZATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalPersonId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalPersonId"
+      EntityUsage="AppraisalEO"
+      AliasName="APPRAISAL_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiserPersonId"
+      EntityAttrName="PromiserPersonId"
+      EntityUsage="AppraisalEO"
+      AliasName="PROMISER_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfItemKey"
+      IsNotNull="true"
+      EntityAttrName="WfItemKey"
+      EntityUsage="AppraisalEO"
+      AliasName="WF_ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EffectiveDate"
+      EntityAttrName="EffectiveDate"
+      EntityUsage="AppraisalEO"
+      AliasName="EFFECTIVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignDate"
+      EntityAttrName="SignDate"
+      EntityUsage="AppraisalEO"
+      AliasName="SIGN_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalGroupId"
+      EntityAttrName="AppraisalGroupId"
+      EntityUsage="AppraisalEO"
+      AliasName="APPRAISAL_GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseId"
+      EntityAttrName="PhaseId"
+      EntityUsage="AppraisalEO"
+      AliasName="PHASE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodTypeId"
+      EntityAttrName="PeriodTypeId"
+      EntityUsage="AppraisalEO"
+      AliasName="PERIOD_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalYear"
+      EntityAttrName="AppraisalYear"
+      EntityUsage="AppraisalEO"
+      AliasName="APPRAISAL_YEAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodId"
+      EntityAttrName="PeriodId"
+      EntityUsage="AppraisalEO"
+      AliasName="PERIOD_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusId"
+      EntityAttrName="StatusId"
+      EntityUsage="AppraisalEO"
+      AliasName="STATUS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Enabled"
+      EntityAttrName="Enabled"
+      EntityUsage="AppraisalEO"
+      AliasName="ENABLED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApprovalNum"
+      EntityAttrName="ApprovalNum"
+      EntityUsage="AppraisalEO"
+      AliasName="APPROVAL_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CalMark"
+      EntityAttrName="CalMark"
+      EntityUsage="AppraisalEO"
+      AliasName="CAL_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriMark"
+      EntityAttrName="OriMark"
+      EntityUsage="AppraisalEO"
+      AliasName="ORI_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModMark"
+      EntityAttrName="ModMark"
+      EntityUsage="AppraisalEO"
+      AliasName="MOD_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalMark"
+      EntityAttrName="FinalMark"
+      EntityUsage="AppraisalEO"
+      AliasName="FINAL_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriLevel"
+      EntityAttrName="OriLevel"
+      EntityUsage="AppraisalEO"
+      AliasName="ORI_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalLevel"
+      EntityAttrName="FinalLevel"
+      EntityUsage="AppraisalEO"
+      AliasName="FINAL_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="AppraisalEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="AppraisalEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="AppraisalEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="AppraisalEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="AppraisalEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="AppraisalEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeptName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEPT_NAME"
+      Expression="DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_NAME"
+      Expression="PERIOD_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_NAME"
+      Expression="PHASE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_NAME"
+      Expression="STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmployeeNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPLOYEE_NUMBER"
+      Expression="EMPLOYEE_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagerName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MANAGER_NAME"
+      Expression="MANAGER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpPosition"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_POSITION"
+      Expression="EMP_POSITION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagerPosition"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MANAGER_POSITION"
+      Expression="MANAGER_POSITION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpGroup"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_GROUP"
+      Expression="EMP_GROUP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrentPerformer"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CURRENT_PERFORMER"
+      Expression="CURRENT_PERFORMER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsPromisee"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_PROMISEE"
+      Expression="IS_PROMISEE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="APPRAISAL_DATE"
+      Expression="APPRAISAL_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Year"
+      IsPersistent="false"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="YEAR"
+      Expression="YEAR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompanyId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="COMPANY_ID"
+      Expression="COMPANY_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelectFlag"
+      IsSelected="false"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SELECT_FLAG"
+      Passivate="true"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+</ViewObject>

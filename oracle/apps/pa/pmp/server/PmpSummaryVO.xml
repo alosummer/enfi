@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpSummaryVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.pmp.server.PmpSummaryVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpSummaryVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pmpsummaryeo.project_id
+      ,pmpsummaryeo.version_num
+      ,cux_pa_pmp_util_pkg.get_project_class(pmpsummaryeo.project_id) project_class
+      ,cux_pa_pmp_util_pkg.get_contract_amount(pmpsummaryeo.project_id) contract_amount
+      ,cux_pa_pmp_util_pkg.get_award_date(pmpsummaryeo.project_id) award_date
+      ,cux_pa_pmp_util_pkg.get_project_start_date(pmpsummaryeo.project_id) project_start_date
+      ,cux_pa_pmp_util_pkg.get_schedule_completion_date(pmpsummaryeo.project_id) schedule_completion_date
+      ,cux_pa_pmp_util_pkg.get_project_scale(pmpsummaryeo.project_id) project_scale
+      ,cux_pa_pmp_util_pkg.get_total_project_investment(pmpsummaryeo.project_id) total_project_investment
+      ,pmpsummaryeo.cooperators
+      ,pmpsummaryeo.project_desc
+      ,pmpsummaryeo.project_range
+      ,pmpsummaryeo.attribute1
+      ,pmpsummaryeo.attribute2
+      ,pmpsummaryeo.attribute3
+      ,pmpsummaryeo.attribute4
+      ,pmpsummaryeo.attribute5
+      ,pmpsummaryeo.attribute6
+      ,pmpsummaryeo.attribute7
+      ,pmpsummaryeo.attribute8
+      ,pmpsummaryeo.attribute9
+      ,pmpsummaryeo.created_by
+      ,pmpsummaryeo.creation_date
+      ,pmpsummaryeo.last_updated_by
+      ,pmpsummaryeo.last_update_date
+      ,pmpsummaryeo.last_update_login
+      ,pmpsummaryeo.rowid
+FROM   cux.cux_pa_pmp_summary_t pmpsummaryeo
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PmpSummaryEO"
+      Entity="cux.oracle.apps.pa.pmp.server.PmpSummaryEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="PmpSummaryEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNum"
+      EntityAttrName="VersionNum"
+      EntityUsage="PmpSummaryEO"
+      AliasName="VERSION_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectClass"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_CLASS"
+      Expression="PROJECT_CLASS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContractAmount"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CONTRACT_AMOUNT"
+      Expression="CONTRACT_AMOUNT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AwardDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="AWARD_DATE"
+      Expression="AWARD_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectStartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="PROJECT_START_DATE"
+      Expression="PROJECT_START_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduleCompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SCHEDULE_COMPLETION_DATE"
+      Expression="SCHEDULE_COMPLETION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectScale"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_SCALE"
+      Expression="PROJECT_SCALE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalProjectInvestment"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_PROJECT_INVESTMENT"
+      Expression="TOTAL_PROJECT_INVESTMENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cooperators"
+      EntityAttrName="Cooperators"
+      EntityUsage="PmpSummaryEO"
+      AliasName="COOPERATORS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectDesc"
+      EntityAttrName="ProjectDesc"
+      EntityUsage="PmpSummaryEO"
+      AliasName="PROJECT_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRange"
+      EntityAttrName="ProjectRange"
+      EntityUsage="PmpSummaryEO"
+      AliasName="PROJECT_RANGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="PmpSummaryEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="PmpSummaryEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="PmpSummaryEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="PmpSummaryEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="PmpSummaryEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="PmpSummaryEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

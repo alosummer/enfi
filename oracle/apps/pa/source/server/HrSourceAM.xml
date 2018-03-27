@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="HrSourceAM"
+   ComponentClass="cux.oracle.apps.pa.source.server.HrSourceAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="DeptVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.DeptVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerJobVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.PerJobVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceDetailVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceSearchPVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceSearchPVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceHistoryVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceHistoryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceGWVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceGWVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HrSourceZJVO1"
+      ViewObjectName="cux.oracle.apps.pa.source.server.HrSourceZJVO" >
+   </ViewUsage>
+</AppModule>

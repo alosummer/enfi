@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.ProrateManageCO" windowTitle="比例分布管理" title="比例分布管理" amDefName="cux.oracle.apps.per.review.server.ProrateManageAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="MainRN" mode="autoCustomizationCriteria">
+               <ui:contents>
+                  <oa:table id="ProrateManageVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="ProrateId" dataType="NUMBER" viewName="ProrateManageVO1" viewAttr="ProrateId" prompt="序号"/>
+                        <oa:messageChoice id="GroupName" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId" viewName="ProrateManageVO1" viewAttr="GroupId"/>
+                        <oa:messageChoice id="OrgName" viewName="ProrateManageVO1" viewAttr="OrgId" prompt="公司" pickListViewDef="cux.oracle.apps.per.poplist.server.PerLegalEntitiesVO" pickListDispAttr="OrgName" pickListValAttr="OrgId"/>
+                        <oa:messageTextInput id="LevelA" viewName="ProrateManageVO1" viewAttr="LevelA" prompt="A"/>
+                        <oa:messageTextInput id="LevelB" viewName="ProrateManageVO1" viewAttr="LevelB" prompt="B"/>
+                        <oa:messageTextInput id="LevelC" viewName="ProrateManageVO1" viewAttr="LevelC" prompt="C"/>
+                        <oa:messageTextInput id="LevelD" viewName="ProrateManageVO1" viewAttr="LevelD" prompt="D"/>
+                        <oa:messageTextInput id="LevelE" viewName="ProrateManageVO1" viewAttr="LevelE" prompt="E"/>
+                        <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="deleteProrate">
+                                 <ui:parameters>
+                                    <ui:parameter key="ProrateId" value="${oa.ProrateManageSrhVO1.ProrateId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                              <oa:submitButton id="Cancel" text="取消" prompt="取消"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="比例分布查询" id="ProrateSimpleSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageChoice id="SearchGroupName" prompt="考群" pickListViewName="" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId"/>
+                              <oa:messageChoice id="SearchOrgName" dataType="NUMBER" pickListViewDef="cux.oracle.apps.per.poplist.server.PerLegalEntitiesVO" pickListDispAttr="OrgName" pickListValAttr="OrgId" prompt="组织"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="groupNameMap" criteriaItem="SearchGroupName" resultsItem="GroupName"/>
+                  <oa:queryCriteriaMap id="orgNameMap" criteriaItem="SearchOrgName" resultsItem="OrgName"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

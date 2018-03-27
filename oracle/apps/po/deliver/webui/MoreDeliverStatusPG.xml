@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="MoreDeliverStatusPG" amDefName="cux.oracle.apps.po.deliver.server.CuxDeliverAM" controllerClass="cux.oracle.apps.po.deliver.webui.MoreDeliverStatusPGCO" windowTitle="交付物管理" title="交付物管理">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="POHeaderRN" text="订单信息">
+               <ui:contents>
+                  <oa:messageStyledText id="Segment1" viewName="CuxPoDeliDisVO1" viewAttr="Segment1" prompt="订单号" styleClass="OraDataText" shortDesc="订单号"/>
+                  <oa:messageStyledText id="Comments" viewName="CuxPoDeliDisVO1" viewAttr="Comments" prompt="订单说明" styleClass="OraDataText" shortDesc="订单说明"/>
+                  <oa:messageStyledText id="Description" viewName="CuxPoDeliDisVO1" viewAttr="Description" prompt="订单类型" styleClass="OraDataText" shortDesc="订单类型"/>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="CuxPoDeliStatusTVO1" text="交付物状态列表">
+               <ui:contents>
+                  <oa:messageStyledText id="OrderSeq" dataType="NUMBER" prompt="序号" viewName="CuxPoDeliStatusTVO1" viewAttr="OrderSeq"/>
+                  <oa:messageStyledText id="DeliName" dataType="VARCHAR2" prompt="名称" viewName="CuxPoDeliStatusTVO1" viewAttr="DeliName" maximumLength="4000"/>
+                  <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="当前状态" viewName="CuxPoDeliStatusTVO1" viewAttr="StatusName" maximumLength="240"/>
+                  <oa:messageStyledText id="LastUpdateName" dataType="VARCHAR2" prompt="最后更新者" viewName="CuxPoDeliStatusTVO1" viewAttr="LastUpdateName" maximumLength="272"/>
+                  <oa:messageStyledText id="LastUpdateDate" dataType="DATE" prompt="最后更新日" viewName="CuxPoDeliStatusTVO1" viewAttr="LastUpdateDate"/>
+                  <oa:messageStyledText id="OnDutyPersonName" dataType="VARCHAR2" prompt="负责人" viewName="CuxPoDeliStatusTVO1" viewAttr="OnDutyPersonName" maximumLength="272"/>
+                  <oa:messageStyledText id="Remark" dataType="VARCHAR2" prompt="备注" viewName="CuxPoDeliStatusTVO1" viewAttr="Remark" maximumLength="272"/>
+                  <oa:image id="UpdateBTN" source="updateicon_enabled.gif" prompt="更新">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="UpdateDetail">
+                           <ui:parameters>
+                              <ui:parameter key="DeliID" value="${oa.CuxPoDeliStatusTVO1.DeliId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

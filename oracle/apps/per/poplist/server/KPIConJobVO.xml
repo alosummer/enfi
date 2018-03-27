@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KPIConJobVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.poplist.server.KPIConJobVORowImpl"
+   ComponentClass="cux.oracle.apps.per.poplist.server.KPIConJobVOImpl"
+   FetchMode="FETCH_ALL"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select pprt.project_role_id AS epm_cj_code
+     , NULL AS organization_id
+     , pprt.meaning         AS epm_cj_name
+     , 'PROJ_ROLE'          AS epm_cj_type
+  from PA_PROJECT_ROLE_TYPES_VL pprt
+     , hr_lookups hl
+ WHERE SYSDATE BETWEEN nvl(pprt.start_date_active,SYSDATE) AND nvl(pprt.end_date_active,SYSDATE)
+   AND pprt.meaning = hl.meaning
+   AND hl.lookup_type ='EPM_PROJ_ROLE'
+   AND pprt.LANGUAGE = userenv('LANG')
+   AND 'PROJ_ROLE' = 'PROJ_ROLE'
+UNION ALL
+SELECT pj.position_id AS epm_cj_code
+     , pj.organization_id 
+     , pj.NAME AS epm_cj_name
+     , 'POSITION'        AS epm_cj_type
+  FROM hr_pos_lov_v pj
+ WHERE 'POSITION' = 'POSITION'
+UNION ALL
+SELECT haou.ORGANIZATION_ID AS epm_cj_code
+     , haou.ORGANIZATION_ID 
+     , haou.NAME            AS epm_cj_name
+     , 'DEPARTMENT'         AS epm_cj_type
+  FROM hr_all_organization_units haou
+ WHERE haou.attribute3 IN('一层','二层','三层')
+   AND SYSDATE BETWEEN nvl(haou.date_from,SYSDATE) AND nvl(haou.date_to,SYSDATE)
+   AND 'DEPARTMENT'= 'DEPARTMENT'
+UNION ALL
+SELECT haou.ORGANIZATION_ID AS epm_cj_code
+     , haou.ORGANIZATION_ID 
+     , haou.NAME            AS epm_cj_name
+     , 'DEPARTMENT'         AS epm_cj_type
+  FROM hr_all_organization_units haou
+ WHERE haou.NAME = '中冶赛迪工程技术股份有限公司'
+   AND  'DEPARTMENT' = 'DEPARTMENT'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="EpmCjCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="10"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EPM_CJ_CODE"
+      Expression="EPM_CJ_CODE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="40" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORGANIZATION_ID"
+      Expression="ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCjName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CJ_NAME"
+      Expression="EPM_CJ_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCjType"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="8"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="EPM_CJ_TYPE"
+      Expression="EPM_CJ_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="8" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

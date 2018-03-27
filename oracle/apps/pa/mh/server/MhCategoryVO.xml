@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="MhCategoryVO"
+   OrderBy="expenditure_type asc"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.pa.mh.server.MhCategoryVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pmc.expenditure_type_id
+      ,pmc.expenditure_type
+      ,'' project_role
+FROM   cux_pa_mh_category_v pmc
+      ,(SELECT '项目经理' project_role
+              ,'' rel
+        FROM   dual
+        UNION ALL
+        SELECT '设计经理' project_role
+              ,'设计' rel
+        FROM   dual
+        UNION ALL
+        SELECT '专业负责人' project_role
+              ,'设计工作' rel
+        FROM   dual
+        UNION ALL
+        SELECT '采购经理' project_role
+              ,'采购' rel
+        FROM   dual
+        UNION ALL
+        SELECT '施工经理' project_role
+              ,'施工' rel
+        FROM   dual) pr
+WHERE  pmc.expenditure_type LIKE '%' || pr.rel || '%'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ExpenditureTypeId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EXPENDITURE_TYPE_ID"
+      Expression="EXPENDITURE_TYPE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpenditureType"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EXPENDITURE_TYPE"
+      Expression="EXPENDITURE_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRole"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_ROLE"
+      Expression="PROJECT_ROLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

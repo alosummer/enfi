@@ -1,0 +1,233 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxDocinfoManageResultPG" amDefName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageAM" windowTitle="文件协议归档查询" title="文件协议归档查询" controllerClass="cux.oracle.apps.cux.docinfo.webui.CuxDocinfoManageResultPGCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="QueryRN" mode="autoCustomizationCriteria" dispSimple="true">
+               <oa:simpleSearchPanel>
+                  <oa:header text="项目查询条件" id="ProjectSearch">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN" rows="1" columns="1" promptWidth="1%" width="60%">
+                           <ui:contents>
+                              <oa:messageLovInput id="SearchDocType" prompt="文件类型" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoDocTypeLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap5" lovItem="DocumentTypeName" resultTo="SearchDocType" criteriaFrom="SearchDocType"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchCountryName" prompt="国家" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxCountryLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="TerritoryShortName" resultTo="SearchCountryName" criteriaFrom="SearchCountryName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchAreaAlias" prompt="洲名" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxAreaAliasListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning"/>
+                              <oa:messageTextInput id="SearchArchiveDateStart" prompt="建立日期从" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchArchiveDateEnd" prompt="建立日期至" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchProjectName" prompt="项目名称"/>
+                              <oa:messageTextInput id="SearchRelateCorpName" prompt="对方公司名称"/>
+                              <oa:messageTextInput id="SearchOtherCorpName" prompt="其他公司名称"/>
+                              <oa:messageLovInput id="SearchLang" prompt="语言" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoLangLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap6" lovItem="LangName" resultTo="SearchLang" criteriaFrom="SearchLang"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchIsSigned" prompt="是否双方签字" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocSignListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning"/>
+                              <oa:messageLovInput id="SearchCopyType" prompt="来源类型" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoCopyLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap7" lovItem="DocCopyName" resultTo="SearchCopyType" criteriaFrom="SearchCopyType"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchSubmitPerson" prompt="责任人" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxEmpLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap2" lovItem="EmpFullName" resultTo="SearchSubmitPerson" criteriaFrom="SearchSubmitPerson"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchIsArchive" prompt="是否归档" defaultValue="" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                              <oa:messageChoice id="SearchIsEndActive" prompt="是否失效" defaultValue="" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                              <oa:messageChoice id="SearchIsEvlSheet" prompt="是否有评审表" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocRevListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <ui:contents>
+                  <oa:advancedTable id="CuxDocinfoManageResultVO1" text="文档归档查询结果" viewName="CuxDocinfoManageResultVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="column1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="文档编号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DocNumber" viewAttr="DocNumber" destination=""/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column3">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="项目名称"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectNameDis" viewAttr="ProjectName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column4">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="对方公司名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RelationCorpName" viewAttr="RelationCorpName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column41">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader41" prompt="其他公司名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherCorpName" viewAttr="OtherCorpName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column42">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader411" prompt="洲名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="AreaAlias" prompt="洲名" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxAreaAliasListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="AreaAlias" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column43">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4111" prompt="国家"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="CountryName" prompt="国家" dataType="VARCHAR2" viewAttr="CountryName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column5">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="语言"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="LangName" viewAttr="LangName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column6">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader6" prompt="文件类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DocumentTypeName" viewAttr="DocumentTypeName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column71">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71" prompt="是否有评审表"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="IsEvlSheet" prompt="是否有评审表" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocRevListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="IsEvlSheet" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column7">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7" prompt="是否双方签字"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="IsSigned" prompt="是否双方签字" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocSignListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="IsSigned" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column8">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader8" prompt="纸质/电子版"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DocCopyName" viewAttr="DocCopyName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column72">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader72" prompt="是否归档"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="IsArchive" viewAttr="IsArchive" readOnly="true" defaultValue="" checkedValue="Y" unCheckedValue="N"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column9">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader9" prompt="归档日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ArchiveDate" viewAttr="ArchiveDate" dataType="DATE"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column10">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader10" prompt="提交人"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="SubmitterPersonName" viewAttr="SubmitterPersonName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column11">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="说明"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="Remark" viewAttr="Remark"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column721">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader721" prompt="是否失效"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="IsEndActive" viewAttr="IsEndActive" defaultValue="" checkedValue="Y" unCheckedValue="N" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column91">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader91" prompt="失效日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EndActiveDate" viewAttr="EndActiveDate" dataType="DATE"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column911">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader911" prompt="建立日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="CreationDate" viewAttr="CreationDate" dataType="DATE"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column12">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4112" prompt="更新"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="UPDATE_ENABLE" source="updateicon_enabled.gif">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="update" id="fireAction1">
+                                       <ui:parameters>
+                                          <ui:parameter key="UpdateDocId" value="${oa.CuxDocinfoManageResultVO1.DocId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="HeaderTableAction">
+                           <ui:contents>
+                              <oa:submitButton id="CreateDocinfoBTN" text="新建文件协议归档" prompt="新建文件协议归档"/>
+                              <oa:submitButton id="ExportBTN" text="excel导出" prompt="excel导出"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

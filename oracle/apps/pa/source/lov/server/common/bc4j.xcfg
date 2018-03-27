@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="HrSourceLovAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>ENFIDEV</JDBCName>
+         <jbo.project>CUXPA</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.pa.source.lov.server.HrSourceLovAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.pa.source.lov.server.HrSourceLovAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

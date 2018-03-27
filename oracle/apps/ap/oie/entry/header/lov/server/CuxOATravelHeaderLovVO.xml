@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxOATravelHeaderLovVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOATravelHeaderLovVORowImpl"
+   ComponentClass="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOATravelHeaderLovVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT caetah.oa_travel_header_id,
+       caetah.oa_travel_header_name,
+       caetah.wf_num,
+       caetah.project_num,
+       caetah.ccsy
+  FROM cux_ap_exp_oa_travel_apply_v caetah
+ WHERE EXISTS (SELECT 1
+          FROM cux_ap_exp_oa_travel_detail_v caetl
+         WHERE caetl.oa_travel_header_id = caetah.oa_travel_header_id
+           AND caetl.emp_id = fnd_global.employee_id)
+    OR EXISTS
+ (SELECT 1
+          FROM per_employees_x pex
+         WHERE pex.employee_num = caetah.emp_num
+           AND pex.employee_id = fnd_global.employee_id)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="OaTravelHeaderId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="OA_TRAVEL_HEADER_ID"
+      Expression="OA_TRAVEL_HEADER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OaTravelHeaderName"
+      IsPersistent="false"
+      Precision="19"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="OA_TRAVEL_HEADER_NAME"
+      Expression="OA_TRAVEL_HEADER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="19" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfNum"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WF_NUM"
+      Expression="WF_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectNum"
+      IsPersistent="false"
+      Precision="999"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUM"
+      Expression="PROJECT_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="999" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ccsy"
+      IsPersistent="false"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CCSY"
+      Expression="CCSY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

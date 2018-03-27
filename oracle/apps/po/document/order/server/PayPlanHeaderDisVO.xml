@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PayPlanHeaderDisVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.po.document.order.server.PayPlanHeaderDisVORowImpl"
+   ComponentClass="cux.oracle.apps.po.document.order.server.PayPlanHeaderDisVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT cux_po_pay_plan_pkg.GET_PAID_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) AS paid_total,
+       CASE
+         WHEN cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) = 0 THEN
+          0
+         ELSE
+          trunc((cux_po_pay_plan_pkg.GET_PAID_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) /
+                cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) * 100),
+                2)
+       END AS paid_percent,
+       (cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) -
+       cux_po_pay_plan_pkg.GET_PAID_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id)) AS unpaid_remain_total,
+       cux_po_pay_plan_pkg.GET_RECEIVED_INV_AMT_ORG(p_po_header_id => pha.po_header_id) AS inv_total,
+       CASE
+         WHEN cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) = 0 THEN
+          0
+         ELSE
+          trunc((cux_po_pay_plan_pkg.GET_RECEIVED_INV_AMT_ORG(p_po_header_id => pha.po_header_id) /
+                cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) * 100),
+                2)
+       END AS inv_percent,
+       (cux_po_pay_plan_pkg.GET_CONTRACT_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id) -
+       cux_po_pay_plan_pkg.GET_RECEIVED_INV_AMT_ORG(p_po_header_id => pha.po_header_id)) AS uninv_remain_total,
+       cux_po_pay_plan_pkg.GET_CONFIRM_AMT_ORG(p_po_header_id => pha.po_header_id) AS confirm_total,
+       (cux_po_pay_plan_pkg.GET_CONFIRM_AMT_ORG(p_po_header_id => pha.po_header_id) -
+       cux_po_pay_plan_pkg.GET_PAID_TOTAL_AMT_ORG(p_po_header_id => pha.po_header_id)) AS confirm_unpaid_total
+  FROM po_headers_all pha
+ WHERE pha.po_header_id = :1
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="PaidTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PAID_TOTAL"
+      Expression="PAID_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PaidPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PAID_PERCENT"
+      Expression="PAID_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnpaidRemainTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="UNPAID_REMAIN_TOTAL"
+      Expression="UNPAID_REMAIN_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="INV_TOTAL"
+      Expression="INV_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="INV_PERCENT"
+      Expression="INV_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UninvRemainTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="UNINV_REMAIN_TOTAL"
+      Expression="UNINV_REMAIN_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConfirmTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CONFIRM_TOTAL"
+      Expression="CONFIRM_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConfirmUnpaidTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CONFIRM_UNPAID_TOTAL"
+      Expression="CONFIRM_UNPAID_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

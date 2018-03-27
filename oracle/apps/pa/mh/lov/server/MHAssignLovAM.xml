@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="MHAssignLovAM"
+   ComponentClass="cux.oracle.apps.pa.mh.lov.server.MHAssignLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ProjectLovVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.lov.server.ProjectLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PersonLovVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.lov.server.PersonLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectRoleLovVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.lov.server.ProjectRoleLovVO" >
+   </ViewUsage>
+</AppModule>

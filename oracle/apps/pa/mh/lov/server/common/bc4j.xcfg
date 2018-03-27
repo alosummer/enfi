@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="MHAssignLovAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>ENFIDEV</JDBCName>
+         <jbo.project>CUXPA</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.pa.mh.lov.server.MHAssignLovAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.pa.mh.lov.server.MHAssignLovAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

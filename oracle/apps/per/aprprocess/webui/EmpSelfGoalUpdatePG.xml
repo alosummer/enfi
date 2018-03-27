@@ -1,0 +1,211 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" windowTitle="绩效合同" title="绩效合同" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM" controllerClass="cux.oracle.apps.per.aprprocess.webui.EmpSelfGoalUpdateCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:flowLayout id="ContractInfoRN">
+               <ui:contents>
+                  <oa:submitButton id="CopyPrevious" text="复制历史绩效合同" prompt="复制历史绩效合同" rendered="true">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="copy" id="fireAction12">
+                           <ui:parameters>
+                              <ui:parameter key="appraisalid" value="${oa.AprEmpSelfDetailVO1.AppraisalId}"/>
+                              <ui:parameter key="appraisalpersonid" value="${oa.AprEmpSelfDetailVO1.AppraisalPersonId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:separator id="item3"/>
+                  <oa:spacer id="item31" height="40"/>
+                  <oa:tableLayout id="region1" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:rowLayout id="region2">
+                           <ui:contents>
+                              <oa:cellFormat id="region3">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ManagerName" dataType="VARCHAR2" prompt="发约人姓名:" viewName="AprEmpSelfDetailVO1" viewAttr="ManagerName" maximumLength="240" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region4">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="受约人姓名:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpName" maximumLength="240" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region5">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="阶段:" viewName="AprEmpSelfDetailVO1" viewAttr="PhaseName" maximumLength="80" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region21">
+                           <ui:contents>
+                              <oa:cellFormat id="region31">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpPosition" dataType="VARCHAR2" prompt="受约人职务:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpPosition" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region41">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DeptName" dataType="VARCHAR2" prompt="受约人部门:" viewName="AprEmpSelfDetailVO1" viewAttr="DeptName" maximumLength="240" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region51">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpGroup" dataType="VARCHAR2" prompt="所属考群:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpGroup" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                  </oa:tableLayout>
+                  <oa:formValue id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="AprEmpSelfDetailVO1" viewAttr="AppraisalId"/>
+                  <oa:tip id="item4" text="&lt;p style=&quot;color:red&quot;>1.点击添加按钮以选择KPI指标或填写工作任务，所有指标权重之和为100&lt;br>2.点击复制历史绩效合同按钮，可选择历年绩效合同，并将历史合同指标带出，对于受约对象已不适用的指标将在提交时验证&lt;/p>"/>
+               </ui:contents>
+            </oa:flowLayout>
+            <oa:header id="regionKPI" text="KPI指标">
+               <ui:contents>
+                  <oa:table id="AprKPIVO1" width="100%" blockSize="50">
+                     <ui:contents>
+                        <oa:messageLovInput id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="AprKPIVO1" viewAttr="KpiName" maximumLength="300" externalListOfValues="/cux/oracle/apps/per/aprprocess/webui/KPILovRN" unvalidated="true" required="no">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="KpiArea" resultTo="KpiArea"/>
+                              <lovMap id="lovMap3" lovItem="KpiName" resultTo="KpiName"/>
+                              <lovMap id="lovMap4" lovItem="KpiDesc" resultTo="KpiDesc"/>
+                              <lovMap id="lovMap5" lovItem="KpiDataSource" resultTo="KpiDataSource" criteriaFrom="KpiDataSource"/>
+                              <lovMap id="lovMap6" lovItem="KpiScoringMethod" resultTo="KpiScoringMethod"/>
+                              <lovMap id="lovMap7" lovItem="KpiId" resultTo="KpiId" criteriaFrom="KpiId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="KpiArea" dataType="VARCHAR2" prompt="考核层面" viewName="AprKPIVO1" viewAttr="KpiArea" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIAreaVO" pickListDispAttr="EpmIlName" pickListValAttr="EpmIlCode" pickListViewName="KPIAreaVO1" readOnly="true"/>
+                        <oa:messageTextInput id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="AprKPIVO1" viewAttr="KpiDesc" maximumLength="1000" readOnly="true"/>
+                        <oa:messageTextInput id="Attribute5" dataType="VARCHAR2" prompt="备注" viewName="AprKPIVO1" viewAttr="Attribute5" maximumLength="4000"/>
+                        <oa:messageTextInput id="Weight" dataType="VARCHAR2" prompt="权重(%)" viewName="AprKPIVO1" viewAttr="Weight" maximumLength="20" columns="5" required="no"/>
+                        <oa:messageTextInput id="TargetValue" dataType="NUMBER" prompt="目标值" viewName="AprKPIVO1" viewAttr="TargetValue" maximumLength="10" columns="4" serverUnvalidated="true"/>
+                        <oa:messageTextInput id="MinimumValue" dataType="NUMBER" prompt="下限值" viewName="AprKPIVO1" viewAttr="MinimumValue" maximumLength="10" columns="4" serverUnvalidated="true"/>
+                        <oa:messageChoice id="KpiDataSource" dataType="VARCHAR2" prompt="来源" viewName="AprKPIVO1" viewAttr="KpiDataSource" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceVO" pickListDispAttr="EpmDsName" pickListValAttr="EpmDsCode" readOnly="true"/>
+                        <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" shortDesc="Select to delete information.">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="kpidelete" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="contractId" value="${oa.AprKPIVO1.ContractId}"/>
+                                    <ui:parameter key="kpiname" value="${oa.AprKPIVO1.KpiName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="KpiId" dataType="NUMBER" prompt="KPI ID" viewName="AprKPIVO1" viewAttr="KpiId" rendered="true"/>
+                        <oa:formValue id="ContractId" dataType="NUMBER" prompt="ContractId" viewName="AprKPIVO1" viewAttr="ContractId"/>
+                        <oa:formValue id="AppraisalId1" dataType="NUMBER" prompt="AppraisalId" viewName="AprKPIVO1" viewAttr="AppraisalId"/>
+                        <oa:formValue id="KpiScoringMethod" dataType="VARCHAR2" prompt="KpiScoringMethod" viewName="AprKPIVO1" viewAttr="KpiScoringMethod" rendered="true"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="regionTask" text="工作任务">
+               <ui:contents>
+                  <oa:table id="AprTaskVO1" width="100%" blockSize="50">
+                     <ui:contents>
+                        <oa:messageTextInput id="KpiName1" dataType="VARCHAR2" prompt="考核指标" viewName="AprTaskVO1" viewAttr="KpiName" maximumLength="300" unvalidated="true" required="no"/>
+                        <oa:messageStyledText id="KpiArea1" dataType="VARCHAR2" prompt="考核层面" viewName="AprTaskVO1" viewAttr="KpiAreaDesc"/>
+                        <oa:messageTextInput id="KpiDesc1" dataType="VARCHAR2" prompt="描述" viewName="AprTaskVO1" viewAttr="KpiDesc" maximumLength="1000" readOnly="false"/>
+                        <oa:messageTextInput id="Attribute51" dataType="VARCHAR2" prompt="备注" viewName="AprTaskVO1" viewAttr="Attribute5" maximumLength="4000"/>
+                        <oa:messageTextInput id="Weight1" dataType="VARCHAR2" prompt="权重(%)" viewName="AprTaskVO1" viewAttr="Weight" maximumLength="20" columns="5" required="no"/>
+                        <oa:messageTextInput id="TargetValue1" dataType="NUMBER" prompt="目标值" viewName="AprTaskVO1" viewAttr="TargetValue" maximumLength="10" columns="4" serverUnvalidated="true"/>
+                        <oa:messageTextInput id="MinimumValue1" dataType="NUMBER" prompt="下限值" viewName="AprTaskVO1" viewAttr="MinimumValue" maximumLength="10" columns="4" serverUnvalidated="true"/>
+                        <oa:messageStyledText id="KpiDataSource1" dataType="VARCHAR2" prompt="来源" viewName="AprTaskVO1" viewAttr="DataSourceDesc"/>
+                        <oa:image id="DeleteEnabled1" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" shortDesc="Select to delete information.">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="taskdelete" id="fireAction13">
+                                 <ui:parameters>
+                                    <ui:parameter key="contractId" value="${oa.AprTaskVO1.ContractId}"/>
+                                    <ui:parameter key="kpiname" value="${oa.AprTaskVO1.KpiName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="ContractId1" dataType="NUMBER" prompt="ContractId" viewName="AprTaskVO1" viewAttr="ContractId"/>
+                        <oa:formValue id="AppraisalId11" dataType="NUMBER" prompt="AppraisalId" viewName="AprTaskVO1" viewAttr="AppraisalId"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="regionBehaviour" text="行为规范">
+               <ui:contents>
+                  <oa:hideShow id="rsBehaviour" disclosedText="隐藏行为规范" undisclosedText="查看行为规范">
+                     <ui:contents>
+                        <oa:table id="BehaviourVO1" blockSize="20">
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiOrgName" dataType="VARCHAR2" prompt="指标所属组织" viewName="BehaviourVO1" viewAttr="KpiOrgName" maximumLength="150" rendered="true"/>
+                              <oa:messageStyledText id="KpiAreaName" dataType="VARCHAR2" prompt="考核层面" viewName="BehaviourVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+                              <oa:messageStyledText id="KpiName2" dataType="VARCHAR2" prompt="考核指标" viewName="BehaviourVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+                              <oa:messageStyledText id="KpiDesc2" dataType="VARCHAR2" prompt="描述" viewName="BehaviourVO1" viewAttr="KpiDesc" maximumLength="500"/>
+                              <oa:messageStyledText id="KpiDataSourceName" dataType="VARCHAR2" prompt="数据来源" viewName="BehaviourVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:hideShow>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="regionAdd" text="加分项">
+               <ui:contents>
+                  <oa:hideShow id="rsAdd" disclosedText="隐藏加分项" undisclosedText="查看加分项">
+                     <ui:contents>
+                        <oa:table id="AddVO1" blockSize="20">
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiOrgName1" dataType="VARCHAR2" prompt="指标所属组织" viewName="AddVO1" viewAttr="KpiOrgName" maximumLength="150" rendered="true"/>
+                              <oa:messageStyledText id="KpiAreaName1" dataType="VARCHAR2" prompt="考核层面" viewName="AddVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+                              <oa:messageStyledText id="KpiName21" dataType="VARCHAR2" prompt="考核指标" viewName="AddVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+                              <oa:messageStyledText id="KpiDesc21" dataType="VARCHAR2" prompt="描述" viewName="AddVO1" viewAttr="KpiDesc" maximumLength="500"/>
+                              <oa:messageStyledText id="KpiDataSourceName1" dataType="VARCHAR2" prompt="数据来源" viewName="AddVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:hideShow>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="regionSub" text="减分项">
+               <ui:contents>
+                  <oa:hideShow id="rsSub" disclosedText="隐藏减分项" undisclosedText="查看减分项">
+                     <ui:contents>
+                        <oa:table id="SubVO1" blockSize="20">
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiOrgName11" dataType="VARCHAR2" prompt="指标所属组织" viewName="SubVO1" viewAttr="KpiOrgName" maximumLength="150" rendered="true"/>
+                              <oa:messageStyledText id="KpiAreaName11" dataType="VARCHAR2" prompt="考核层面" viewName="SubVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+                              <oa:messageStyledText id="KpiName211" dataType="VARCHAR2" prompt="考核指标" viewName="SubVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+                              <oa:messageStyledText id="KpiDesc211" dataType="VARCHAR2" prompt="描述" viewName="SubVO1" viewAttr="KpiDesc" maximumLength="500"/>
+                              <oa:messageStyledText id="KpiDataSourceName11" dataType="VARCHAR2" prompt="数据来源" viewName="SubVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:hideShow>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="AprAttendVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="AppSeq" dataType="NUMBER" prompt="审批顺序" viewName="AprAttendVO1" viewAttr="AppSeq"/>
+                  <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="审批人" viewName="AprAttendVO1" viewAttr="LastName" maximumLength="150"/>
+                  <oa:messageStyledText id="OpinionDate" dataType="DATETIME" prompt="审批日期" viewName="AprAttendVO1" viewAttr="OpinionDate"/>
+                  <oa:messageStyledText id="OpinionResult" dataType="VARCHAR2" prompt="审批状态" viewName="AprAttendVO1" viewAttr="OpinionResult" maximumLength="500"/>
+                  <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="评语" viewName="AprAttendVO1" viewAttr="Description" maximumLength="500"/>
+               </ui:contents>
+            </oa:table>
+            <oa:flowLayout id="NoteRN">
+               <ui:contents>
+                  <oa:messageTextInput id="Note" rows="5" maximumLength="500" prompt="意见" shortDesc="请填写备注" viewName="AttendNoteVO1" viewAttr="Description" columns="100"/>
+               </ui:contents>
+            </oa:flowLayout>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="Save" text="保存" prompt="保存"/>
+                  <oa:submitButton id="Apply" text="提交" prompt="提交"/>
+                  <oa:submitButton id="Cancel" text="返回" prompt="返回" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

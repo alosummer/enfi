@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxCurrencyLovVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxCurrencyLovVORowImpl"
+   ComponentClass="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxCurrencyLovVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT currency_code,
+      /* nvl(PRECISION,
+           0) AS PRECISION,
+       NAME,
+       derive_factor AS euro_rate,
+       derive_effective AS effective_date,
+       currency_code || ' - ' || NAME AS currency_code_name,*/
+       cux_ap_exp_pkg.get_currency_rate(p_currency_code => currency_code,
+                                        p_date          => SYSDATE) AS rate
+  FROM fnd_currencies_vl
+ WHERE enabled_flag = 'Y'
+   AND currency_flag = 'Y'
+   AND trunc(nvl(start_date_active,
+                 SYSDATE)) <= trunc(SYSDATE)
+   AND trunc(nvl(end_date_active,
+                 SYSDATE)) >= trunc(SYSDATE)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="CurrencyCode"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CURRENCY_CODE"
+      Expression="CURRENCY_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RATE"
+      Expression="RATE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

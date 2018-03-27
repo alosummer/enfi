@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" windowTitle="查询给号申请" amDefName="cux.oracle.apps.pa.docnum.server.DocNumReqAM" controllerClass="cux.oracle.apps.pa.docnum.webui.DocNumSearchCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryRN" text="查询给号申请">
+               <ui:contents>
+                  <oa:messageComponentLayout id="queryRN">
+                     <ui:footer>
+                        <oa:flowLayout id="region6">
+                           <ui:contents>
+                              <oa:button id="search" text="搜索" prompt="搜索">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="search"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                              <oa:button id="reset" text="清除" prompt="清除">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="reset"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:footer>
+                     <ui:contents>
+                        <oa:messageLovInput id="projectNum" prompt="项目号" externalListOfValues="/cux/oracle/apps/pa/docnum/lov/webui/ProjectLOV" viewName="DocnumSummaryPVO1" viewAttr="ProjectNum">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="ProjectId" resultTo="projectId"/>
+                              <lovMap id="lovMap3" lovItem="ProjectNum" resultTo="projectNum" criteriaFrom="projectNum"/>
+                              <lovMap id="lovMap4" lovItem="ProjectName" resultTo="projectName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="projectName" prompt="项目名称" externalListOfValues="/cux/oracle/apps/pa/docnum/lov/webui/ProjectLOV" viewName="DocnumSummaryPVO1" viewAttr="ProjectName">
+                           <lovMappings>
+                              <lovMap id="lovMap2" lovItem="ProjectId" resultTo="projectId"/>
+                              <lovMap id="lovMap5" lovItem="ProjectName" resultTo="projectName" criteriaFrom="projectName"/>
+                              <lovMap id="lovMap6" lovItem="ProjectNum" resultTo="projectNum"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="status" pickListViewName="DocNumStatusVO1" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="状态" viewName="DocnumSummaryPVO1" viewAttr="Status"/>
+                        <oa:messageTextInput id="DocName" prompt="文档名称" viewName="DocnumSummaryPVO1" viewAttr="DocName"/>
+                        <oa:messageLovInput id="Requster" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV" prompt="申请人" viewName="DocnumSummaryPVO1" viewAttr="RequesterName">
+                           <lovMappings>
+                              <lovMap id="lovMap7" lovItem="PersonId" resultTo="personId"/>
+                              <lovMap id="lovMap8" lovItem="LastName" resultTo="Requster" criteriaFrom="Requster"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="ReqStartDate" dataType="DATE" prompt="申请起始时间" viewName="DocnumSummaryPVO1" viewAttr="ReqStartDate"/>
+                        <oa:messageTextInput id="ReqEndDate" dataType="DATE" prompt="申请截止时间" viewName="DocnumSummaryPVO1" viewAttr="ReqEndDate"/>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:formValue id="personId" viewName="DocnumSummaryPVO1" viewAttr="RequesterID"/>
+                  <oa:formValue id="projectId" viewName="DocnumSummaryPVO1" viewAttr="ProjectId"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ResultRN">
+               <ui:contents>
+                  <oa:table id="DocnumSummaryVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="BatchNum" dataType="NUMBER" prompt="批次号" viewName="DocnumSummaryVO1" viewAttr="BatchNum"/>
+                        <oa:messageStyledText id="Segment1" dataType="VARCHAR2" prompt="项目号" viewName="DocnumSummaryVO1" viewAttr="Segment1" maximumLength="25"/>
+                        <oa:messageStyledText id="item1" dataType="VARCHAR2" prompt="项目名称" viewName="DocnumSummaryVO1" viewAttr="Name" maximumLength="30"/>
+                        <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="申请状态" viewName="DocnumSummaryVO1" viewAttr="StatusName" maximumLength="4000"/>
+                        <oa:messageStyledText id="DocName1" dataType="VARCHAR2" prompt="文档名称" viewName="DocnumSummaryVO1" viewAttr="DocName" maximumLength="300"/>
+                        <oa:messageStyledText id="ReqDesc" dataType="VARCHAR2" prompt="描述" viewName="DocnumSummaryVO1" viewAttr="ReqDesc" maximumLength="3000"/>
+                        <oa:messageStyledText id="CreatedByName" dataType="VARCHAR2" prompt="申请人" viewName="DocnumSummaryVO1" viewAttr="CreatedByName" maximumLength="4000"/>
+                        <oa:messageStyledText id="CreationDate" dataType="DATE" prompt="申请时间" viewName="DocnumSummaryVO1" viewAttr="CreationDate"/>
+                        <oa:messageStyledText id="ApproverName" dataType="VARCHAR2" prompt="审核人" viewName="DocnumSummaryVO1" viewAttr="ApproverName" maximumLength="4000"/>
+                        <oa:image id="Detail" prompt="详情" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail">
+                                 <ui:parameters>
+                                    <ui:parameter key="ReqBatchId" value="${oa.current.BatchNum}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

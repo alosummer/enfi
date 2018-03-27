@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="AprAM"
+   ComponentClass="cux.oracle.apps.per.aprprocess.server.AprAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="AprEmpSelfListVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprEmpSelfListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprEmpSelfDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprEmpSelfDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ContractVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.ContractVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprKPIVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprKPIVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerKPILovVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.PerKPILovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprDetail1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprDetail" >
+   </ViewUsage>
+   <ViewUsage
+      Name="KPILovVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.KPILovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="KPIDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.KPIDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprTaskVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprTaskVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprAttendVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprAttendVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprCopyVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprCopyVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BehavAddSubVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.BehavAddSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AttendVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AttendVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AttendNoteVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AttendNoteVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprManagerListVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprManagerListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprManagerDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprManagerDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AddVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AddVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BehaviourVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.BehaviourVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SubVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.SubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprSourceManualVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprSourceManualVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprSourceSystemVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprSourceSystemVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprScoreVisibleVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprScoreVisibleVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BehaviourListVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.BehaviourListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AddListVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AddListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SubListVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.SubListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AprFinishDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.aprprocess.server.AprFinishDetailVO" >
+   </ViewUsage>
+</AppModule>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="TmplManageAM"
+   ComponentClass="cux.oracle.apps.per.review.server.TmplManageAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="TemplateVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TemplateVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TmplDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TmplDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TemplateClassVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TemplateClassVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TemplateContentVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TemplateContentVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TemplateKPIClasses1"
+      ViewObjectName="cux.oracle.apps.per.poplist.server.TemplateKPIClasses" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TemplateKPIVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TemplateKPIVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TmplJobVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TmplJobVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TmplOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TmplOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TmplEmpVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.TmplEmpVO" >
+   </ViewUsage>
+   <ViewLinkUsage
+      Name="TmplContentVL1"
+      ViewLinkObjectName="cux.oracle.apps.per.review.server.TmplContentVL"
+      SrcViewUsageName="cux.oracle.apps.per.review.server.TmplManageAM.TemplateClassVO1"
+      DstViewUsageName="cux.oracle.apps.per.review.server.TmplManageAM.TemplateContentVO1" >
+      <DesignTime>
+         <Attr Name="_isCodegen" Value="true" />
+         <Attr Name="_version" Value="10.1.3.39.81" />
+      </DesignTime>
+   </ViewLinkUsage>
+</AppModule>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PersonQueryVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.server.PersonQueryVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.server.PersonQueryVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ppf1.full_name || '(' || ppf1.employee_number || ')' create_person_name
+  FROM fnd_user         fu,
+       per_all_people_f ppf1
+ WHERE 1 = 1
+   AND ppf1.person_id = fu.employee_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf1.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf1.effective_end_date,
+           SYSDATE)
+   AND fu.user_id = fnd_global.user_id
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="CreatePersonName"
+      IsPersistent="false"
+      Precision="272"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CREATE_PERSON_NAME"
+      Expression="CREATE_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="272" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

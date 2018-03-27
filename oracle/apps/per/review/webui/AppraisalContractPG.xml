@@ -1,0 +1,300 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.AppraisalAM" windowTitle="绩效合同" title="绩效合同" addForm="true" controllerClass="cux.oracle.apps.per.review.webui.AppraisalContractCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:flowLayout id="ContractInfoRN">
+               <ui:contents>
+                  <oa:submitButton id="ChooseTemplate" text="选择模板" prompt="选择模板" rendered="false"/>
+                  <oa:submitButton id="CopyPrevious" text="复制历史绩效合同" prompt="复制历史绩效合同" rendered="false">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="copy" id="fireAction12">
+                           <ui:parameters>
+                              <ui:parameter key="personId" value="${oa.AppraisalEmpVO1.AppraisalPersonId}"/>
+                              <ui:parameter key="appraisalId" value="${oa.AppraisalEmpVO1.AppraisalId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:defaultDoubleColumn id="AppraisalEmpVO1">
+                     <ui:contents>
+                        <oa:formValue id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="AppraisalEmpVO1" viewAttr="AppraisalId"/>
+                        <oa:messageStyledText id="DeptName" dataType="VARCHAR2" prompt="受约人部门:" viewName="AppraisalEmpVO1" viewAttr="DeptName" maximumLength="240" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="受约人姓名:" viewName="AppraisalEmpVO1" viewAttr="EmpName" maximumLength="240" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="EmpPosition" dataType="VARCHAR2" prompt="职位:" viewName="AppraisalEmpVO1" viewAttr="EmpPosition" maximumLength="700" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="ManagerName" dataType="VARCHAR2" prompt="发约人姓名:" viewName="AppraisalEmpVO1" viewAttr="ManagerName" maximumLength="240" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="阶段:" viewName="AppraisalEmpVO1" viewAttr="PhaseName" maximumLength="80" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="ManagerPosition" dataType="VARCHAR2" prompt="发约人职位:" viewName="AppraisalEmpVO1" viewAttr="ManagerPosition" maximumLength="700" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="FinalLevel" dataType="VARCHAR2" prompt="最终等级:" viewName="AppraisalEmpVO1" viewAttr="FinalLevel" maximumLength="10" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="FinalMark" dataType="NUMBER" prompt="总体得分:" viewName="AppraisalEmpVO1" viewAttr="FinalMark" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="space1"/>
+                        <oa:messageStyledText id="SelfMark" dataType="NUMBER" prompt="自评总得分:" viewName="AppraisalEmpVO1" viewAttr="OriMark" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="space2"/>
+                        <oa:messageTextInput id="EffectiveDate" dataType="DATE" prompt="合同有效期:" viewName="AppraisalEmpVO1" viewAttr="EffectiveDate" styleClass="OraDataText"/>
+                        <oa:messageTextInput id="SignDate" dataType="DATE" prompt="签署日期:" viewName="AppraisalEmpVO1" viewAttr="SignDate" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:defaultDoubleColumn>
+                  <oa:separator id="item3"/>
+               </ui:contents>
+            </oa:flowLayout>
+            <oa:advancedTable id="ContractClassVO1" viewName="ContractClassVO1" detailViewAttr="ShowFlag" width="100%">
+               <ui:contents>
+                  <oa:formValue id="ClassId" dataType="NUMBER" prompt="ClassId" viewName="ContractClassVO1" viewAttr="ClassId"/>
+                  <oa:formValue id="AppraisalId1" dataType="NUMBER" prompt="AppraisalId" viewName="ContractClassVO1" viewAttr="AppraisalId"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="ContractClassVO1" viewAttr="TmplId"/>
+                  <oa:formValue id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="ContractClassVO1" viewAttr="KpiClass"/>
+                  <oa:column id="KpiClassMeaningCol">
+                     <ui:columnHeader/>
+                     <ui:contents>
+                        <oa:messageStyledText id="KpiClassMeaning" viewAttr="KpiDesc"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="WeightCol">
+                     <ui:columnHeader/>
+                     <ui:contents>
+                        <oa:messageTextInput id="Weight" viewAttr="Weight" dataType="VARCHAR2" maximumLength="20"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="ValueCol">
+                     <ui:columnHeader/>
+                     <ui:contents>
+                        <oa:messageStyledText id="ValidValue" viewAttr="ValidValue" dataType="NUMBER"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="KpiClassDetailCol">
+                     <ui:columnHeader/>
+                     <ui:contents>
+                        <oa:switcher regionName="Toolbox Orders Update Switch" viewAttr="UpdateImage" id="UpdateSwitcher1" use="/oracle/apps/fnd/attributesets/Buttons/Update" rendered="true">
+                           <ui:case name="UpdateEnabled1">
+                              <oa:image source="updateicon_enabled.gif" destination="" shortDesc="Select to update information." id="UpdateEnabled1" imageHeight="24" imageWidth="24">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="updateContract" id="fireAction11">
+                                       <ui:parameters>
+                                          <ui:parameter key="appraisalId" value="${oa.ContractClassVO1.AppraisalId}"/>
+                                          <ui:parameter key="kpiClass" value="${oa.ContractClassVO1.KpiClass}"/>
+                                          <ui:parameter key="kpiClassType" value="${oa.ContractClassVO1.Attribute4}"/>
+                                          <ui:parameter key="kpiClassStdAdd" value="${oa.ContractClassVO1.Attribute1}"/>
+                                          <ui:parameter key="kpiComputeAddSub" value="${oa.ContractClassVO1.Attribute2}"/>
+                                          <ui:parameter key="kpiStdAddWeightMethod" value="${oa.ContractClassVO1.Attribute9}"/>
+                                          <ui:parameter key="kpiClassWeight" value="${oa.ContractClassVO1.Weight}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                           <ui:case name="UpdateDisabled1">
+                              <oa:image source="updateicon_disabled.gif" shortDesc="Update functionality disabled" id="UpdateDisabled1" imageHeight="24" imageWidth="24"/>
+                           </ui:case>
+                        </oa:switcher>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:formValue id="Attribute5" viewAttr="Attribute5"/>
+                  <oa:formValue id="ValidScoreValue" viewAttr="ValidScoreValue" dataType="NUMBER"/>
+                  <oa:formValue id="Attribute1" viewAttr="Attribute1"/>
+                  <oa:formValue id="Attribute2" viewAttr="Attribute2"/>
+                  <oa:formValue id="Attribute9" viewAttr="Attribute9"/>
+               </ui:contents>
+               <ui:detail>
+                  <oa:header id="detailRN">
+                     <ui:contents>
+                        <oa:advancedTable id="ContractContentVO1" width="100%" viewName="ContractContentVO1" blockSize="50">
+                           <ui:contents>
+                              <oa:column id="KpiAreaCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1" prompt="考核层面"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiArea" viewName="ContractContentVO1" viewAttr="KpiAreaMeaning"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="KpiNameCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader2" prompt="考核指标"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiName" viewName="ContractContentVO1" viewAttr="KpiName"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="KpiDescCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader3" prompt="描述"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiDesc" viewName="ContractContentVO1" viewAttr="KpiDesc"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="Attribute5Col">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader13" prompt="备注"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Comments" serverUnvalidated="true" viewName="ContractContentVO1" viewAttr="Attribute5"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="WeightChildCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader4" prompt="权重(%)"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiWeight" viewName="ContractContentVO1" viewAttr="Weight" dataType="VARCHAR2"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="TargetValueCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader5" prompt="目标值"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TargetValue" viewName="ContractContentVO1" viewAttr="TargetValue" dataType="NUMBER"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="MininumValueCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader6" prompt="下限值"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="MinimumValue" viewName="ContractContentVO1" viewAttr="MinimumValue" dataType="NUMBER"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="ActualValueCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader7" prompt="实际值"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ActualValue" viewName="ContractContentVO1" viewAttr="ActualValue" dataType="NUMBER" destination=""/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="SelEvalValueCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader12" prompt="自评分"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="SelfEvalValue" dataType="NUMBER" viewName="ContractContentVO1" viewAttr="SelfEvalValue"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="ScoreValueCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader8" prompt="得分"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ScoreValue" viewName="ContractContentVO1" viewAttr="ScoreValue" dataType="NUMBER"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DataSourceCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader9" prompt="数据来源"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Datasource" viewName="ContractContentVO1" viewAttr="KpiDataSourceMeaning"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DetailCol" rendered="false">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader10" prompt="明细"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:switcher regionName="Toolbox Orders Update Switch" viewName="ContractContentVO1" viewAttr="UpdateImage" id="UpdateSwitcher" use="/oracle/apps/fnd/attributesets/Buttons/Update">
+                                       <ui:case name="case3">
+                                          <oa:image source="detailsicon_enabled.gif" destination="" shortDesc="Select to update information." id="UpdateEnabled" imageHeight="24" imageWidth="24">
+                                             <ui:primaryClientAction>
+                                                <ui:fireAction event="updateContractChild" formSubmitted="true">
+                                                   <ui:parameters>
+                                                      <ui:parameter key="appraisalId" value="${oa.ContractContentVO1.AppraisalId}"/>
+                                                      <ui:parameter key="kpiClass" value="${oa.ContractContentVO1.KpiClass}"/>
+                                                      <ui:parameter key="contractId" value="${oa.ContractContentVO1.ContractId}"/>
+                                                      <ui:parameter key="kpiChildWeight" value="${oa.ContractContentVO1.Weight}"/>
+                                                      <ui:parameter key="sourcePage" value="AppraisalContractPG"/>
+                                                      <ui:parameter key="kpiId" value="${oa.ContractContentVO1.KpiId}"/>
+                                                      <ui:parameter key="kpiArea" value="${oa.ContractContentVO1.KpiAreaMeaning}"/>
+                                                      <ui:parameter key="kpiName" value="${oa.ContractContentVO1.KpiName}"/>
+                                                   </ui:parameters>
+                                                </ui:fireAction>
+                                             </ui:primaryClientAction>
+                                          </oa:image>
+                                       </ui:case>
+                                       <ui:case name="case4">
+                                          <oa:image source="detailsicon_disabled.gif" shortDesc="Update functionality disabled" id="UpdateDisabled" imageHeight="24" imageWidth="24"/>
+                                       </ui:case>
+                                    </oa:switcher>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DelCol" rendered="false">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader11" prompt="删除"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:switcher regionName="" viewName="ContractContentVO1" viewAttr="DeleteImage" id="DeleteSwitcher" use="/oracle/apps/fnd/attributesets/Buttons/Delete">
+                                       <ui:case name="DeleteEnabled">
+                                          <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" shortDesc="Select to delete information.">
+                                             <ui:primaryClientAction>
+                                                <ui:fireAction event="delete" id="fireAction1">
+                                                   <ui:parameters>
+                                                      <ui:parameter key="contractId" value="${oa.ContractContentVO1.ContractId}"/>
+                                                   </ui:parameters>
+                                                </ui:fireAction>
+                                             </ui:primaryClientAction>
+                                          </oa:image>
+                                       </ui:case>
+                                       <ui:case name="case2">
+                                          <oa:image source="deleteicon_disabled.gif" shortDesc="Delete functionality disabled." id="DeleteDisabled" imageHeight="24" imageWidth="24"/>
+                                       </ui:case>
+                                    </oa:switcher>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:formValue id="ContractId" viewName="ContractContentVO1" viewAttr="ContractId" dataType="NUMBER"/>
+                              <oa:formValue id="KpiScoringMethod" viewName="ContractContentVO1" viewAttr="KpiScoringMethod"/>
+                              <oa:formValue id="KpiDataSource" viewName="ContractContentVO1" viewAttr="KpiDataSource"/>
+                              <oa:formValue id="KpiClass1" viewName="ContractContentVO1" viewAttr="KpiClass"/>
+                           </ui:contents>
+                        </oa:advancedTable>
+                     </ui:contents>
+                  </oa:header>
+               </ui:detail>
+            </oa:advancedTable>
+            <oa:table id="AppraisalAttendVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="AppSeq" dataType="NUMBER" prompt="审批顺序" viewName="AppraisalAttendVO1" viewAttr="AppSeq"/>
+                  <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="审批人" viewName="AppraisalAttendVO1" viewAttr="EmpName" maximumLength="150"/>
+                  <oa:messageStyledText id="OpinionDate" dataType="DATETIME" prompt="审批日期" viewName="AppraisalAttendVO1" viewAttr="OpinionDate"/>
+                  <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="评语" viewName="AppraisalAttendVO1" viewAttr="Description" maximumLength="500"/>
+               </ui:contents>
+            </oa:table>
+            <oa:flowLayout id="AppealRN">
+               <ui:contents>
+                  <oa:messageTextInput id="AppealDesc" viewName="AppraisalAttendEnterVO1" viewAttr="Description" prompt="请在下面描述申诉内容及原因" rows="5" columns="50" maximumLength="500"/>
+                  <oa:formValue id="OpinionDate1" dataType="DATE"/>
+                  <oa:submitButton id="RejectAppeal" text="驳回申诉" prompt="驳回申诉"/>
+                  <oa:spacer id="item211" width="15"/>
+                  <oa:submitButton id="AgreeAppeal" text="同意申诉" prompt="同意申诉"/>
+                  <oa:spacer id="item212" width="5"/>
+                  <oa:submitButton id="Appeal" text="我要申诉" prompt="我要申诉"/>
+               </ui:contents>
+            </oa:flowLayout>
+            <oa:flowLayout id="NoteRN">
+               <ui:contents>
+                  <oa:messageTextInput id="Note" rows="5" maximumLength="500" prompt="意见" shortDesc="请填写备注" viewName="AppraisalAttendNoteVO1" viewAttr="Description" columns="100"/>
+               </ui:contents>
+            </oa:flowLayout>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:flowLayout id="ActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Save" text="保存" prompt="保存"/>
+                        <oa:spacer id="item1" width="15"/>
+                        <oa:submitButton id="Submit" text="提交" prompt="提交"/>
+                        <oa:spacer id="item2" width="15"/>
+                        <oa:submitButton id="Return" text="退回" prompt="退回" rendered="false"/>
+                        <oa:spacer id="item214" width="15"/>
+                        <oa:submitButton id="Back" text="返回" prompt="返回"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

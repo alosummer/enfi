@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="XXNotifAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>test</JDBCName>
+         <jbo.project>Cinda</jbo.project>
+         <AppModuleJndiName>oracle.apps.xxt.ap.oie.workflow.apexp.server.XXNotifAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>oracle.apps.xxt.ap.oie.workflow.apexp.server.XXNotifAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="CuxNotifAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>enfi_dev</JDBCName>
+         <jbo.project>OAProject1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.cux.workflow.server.CuxNotifAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.cux.workflow.server.CuxNotifAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="test">
+      <ENTRY name="JDBC_PORT" value="1521"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="localhost"/>
+      <ENTRY name="user" value="scott"/>
+      <ENTRY name="ConnectionName" value="test"/>
+      <ENTRY name="SID" value="ORCL"/>
+      <ENTRY name="Role" value="Normal"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}056FBB67CA5B32EE93E3FD28424D28D155]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>

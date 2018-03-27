@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.pa.mh.lov.server.MHAssignLovAM" scope="/">
+   <ui:contents>
+      <oa:table name="ProjectRoleLOV" id="ProjectRoleLovVO1">
+         <ui:contents>
+            <oa:formValue id="ProjectRoleId" dataType="NUMBER" prompt="ProjectRoleId" viewName="ProjectRoleLovVO1" viewAttr="ProjectRoleId"/>
+            <oa:formValue id="ProjectRoleType" dataType="VARCHAR2" prompt="ProjectRoleType" viewName="ProjectRoleLovVO1" viewAttr="ProjectRoleType"/>
+            <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="项目角色" viewName="ProjectRoleLovVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
+            <oa:formValue id="ResourceSourceId" dataType="NUMBER" prompt="ResourceSourceId" viewName="ProjectRoleLovVO1" viewAttr="ResourceSourceId"/>
+            <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="ProjectRoleLovVO1" viewAttr="ProjectId"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

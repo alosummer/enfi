@@ -1,0 +1,187 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:stackLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpNtfAM" controllerClass="cux.oracle.apps.ap.oie.workflow.apexp.webui.CuxApExpNtfRNCO" standalone="true">
+   <ui:contents>
+      <oa:header id="InTravelRN" text="国内差旅报销信息">
+         <ui:contents>
+            <oa:table id="CuxApExpInTotalSubVO1" width="100%" text="报销费用汇总(人民币)">
+               <ui:contents>
+                  <oa:messageStyledText id="EmpNumber" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpInTotalSubVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                  <oa:messageStyledText id="EmpName4" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpInTotalSubVO1" viewAttr="EmpName" maximumLength="9"/>
+                  <oa:messageStyledText id="TravelSubsidy" dataType="NUMBER" prompt="补助费" viewName="CuxApExpInTotalSubVO1" viewAttr="TravelSubsidy" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeePlane" dataType="NUMBER" prompt="飞机" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeePlane" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeeTrain" dataType="NUMBER" prompt="火车" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeeTrain" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeeAutomobile" dataType="NUMBER" prompt="汽车" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeeAutomobile" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeeShip" dataType="NUMBER" prompt="轮船" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeeShip" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeeInJing" dataType="NUMBER" prompt="市内交通费" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeeInJing" totalValue="true"/>
+                  <oa:messageStyledText id="TrafficFeeOutJing" dataType="NUMBER" prompt="市外交通费" viewName="CuxApExpInTotalSubVO1" viewAttr="TrafficFeeOutJing" totalValue="true"/>
+                  <oa:messageStyledText id="AccomFee" dataType="NUMBER" prompt="住宿费" viewName="CuxApExpInTotalSubVO1" viewAttr="AccomFee" totalValue="true"/>
+                  <oa:messageStyledText id="OtherFee" dataType="NUMBER" prompt="其他费用" viewName="CuxApExpInTotalSubVO1" viewAttr="OtherFee" totalValue="true"/>
+                  <oa:messageStyledText id="EmpTotal" dataType="NUMBER" prompt="国内差旅-合计" viewName="CuxApExpInTotalSubVO1" viewAttr="EmpTotal" totalValue="true"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpInTravelSubVO1" width="100%" text="出差补贴">
+               <ui:contents>
+                  <oa:messageStyledText id="EmployeeNumber" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpInTravelSubVO1" viewAttr="EmployeeNumber" maximumLength="30"/>
+                  <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpInTravelSubVO1" viewAttr="EmpName" maximumLength="240"/>
+                  <oa:messageStyledText id="StartDate" dataType="DATE" prompt="从" viewName="CuxApExpInTravelSubVO1" viewAttr="StartDate"/>
+                  <oa:messageStyledText id="EndDate" dataType="DATE" prompt="到" viewName="CuxApExpInTravelSubVO1" viewAttr="EndDate"/>
+                  <oa:messageStyledText id="FeeType" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpInTravelSubVO1" viewAttr="FeeType" maximumLength="150"/>
+                  <oa:messageStyledText id="TravelDatesNumber" dataType="NUMBER" prompt="出差天数" viewName="CuxApExpInTravelSubVO1" viewAttr="TravelDatesNumber"/>
+                  <oa:messageStyledText id="IsSepcialSite" dataType="VARCHAR2" prompt="是否特殊地点出差" viewName="CuxApExpInTravelSubVO1" viewAttr="IsSepcialSite" maximumLength="30"/>
+                  <oa:messageStyledText id="FeePerDay" dataType="NUMBER" prompt="补贴人天" viewName="CuxApExpInTravelSubVO1" viewAttr="FeePerDay"/>
+                  <oa:messageStyledText id="TravelSubsidyTotal" dataType="NUMBER" prompt="出差补贴" viewName="CuxApExpInTravelSubVO1" viewAttr="TravelSubsidyTotal"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpInTrafficSubVO1" width="100%" text="交通费">
+               <ui:contents>
+                  <oa:messageStyledText id="EmployeeNumber1" dataType="VARCHAR2" prompt="工号" viewName="CuxApExpInTrafficSubVO1" viewAttr="EmployeeNumber" maximumLength="30"/>
+                  <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="姓名" viewName="CuxApExpInTrafficSubVO1" viewAttr="EmpName" maximumLength="240"/>
+                  <oa:messageStyledText id="StartDate1" dataType="DATETIME" prompt="从" viewName="CuxApExpInTrafficSubVO1" viewAttr="StartDate"/>
+                  <oa:messageStyledText id="EndDate1" dataType="DATETIME" prompt="至" viewName="CuxApExpInTrafficSubVO1" viewAttr="EndDate"/>
+                  <oa:messageStyledText id="FeeType1" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpInTrafficSubVO1" viewAttr="FeeType" maximumLength="150"/>
+                  <oa:messageStyledText id="StartSite" dataType="VARCHAR2" prompt="出发" viewName="CuxApExpInTrafficSubVO1" viewAttr="StartSite" maximumLength="150"/>
+                  <oa:messageStyledText id="EndSite" dataType="VARCHAR2" prompt="到达" viewName="CuxApExpInTrafficSubVO1" viewAttr="EndSite" maximumLength="150"/>
+                  <oa:messageStyledText id="TrafficType" dataType="VARCHAR2" prompt="交通工具" viewName="CuxApExpInTrafficSubVO1" viewAttr="TrafficType" maximumLength="150"/>
+                  <oa:messageStyledText id="TrafficNumber" dataType="VARCHAR2" prompt="航班号" viewName="CuxApExpInTrafficSubVO1" viewAttr="TrafficNumber" maximumLength="150"/>
+                  <oa:messageStyledText id="TrafficFee" dataType="NUMBER" prompt="交通费" viewName="CuxApExpInTrafficSubVO1" viewAttr="TrafficFee"/>
+                  <oa:messageStyledText id="BuyTicketFee" dataType="NUMBER" prompt="订退票费" viewName="CuxApExpInTrafficSubVO1" viewAttr="BuyTicketFee"/>
+                  <oa:messageStyledText id="LevelSubsidy" dataType="NUMBER" prompt="硬座补贴" viewName="CuxApExpInTrafficSubVO1" viewAttr="LevelSubsidy"/>
+                  <oa:messageStyledText id="OvertimeSubsidy" dataType="NUMBER" prompt="超时补贴" viewName="CuxApExpInTrafficSubVO1" viewAttr="OvertimeSubsidy"/>
+                  <oa:messageStyledText id="PublicTrafficFeeInJing" dataType="NUMBER" prompt="公交费" viewName="CuxApExpInTrafficSubVO1" viewAttr="PublicTrafficFeeInJing"/>
+                  <oa:messageStyledText id="TaxiFeeInJing" dataType="NUMBER" prompt="出租车费" viewName="CuxApExpInTrafficSubVO1" viewAttr="TaxiFeeInJing"/>
+                  <oa:messageStyledText id="TotalTrafficFeeOutJing" dataType="NUMBER" prompt="市外交通费" viewName="CuxApExpInTrafficSubVO1" viewAttr="TotalTrafficFeeOutJing"/>
+                  <oa:messageStyledText id="Remark" dataType="VARCHAR2" prompt="超标说明" viewName="CuxApExpInTrafficSubVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpInAccomSubVO1" width="100%" text="住宿费">
+               <ui:contents>
+                  <oa:messageStyledText id="EmployeeNumber2" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpInAccomSubVO1" viewAttr="EmployeeNumber" maximumLength="30"/>
+                  <oa:messageStyledText id="EmpName2" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpInAccomSubVO1" viewAttr="EmpName" maximumLength="240"/>
+                  <oa:messageStyledText id="StartDate2" dataType="DATE" prompt="从" viewName="CuxApExpInAccomSubVO1" viewAttr="StartDate"/>
+                  <oa:messageStyledText id="EndDate2" dataType="DATE" prompt="到" viewName="CuxApExpInAccomSubVO1" viewAttr="EndDate"/>
+                  <oa:messageStyledText id="FeeType2" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpInAccomSubVO1" viewAttr="FeeType" maximumLength="150"/>
+                  <oa:messageStyledText id="AccomSite" dataType="VARCHAR2" prompt="住宿地点" viewName="CuxApExpInAccomSubVO1" viewAttr="AccomSite" maximumLength="150"/>
+                  <oa:messageStyledText id="AccomDaysNumber" dataType="NUMBER" prompt="住宿天数" viewName="CuxApExpInAccomSubVO1" viewAttr="AccomDaysNumber"/>
+                  <oa:messageStyledText id="FeePerDay1" dataType="NUMBER" prompt="住宿费" viewName="CuxApExpInAccomSubVO1" viewAttr="FeePerDay"/>
+                  <oa:messageStyledText id="Remark1" dataType="VARCHAR2" prompt="超标说明" viewName="CuxApExpInAccomSubVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpInOtherFeeSubVO1" text="其他差旅费用" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="EmployeeNumber3" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="EmployeeNumber" maximumLength="30"/>
+                  <oa:messageStyledText id="EmpName3" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="EmpName" maximumLength="240"/>
+                  <oa:messageStyledText id="FeeType3" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="FeeType" maximumLength="150"/>
+                  <oa:messageStyledText id="FeeDate" dataType="DATE" prompt="费用发生日期" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="FeeDate"/>
+                  <oa:messageStyledText id="FeeAmount" dataType="NUMBER" prompt="费用金额" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="FeeAmount"/>
+                  <oa:messageStyledText id="Remark2" dataType="VARCHAR2" prompt="备注" viewName="CuxApExpInOtherFeeSubVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+      </oa:header>
+      <oa:header id="OutTravelRN" text="出国差旅报销信息">
+         <ui:contents>
+            <oa:table id="CuxApExpOutTravelTotalSubVO1" width="100%" text="报销费用汇总(人民币)">
+               <ui:contents>
+                  <oa:messageStyledText id="EmpNumber3" dataType="VARCHAR2" prompt="工号" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                  <oa:messageStyledText id="EmpName8" dataType="VARCHAR2" prompt="姓名" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="EmpName" maximumLength="9"/>
+                  <oa:messageStyledText id="AboardFeePlane" dataType="NUMBER" prompt="机票" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeePlane" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeAccom" dataType="NUMBER" prompt="住宿费" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeAccom" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeFood" dataType="NUMBER" prompt="伙食费" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeFood" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeOtherFee" dataType="NUMBER" prompt="公杂费" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeOtherFee" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeBuzhu" dataType="NUMBER" prompt="现场服务补助" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeBuzhu" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeOther" dataType="NUMBER" prompt="其他费用" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeOther" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeTicket" dataType="NUMBER" prompt="退订票费" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeTicket" totalValue="true"/>
+                  <oa:messageStyledText id="AboardFeeInJing" dataType="NUMBER" prompt="市内交通费" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="AboardFeeInJing" totalValue="true"/>
+                  <oa:messageStyledText id="EmpAboardTotal" dataType="NUMBER" prompt="国外差旅-合计" viewName="CuxApExpOutTravelTotalSubVO1" viewAttr="EmpAboardTotal" totalValue="true"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpOutTravelHeaderSubVO1" width="100%" text="出国信息">
+               <ui:contents>
+                  <oa:messageStyledText id="OaAbroadTravelHeaderName" dataType="VARCHAR2" prompt="出国申请" viewName="CuxApExpOutTravelHeaderSubVO1" viewAttr="OaAbroadTravelHeaderName" maximumLength="19"/>
+                  <oa:messageStyledText id="AbourdStartDate" dataType="DATE" prompt="实际出发日期" viewName="CuxApExpOutTravelHeaderSubVO1" viewAttr="AbourdStartDate"/>
+                  <oa:messageStyledText id="AbourdEndDate" dataType="DATE" prompt="实际返回日期" viewName="CuxApExpOutTravelHeaderSubVO1" viewAttr="AbourdEndDate"/>
+                  <oa:messageStyledText id="TravelDaysNumber" dataType="NUMBER" prompt="出国天数" viewName="CuxApExpOutTravelHeaderSubVO1" viewAttr="TravelDaysNumber"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpOutTravelEmpLineSubVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="EmpNumber1" dataType="VARCHAR2" prompt="工号" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                  <oa:messageStyledText id="EmpName5" dataType="VARCHAR2" prompt="姓名" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="EmpName" maximumLength="9"/>
+                  <oa:messageStyledText id="EmpDept" dataType="VARCHAR2" prompt="部门" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="EmpDept" maximumLength="15"/>
+                  <oa:messageStyledText id="TravelType" dataType="VARCHAR2" prompt="出差类型" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="TravelType" maximumLength="18"/>
+                  <oa:messageStyledText id="TravelCountry" dataType="VARCHAR2" prompt="出访国家" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="TravelCountry" maximumLength="9"/>
+                  <oa:messageStyledText id="IsConference" dataType="VARCHAR2" prompt="是否会议类型" viewName="CuxApExpOutTravelEmpLineSubVO1" viewAttr="IsConference" maximumLength="3"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpOutTravelFeeLineSubVO1" width="100%" text="出国费用详细">
+               <ui:contents>
+                  <oa:messageStyledText id="EmpNumber2" dataType="VARCHAR2" prompt="工号" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                  <oa:messageStyledText id="EmpName6" dataType="VARCHAR2" prompt="姓名" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="EmpName" maximumLength="9"/>
+                  <oa:messageStyledText id="FeeType4" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="FeeType" maximumLength="31"/>
+                  <oa:messageStyledText id="PlanPerAmount" dataType="NUMBER" prompt="金额单价" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="PlanPerAmount"/>
+                  <oa:messageStyledText id="PlanDays" dataType="NUMBER" prompt="计划天数" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="PlanDays"/>
+                  <oa:messageStyledText id="CurrencyCode" dataType="VARCHAR2" prompt="币种" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="CurrencyCode" maximumLength="3"/>
+                  <oa:messageStyledText id="FeeSource" dataType="VARCHAR2" prompt="费用来源" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="FeeSource" maximumLength="6"/>
+                  <oa:messageStyledText id="RealTravelDays" dataType="NUMBER" prompt="实际天数" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="RealTravelDays"/>
+                  <oa:messageStyledText id="RealPerAmount" dataType="NUMBER" prompt="实际单价" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="RealPerAmount"/>
+                  <oa:messageStyledText id="RealTotalAmount" dataType="NUMBER" prompt="实际总金额" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="RealTotalAmount"/>
+                  <oa:messageStyledText id="RealTotalAmountBeq" dataType="NUMBER" prompt="实际总金额(人民币)" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="RealTotalAmountBeq"/>
+                  <oa:messageStyledText id="Remark3" dataType="VARCHAR2" prompt="说明" viewName="CuxApExpOutTravelFeeLineSubVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxApExpOutTravelOtherFeeLineSubVO1" width="100%" text="订退票费及市内交通费">
+               <ui:contents>
+                  <oa:messageStyledText id="EmployeeNumber4" dataType="VARCHAR2" prompt="工号" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="EmployeeNumber" maximumLength="30"/>
+                  <oa:messageStyledText id="EmpName7" dataType="VARCHAR2" prompt="姓名" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="EmpName" maximumLength="240"/>
+                  <oa:messageStyledText id="FeeType5" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="FeeType" maximumLength="150"/>
+                  <oa:messageStyledText id="CurrencyCode1" dataType="VARCHAR2" prompt="币种" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="CurrencyCode" maximumLength="150"/>
+                  <oa:messageStyledText id="Rate" dataType="NUMBER" prompt="汇率" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="Rate"/>
+                  <oa:messageStyledText id="FeeDate1" dataType="DATE" prompt="费用日期" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="FeeDate"/>
+                  <oa:messageStyledText id="FeeAmount1" dataType="NUMBER" prompt="费用金额" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="FeeAmount"/>
+                  <oa:messageStyledText id="Remark4" dataType="VARCHAR2" prompt="说明" viewName="CuxApExpOutTravelOtherFeeLineSubVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+      </oa:header>
+      <oa:header id="BudgetRN" text="预算信息">
+         <ui:contents>
+            <oa:table id="CuxDeptBudgetVO1" width="100%" text="部门年预算占用">
+               <ui:contents>
+                  <oa:messageStyledText id="BgtBigName" dataType="VARCHAR2" prompt="预算控制项" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigName" maximumLength="30"/>
+                  <oa:messageStyledText id="BgtBigValue" dataType="NUMBER" prompt="控制预算项金额" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigValue"/>
+                  <oa:messageStyledText id="BgtBigUsedAmt" dataType="NUMBER" prompt="预算已占金额" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigUsedAmt"/>
+                  <oa:messageStyledText id="BgtBigUsedPercent" dataType="NUMBER" prompt="预算已占百分比" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigUsedPercent"/>
+                  <oa:messageStyledText id="BgtBigAvlAmt" dataType="NUMBER" prompt="预算可用额" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigAvlAmt"/>
+                  <oa:messageStyledText id="ApplyAmount" dataType="NUMBER" prompt="本次申请金额" viewName="CuxDeptBudgetVO1" viewAttr="ApplyAmount"/>
+                  <oa:messageStyledText id="BgtBigMtAmount" dataType="NUMBER" prompt="超预算金额" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigMtAmount"/>
+                  <oa:messageStyledText id="BgtBigMtAmountPercent" dataType="NUMBER" prompt="超支百分比" viewName="CuxDeptBudgetVO1" viewAttr="BgtBigMtAmountPercent"/>
+                  <oa:messageStyledText id="DeptBudgetAmt" dataType="NUMBER" prompt="部门预算总数" viewName="CuxDeptBudgetVO1" viewAttr="DeptBudgetAmt"/>
+                  <oa:messageStyledText id="DeptUsedAmt" dataType="NUMBER" prompt="部门预算已占用额" viewName="CuxDeptBudgetVO1" viewAttr="DeptUsedAmt"/>
+                  <oa:messageStyledText id="DeptUsedPercent" dataType="NUMBER" prompt="部门预算已占用百分比" viewName="CuxDeptBudgetVO1" viewAttr="DeptUsedPercent"/>
+                  <oa:messageStyledText id="DeptAvlAmt" dataType="NUMBER" prompt="部门预算可用额" viewName="CuxDeptBudgetVO1" viewAttr="DeptAvlAmt"/>
+                  <oa:messageStyledText id="DeptMtAmount" dataType="NUMBER" prompt="超预算金额" viewName="CuxDeptBudgetVO1" viewAttr="DeptMtAmount"/>
+                  <oa:messageStyledText id="DeptMtAmountPercent" dataType="NUMBER" prompt="超支百分比" viewName="CuxDeptBudgetVO1" viewAttr="DeptMtAmountPercent"/>
+               </ui:contents>
+            </oa:table>
+            <oa:table id="CuxProBudgetVO1" width="100%" text="工程项目预算占用情况">
+               <ui:contents>
+                  <oa:messageStyledText id="BgtBigName1" dataType="VARCHAR2" prompt="预算控制项" viewName="CuxProBudgetVO1" viewAttr="BgtBigName" maximumLength="30"/>
+                  <oa:messageStyledText id="BgtBigValue1" dataType="NUMBER" prompt="控制预算项金额" viewName="CuxProBudgetVO1" viewAttr="BgtBigValue"/>
+                  <oa:messageStyledText id="BgtBigUsedAmt1" dataType="NUMBER" prompt="预算已占金额" viewName="CuxProBudgetVO1" viewAttr="BgtBigUsedAmt"/>
+                  <oa:messageStyledText id="BgtBigUsedPercent1" dataType="NUMBER" prompt="预算已占百分比" viewName="CuxProBudgetVO1" viewAttr="BgtBigUsedPercent"/>
+                  <oa:messageStyledText id="BgtBigAvlAmt1" dataType="NUMBER" prompt="预算可用额" viewName="CuxProBudgetVO1" viewAttr="BgtBigAvlAmt"/>
+                  <oa:messageStyledText id="ApplyAmount1" dataType="NUMBER" prompt="本次申请金额" viewName="CuxProBudgetVO1" viewAttr="ApplyAmount"/>
+                  <oa:messageStyledText id="BgtBigMtAmount1" dataType="NUMBER" prompt="超预算金额" viewName="CuxProBudgetVO1" viewAttr="BgtBigMtAmount"/>
+                  <oa:messageStyledText id="BgtBigMtAmountPercent1" dataType="NUMBER" prompt="超支百分比" viewName="CuxProBudgetVO1" viewAttr="BgtBigMtAmountPercent"/>
+                  <oa:messageStyledText id="ProBudgetAmt" dataType="NUMBER" prompt="项目预算总数" viewName="CuxProBudgetVO1" viewAttr="ProBudgetAmt"/>
+                  <oa:messageStyledText id="ProUsedAmt" dataType="NUMBER" prompt="项目预算已占用额" viewName="CuxProBudgetVO1" viewAttr="ProUsedAmt"/>
+                  <oa:messageStyledText id="ProUsedPercent" dataType="NUMBER" prompt="项目预算已占用百分比" viewName="CuxProBudgetVO1" viewAttr="ProUsedPercent"/>
+                  <oa:messageStyledText id="ProAvlAmt" dataType="NUMBER" prompt="项目预算可用额" viewName="CuxProBudgetVO1" viewAttr="ProAvlAmt"/>
+                  <oa:messageStyledText id="ProMtAmount" dataType="NUMBER" prompt="超预算金额" viewName="CuxProBudgetVO1" viewAttr="ProMtAmount"/>
+                  <oa:messageStyledText id="ProMtAmountPercent" dataType="NUMBER" prompt="超支百分比" viewName="CuxProBudgetVO1" viewAttr="ProMtAmountPercent"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+      </oa:header>
+   </ui:contents>
+</oa:stackLayout>

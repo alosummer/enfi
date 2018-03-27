@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="TmplOrgVO"
+   OrderBy="rownum"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.TmplOrgVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT rownum,
+       TmplOrgEO.TMPL_ID, 
+       TmplOrgEO.ORGANIZATION_ID,
+       haou.NAME AS  ORGANIZATION_NAME,
+       TmplOrgEO.ATTRIBUTE1, 
+       TmplOrgEO.ATTRIBUTE2, 
+       TmplOrgEO.ATTRIBUTE3, 
+       TmplOrgEO.ATTRIBUTE4, 
+       TmplOrgEO.ATTRIBUTE5, 
+       TmplOrgEO.LAST_UPDATE_DATE, 
+       TmplOrgEO.LAST_UPDATED_BY, 
+       TmplOrgEO.LAST_UPDATE_LOGIN, 
+       TmplOrgEO.CREATED_BY, 
+       TmplOrgEO.CREATION_DATE
+FROM CUX_TMPL_ORG_T TmplOrgEO
+   , hr_all_organization_units haou
+WHERE TmplOrgEO.Organization_Id = haou.Organization_Id
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="TmplOrgEO"
+      Entity="cux.oracle.apps.per.review.server.TmplOrgEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      IsNotNull="true"
+      EntityAttrName="TmplId"
+      EntityUsage="TmplOrgEO"
+      AliasName="TMPL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsNotNull="true"
+      EntityAttrName="OrganizationId"
+      EntityUsage="TmplOrgEO"
+      AliasName="ORGANIZATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORGANIZATION_NAME"
+      Expression="ORGANIZATION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="TmplOrgEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="TmplOrgEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="TmplOrgEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="TmplOrgEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="TmplOrgEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="TmplOrgEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="TmplOrgEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="TmplOrgEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="TmplOrgEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="TmplOrgEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

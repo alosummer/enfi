@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KeyPIVO"
+   OrderBy="rownum"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.KeyPIVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.KeyPIVOImpl"
+   UseGlueCode="false" >
+   <Properties>
+      <Property Name ="VO_ATTR.KPIConstraintVO.VO_DATATYPE" Value ="Number" />
+      <Property Name ="VO_ATTR.KPIConstraintVO.VO_QUALIFIED_NAME" Value ="Number" />
+   </Properties>
+   <SQLQuery><![CDATA[
+SELECT rownum,
+       KeyPIEO.KPI_ID, 
+       KeyPIEO.KPI_CLASS, 
+       KeyPIEO.KPI_NAME, 
+       KeyPIEO.KPI_DESC, 
+       KeyPIEO.KPI_DATA_SOURCE, 
+       KeyPIEO.KPI_DATA_DIMENSION, 
+       KeyPIEO.START_DATE, 
+       KeyPIEO.END_DATE, 
+       KeyPIEO.ATTRIBUTE1, 
+       KeyPIEO.ATTRIBUTE2, 
+       KeyPIEO.ATTRIBUTE3, 
+       KeyPIEO.ATTRIBUTE4, 
+       (SELECT ou.name FROM hr_all_organization_units ou WHERE ou.organization_id(+) = keyPIEO.Attribute5) organization_name,
+       KeyPIEO.ATTRIBUTE5, 
+       KeyPIEO.LAST_UPDATE_DATE, 
+       KeyPIEO.LAST_UPDATED_BY, 
+       KeyPIEO.LAST_UPDATE_LOGIN, 
+       KeyPIEO.CREATED_BY, 
+       KeyPIEO.CREATION_DATE, 
+       KeyPIEO.KPI_AREA, 
+       KeyPIEO.KPI_SCORING_METHOD, 
+       KeyPIEO.CAL_TEXT, 
+       KeyPIEO.CAL_TYPE, 
+       KeyPIEO.REPORT_TEXT, 
+       KeyPIEO.REPORT_TYPE,
+       decode(nvl(keypieo.attribute5,'81'),
+              (SELECT pspv.organization_id
+                 FROM per_security_profiles_v pspv
+                WHERE pspv.security_profile_id =
+                      fnd_profile.value('PER_SECURITY_PROFILE_ID')),
+              0,
+              1) updatable,
+       decode(nvl(keypieo.attribute5,'81'),
+              (SELECT pspv.organization_id
+                 FROM per_security_profiles_v pspv
+                WHERE pspv.security_profile_id =
+                      fnd_profile.value('PER_SECURITY_PROFILE_ID')),
+              1,
+              0) renderable
+FROM CUX_KPI_T KeyPIEO
+ WHERE SYSDATE BETWEEN nvl(KeyPIEO.START_DATE,SYSDATE) AND nvl(KeyPIEO.END_DATE,SYSDATE)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="KeyPIEO"
+      Entity="cux.oracle.apps.per.review.server.KeyPIEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+         <Attr Name="_queryOrderBy" Value="KPI_ID" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      IsNotNull="true"
+      EntityAttrName="KpiId"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      EntityAttrName="KpiClass"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiName"
+      EntityAttrName="KpiName"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      EntityAttrName="KpiDesc"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSource"
+      EntityAttrName="KpiDataSource"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_DATA_SOURCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataDimension"
+      EntityAttrName="KpiDataDimension"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_DATA_DIMENSION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      EntityAttrName="StartDate"
+      EntityUsage="KeyPIEO"
+      AliasName="START_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="KeyPIEO"
+      AliasName="END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="KeyPIEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="KeyPIEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="KeyPIEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="KeyPIEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORGANIZATION_NAME"
+      Expression="ORGANIZATION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="KeyPIEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="KeyPIEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="KeyPIEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="KeyPIEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="KeyPIEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="KeyPIEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiArea"
+      EntityAttrName="KpiArea"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiScoringMethod"
+      EntityAttrName="KpiScoringMethod"
+      EntityUsage="KeyPIEO"
+      AliasName="KPI_SCORING_METHOD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CalText"
+      EntityAttrName="CalText"
+      EntityUsage="KeyPIEO"
+      AliasName="CAL_TEXT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CalType"
+      EntityAttrName="CalType"
+      EntityUsage="KeyPIEO"
+      AliasName="CAL_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReportText"
+      EntityAttrName="ReportText"
+      EntityUsage="KeyPIEO"
+      AliasName="REPORT_TEXT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReportType"
+      EntityAttrName="ReportType"
+      EntityUsage="KeyPIEO"
+      AliasName="REPORT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Updatable"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="UPDATABLE"
+      Expression="UPDATABLE"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Renderable"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="RENDERABLE"
+      Expression="RENDERABLE"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="KPIConstraintVO"
+      ViewLink="cux.oracle.apps.per.review.server.KPIConstraintVL"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+</ViewObject>

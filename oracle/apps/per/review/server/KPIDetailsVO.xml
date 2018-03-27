@@ -1,0 +1,549 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KPIDetailsVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.KPIDetailsVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT A.CONTRACT_ID,
+       A.APPRAISAL_ID,
+       A.TMPL_ID,
+       A.WEIGHT,
+       A.TARGET_VALUE,
+       A.MINIMUM_VALUE,
+       A.RATING_METHOD,
+       A.SHOW_SEQ,
+       A.KPI_ID,
+       A.KPI_AREA,
+       A.KPI_AREA_MEANING,
+       A.KPI_NAME,
+       A.KPI_DESC,
+       A.KPI_CLASS,
+       A.KPI_DATA_SOURCE,
+       A.KPI_DATA_SOURCE_MEANING,
+       A.KPI_DATA_DIMENSION,
+       A.KPI_SCORING_METHOD,
+       A.KPI_SCORING_METHOD_MEANING,
+       A.ACTUAL_VALUE,
+       A.SCORE_VALUE,
+       A.SELF_EVAL_VALUE,
+       A.ACTUAL_VALUE_SHOW,
+       DECODE(A.KPI_DATA_SOURCE,
+              '-1',
+              CUX_JXKH_COMMON_PKG.CAL_KPI_SCOREVALUE(A.CONTRACT_ID,
+                                                     A.ACTUAL_VALUE_SHOW,a.sign_date),
+              NULL) AS SCORE_VALUE_SHOW,
+       A.PARENT_CONTRACT_ID,
+       A.APPRAISAL_PERSON_ID,
+       B.ORGANIZATION_NAME,
+       B.MEANING,
+       B.EPM_CJ_NAME,
+       B.ATTRIBUTE5
+  FROM (WITH ZCX AS (SELECT CONTRACTEO.CONTRACT_ID,
+                            CONTRACTEO.APPRAISAL_ID,
+                            CONTRACTEO.TMPL_ID,
+                            CONTRACTEO.WEIGHT,
+                            CONTRACTEO.TARGET_VALUE,
+                            CONTRACTEO.MINIMUM_VALUE,
+                            CONTRACTEO.RATING_METHOD,
+                            CONTRACTEO.SHOW_SEQ,
+                            CONTRACTEO.KPI_ID,
+                            CONTRACTEO.KPI_AREA,
+                            NVL(LV1.MEANING, CONTRACTEO.KPI_AREA) AS KPI_AREA_MEANING,
+                            CONTRACTEO.KPI_NAME,
+                            CONTRACTEO.KPI_DESC,
+                            CONTRACTEO.KPI_CLASS,
+                            CONTRACTEO.KPI_DATA_SOURCE,
+                            NVL(DS.EPM_DS_NAME, CONTRACTEO.KPI_DATA_SOURCE) AS KPI_DATA_SOURCE_MEANING,
+                            CONTRACTEO.KPI_DATA_DIMENSION,
+                            CONTRACTEO.KPI_SCORING_METHOD,
+                            NVL(LV.MEANING, CONTRACTEO.KPI_SCORING_METHOD) AS KPI_SCORING_METHOD_MEANING,
+                            CONTRACTEO.ATTRIBUTE1,
+                            CONTRACTEO.ATTRIBUTE2,
+                            CONTRACTEO.ATTRIBUTE3,
+                            CONTRACTEO.ATTRIBUTE4,
+                            CONTRACTEO.ATTRIBUTE5,
+                            CONTRACTEO.ACTUAL_VALUE,
+                            CONTRACTEO.SCORE_VALUE,
+                            CONTRACTEO.SELF_EVAL_VALUE,
+                            NVL(cat.sign_date,SYSDATE) sign_date,
+                            TO_NUMBER(DECODE(CONTRACTEO.KPI_DATA_SOURCE,
+                                             '-1',
+                                             DECODE(CAT.PHASE_ID,
+                                                    'GOAL',
+                                                    DECODE(CAT.STATUS_ID,
+                                                           'COMPLETED',
+                                                           DECODE(NVL(FND_PROFILE.VALUE('CUX_EPM_CAL_SCORE_FLAG'),
+                                                                      'Y'),
+                                                                  'N',
+                                                                  NULL,
+                                                                  CUX_JXKH_COMMON_PKG.CAL_KPI_ACTUALVALUE(CONTRACTEO.APPRAISAL_ID,
+                                                                                                          CONTRACTEO.KPI_ID,NVL(cat.sign_date,SYSDATE))),
+                                                           NULL),
+                                                    CONTRACTEO.ACTUAL_VALUE),
+                                             NULL)) AS ACTUAL_VALUE_SHOW,
+                            CONTRACTEO.PARENT_CONTRACT_ID,
+                            CAT.APPRAISAL_PERSON_ID,
+                             cux_jxkh_common_pkg.get_constraint_id(CAT.appraisal_person_id,
+                                                     CONTRACTEO.KPI_ID,NVL(cat.sign_date,SYSDATE)) constraint_id
+                       FROM CUX_CONTRACT_T    CONTRACTEO,
+                            FND_LOOKUP_VALUES LV,
+                            CUX_DATA_SOURCE_V DS,
+                            FND_LOOKUP_VALUES LV1,
+                            CUX_APPRAISAL_T   CAT
+                      WHERE CONTRACTEO.APPRAISAL_ID = CAT.APPRAISAL_ID
+                        AND CONTRACTEO.KPI_SCORING_METHOD = LV.LOOKUP_CODE(+)
+                        AND LV.LOOKUP_TYPE(+) = 'EPM_SCORING_METHOD'
+                        AND LV.LANGUAGE(+) = USERENV('LANG')
+                        AND NVL(LV.START_DATE_ACTIVE(+), SYSDATE) <= SYSDATE
+                        AND NVL(LV.END_DATE_ACTIVE(+), SYSDATE) >= SYSDATE
+                        AND CONTRACTEO.KPI_DATA_SOURCE = DS.EPM_DS_CODE(+)
+                        AND CONTRACTEO.KPI_AREA = LV1.LOOKUP_CODE(+)
+                        AND LV1.LOOKUP_TYPE(+) = 'EPM_INDICATOR_LEVEL'
+                        AND LV1.LANGUAGE(+) = USERENV('LANG')
+                        AND NVL(LV1.START_DATE_ACTIVE(+), SYSDATE) <= SYSDATE
+                        AND NVL(LV1.END_DATE_ACTIVE(+), SYSDATE) >= SYSDATE)
+         SELECT *
+           FROM ZCX) A, (SELECT KPICONSTRAINTEO.CONSTRAINT_ID,
+                                KPICONSTRAINTEO.KPI_ID,
+                                KPICONSTRAINTEO.CONSTRAINT_TYPE,
+                                KPICONSTRAINTEO.CONSTRAINT_OBJ,
+                                KPICONSTRAINTEO.CONSTRAINT_JOB,
+                                KPICONSTRAINTEO.CONSTRAINT_DATA_DIM,
+                                KPICONSTRAINTEO.ATTRIBUTE1,
+                                KPICONSTRAINTEO.ATTRIBUTE2,
+                                KPICONSTRAINTEO.ATTRIBUTE3,
+                                KPICONSTRAINTEO.ATTRIBUTE4,
+                                KPICONSTRAINTEO.ATTRIBUTE5,
+                                LV.MEANING,
+                                CJC.EPM_CJ_NAME,
+                                COV.NAME ORGANIZATION_NAME
+                           FROM CUX_KPI_CONSTRAINT_T KPICONSTRAINTEO,
+                                FND_LOOKUP_VALUES    LV,
+                                CUX_EPM_CJO_V        CJC,
+                                CUX_ORGANIZATION_V   COV
+                          WHERE LV.LOOKUP_TYPE = 'EPM_OBJECT_CLASS'
+                            AND LV.LANGUAGE = USERENV('LANG')
+                            AND NVL(LV.START_DATE_ACTIVE, SYSDATE) <= SYSDATE
+                            AND NVL(LV.END_DATE_ACTIVE, SYSDATE) >= SYSDATE
+                            AND KPICONSTRAINTEO.CONSTRAINT_TYPE =
+                                LV.LOOKUP_CODE(+)
+                            AND KPICONSTRAINTEO.CONSTRAINT_JOB =
+                                CJC.EPM_CJ_CODE(+)
+                            AND KPICONSTRAINTEO.CONSTRAINT_TYPE =
+                                CJC.CONSTRAINT_TYPE(+)
+                            AND KPICONSTRAINTEO.CONSTRAINT_OBJ =
+                                COV.ORGANIZATION_ID(+)) B
+          WHERE substr(a.constraint_id, 1, instr(a.constraint_id || ',', ',') - 1) = b.constraint_id(+)
+            AND a.KPI_CLASS = 'KPI'
+            AND A.APPRAISAL_ID = :1
+            AND A.KPI_CLASS = :2
+            ORDER BY A.CONTRACT_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ContractId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CONTRACT_ID"
+      Expression="CONTRACT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APPRAISAL_ID"
+      Expression="APPRAISAL_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TMPL_ID"
+      Expression="TMPL_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WEIGHT"
+      Expression="WEIGHT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetValue"
+      IsPersistent="false"
+      Precision="10"
+      Scale="3"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TARGET_VALUE"
+      Expression="TARGET_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MinimumValue"
+      IsPersistent="false"
+      Precision="10"
+      Scale="3"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MINIMUM_VALUE"
+      Expression="MINIMUM_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RatingMethod"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RATING_METHOD"
+      Expression="RATING_METHOD"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowSeq"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SHOW_SEQ"
+      Expression="SHOW_SEQ"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="KPI_ID"
+      Expression="KPI_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiArea"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_AREA"
+      Expression="KPI_AREA"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiAreaMeaning"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_AREA_MEANING"
+      Expression="KPI_AREA_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiName"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_NAME"
+      Expression="KPI_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      IsPersistent="false"
+      Precision="1000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_DESC"
+      Expression="KPI_DESC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_CLASS"
+      Expression="KPI_CLASS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSource"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_DATA_SOURCE"
+      Expression="KPI_DATA_SOURCE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSourceMeaning"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_DATA_SOURCE_MEANING"
+      Expression="KPI_DATA_SOURCE_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataDimension"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_DATA_DIMENSION"
+      Expression="KPI_DATA_DIMENSION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiScoringMethod"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_SCORING_METHOD"
+      Expression="KPI_SCORING_METHOD"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiScoringMethodMeaning"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_SCORING_METHOD_MEANING"
+      Expression="KPI_SCORING_METHOD_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualValue"
+      IsPersistent="false"
+      Precision="10"
+      Scale="3"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ACTUAL_VALUE"
+      Expression="ACTUAL_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScoreValue"
+      IsPersistent="false"
+      Precision="10"
+      Scale="3"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SCORE_VALUE"
+      Expression="SCORE_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelfEvalValue"
+      IsPersistent="false"
+      Precision="10"
+      Scale="3"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SELF_EVAL_VALUE"
+      Expression="SELF_EVAL_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualValueShow"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ACTUAL_VALUE_SHOW"
+      Expression="ACTUAL_VALUE_SHOW"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScoreValueShow"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SCORE_VALUE_SHOW"
+      Expression="SCORE_VALUE_SHOW"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ParentContractId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PARENT_CONTRACT_ID"
+      Expression="PARENT_CONTRACT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalPersonId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APPRAISAL_PERSON_ID"
+      Expression="APPRAISAL_PERSON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORGANIZATION_NAME"
+      Expression="ORGANIZATION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCjName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CJ_NAME"
+      Expression="EPM_CJ_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE5"
+      Expression="ATTRIBUTE5"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ProjectVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.hxc.selfservice.timecard.server.ProjectVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT projectnumber
+      ,projectname
+      ,projectdetails
+      ,projectid
+      ,start_date
+      ,completion_date
+      ,carrying_out_organization_id
+      ,sort_seq
+FROM   (SELECT project_number               projectnumber
+              ,project_name                 projectname
+              ,project_details              projectdetails
+              ,project_id                   projectid
+              ,start_date
+              ,completion_date
+              ,carrying_out_organization_id
+              ,1                            sort_seq
+        FROM   pa_online_projects_v popv
+        WHERE  EXISTS (SELECT 1
+                FROM   cux_pa_mh_assign_header_t pmah
+                      ,cux_pa_mh_assign_lines_t  pmal
+                WHERE  pmah.assign_id = pmal.assign_id
+                AND    pmah.project_id = popv.project_id
+                AND    pmal.person_id = fnd_global.employee_id)
+        UNION ALL
+        SELECT project_number projectnumber
+              ,project_name projectname
+              ,project_details projectdetails
+              ,project_id projectid
+              ,start_date
+              ,completion_date
+              ,carrying_out_organization_id
+              ,2 sort_seq
+        FROM   pa_online_projects_v popv
+        WHERE  NOT EXISTS
+         (SELECT 1
+                FROM   cux_pa_mh_assign_header_t pmah
+                      ,cux_pa_mh_assign_lines_t  pmal
+                WHERE  pmah.assign_id = pmal.assign_id
+                AND    pmah.project_id = popv.project_id
+                AND    pmal.person_id = fnd_global.employee_id))
+ORDER  BY sort_seq
+         ,projectnumber ASC
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="Projectnumber"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECTNUMBER"
+      Expression="PROJECTNUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Projectname"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECTNAME"
+      Expression="PROJECTNAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Projectdetails"
+      IsPersistent="false"
+      Precision="58"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECTDETAILS"
+      Expression="PROJECTDETAILS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="58" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Projectid"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECTID"
+      Expression="PROJECTID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="START_DATE"
+      Expression="START_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="COMPLETION_DATE"
+      Expression="COMPLETION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarryingOutOrganizationId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CARRYING_OUT_ORGANIZATION_ID"
+      Expression="CARRYING_OUT_ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SortSeq"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SORT_SEQ"
+      Expression="SORT_SEQ"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

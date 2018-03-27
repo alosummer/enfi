@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="TmplJobVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.TmplJobVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT rownum,
+       TmplJobEO.TMPL_ID, 
+       TmplJobEO.JOB_ID, 
+       pj.NAME AS job_name,
+       TmplJobEO.ATTRIBUTE1, 
+       TmplJobEO.ATTRIBUTE2, 
+       TmplJobEO.ATTRIBUTE3, 
+       TmplJobEO.ATTRIBUTE4, 
+       TmplJobEO.ATTRIBUTE5, 
+       TmplJobEO.LAST_UPDATE_DATE, 
+       TmplJobEO.LAST_UPDATED_BY, 
+       TmplJobEO.LAST_UPDATE_LOGIN, 
+       TmplJobEO.CREATED_BY, 
+       TmplJobEO.CREATION_DATE
+FROM CUX_TMPL_JOB_T TmplJobEO
+   , per_jobs pj
+WHERE TmplJobEO.JOB_ID = pj.job_id
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="TmplJobEO"
+      Entity="cux.oracle.apps.per.review.server.TmplJobEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      IsNotNull="true"
+      EntityAttrName="TmplId"
+      EntityUsage="TmplJobEO"
+      AliasName="TMPL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="JobId"
+      IsNotNull="true"
+      EntityAttrName="JobId"
+      EntityUsage="TmplJobEO"
+      AliasName="JOB_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="JobName"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="JOB_NAME"
+      Expression="JOB_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="TmplJobEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="TmplJobEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="TmplJobEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="TmplJobEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="TmplJobEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="TmplJobEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="TmplJobEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="TmplJobEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="TmplJobEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="TmplJobEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

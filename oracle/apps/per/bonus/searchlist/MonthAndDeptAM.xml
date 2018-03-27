@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="MonthAndDeptAM"
+   ComponentClass="cux.oracle.apps.per.bonus.searchlist.MonthAndDeptAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="MonthVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.searchlist.MonthVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptOV1"
+      ViewObjectName="cux.oracle.apps.per.bonus.searchlist.DeptOV" >
+   </ViewUsage>
+   <ViewUsage
+      Name="searchVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.searchlist.searchVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="YearVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.searchlist.YearVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptBonusVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.searchlist.DeptBonusVO" >
+   </ViewUsage>
+</AppModule>

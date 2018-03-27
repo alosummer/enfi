@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="CuxDocinfoLovAM"
+   ComponentClass="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="CuxDocinfoDocTypeLovVO1"
+      ViewObjectName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoDocTypeLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxDocinfoCopyLovVO1"
+      ViewObjectName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoCopyLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxDocinfoLangLovVO1"
+      ViewObjectName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoLangLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxCountryLovVO1"
+      ViewObjectName="cux.oracle.apps.cux.docinfo.lov.server.CuxCountryLovVO" >
+   </ViewUsage>
+</AppModule>

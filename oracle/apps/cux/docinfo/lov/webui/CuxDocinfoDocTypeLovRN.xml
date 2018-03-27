@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoLovAM">
+   <ui:contents>
+      <oa:table name="CuxDocinfoDocTypeLovRN" id="CuxDocinfoDocTypeLovVO1">
+         <ui:contents>
+            <oa:formValue id="DocumentTypeCode" dataType="VARCHAR2" prompt="DocumentTypeCode" viewName="CuxDocinfoDocTypeLovVO1" viewAttr="DocumentTypeCode"/>
+            <oa:messageStyledText id="DocumentTypeName" dataType="VARCHAR2" prompt="文件类型" viewName="CuxDocinfoDocTypeLovVO1" viewAttr="DocumentTypeName" maximumLength="80" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

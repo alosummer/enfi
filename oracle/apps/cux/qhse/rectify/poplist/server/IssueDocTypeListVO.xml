@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="IssueDocTypeListVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.poplist.server.IssueDocTypeListVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.poplist.server.IssueDocTypeListVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pal.lookup_code,
+       pal.meaning
+  FROM pa_lookups pal
+ WHERE 1 = 1
+   AND pal.lookup_type = 'ISSUE_DOCUMENTS_TYPE'
+   AND pal.enabled_flag = 'Y'
+   AND nvl(pal.start_date_active,
+           SYSDATE) <= SYSDATE
+   AND nvl(pal.end_date_active,
+           SYSDATE + 1) > SYSDATE
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LookupCode"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

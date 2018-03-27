@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxQualityMagHeaderVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagHeaderVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagHeaderVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT CuxQualityMagHeaderEO.HEADER_ID, 
+       CuxQualityMagHeaderEO.PROJECT_ID, 
+       CuxQualityMagHeaderEO.CREATION_DATE, 
+       CuxQualityMagHeaderEO.CREATED_BY, 
+       CuxQualityMagHeaderEO.LAST_UPDATE_DATE, 
+       CuxQualityMagHeaderEO.LAST_UPDATED_BY, 
+       CuxQualityMagHeaderEO.LAST_UPDATE_LOGIN, 
+       CuxQualityMagHeaderEO.ATTRIBUTE_CATEGORY, 
+       CuxQualityMagHeaderEO.ATTRIBUTE1, 
+       CuxQualityMagHeaderEO.ATTRIBUTE2, 
+       CuxQualityMagHeaderEO.ATTRIBUTE3, 
+       CuxQualityMagHeaderEO.ATTRIBUTE4, 
+       CuxQualityMagHeaderEO.ATTRIBUTE5, 
+       CuxQualityMagHeaderEO.INTERATOR, 
+       CuxQualityMagHeaderEO.ORG_ID, 
+       CuxQualityMagHeaderEO.STATUS
+FROM CUX_QUALITY_MAG_HEADER CuxQualityMagHeaderEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxQualityMagHeaderEO"
+      Entity="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagHeaderEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="HeaderId"
+      IsNotNull="true"
+      EntityAttrName="HeaderId"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsNotNull="true"
+      EntityAttrName="ProjectId"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Interator"
+      IsUpdateable="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="INTERATOR"
+      Expression="NULL"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      IsNotNull="true"
+      EntityAttrName="OrgId"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="CuxQualityMagHeaderEO"
+      AliasName="STATUS" >
+   </ViewAttribute>
+</ViewObject>

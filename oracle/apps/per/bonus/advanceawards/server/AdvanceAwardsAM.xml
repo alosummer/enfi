@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="AdvanceAwardsAM"
+   ComponentClass="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="AdvanceAwardsDateVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsDateVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvanceAwardsTypeVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsOtherPerVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOtherPerVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsOtherLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOtherLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsPerLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsPerLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsSummaryVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsDeptPerVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsDeptPerVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsOperatorVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOperatorVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsDeptPersonVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsDeptPersonVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsOtherTypeVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOtherTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsSummaryOtherVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsSummaryOtherVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsExamVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsExamVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsAttachmentVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsAttachmentVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsDeptLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsDeptLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RejDistVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.RejDistVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsYearStatVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsYearStatVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NtfSuspendWarnVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.NtfSuspendWarnVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxBonusOfficeDistributionVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.CuxBonusOfficeDistributionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvanceAwardsTypeVO2"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsOfficeLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOfficeLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxBonusOfficePersonDistVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.CuxBonusOfficePersonDistVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AdvAwardsSummaryOfficeVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsSummaryOfficeVO" >
+   </ViewUsage>
+</AppModule>

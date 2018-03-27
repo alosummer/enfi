@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="NtfSuspendWarnVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.advanceawards.server.NtfSuspendWarnVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="smonth"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="iorgid"
+      Kind="where"
+      Type="java.lang.Integer" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT HOUV.NAME AS BONUS_DEP_NAME,
+       TO_CHAR(CBP.DISTRIBUTION_DATE, 'yyyy-mm') AS DIS_MONTH,
+       PPF.EMPLOYEE_NUMBER EMP_NO,
+       PPF.LAST_NAME EMP_NAME,
+       CBP.DEP_NAME AS EMP_ORG_NAME,
+       APPS.HR_PERSON_TYPE_USAGE_INFO.GET_USER_PERSON_TYPE(SYSDATE,
+                                                           CBP.PERSON_ID) AS PER_STATUS,
+       CBT.TYPE_NAME AS BONUS_TYPE_NAME,
+       CBP.DISTRIBUTION_AMOUNT,
+       CBP.IMPORT_STATUS,
+       CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBP.Person_Id,
+                                                CBP.DEP_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                TO_DATE(:smonth,'yyyy-mm')) ASSGN_STATUS
+  FROM APPS.CUX_BONUS_PERSON_DISTRIBUTION CBP
+ INNER JOIN HR.HR_ALL_ORGANIZATION_UNITS HOUV ON CBP.Organization_Id = HOUV.ORGANIZATION_ID
+ INNER JOIN APPS.PER_PEOPLE_F PPF ON CBP.Person_Id = PPF.PERSON_ID and 
+            CBP.DISTRIBUTION_DATE BETWEEN PPF.EFFECTIVE_START_DATE and PPF.EFFECTIVE_END_DATE
+ INNER JOIN APPS.CUX_BONUS_TYPE CBT ON (CBP.TYPE_ID = CBT.TYPE_ID AND NVL(CBT.ATTRIBUTE2, 'Y') = 'Y')
+ WHERE CBP.DEP_ID > 0
+   and CBP.DISTRIBUTION_DATE = TO_DATE(:smonth,'yyyy-mm')
+   and CBP.DISTRIBUTION_STATUS = '已批准'
+   and NOT (CBP.Import_Status = '已退回' and CBP.DISTRIBUTION_STATUS = '已批准')
+   AND CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBP.Person_Id,
+                                                CBP.DEP_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                TO_DATE(:smonth,'yyyy-mm')) <> 's'
+   AND CUX_HR_BONUS_PRJ.GET_COMP_ID_BYORGANIZATION(CBP.DEP_ID) = :iorgid
+ORDER BY HOUV.NAME, CBP.DEP_NAME
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="BonusDepName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BONUS_DEP_NAME"
+      Expression="BONUS_DEP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisMonth"
+      IsPersistent="false"
+      Precision="7"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DIS_MONTH"
+      Expression="DIS_MONTH"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpNo"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NO"
+      Expression="EMP_NO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpOrgName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_ORG_NAME"
+      Expression="EMP_ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerStatus"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PER_STATUS"
+      Expression="PER_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BonusTypeName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BONUS_TYPE_NAME"
+      Expression="BONUS_TYPE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTION_AMOUNT"
+      Expression="DISTRIBUTION_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ImportStatus"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IMPORT_STATUS"
+      Expression="IMPORT_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AssgnStatus"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ASSGN_STATUS"
+      Expression="ASSGN_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

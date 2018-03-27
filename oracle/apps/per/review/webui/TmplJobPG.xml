@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TmplJobCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="TmplJobVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="TmplJobVO1" viewAttr="Rownum"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="TmplJobVO1" viewAttr="TmplId"/>
+                  <oa:messageLovInput id="JobName" dataType="VARCHAR2" prompt="职务" viewName="TmplJobVO1" viewAttr="JobName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerJobRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="JobId" resultTo="JobId"/>
+                        <lovMap id="lovMap2" lovItem="JobName" resultTo="JobName" criteriaFrom="JobName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="JobId" viewName="TmplJobVO1" viewAttr="JobId"/>
+                  <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="tmplId" value="${oa.TmplJobVO1.TmplId}"/>
+                              <ui:parameter key="jobId" value="${oa.TmplJobVO1.JobId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:spacer id="item2" width="5"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,624 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxFinPlanMaintainVersionsWorkingCostVO"
+   Extends="oracle.apps.pa.finplan.server.FinPlanMaintainVersionsWorkingCostVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   ComponentClass="cux.oracle.apps.pa.finplan.server.CuxFinPlanMaintainVersionsWorkingCostVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT 'N' AS radio_select
+      ,version_number
+      ,version_name
+      ,decode(plan_processing_code, 'P', 'Y', 'PPP', 'Y', 'N') AS radio_select_enable
+      ,burdened_cost
+      ,total_utilization_percent
+      ,total_utilization_hours
+      ,total_head_count
+      ,status_meaning
+      ,decode(current_working_flag, 'Y', 'WorkingCurrentYes',
+              'WorkingCurrentNo') AS current_working
+      ,decode(:0, 'Y',
+              decode(current_working_flag, 'Y',
+                      decode(budget_status_code, 'W',
+                              decode(plan_processing_code, 'P', 'SubmitNo',
+                                      'SubmitYes'), 'SubmitNo'), 'SubmitNo'),
+              decode(locked_by_person_id,
+                      nvl(pa_fin_plan_maint_ver_global.get_login_person_id(),
+                           -1),
+                      /*If there is no employee_id for the user submit
+                                                                                                                                                                                                                                   icon is not shown */
+                      decode(current_working_flag, 'Y',
+                              decode(budget_status_code, 'W',
+                                      decode(plan_processing_code, 'P', 'SubmitNo',
+                                              'XLUP', 'SubmitNo', 'XLUE', 'SubmitNo',
+                                              'SubmitYes'), 'SubmitNo'),
+                              'SubmitNo'), 'SubmitNo')) AS submit
+      ,decode(:0, 'Y',
+              decode(cux_pa_util_pkg.baseline_ignore_project(project_id),
+                      'Y',
+                      decode(current_working_flag, 'Y',
+                              decode(budget_status_code, 'S',
+                                      decode(wf_status_code, 'IN_ROUTE',
+                                              'BaselineNo', 'BaselineYes'),
+                                      'BaselineNo'), 'BaselineNo'),
+                      decode(cux_pa_util_pkg.is_project_cost_budget(fin_plan_type_id),
+                              'N',
+                              decode(current_working_flag, 'Y',
+                                      decode(budget_status_code, 'S',
+                                              decode(wf_status_code, 'IN_ROUTE',
+                                                      'BaselineNo', 'BaselineYes'),
+                                              'BaselineNo'), 'BaselineNo'),
+                              'BaselineNo')),
+              decode(cux_pa_util_pkg.baseline_ignore_project(project_id),
+                      'Y',
+                      decode(locked_by_person_id,
+                              pa_fin_plan_maint_ver_global.get_login_person_id(),
+                              decode(current_working_flag, 'Y',
+                                      decode(budget_status_code, 'S',
+                                              decode(wf_status_code, 'IN_ROUTE',
+                                                      'BaselineNo', 'BaselineYes'),
+                                              'BaselineNo'), 'BaselineNo'),
+                              decode(nvl(pa_fin_plan_maint_ver_global.get_fin_plan_security('Baseline'),
+                                          'N'), 'Y',
+                                      decode(current_working_flag, 'Y',
+                                              decode(budget_status_code, 'S',
+                                                      decode(wf_status_code,
+                                                              'IN_ROUTE', 'BaselineNo',
+                                                              'BaselineYes'),
+                                                      'BaselineNo'), 'BaselineNo'),
+                                      'BaselineNo')),
+                      decode(cux_pa_util_pkg.is_project_cost_budget(fin_plan_type_id),
+                              'N',
+                              decode(locked_by_person_id,
+                                      pa_fin_plan_maint_ver_global.get_login_person_id(),
+                                      decode(current_working_flag, 'Y',
+                                              decode(budget_status_code, 'S',
+                                                      decode(wf_status_code,
+                                                              'IN_ROUTE', 'BaselineNo',
+                                                              'BaselineYes'),
+                                                      'BaselineNo'), 'BaselineNo'),
+                                      decode(nvl(pa_fin_plan_maint_ver_global.get_fin_plan_security('Baseline'),
+                                                  'N'), 'Y',
+                                              decode(current_working_flag, 'Y',
+                                                      decode(budget_status_code, 'S',
+                                                              decode(wf_status_code,
+                                                                      'IN_ROUTE',
+                                                                      'BaselineNo',
+                                                                      'BaselineYes'),
+                                                              'BaselineNo'),
+                                                      'BaselineNo'), 'BaselineNo')),
+                              'BaselineNo'))) AS baseline
+      ,decode(:0, 'Y',
+              decode(current_working_flag, 'Y',
+                      decode(budget_status_code, 'S',
+                              decode(wf_status_code, 'IN_ROUTE', 'ReworkNo',
+                                      'ReworkYes'), 'ReworkNo'), 'ReworkNo'),
+              decode(locked_by_person_id,
+                      pa_fin_plan_maint_ver_global.get_login_person_id(),
+                      decode(current_working_flag, 'Y',
+                              decode(budget_status_code, 'S',
+                                      decode(wf_status_code, 'IN_ROUTE',
+                                              'ReworkNo', 'ReworkYes'), 'ReworkNo'),
+                              'ReworkNo'),
+                      decode(nvl(pa_fin_plan_maint_ver_global.get_fin_plan_security('Rework'),
+                                  'N'), 'Y',
+                              decode(current_working_flag, 'Y',
+                                      decode(budget_status_code, 'S',
+                                              decode(wf_status_code, 'IN_ROUTE',
+                                                      'ReworkNo', 'ReworkYes'),
+                                              'ReworkNo'), 'ReworkNo'),
+                              'ReworkNo'))) AS rework
+      ,'DetailsYes' AS details
+      ,decode(plan_processing_code, 'P', 'InProgress', 'E', 'Error',
+              'NotInProgress') AS plan_processing_code
+      ,request_id
+      ,budget_version_id
+      ,fin_plan_type_id
+      ,record_version_number
+      ,raw_cost
+      ,locked_by_person_id
+      ,decode(:0, 'Y',
+              decode(budget_status_code, 'W',
+                      decode(plan_processing_code, 'WUE', 'ProcessLockError',
+                              decode(locked_by_person_id,
+                                      nvl(pa_fin_plan_maint_ver_global.get_login_person_id(),
+                                           -1), 'LockToUnlock', NULL,
+                                      'UnlockToLock', -98, 'ProcessLock',
+                                      'LockedBy')), 'S',
+                      decode(locked_by_person_id,
+                              pa_fin_plan_maint_ver_global.get_login_person_id(),
+                              'Nothing', NULL, 'Nothing', 'Nothing'
+                              /*'LockedBy'*/), 'Nothing'),
+              decode(budget_status_code, 'W',
+                      decode(plan_processing_code, 'WUE', 'ProcessLockError',
+                              'XLUP', 'WebAdiConcProcLock', 'XLUE',
+                              'WebAdiConcProcLockErr',
+                              decode(locked_by_person_id,
+                                      nvl(pa_fin_plan_maint_ver_global.get_login_person_id(),
+                                           -1), 'LockToUnlock', NULL,
+                                      'UnlockToLock', 'LockedBy')), 'S',
+                      decode(locked_by_person_id,
+                              pa_fin_plan_maint_ver_global.get_login_person_id(),
+                              'Nothing', NULL, 'Nothing', 'Nothing'
+                              /*'LockedBy'*/), 'Nothing')) AS change_control
+      ,decode(budget_status_code, 'W',
+              decode(nvl(locked_by_person_id, -1),
+                      pa_fin_plan_maint_ver_global.get_login_person_id(),
+                      decode(plan_processing_code, 'P', 'EditOff', 'E',
+                              'EditOff', 'XLUP', 'EditOff', 'XLUE', 'EditOff',
+                              'EditOn'), -1, 'EditOn', 'EditOff'), 'EditOff') AS edit_plan
+      ,locked_by_person_name
+      ,quantity
+      ,row_id
+      ,decode(pa_fp_gen_amount_utils.get_src_resource_class_flag(budget_version_id),
+              'Y', equipment_quantity, NULL) equipment_quantity
+      ,decode(pa_fp_gen_amount_utils.get_src_resource_class_flag(budget_version_id),
+              'Y', people_quantity, NULL) people_quantity
+      ,project_structure_version_id
+      ,plan_processing_code AS db_plan_processing_code
+      ,decode(pa_fp_gen_amount_utils.get_src_resource_class_flag(budget_version_id),
+              'N', nvl(equipment_quantity, 0) + nvl(people_quantity, 0),
+              to_number(NULL)) total_quantity
+FROM   pa_fp_working_cost_v
+ORDER  BY -version_number
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="RadioSelect"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RADIO_SELECT"
+      Expression="RADIO_SELECT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VERSION_NUMBER"
+      Expression="VERSION_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionName"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="60"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VERSION_NAME"
+      Expression="VERSION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="60" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RadioSelectEnable"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RADIO_SELECT_ENABLE"
+      Expression="RADIO_SELECT_ENABLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BurdenedCost"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BURDENED_COST"
+      Expression="BURDENED_COST"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalUtilizationPercent"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_UTILIZATION_PERCENT"
+      Expression="TOTAL_UTILIZATION_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalUtilizationHours"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_UTILIZATION_HOURS"
+      Expression="TOTAL_UTILIZATION_HOURS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalHeadCount"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_HEAD_COUNT"
+      Expression="TOTAL_HEAD_COUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusMeaning"
+      IsQueriable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_MEANING"
+      Expression="STATUS_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrentWorking"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CURRENT_WORKING"
+      Expression="CURRENT_WORKING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Submit"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUBMIT"
+      Expression="SUBMIT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Baseline"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="11"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BASELINE"
+      Expression="BASELINE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="11" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rework"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REWORK"
+      Expression="REWORK"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Details"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DETAILS"
+      Expression="DETAILS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlanProcessingCode"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="13"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PLAN_PROCESSING_CODE"
+      Expression="PLAN_PROCESSING_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="13" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequestId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="REQUEST_ID"
+      Expression="REQUEST_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BudgetVersionId"
+      IsQueriable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BUDGET_VERSION_ID"
+      Expression="BUDGET_VERSION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinPlanTypeId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="FIN_PLAN_TYPE_ID"
+      Expression="FIN_PLAN_TYPE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordVersionNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RECORD_VERSION_NUMBER"
+      Expression="RECORD_VERSION_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RawCost"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RAW_COST"
+      Expression="RAW_COST"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LockedByPersonId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCKED_BY_PERSON_ID"
+      Expression="LOCKED_BY_PERSON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChangeControl"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHANGE_CONTROL"
+      Expression="CHANGE_CONTROL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="12" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EditPlan"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="7"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EDIT_PLAN"
+      Expression="EDIT_PLAN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LockedByPersonName"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCKED_BY_PERSON_NAME"
+      Expression="LOCKED_BY_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Quantity"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QUANTITY"
+      Expression="QUANTITY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowId1"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.RowID"
+      ColumnType="ROWID"
+      AliasName="ROW_ID"
+      Expression="ROW_ID"
+      SQLType="ROWID" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EquipmentQuantity"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EQUIPMENT_QUANTITY"
+      Expression="EQUIPMENT_QUANTITY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeopleQuantity"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PEOPLE_QUANTITY"
+      Expression="PEOPLE_QUANTITY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectStructureVersionId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_STRUCTURE_VERSION_ID"
+      Expression="PROJECT_STRUCTURE_VERSION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DbPlanProcessingCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DB_PLAN_PROCESSING_CODE"
+      Expression="DB_PLAN_PROCESSING_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalQuantity"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_QUANTITY"
+      Expression="TOTAL_QUANTITY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

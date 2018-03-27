@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.cux.qhse.quality.lov.server.CuxLovAM">
+   <ui:contents>
+      <oa:table name="CuxQuaPlanControlLovRN" id="CuxQuaPlanControlLovVO1">
+         <ui:contents>
+            <oa:formValue id="LookupCode" dataType="VARCHAR2" prompt="LookupCode" viewName="CuxQuaPlanControlLovVO1" viewAttr="LookupCode"/>
+            <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="目标计划控制项" viewName="CuxQuaPlanControlLovVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
+            <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="目标计划控制项说明" viewName="CuxQuaPlanControlLovVO1" viewAttr="Description" maximumLength="240"/>
+            <oa:formValue id="PredefinedFlag" viewName="CuxQuaPlanControlLovVO1" viewAttr="PredefinedFlag"/>
+            <oa:formValue id="Attribute2" viewName="CuxQuaPlanControlLovVO1" viewAttr="Attribute2"/>
+            <oa:formValue id="Attribute3" viewName="CuxQuaPlanControlLovVO1" viewAttr="Attribute3"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.PerReviewAM" windowTitle="定义考群" title="定义考群" controllerClass="cux.oracle.apps.per.review.webui.UpdateReviewGroupCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:messageChoice id="OrgId" pickListViewDef="cux.oracle.apps.per.poplist.server.PerLegalEntitiesVO" pickListDispAttr="OrgName" pickListValAttr="OrgId" prompt="公司" required="yes" viewName="PerReviewGrpVO1" viewAttr="OrgId" allowBlankValue="false"/>
+                  <oa:messageTextInput id="GroupName" required="yes" viewName="PerReviewGrpVO1" viewAttr="GroupName" prompt="考群名称" maximumLength="200"/>
+                  <oa:messageChoice id="LevelMode" selectiveSearchCriteria="false" pickListViewDef="cux.oracle.apps.per.poplist.server.PerLevelModeVO" pickListValAttr="EpmCode" pickListDispAttr="EpmMeaning" required="yes" viewName="PerReviewGrpVO1" viewAttr="EpmLevelmode" prompt="评级模式" allowBlankValue="false"/>
+                  <oa:formValue id="GroupId" viewName="PerReviewGrpVO1" viewAttr="GroupId" dataType="NUMBER"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" hAlign="right" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存" hAlign="right"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

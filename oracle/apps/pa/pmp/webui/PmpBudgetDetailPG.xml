@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目预算总成本控制目标分解表" title="" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpBudgetDetailCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr" text="项目预算总成本控制目标分解表">
+               <ui:contents>
+                  <oa:table id="PmpBudgetDetailVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SortSeq" dataType="NUMBER" prompt="序号" viewName="PmpBudgetDetailVO1" viewAttr="SortSeq"/>
+                        <oa:messageStyledText id="ExpenseMainCategory" dataType="VARCHAR2" prompt="费用大类" viewName="PmpBudgetDetailVO1" viewAttr="ExpenseMainCategory" maximumLength="300"/>
+                        <oa:messageStyledText id="ExpenseSubCategory" dataType="VARCHAR2" prompt="费用小类" viewName="PmpBudgetDetailVO1" viewAttr="ExpenseSubCategory" maximumLength="300"/>
+                        <oa:messageStyledText id="TargetValue" dataType="NUMBER" prompt="目标值(万元)" viewName="PmpBudgetDetailVO1" viewAttr="TargetValue"/>
+                        <oa:messageStyledText id="PercentOfContract" dataType="NUMBER" prompt="目标值占合同额百分比(%)" viewName="PmpBudgetDetailVO1" viewAttr="PercentOfContract"/>
+                        <oa:messageStyledText id="Memo" dataType="VARCHAR2" prompt="备注" viewName="PmpBudgetDetailVO1" viewAttr="Memo" maximumLength="3000"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.bonus.project.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="DeptDisStatusVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.DeptDisStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptDistributionVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.DeptDistributionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptPersonLovVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.DeptPersonLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptPrjListVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.DeptPrjListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjBonusDisVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjBonusDisVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjBonusLotToDisVL"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjBonusLotToDisVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="PrjBonusLotVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjBonusLotVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjDisExportVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjDisExportVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjDispatchVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjDispatchVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjDistributionVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjDistributionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjNtfGroupOrgVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjNtfGroupOrgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjNtfOrgDisVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjNtfOrgDisVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjNtfSuspendWarnVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjNtfSuspendWarnVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjPersonLovVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjPersonLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrjWorkFlowDisVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.PrjWorkFlowDisVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectAM"
+      FullName="cux.oracle.apps.per.bonus.project.server.ProjectAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ProjectListVO"
+      FullName="cux.oracle.apps.per.bonus.project.server.ProjectListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

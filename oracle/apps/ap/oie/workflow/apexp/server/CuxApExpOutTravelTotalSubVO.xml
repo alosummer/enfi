@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxApExpOutTravelTotalSubVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelTotalSubVORowImpl"
+   ComponentClass="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelTotalSubVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT rownum AS line_number,
+       emp_id,
+       emp_number,
+       emp_name,
+       relationship_id,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-机票') AS aboard_fee_plane,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-住宿费') AS aboard_fee_accom,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-伙食费') AS aboard_fee_food,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-公杂费') AS aboard_fee_other_fee,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-现场补助') AS aboard_fee_buzhu,
+       cux_ap_exp_pkg.get_emp_aboard_fee(p_relationship_id => relationship_id,
+                                         p_emp_id          => emp_id,
+                                         p_fee_type        => '国外差旅-其他费用') AS aboard_fee_other,
+       
+       cux_ap_exp_pkg.get_emp_aboard_other_fee(p_relationship_id => relationship_id,
+                                               p_emp_id          => emp_id,
+                                               p_fee_type        => '国外差旅-订退票费') AS aboard_fee_ticket,
+       
+       cux_ap_exp_pkg.get_emp_aboard_other_fee(p_relationship_id => relationship_id,
+                                               p_emp_id          => emp_id,
+                                               p_fee_type        => '国外差旅-市内交通费') AS aboard_fee_in_jing,
+       1 AS emp_aboard_total
+  FROM (SELECT caeod.emp_id,
+               caeod.emp_number,
+               caeod.emp_name,
+               caeod.travel_type,
+               caer.relationship_id
+          FROM cux_ap_exp_related_oa_info     caer,
+               cux_ap_exp_related_oa_line     caerl,
+               cux_ap_exp_aboard_tra_detail_v caeod
+         WHERE caerl.oa_travel_line_id = caeod.oa_abroad_travel_line_id
+           AND caerl.oa_travel_header_id = caeod.oa_abroad_travel_header_id
+           AND caer.oa_outsea_travel_process_id =
+               caeod.oa_abroad_travel_header_id
+           AND caerl.aboard_flag = 'Y'
+           AND caer.relationship_id = caerl.relationship_id
+         ORDER BY caeod.emp_number)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LineNumber"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LINE_NUMBER"
+      Expression="LINE_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EMP_ID"
+      Expression="EMP_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpNumber"
+      IsPersistent="false"
+      Precision="6"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="EMP_NUMBER"
+      Expression="EMP_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RelationshipId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RELATIONSHIP_ID"
+      Expression="RELATIONSHIP_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeePlane"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_PLANE"
+      Expression="ABOARD_FEE_PLANE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeAccom"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_ACCOM"
+      Expression="ABOARD_FEE_ACCOM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeFood"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_FOOD"
+      Expression="ABOARD_FEE_FOOD"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeOtherFee"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_OTHER_FEE"
+      Expression="ABOARD_FEE_OTHER_FEE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeBuzhu"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_BUZHU"
+      Expression="ABOARD_FEE_BUZHU"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeOther"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_OTHER"
+      Expression="ABOARD_FEE_OTHER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeTicket"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_TICKET"
+      Expression="ABOARD_FEE_TICKET"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AboardFeeInJing"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ABOARD_FEE_IN_JING"
+      Expression="ABOARD_FEE_IN_JING"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpAboardTotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EMP_ABOARD_TOTAL"
+      Expression="EMP_ABOARD_TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

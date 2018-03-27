@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.poplist.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AppraisalPhaseVO"
+      FullName="cux.oracle.apps.per.poplist.server.AppraisalPhaseVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpApproveTypeVO"
+      FullName="cux.oracle.apps.per.poplist.server.EmpApproveTypeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpPeriodVO"
+      FullName="cux.oracle.apps.per.poplist.server.EmpPeriodVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpPhaseVO"
+      FullName="cux.oracle.apps.per.poplist.server.EmpPhaseVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EpmCalType"
+      FullName="cux.oracle.apps.per.poplist.server.EpmCalType"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EpmReportType"
+      FullName="cux.oracle.apps.per.poplist.server.EpmReportType"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EpmStatusVO"
+      FullName="cux.oracle.apps.per.poplist.server.EpmStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EpmWfStatus"
+      FullName="cux.oracle.apps.per.poplist.server.EpmWfStatus"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="FlagVO"
+      FullName="cux.oracle.apps.per.poplist.server.FlagVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="GradeAEVO"
+      FullName="cux.oracle.apps.per.poplist.server.GradeAEVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIAreaVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIAreaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIClassVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIClassVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIConJobVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIConJobVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIConObjVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIConObjVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDataDimensionVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIDataDimensionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDataSourceSMVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIDataSourceSMVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDataSourceVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIDataSourceVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDimVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIDimVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPILevelVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPILevelVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIObjectClassVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIObjectClassVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIScoreMethodVO"
+      FullName="cux.oracle.apps.per.poplist.server.KPIScoreMethodVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerGroupVO"
+      FullName="cux.oracle.apps.per.poplist.server.PerGroupVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerJobVO"
+      FullName="cux.oracle.apps.per.poplist.server.PerJobVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerLegalEntitiesVO"
+      FullName="cux.oracle.apps.per.poplist.server.PerLegalEntitiesVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerLevelModeVO"
+      FullName="cux.oracle.apps.per.poplist.server.PerLevelModeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerOrgVO"
+      FullName="cux.oracle.apps.per.poplist.server.PerOrgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RoleTypeVO"
+      FullName="cux.oracle.apps.per.poplist.server.RoleTypeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TemplateKPIClasses"
+      FullName="cux.oracle.apps.per.poplist.server.TemplateKPIClasses"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="YesNoVO"
+      FullName="cux.oracle.apps.per.poplist.server.YesNoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

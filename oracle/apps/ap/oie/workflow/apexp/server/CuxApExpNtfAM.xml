@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="CuxApExpNtfAM"
+   ComponentClass="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpNtfAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="CuxApExpInTravelSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTravelSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpInTrafficSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTrafficSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpInAccomSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInAccomSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpInOtherFeeSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInOtherFeeSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpInTotalSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTotalSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpCheckDisplayVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpCheckDisplayVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpOutTravelHeaderSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelHeaderSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpOutTravelEmpLineSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelEmpLineSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpOutTravelFeeLineSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelFeeLineSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpOutTravelOtherFeeLineSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelOtherFeeLineSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxApExpOutTravelTotalSubVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelTotalSubVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxDeptBudgetVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxDeptBudgetVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxProBudgetVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxProBudgetVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxNtfMessageNameVO1"
+      ViewObjectName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxNtfMessageNameVO" >
+   </ViewUsage>
+</AppModule>

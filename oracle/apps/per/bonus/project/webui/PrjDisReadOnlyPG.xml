@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjDisReadOnlyCO" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM" windowTitle="项目管理奖发放记录" title="项目管理奖发放">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="PrjBugetRN">
+               <ui:contents>
+                  <oa:messageStyledText id="PrjNum" prompt="项目编号" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item1"/>
+                  <oa:messageStyledText id="PrjName" prompt="项目名称" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item2"/>
+                  <oa:messageStyledText id="PrjBudget" prompt="预算总额(元)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item3"/>
+                  <oa:messageStyledText id="PrjIssueBudget" prompt="可发放预算总额(元)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item4"/>
+                  <oa:messageStyledText id="PrjReleaseTotal" prompt="已发放总额(元)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item5"/>
+                  <oa:messageStyledText id="PrjIssueTotal" prompt="可发放总额(元)" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:header id="HistoryRN" text="项目管理奖历史发放记录（已审批通过）">
+               <ui:contents>
+                  <oa:advancedTable id="PrjLotTable" viewName="PrjBonusLotVO1" detailViewAttr="Viewline" childViewAttrName="Groupid" viewLinkName="PrjBonusLotToDisVL1" width="100%">
+                     <ui:contents>
+                        <oa:column id="LotIdCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="发放批次"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="LotId" viewAttr="LotId" dataType="VARCHAR2"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistributionAmountCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="发放金额(元)"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistributionAmount" viewAttr="DistributionAmount" dataType="VARCHAR2"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ApprovedDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="审批日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ApprovedDate" viewAttr="ApprovedDate"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:detail>
+                        <oa:header id="DetailRN">
+                           <ui:contents>
+                              <oa:advancedTable id="PrjDisTable" viewName="PrjBonusDisVO1" viewLinkName="PrjBonusLotToDisVL1" width="95%">
+                                 <ui:contents>
+                                    <oa:column id="DetailEmpNoCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader4" prompt="工号"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailEmpNo" viewAttr="EmpNo"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="DetailEmpNameCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader7" prompt="姓名"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailEmpName" viewAttr="EmpName"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="DetailOrgNameCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader9" prompt="组织"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailOrgName" viewAttr="OrgName"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="DetailDistributionAmountCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader5" prompt="奖金(元)"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailDistributionAmount" viewAttr="DistributionAmount"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="DetailNoteCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader6" prompt="备注"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailNote" viewAttr="Note"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="DetailImportStatusCol">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader8" prompt="ERP导入状态"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="DetailImportStatus" viewAttr="ImportStatus"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                 </ui:contents>
+                              </oa:advancedTable>
+                           </ui:contents>
+                        </oa:header>
+                     </ui:detail>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

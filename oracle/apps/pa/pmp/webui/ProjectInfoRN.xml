@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:tableLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.pa.pmp.webui.ProjectInfoCO" scope="/">
+   <ui:contents>
+      <oa:rowLayout id="region1" width="100%">
+         <ui:contents>
+            <oa:cellFormat id="region2" width="10%" hAlign="left">
+               <ui:contents>
+                  <oa:messageStyledText id="ProjectNum" dataType="VARCHAR2" prompt="项目编号" viewName="PmpProjectInfoVO1" viewAttr="ProjectNum" maximumLength="25"/>
+               </ui:contents>
+            </oa:cellFormat>
+            <oa:cellFormat id="region3" width="90%" hAlign="left">
+               <ui:contents>
+                  <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="PmpProjectInfoVO1" viewAttr="ProjectName" maximumLength="30"/>
+               </ui:contents>
+            </oa:cellFormat>
+         </ui:contents>
+      </oa:rowLayout>
+   </ui:contents>
+</oa:tableLayout>

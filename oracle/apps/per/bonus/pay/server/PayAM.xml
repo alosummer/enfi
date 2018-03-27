@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="PayAM"
+   ComponentClass="cux.oracle.apps.per.bonus.pay.server.PayAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="PersonDisVo1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.PersonDisVo" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PeriodVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.poplist.server.PeriodVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DisOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.poplist.server.DisOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BonusTypeVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.poplist.server.BonusTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EmpVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.poplist.server.EmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="OtherPersonDisVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.OtherPersonDisVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="InternalDisOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.InternalDisOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ExternalEmpOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.ExternalEmpOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="InternalEmpOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.InternalEmpOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PayrollVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.pay.server.PayrollVO" >
+   </ViewUsage>
+</AppModule>

@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <!--*[Enter Javadoc like developer documentation, delete this line once you fill the included template.] [Put a one line description of the region here.] [Put a brief description of the usage of the region here.] @param [Parameter_name] [Put parameter use here.] @param [Parameter_name] [Put parameter use here.] @see [Put any additional links apart from controller class and BC4J objects directly referenced by this region]-->
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.manager.server.CuxManagerGrantDetailsAM" controllerClass="cux.oracle.apps.per.bonus.manager.webui.CuxManagerGrantDetailsCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="region1" controllerClass="cux.oracle.apps.per.bonus.manager.webui.CuxManagerGrantDetailsCO" amDefName="cux.oracle.apps.per.bonus.manager.server.CuxManagerGrantDetailsAM">
+               <ui:contents>
+                  <oa:table id="CuxManagerGrantDetailsVO1" amDefName="cux.oracle.apps.per.bonus.manager.server.CuxManagerGrantDetailsAM" controllerClass="cux.oracle.apps.per.bonus.manager.webui.CuxManagerGrantDetailsCO" blockSize="40" width="500">
+                     <ui:contents>
+                        <oa:messageStyledText id="ProjectNumber" dataType="VARCHAR2" prompt="项目编号" viewName="CuxManagerGrantDetailsVO1" viewAttr="ProjectNumber" maximumLength="25"/>
+                        <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="CuxManagerGrantDetailsVO1" viewAttr="ProjectName" maximumLength="30"/>
+                        <oa:messageStyledText id="Manager" dataType="VARCHAR2" prompt="项目经理" viewName="CuxManagerGrantDetailsVO1" viewAttr="Manager" maximumLength="4000"/>
+                        <oa:messageStyledText id="DistributedAmt" dataType="NUMBER" prompt="项目已发金额" viewName="CuxManagerGrantDetailsVO1" viewAttr="DistributedAmt"/>
+                        <oa:messageStyledText id="DistributableAmt" dataType="NUMBER" prompt="项目可发金额" viewName="CuxManagerGrantDetailsVO1" viewAttr="DistributableAmt"/>
+                        <oa:messageStyledText id="DistributionAmount" dataType="NUMBER" prompt="本次下发金额" viewName="CuxManagerGrantDetailsVO1" viewAttr="DistributionAmount"/>
+                        <oa:messageStyledText id="DistributionDate" dataType="DATE" prompt="本次下发日期" viewName="CuxManagerGrantDetailsVO1" viewAttr="DistributionDate"/>
+                        <oa:messageStyledText id="DepName" dataType="VARCHAR2" prompt="部门" viewName="CuxManagerGrantDetailsVO1" viewAttr="DepName" maximumLength="150"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

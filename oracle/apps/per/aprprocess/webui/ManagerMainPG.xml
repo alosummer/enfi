@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" controllerClass="cux.oracle.apps.per.aprprocess.webui.ManagerMainCO" windowTitle="绩效管理_经理自助" title="绩效管理_经理自助" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryAprRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageChoice id="SearchPhase" pickListViewDef="cux.oracle.apps.per.poplist.server.AppraisalPhaseVO" pickListDispAttr="EpmPhaseName" pickListValAttr="EpmPhaseCode" prompt="阶段"/>
+                        <oa:messageLovInput id="SearchEmpName" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" queryable="false" prompt="员工" dataType="VARCHAR2">
+                           <lovMappings>
+                              <lovMap id="lovMap2" lovItem="EmployeeName" resultTo="SearchEmpName" criteriaFrom="SearchEmpName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="SearchOrg" externalListOfValues="/cux/oracle/apps/per/lov/webui/OrganizationRN" prompt="所属组织">
+                           <lovMappings>
+                              <lovMap id="lovMap3" lovItem="OrganizationName" resultTo="SearchOrg" criteriaFrom="SearchOrg"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="SearchYearFrom" prompt="起始年份"/>
+                        <oa:messageTextInput id="SearchYearTo" prompt="截至年份"/>
+                        <oa:messageChoice id="SearchStatus" pickListViewDef="cux.oracle.apps.per.poplist.server.EpmStatusVO" pickListValAttr="EpmFsCode" pickListDispAttr="EpmFsName" prompt="状态"/>
+                        <oa:messageLovInput id="SearchPerformer" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmployeeRN" prompt="当前处理人">
+                           <lovMappings>
+                              <lovMap id="lovMap4" lovItem="LastName" resultTo="SearchPerformer" criteriaFrom="SearchPerformer"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:separator id="separator"/>
+                  <oa:table id="AprManagerListVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="AppraisalId1" dataType="NUMBER" prompt="序号" viewName="AprManagerListVO1" viewAttr="AppraisalId"/>
+                        <oa:messageStyledText id="AppraisalYear1" dataType="VARCHAR2" prompt="年度" viewName="AprManagerListVO1" viewAttr="AppraisalYear" maximumLength="20" sortState="yes" initSortSeq="first"/>
+                        <oa:messageStyledText id="EmpGroup1" dataType="VARCHAR2" prompt="考群" viewName="AprManagerListVO1" viewAttr="EmpGroup" maximumLength="20" sortState="yes" initSortSeq="none"/>
+                        <oa:messageStyledText id="OrgName1" dataType="VARCHAR2" prompt="部门" viewName="AprManagerListVO1" viewAttr="DeptName" maximumLength="240" sortState="yes" initSortSeq="third"/>
+                        <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="姓名" viewName="AprManagerListVO1" viewAttr="EmpName" maximumLength="240" sortState="yes"/>
+                        <oa:messageStyledText id="EmployeeNumber1" viewName="AprManagerListVO1" viewAttr="EmployeeNumber" prompt="工号" sortState="yes"/>
+                        <oa:messageStyledText id="PhaseName1" dataType="VARCHAR2" prompt="阶段" viewName="AprManagerListVO1" viewAttr="PhaseName" maximumLength="80" sortState="yes"/>
+                        <oa:messageStyledText id="StatusName1" dataType="VARCHAR2" prompt="状态" viewName="AprManagerListVO1" viewAttr="StatusName" maximumLength="80" sortState="yes"/>
+                        <oa:messageStyledText id="LastUpdateDate1" dataType="DATE" prompt="最后处理时间" viewName="AprManagerListVO1" viewAttr="LastUpdateDate" sortState="yes"/>
+                        <oa:messageStyledText id="CurrentPerformer1" viewName="AprManagerListVO1" viewAttr="CurrentPerformer" prompt="当前处理人"/>
+                        <oa:image id="Detail1" source="detailsicon_enabled.gif" prompt="明细">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail" id="fireAction11">
+                                 <ui:parameters>
+                                    <ui:parameter key="appraisalid" value="${oa.AprManagerListVO1.AppraisalId}"/>
+                                    <ui:parameter key="phaseid" value="${oa.AprManagerListVO1.PhaseId}"/>
+                                    <ui:parameter key="statusid" value="${oa.AprManagerListVO1.StatusId}"/>
+                                    <ui:parameter key="ispromisee" value="${oa.AprManagerListVO1.IsPromisee}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection1" viewName="AprManagerListVO1" viewAttr="SelectFlag"/>
+                     </ui:tableSelection>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region1">
+                           <ui:contents>
+                              <oa:submitButton id="Approve" text="批准" prompt="批准" shortDesc="选择绩效合同:"/>
+                              <oa:spacer id="item1" width="5"/>
+                              <oa:submitButton id="Reject" text="退回" prompt="退回" rendered="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AprAttendVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.aprprocess.server.AprAttendVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT CAA.APP_SEQ,
+       PERSON.LAST_NAME,
+       CAA.OPINION_DATE,
+       CASE WHEN CAA.OPINION_RESULT = '退回' THEN '退回'
+            WHEN CAA.PERSON_TYPE = 0 AND CAA.OPINION_DATE IS NOT NULL THEN '已提交'
+            WHEN CAA.PERSON_TYPE = 0 AND CAA.OPINION_DATE IS NULL AND CAA.ENABLEED = 1 THEN '未提交'
+            WHEN CAA.PERSON_TYPE = 1 AND CAA.OPINION_DATE IS NOT NULL THEN '批准'
+            WHEN CAA.PERSON_TYPE = 1 AND CAA.OPINION_DATE IS NULL AND CAA.ENABLEED = 1 THEN '待处理'
+            ELSE ''
+            END AS OPINION_RESULT,
+       CAA.DESCRIPTION
+  FROM CUX_APPRAISAL_ATTEND CAA
+ LEFT OUTER JOIN (SELECT PPF.LAST_NAME,PPF.PERSON_ID
+                    FROM APPS.PER_PEOPLE_F PPF 
+                   WHERE SYSDATE BETWEEN PPF.EFFECTIVE_START_DATE AND PPF.EFFECTIVE_END_DATE
+                 ) PERSON  ON CAA.PERSON_ID = PERSON.PERSON_ID
+ WHERE CAA.ENABLEED IN (1,2)
+   AND CAA.APPRAISAL_ID = :1 
+   AND CAA.ATTRIBUTE3 = :2 
+ORDER BY CAA.APP_SEQ
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="AppSeq"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APP_SEQ"
+      Expression="APP_SEQ"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_NAME"
+      Expression="LAST_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OpinionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="OPINION_DATE"
+      Expression="OPINION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OpinionResult"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="OPINION_RESULT"
+      Expression="OPINION_RESULT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      IsPersistent="false"
+      Precision="500"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESCRIPTION"
+      Expression="DESCRIPTION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

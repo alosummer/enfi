@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="AwardsReportAM"
+   ComponentClass="cux.oracle.apps.per.bonus.awardsreport.server.AwardsReportAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="DeptAwardsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.DeptAwardsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="QueryYearVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.QueryYearVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptDetailsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.DeptDetailsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptDistDetailsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.DeptDistDetailsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PersonAwardsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.PersonAwardsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PersonDistDetailsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.PersonDistDetailsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectAwardsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.ProjectAwardsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectAwardsDetailsVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.ProjectAwardsDetailsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="OtherPersonDistVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.awardsreport.server.OtherPersonDistVO" >
+   </ViewUsage>
+</AppModule>

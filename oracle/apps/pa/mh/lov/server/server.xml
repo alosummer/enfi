@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.pa.mh.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="MHAssignLovAM"
+      FullName="cux.oracle.apps.pa.mh.lov.server.MHAssignLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="PersonLovVO"
+      FullName="cux.oracle.apps.pa.mh.lov.server.PersonLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectLovVO"
+      FullName="cux.oracle.apps.pa.mh.lov.server.ProjectLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectRoleLovVO"
+      FullName="cux.oracle.apps.pa.mh.lov.server.ProjectRoleLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

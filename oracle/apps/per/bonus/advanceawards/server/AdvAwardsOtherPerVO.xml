@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AdvAwardsOtherPerVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOtherPerVORowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsOtherPerVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT DISTINCT PF.EMPLOYEE_NUMBER,
+                PF.LAST_NAME,
+                CD.DEP_NAME,
+                DECODE(CD.IMPORT_STATUS,
+                       '已退回',
+                       'otherDelEnabled',
+                       DECODE(DISTRIBUTION_STATUS,
+                              '已批准',
+                              'otherDelDisabled',                              
+                              'otherDelEnabled')) AS OTHER_DELETE,
+                DECODE(CD.IMPORT_STATUS,
+                       '已退回',
+                       '已退回',
+                       '已完成',
+                       '已完成',
+                       DISTRIBUTION_STATUS) AS DISTRIBUTION_STATUS,
+                CD.DISTRIBUTION_AMOUNT,
+                CD.NOTE,
+                CD.ATTRIBUTE1,
+                CD.PERSON_DISTRIBUTION_ID, 
+                DECODE(CD.IMPORT_STATUS,
+                       '已退回',
+                       0,
+                       DECODE(DISTRIBUTION_STATUS,
+                              '已批准',
+                              1,                              
+                              0)) AS Read_Only_Flag,
+                0 as ROW_SEQ 
+  FROM CUX_BONUS_PERSON_DISTRIBUTION CD,
+       CUX_BONUS_ALL_PEOPLE_V PF,
+       CUX_BONUS_TYPE CT
+ WHERE CD.PERSON_ID = PF.PERSON_ID
+   AND CD.TYPE_ID = CT.TYPE_ID
+   AND CD.ATTRIBUTE4 = 'EXTERNAL'
+   AND CD.DISTRIBUTION_STATUS IN ('预保存', '已批准')
+   and not (CD.Import_Status = '已退回' and CD.DISTRIBUTION_STATUS = '已批准')
+   AND CD.Organization_Id = :1
+   AND CT.TYPE_NAME = :2
+   AND CD.DISTRIBUTION_DATE = TO_DATE(:3, 'yyyy-mm')
+ ORDER BY nlssort(PF.LAST_NAME, 'NLS_SORT=SCHINESE_PINYIN_M')
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="EmployeeNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPLOYEE_NUMBER"
+      Expression="EMPLOYEE_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_NAME"
+      Expression="LAST_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DepName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEP_NAME"
+      Expression="DEP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OtherDelete"
+      IsPersistent="false"
+      Precision="16"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="OTHER_DELETE"
+      Expression="OTHER_DELETE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="16" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionStatus"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DISTRIBUTION_STATUS"
+      Expression="DISTRIBUTION_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTION_AMOUNT"
+      Expression="DISTRIBUTION_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Note"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOTE"
+      Expression="NOTE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE1"
+      Expression="ATTRIBUTE1"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonDistributionId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PERSON_DISTRIBUTION_ID"
+      Expression="PERSON_DISTRIBUTION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReadOnlyFlag"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="READ_ONLY_FLAG"
+      Expression="READ_ONLY_FLAG"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowSeq"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROW_SEQ"
+      Expression="ROW_SEQ"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

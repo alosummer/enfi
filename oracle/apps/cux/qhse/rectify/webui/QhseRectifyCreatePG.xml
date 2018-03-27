@@ -1,0 +1,132 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="QhseRectifyCreatePG" amDefName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyAM" controllerClass="cux.oracle.apps.cux.qhse.rectify.webui.QhseRectifyCreatePGCO" windowTitle="问题整改通知单主界面">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="Header" text="问题基本信息">
+               <ui:contents>
+                  <oa:messageComponentLayout id="HeaderLayout" columns="2" rows="1" width="60%" promptWidth="1%">
+                     <ui:contents>
+                        <oa:messageChoice id="DocType" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="DocType" dataType="VARCHAR2" prompt="单据类型" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.IssueDocTypeListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" defaultValue="PROJECT" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="ChangeDocType" unvalidated="true"/>
+                           </ui:primaryClientAction>
+                        </oa:messageChoice>
+                        <oa:messageLovInput id="ManDeptName" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ManDeptName" prompt="管理部门" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/OrgLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap31" lovItem="OrganizationId" resultTo="ManDeptId"/>
+                              <lovMap id="lovMap32" lovItem="OrgName" resultTo="ManDeptName" criteriaFrom="ManDeptName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="CiTypeId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="CiTypeId" prompt="控制项" dataType="NUMBER" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.PaCiTypeListVO" pickListValAttr="CiTypeId" pickListDispAttr="CiName" required="yes"/>
+                        <oa:messageChoice id="Status" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="Status" prompt="状态" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.IssueStatusListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" defaultValue="ENTRING"/>
+                        <oa:messageChoice id="ProblemCategoryId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProblemCategoryId" prompt="分类" dataType="NUMBER" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVO" pickListValAttr="ClassCodeId" pickListDispAttr="ClassCode" required="yes"/>
+                        <oa:messageChoice id="ReasonId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ReasonId" prompt="原因" dataType="NUMBER" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ReasonListVO" pickListValAttr="ClassCodeId" pickListDispAttr="ClassCode" required="yes"/>
+                        <oa:messageLovInput id="DutyPersonName" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="DutyPersonName" prompt="责任人" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/EmployeeLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap33" lovItem="PersonId" resultTo="DutyPersonId"/>
+                              <lovMap id="lovMap34" lovItem="FullName" resultTo="DutyPersonName" criteriaFrom="DutyPersonName"/>
+                              <lovMap id="lovMap40" lovItem="ProjectId" criteriaFrom="ProjectId" requiredForLOV="true"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="TaskName" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="TaskName" prompt="任务" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/ProjectTaskLovRN" readOnly="${oa.CuxRectifyNotifyHeadersVO1.ProjectReadonlyFlag}">
+                           <lovMappings>
+                              <lovMap id="lovMap35" lovItem="TaskId" resultTo="TaskId"/>
+                              <lovMap id="lovMap36" lovItem="ProjectId" criteriaFrom="ProjectId" requiredForLOV="true"/>
+                              <lovMap id="lovMap37" lovItem="TaskName" resultTo="TaskName" criteriaFrom="TaskName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="CompleteDate" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="CompleteDate" dataType="DATE" prompt="完成日期" required="yes"/>
+                        <oa:messageLayout id="messageLayout1">
+                           <ui:contents>
+                              <oa:formValue id="HeaderId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="HeaderId" dataType="NUMBER"/>
+                              <oa:formValue id="OrgId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="OrgId" dataType="NUMBER"/>
+                              <oa:formValue id="ProjectId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectId" dataType="NUMBER"/>
+                              <oa:formValue id="ProjectName" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectName" dataType="VARCHAR2"/>
+                              <oa:formValue id="ProjectOrgName" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectOrgName" dataType="VARCHAR2"/>
+                              <oa:formValue id="ManDeptId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ManDeptId" dataType="NUMBER"/>
+                              <oa:formValue id="DutyPersonId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="DutyPersonId" dataType="NUMBER"/>
+                              <oa:formValue id="TaskId" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="TaskId" dataType="NUMBER"/>
+                              <oa:formValue id="CreatedBy" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="CreatedBy" dataType="NUMBER"/>
+                              <oa:attachmentLink id="AttachmentLink" viewName="CuxRectifyNotifyHeadersVO1" prompt="文档附件" serverUnvalidated="false" unvalidated="false">
+                                 <oa:entityMappings>
+                                    <oa:entityMap id="entityMap1" entityId="CUX_RECTIFY_NOTIFY_HEADERS">
+                                       <oa:primaryKeys>
+                                          <oa:primaryKey id="primaryKey1" viewAttr="HeaderId"/>
+                                       </oa:primaryKeys>
+                                    </oa:entityMap>
+                                 </oa:entityMappings>
+                              </oa:attachmentLink>
+                           </ui:contents>
+                        </oa:messageLayout>
+                        <oa:messageLovInput id="ProjectNumber" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectNumber" prompt="项目编号" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/ProjectLovRN" required="${oa.CuxRectifyNotifyHeadersVO1.ProjectRequiredFlag}" readOnly="${oa.CuxRectifyNotifyHeadersVO1.ProjectReadonlyFlag}">
+                           <lovMappings>
+                              <lovMap id="lovMap3" lovItem="ProjectId" resultTo="ProjectId"/>
+                              <lovMap id="lovMap4" lovItem="ProjectNumber" resultTo="ProjectNumber" criteriaFrom="ProjectNumber"/>
+                              <lovMap id="lovMap5" lovItem="ProjectName" resultTo="ProjectName"/>
+                              <lovMap id="lovMap6" lovItem="ProjectOrgName" resultTo="ProjectOrgName"/>
+                              <lovMap id="lovMap42" lovItem="ProjectManagerId" resultTo="DutyPersonId"/>
+                              <lovMap id="lovMap43" lovItem="ProjectManagerName" resultTo="DutyPersonName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="ProjectNameDis" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectName" prompt="项目名称"/>
+                        <oa:messageStyledText id="ProjectOrgNameDis" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="ProjectOrgName" prompt="项目部门"/>
+                        <oa:messageChoice id="PriorityLevel" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="PriorityLevel" prompt="优先级" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.PaTaskPriorityListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes"/>
+                        <oa:messageChoice id="WorkLevel" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="WorkLevel" prompt="工作级别" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.WorkLevelListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes"/>
+                        <oa:messageTextInput id="Price" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="Price" prompt="价格" dataType="NUMBER"/>
+                        <oa:messageChoice id="SourecType" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="SourecType" prompt="来源类型" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.SourceTypeListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes"/>
+                        <oa:messageStyledText id="CreationDate" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="CreationDate" dataType="DATE" prompt="创建日期"/>
+                        <oa:messageStyledText id="CreatePerson" viewName="CuxRectifyNotifyHeadersVO1" viewAttr="CreatePerson" dataType="VARCHAR2" prompt="创建者"/>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="CuxRectifyNotifyLinesVO1" text="创建问题描述" width="100%">
+               <ui:contents>
+                  <oa:messageTextInput id="ProblemName" dataType="VARCHAR2" prompt="问题名称" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProblemName" maximumLength="50" required="yes"/>
+                  <oa:messageTextInput id="ProblemDesc" dataType="VARCHAR2" prompt="问题描述" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProblemDesc" maximumLength="240" required="yes"/>
+                  <oa:messageChoice id="StatusCode" dataType="VARCHAR2" prompt="状态" viewName="CuxRectifyNotifyLinesVO1" viewAttr="StatusCode" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.LineStatusListVO" pickListValAttr="ProjectStatusCode" pickListDispAttr="ProjectStatusName" defaultValue="CI_WORKING"/>
+                  <oa:messageChoice id="ProblemCategory" dataType="VARCHAR2" prompt="问题分类" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProblemCategory" required="yes" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVO" pickListValAttr="ClassCodeId" pickListDispAttr="ClassCode"/>
+                  <oa:formValue id="ProDutyPersonId" dataType="NUMBER" prompt="ProDutyPersonId" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProDutyPersonId"/>
+                  <oa:messageLovInput id="ProDutyPersonName" dataType="VARCHAR2" prompt="问题责任人" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProDutyPersonName" maximumLength="240" required="yes" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/EmployeeLovRN">
+                     <lovMappings>
+                        <lovMap id="lovMap38" lovItem="FullName" resultTo="ProDutyPersonName" criteriaFrom="ProDutyPersonName"/>
+                        <lovMap id="lovMap39" lovItem="PersonId" resultTo="ProDutyPersonId"/>
+                        <lovMap id="lovMap41" lovItem="ProjectId" criteriaFrom="ProjectId" requiredForLOV="true"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="CompleteDate1" dataType="DATE" prompt="完成日期" viewName="CuxRectifyNotifyLinesVO1" viewAttr="CompleteDate" required="yes"/>
+                  <oa:messageTextInput id="CheckDate" dataType="DATE" prompt="受检日期" viewName="CuxRectifyNotifyLinesVO1" viewAttr="CheckDate" required="yes"/>
+                  <oa:messageTextInput id="CheckRange" dataType="VARCHAR2" prompt="检查范围" viewName="CuxRectifyNotifyLinesVO1" viewAttr="CheckRange" maximumLength="80" required="yes"/>
+                  <oa:image id="DeleteBTN" prompt="删除" source="deleteicon_enabled.gif" serverUnvalidated="true">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="DeleteCurrentLineRow" unvalidated="true"/>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="region1">
+                     <ui:contents>
+                        <oa:button id="AddOneProblemRowBTN" text="创建问题描述" prompt="创建问题描述">
+                           <ui:primaryClientAction>
+                              <ui:firePartialAction event="CreateLineRow"/>
+                           </ui:primaryClientAction>
+                        </oa:button>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="SaveBTN" text="保存" prompt="保存"/>
+                  <oa:submitButton id="CancelBTN" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="SubmitBTN" text="提交" prompt="提交"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.ap.oie.entry.header.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxApExpAccomFeeEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpAccomFeeEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpAccomFeeVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpAccomFeeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOtherFeeEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpOtherFeeEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOtherFeeVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpOtherFeeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelAboardFeeLineEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelAboardFeeLineEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelAboardFeeLineVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelAboardFeeLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelAboardOtherFeeVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelAboardOtherFeeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelAboardTotalFeeVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelAboardTotalFeeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedAboardInfoVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedAboardInfoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedAboardLineVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedAboardLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedOaInfoEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedOaInfoEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedOaInfoVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedOaInfoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedOaLineEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedOaLineEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpRelatedOaLineVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpRelatedOaLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpTotalFeeVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpTotalFeeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpTrafficReimbEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpTrafficReimbEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpTrafficReimbVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpTrafficReimbVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpTravelSubsidyEO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpTravelSubsidyEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxApExpTravelSubsidyVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxApExpTravelSubsidyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxWebExpParamtersVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.CuxWebExpParamtersVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RenderVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.RenderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="YesOrNoVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.server.YesOrNoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="SpecialAwardsAM"
+   ComponentClass="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="SpecialAwardsTypeVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsDeptVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsDeptVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsPersonVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsPersonVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsDateVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsDateVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsSummaryVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsOperatorVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsOperatorVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsExamVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsExamVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialAwardsAttachmentVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsAttachmentVO" >
+   </ViewUsage>
+</AppModule>

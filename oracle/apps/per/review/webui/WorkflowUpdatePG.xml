@@ -1,0 +1,132 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.review.server.WorkflowUpdateAM" windowTitle="绩效考核流程批量控制" title="绩效考核流程批量控制" styleClass="OraDataText" controllerClass="cux.oracle.apps.per.review.webui.WorkflowUpdateCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="QueryRN">
+               <ui:contents>
+                  <oa:messageChoice id="GroupQuery" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" styleClass="OraDataText" pickListDispAttr="GroupName" pickListValAttr="GroupName" prompt="考群"/>
+                  <oa:messageLovInput id="OrganizationQuery" externalListOfValues="/cux/oracle/apps/per/lov/webui/OrganizationRN" unvalidated="true" prompt="组织" styleClass="OraDataText">
+                     <lovMappings>
+                        <lovMap id="OrgNameMap" lovItem="OrganizationName" resultTo="OrganizationQuery" criteriaFrom="OrganizationQuery"/>
+                        <lovMap id="OrgIdMap" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageChoice id="PhaseQuery" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPhaseVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="评估阶段" styleClass="OraDataText"/>
+                  <oa:messageChoice id="PeriodQuery" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPeriodVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="评价周期" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="BeginYearQuery" prompt="评价起始年份" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="EndYearQuery" prompt="评价截至年份" styleClass="OraDataText"/>
+                  <oa:messageChoice id="StatusQuery" pickListViewDef="cux.oracle.apps.per.poplist.server.EpmStatusVO" pickListDispAttr="EpmFsName" pickListValAttr="EpmFsName" prompt="评估状态" styleClass="OraDataText"/>
+                  <oa:messageLovInput id="EmpNameQuery" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmpRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="LastName" resultTo="EmpNameQuery" criteriaFrom="EmpNameQuery"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+               </ui:contents>
+               <ui:footer>
+                  <oa:flowLayout id="region1">
+                     <ui:contents>
+                        <oa:submitButton id="QueryButton" text="查询" prompt="查询" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:footer>
+            </oa:messageComponentLayout>
+            <oa:header id="WorkflowRN" text="绩效流程信息" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:table id="WorkflowHeadTable" width="100%" detailViewAttr="ShowFlag">
+                     <ui:contents>
+                        <oa:messageStyledText id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="WorkFlowInfoVO1" viewAttr="AppraisalId" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageLovInput id="EmpName1" dataType="VARCHAR2" prompt="被评估人" viewName="WorkFlowInfoVO1" viewAttr="EmpName" maximumLength="150" styleClass="OraDataText" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmployeeRN">
+                           <lovMappings>
+                              <lovMap id="lovMap5" lovItem="LastName" resultTo="EmpName1" criteriaFrom="EmpName1"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="EmployeeNumber" dataType="VARCHAR2" prompt="被评估人员工号" viewName="WorkFlowInfoVO1" viewAttr="EmployeeNumber" maximumLength="30" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="DateStart" dataType="DATE" prompt="入职时间" viewName="WorkFlowInfoVO1" viewAttr="DateStart" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="组织" viewName="WorkFlowInfoVO1" viewAttr="OrgName" maximumLength="240" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="OrgId" dataType="NUMBER" prompt="OrgId" viewName="WorkFlowInfoVO1" viewAttr="OrgId" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="GroupName" dataType="VARCHAR2" prompt="考群" viewName="WorkFlowInfoVO1" viewAttr="GroupName" maximumLength="200" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="GroupId" dataType="NUMBER" prompt="GroupId" viewName="WorkFlowInfoVO1" viewAttr="GroupId" maximumLength="10" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="阶段" viewName="WorkFlowInfoVO1" viewAttr="PhaseName" maximumLength="80" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PhaseId" dataType="VARCHAR2" prompt="PhaseId" viewName="WorkFlowInfoVO1" viewAttr="PhaseId" maximumLength="20" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="AppraisalYear" dataType="VARCHAR2" prompt="年份" viewName="WorkFlowInfoVO1" viewAttr="AppraisalYear" maximumLength="20" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="StatusId" dataType="VARCHAR2" prompt="StatusId" viewName="WorkFlowInfoVO1" viewAttr="StatusId" maximumLength="4000" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="AdjustSwitcher" dataType="VARCHAR2" prompt="AdjustSwitcher" viewName="WorkFlowInfoVO1" viewAttr="AdjustSwitcher" maximumLength="14" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="SubmitSwitcher" dataType="VARCHAR2" prompt="SubmitSwitcher" viewName="WorkFlowInfoVO1" viewAttr="SubmitSwitcher" maximumLength="14" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="状态" viewName="WorkFlowInfoVO1" viewAttr="StatusName" maximumLength="80" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PromiserName" dataType="VARCHAR2" prompt="当前处理人" viewName="WorkFlowInfoVO1" viewAttr="PromiserName" maximumLength="4000" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PeriodId" dataType="VARCHAR2" prompt="PeriodId" viewName="WorkFlowInfoVO1" viewAttr="PeriodId" maximumLength="20" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="PeriodName" dataType="VARCHAR2" prompt="PeriodName" viewName="WorkFlowInfoVO1" viewAttr="PeriodName" maximumLength="80" rendered="false" styleClass="OraDataText"/>
+                        <oa:messageStyledText id="SignDate" dataType="DATE" prompt="生效日期" viewName="WorkFlowInfoVO1" viewAttr="SignDate" styleClass="OraDataText"/>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection1" viewName="WorkFlowInfoVO1" viewAttr="SelectFlag"/>
+                     </ui:tableSelection>
+                     <ui:detail>
+                        <oa:header id="WorkflowLineRN" styleClass="OraDataText">
+                           <ui:contents>
+                              <oa:table id="WorkflowLineTable" viewLinkName="WorkflowLineToHeadVL1">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="AttendId" dataType="NUMBER" prompt="AttendId" viewName="WorkflowLineVO1" viewAttr="AttendId" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="AppraisalId1" dataType="NUMBER" prompt="AppraisalId" viewName="WorkflowLineVO1" viewAttr="AppraisalId" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="WorkflowLineVO1" viewAttr="PersonId" rendered="false"/>
+                                    <oa:messageStyledText id="AppSeq" dataType="NUMBER" prompt="审批顺序" viewName="WorkflowLineVO1" viewAttr="AppSeq" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="PersonType" dataType="NUMBER" prompt="PersonType" viewName="WorkflowLineVO1" viewAttr="PersonType" maximumLength="10" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Enableed" dataType="NUMBER" prompt="Enableed" viewName="WorkflowLineVO1" viewAttr="Enableed" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="OpinionDate" dataType="DATE" prompt="OpinionDate" viewName="WorkflowLineVO1" viewAttr="OpinionDate" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="OpinionResult" dataType="VARCHAR2" prompt="OpinionResult" viewName="WorkflowLineVO1" viewAttr="OpinionResult" maximumLength="10" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="Description" viewName="WorkflowLineVO1" viewAttr="Description" maximumLength="500" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="MarkDate" dataType="DATE" prompt="MarkDate" viewName="WorkflowLineVO1" viewAttr="MarkDate" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Mark" dataType="NUMBER" prompt="Mark" viewName="WorkflowLineVO1" viewAttr="Mark" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="LevelId" dataType="VARCHAR2" prompt="LevelId" viewName="WorkflowLineVO1" viewAttr="LevelId" maximumLength="20" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="MarkLevel" dataType="VARCHAR2" prompt="MarkLevel" viewName="WorkflowLineVO1" viewAttr="MarkLevel" maximumLength="20" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="AttributeCategory" dataType="VARCHAR2" prompt="AttributeCategory" viewName="WorkflowLineVO1" viewAttr="AttributeCategory" maximumLength="30" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute1" dataType="VARCHAR2" prompt="Attribute1" viewName="WorkflowLineVO1" viewAttr="Attribute1" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute2" dataType="VARCHAR2" prompt="Attribute2" viewName="WorkflowLineVO1" viewAttr="Attribute2" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute3" dataType="VARCHAR2" prompt="Attribute3" viewName="WorkflowLineVO1" viewAttr="Attribute3" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute4" dataType="VARCHAR2" prompt="Attribute4" viewName="WorkflowLineVO1" viewAttr="Attribute4" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute5" dataType="VARCHAR2" prompt="Attribute5" viewName="WorkflowLineVO1" viewAttr="Attribute5" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute6" dataType="VARCHAR2" prompt="Attribute6" viewName="WorkflowLineVO1" viewAttr="Attribute6" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute7" dataType="VARCHAR2" prompt="Attribute7" viewName="WorkflowLineVO1" viewAttr="Attribute7" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute8" dataType="VARCHAR2" prompt="Attribute8" viewName="WorkflowLineVO1" viewAttr="Attribute8" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute9" dataType="VARCHAR2" prompt="Attribute9" viewName="WorkflowLineVO1" viewAttr="Attribute9" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="Attribute10" dataType="VARCHAR2" prompt="Attribute10" viewName="WorkflowLineVO1" viewAttr="Attribute10" maximumLength="150" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="LastUpdateDate" dataType="DATE" prompt="LastUpdateDate" viewName="WorkflowLineVO1" viewAttr="LastUpdateDate" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="LastUpdatedBy" dataType="NUMBER" prompt="LastUpdatedBy" viewName="WorkflowLineVO1" viewAttr="LastUpdatedBy" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="LastUpdateLogin" dataType="NUMBER" prompt="LastUpdateLogin" viewName="WorkflowLineVO1" viewAttr="LastUpdateLogin" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="CreatedBy" dataType="NUMBER" prompt="CreatedBy" viewName="WorkflowLineVO1" viewAttr="CreatedBy" maximumLength="15" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="CreationDate" dataType="DATE" prompt="CreationDate" viewName="WorkflowLineVO1" viewAttr="CreationDate" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageLovInput id="EmpName" dataType="VARCHAR2" prompt="审批人" viewName="WorkflowLineVO1" viewAttr="EmpName" maximumLength="150" queryable="true" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmployeeRN">
+                                       <lovMappings>
+                                          <lovMap id="lovMap2" lovItem="LastName" resultTo="EmpName" criteriaFrom="EmpName"/>
+                                          <lovMap id="lovMap3" lovItem="PersonId" resultTo="PersonId"/>
+                                          <lovMap id="lovMap4" lovItem="OrganizationName" resultTo="OrganizationName"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageStyledText id="OrganizationName1" dataType="VARCHAR2" prompt="所在组织" viewName="WorkflowLineVO1" viewAttr="OrganizationName" maximumLength="240" styleClass="OraDataText" queryable="true"/>
+                                    <oa:formValue id="OrganizationName" viewName="WorkflowLineVO1" viewAttr="OrganizationName" prompt="所在组织"/>
+                                    <oa:messageStyledText id="UpdateImage" dataType="VARCHAR2" prompt="UpdateImage" viewName="WorkflowLineVO1" viewAttr="UpdateImage" maximumLength="14" rendered="false" styleClass="OraDataText"/>
+                                    <oa:messageStyledText id="DeleteImage" dataType="VARCHAR2" prompt="DeleteImage" viewName="WorkflowLineVO1" viewAttr="DeleteImage" maximumLength="14" rendered="false" styleClass="OraDataText"/>
+                                    <oa:switcher id="DeleteSchr" viewName="WorkflowLineVO1" viewAttr="DeleteImage">
+                                       <ui:case name="DeleteEnabled">
+                                          <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" styleClass="OraDataText"/>
+                                       </ui:case>
+                                       <ui:case name="DeleteDisabled">
+                                          <oa:image id="DeleteDisabled" source="deleteicon_disabled.gif" imageHeight="24" imageWidth="24" styleClass="OraDataText"/>
+                                       </ui:case>
+                                    </oa:switcher>
+                                 </ui:contents>
+                              </oa:table>
+                           </ui:contents>
+                        </oa:header>
+                     </ui:detail>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

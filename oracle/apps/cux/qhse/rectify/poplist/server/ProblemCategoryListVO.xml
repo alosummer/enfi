@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ProblemCategoryListVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pcc1.class_code_id,
+       pcc1.class_code
+  FROM pa_class_codes pcc1
+ WHERE 1 = 1
+   AND pcc1.class_category = '项目问题'
+   AND nvl(pcc1.start_date_active,
+           SYSDATE) <= SYSDATE
+   AND nvl(pcc1.end_date_active,
+           SYSDATE + 1) > SYSDATE
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ClassCodeId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CLASS_CODE_ID"
+      Expression="CLASS_CODE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ClassCode"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CLASS_CODE"
+      Expression="CLASS_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

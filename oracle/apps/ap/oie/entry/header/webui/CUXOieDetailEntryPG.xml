@@ -1,0 +1,426 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CUXOieDetailEntryPG" amDefName="oracle.apps.ap.oie.server.WebExpensesAM" controllerClass="oracle.apps.ap.oie.entry.webui.EntryFlowPageCO" windowTitle="国内出差详细填报">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pbb" extends="/oracle/apps/ap/oie/webui/OIEBUTTONS"/>
+            <oa:header id="OATravelRN" text="国内差旅报销" controllerClass="cux.oracle.apps.ap.oie.entry.header.webui.OATravelRNCO">
+               <ui:contents>
+                  <oa:tip id="tips1" text="1、OA中的出差申请必须是审批通过的才能选到"/>
+                  <oa:tip id="tips2" text="2、带*号的为必填项"/>
+                  <oa:tip id="tips3" text="3、所有数据的校验在点击保存时才会生成，进入下一步前请保存"/>
+                  <oa:tip id="tips4" text="4、系统会根据选择的出差人自动生成费用行，若存在出差多个地方、中途转机等情况，在填报相关费用时请点击“增加另一行”"/>
+                  <oa:messageComponentLayout id="OATravelHeaderRN" width="40%" rows="1" columns="1" promptWidth="1%">
+                     <ui:contents>
+                        <oa:messageLovInput id="TravelHeader" prompt="请关联OA中审批完成的出差申请" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelHeaderLovRN" viewName="CuxApExpRelatedOaInfoVO1" viewAttr="OaTravelHeaderName" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="OaTravelHeaderName" resultTo="TravelHeader" criteriaFrom="TravelHeader"/>
+                              <lovMap id="lovMap2" lovItem="OaTravelHeaderId" resultTo="OaTravelProcessId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLayout id="messageLayout1">
+                           <ui:contents>
+                              <oa:formValue id="OaTravelProcessId" viewName="CuxApExpRelatedOaInfoVO1" viewAttr="OaTravelProcessId"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:advancedTable id="CuxApExpRelatedOaLineVO1" viewName="CuxApExpRelatedOaLineVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="column19">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader19" prompt="删除"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="DeleteBTN" source="deleteicon_enabled.gif" serverUnvalidated="true">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="DeleteRelatedOALine" unvalidated="true" id="fireAction12">
+                                       <ui:parameters>
+                                          <ui:parameter key="EmpId" value="${oa.CuxApExpRelatedOaLineVO1.EmpId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column11">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="出差人工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpNumber9" viewAttr="EmpNumber" prompt="出差人工号"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1" rendered="false">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="行"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="LineNum" viewAttr="LineNum" prompt="行"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column18">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader18" prompt="出差人"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpName9" viewAttr="EmpName" prompt="出差人"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column17">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17" prompt="所在部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpDept" viewAttr="EmpDept" prompt="所在部门"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column16">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader16" prompt="出差事由"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TravelReason" viewAttr="TravelReason" prompt="出差事由"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column15">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="出差类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TravelType" viewAttr="TravelType" prompt="出差类型"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column14">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader14" prompt="出差地点"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TravelSite" viewAttr="TravelSite" prompt="出差地点"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column13">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader13" prompt="计划出发日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PlanBeginDate" viewAttr="PlanBeginDate" prompt="计划出发日期"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column12">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader12" prompt="计划返回日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PlanEndDate" viewAttr="PlanEndDate" prompt="计划返回日期"/>
+                              <oa:formValue id="OaTravelLineId" viewAttr="OaTravelLineId"/>
+                              <oa:formValue id="OaTravelHeaderId" viewAttr="OaTravelHeaderId"/>
+                              <oa:formValue id="RelationshipId9" viewAttr="RelationshipId"/>
+                              <oa:formValue id="EmpId" viewAttr="EmpId"/>
+                              <oa:formValue id="RelatedOaLineId" viewAttr="RelatedOaLineId"/>
+                              <oa:formValue id="AboardFlag" viewAttr="AboardFlag"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41116">
+                           <ui:contents>
+                              <oa:lovActionButton id="lovActionButton1" prompt="请选择报销员工" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelDetailLovRN">
+                                 <lovActionMappings>
+                                    <lovActionMap id="lovActionMap1" lovItem="EmpNumber" resultTo="EmpNumber9"/>
+                                    <lovActionMap id="lovActionMap2" lovItem="EmpName" resultTo="EmpName9"/>
+                                    <lovActionMap id="lovActionMap3" lovItem="EmpDept" resultTo="EmpDept"/>
+                                    <lovActionMap id="lovActionMap4" lovItem="TravelReason" resultTo="TravelReason"/>
+                                    <lovActionMap id="lovActionMap5" lovItem="TravelType" resultTo="TravelType"/>
+                                    <lovActionMap id="lovActionMap6" lovItem="TravelSite" resultTo="TravelSite"/>
+                                    <lovActionMap id="lovActionMap7" lovItem="PlanBeginDate" resultTo="PlanBeginDate"/>
+                                    <lovActionMap id="lovActionMap8" lovItem="PlanEndDate" resultTo="PlanEndDate"/>
+                                    <lovActionMap id="lovActionMap9" lovItem="OaTravelHeaderId" resultTo="OaTravelHeaderId"/>
+                                    <lovActionMap id="lovActionMap10" lovItem="OaTravelLineId" resultTo="OaTravelLineId"/>
+                                    <lovActionMap id="lovActionMap11" lovItem="RelationshipId" resultTo="RelationshipId9"/>
+                                    <lovActionMap id="lovActionMap12" lovItem="EmpId" resultTo="EmpId"/>
+                                    <lovActionMap id="lovActionMap13" lovItem="RowNumber" resultTo="LineNum"/>
+                                    <lovActionMap id="lovActionMap14" lovItem="RelateOaTravelLineId" resultTo="RelatedOaLineId"/>
+                                    <lovActionMap id="lovActionMap15" lovItem="AboardFlag" resultTo="AboardFlag"/>
+                                 </lovActionMappings>
+                              </oa:lovActionButton>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+                  <oa:table id="CuxApExpTravelSubsidyVO1" text="出差补贴" width="100%" blockSize="5">
+                     <ui:contents>
+                        <oa:image id="DeleteBTN111" source="deleteicon_enabled.gif" prompt="删除" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentRow" unvalidated="true" id="fireAction11"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:messageLovInput id="EmployeeNumber" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpTravelSubsidyVO1" viewAttr="EmployeeNumber" required="yes" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelEmpLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap18" lovItem="EmpNumber" resultTo="EmployeeNumber" criteriaFrom="EmployeeNumber"/>
+                              <lovMap id="lovMap19" lovItem="EmpName" resultTo="EmpName1"/>
+                              <lovMap id="lovMap20" lovItem="EmpId" resultTo="EmpId1"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="LineNumber" dataType="NUMBER" prompt="行" viewName="CuxApExpTravelSubsidyVO1" viewAttr="LineNumber" rendered="false"/>
+                        <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpTravelSubsidyVO1" viewAttr="EmpName" maximumLength="240"/>
+                        <oa:messageStyledText id="FeeType" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpTravelSubsidyVO1" viewAttr="FeeType" maximumLength="150"/>
+                        <oa:messageTextInput id="StartDate" dataType="DATE" prompt="从(日期)" viewName="CuxApExpTravelSubsidyVO1" viewAttr="StartDate" required="yes"/>
+                        <oa:messageTextInput id="EndDate" dataType="DATE" prompt="到(日期)" viewName="CuxApExpTravelSubsidyVO1" viewAttr="EndDate" required="yes"/>
+                        <oa:messageStyledText id="TravelDatesNumber" dataType="NUMBER" prompt="出差天数" viewName="CuxApExpTravelSubsidyVO1" viewAttr="TravelDatesNumber"/>
+                        <oa:formValue id="TravelDatesNumber1" prompt="出差天数" viewName="CuxApExpTravelSubsidyVO1"/>
+                        <oa:messageCheckBox id="IsSepcialSite" dataType="VARCHAR2" text="是否特殊地区（西藏、新疆、青海）出差" prompt="是否特殊地区（西藏、新疆、青海）出差" viewName="CuxApExpTravelSubsidyVO1" viewAttr="IsSepcialSite" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                        <oa:messageStyledText id="FeePerDay" dataType="NUMBER" prompt="补贴(人天)" viewName="CuxApExpTravelSubsidyVO1" viewAttr="FeePerDay"/>
+                        <oa:messageStyledText id="TravelSubsidyTotal" dataType="NUMBER" prompt="出差补助" viewName="CuxApExpTravelSubsidyVO1" viewAttr="TravelSubsidyTotal"/>
+                        <oa:formValue id="TravelSubsidyTotal1" prompt="出差补助" viewName="CuxApExpTravelSubsidyVO1"/>
+                        <oa:formValue id="SubsidyLineId" dataType="NUMBER" prompt="SubsidyLineId" viewName="CuxApExpTravelSubsidyVO1" viewAttr="SubsidyLineId"/>
+                        <oa:formValue id="RelationshipId" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpTravelSubsidyVO1" viewAttr="RelationshipId"/>
+                        <oa:formValue id="EmpId1" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpTravelSubsidyVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="CreationDate" dataType="DATE" prompt="CreationDate" viewName="CuxApExpTravelSubsidyVO1" viewAttr="CreationDate"/>
+                        <oa:formValue id="CreatedBy" dataType="NUMBER" prompt="CreatedBy" viewName="CuxApExpTravelSubsidyVO1" viewAttr="CreatedBy"/>
+                        <oa:formValue id="LastUpdateDate" dataType="DATE" prompt="LastUpdateDate" viewName="CuxApExpTravelSubsidyVO1" viewAttr="LastUpdateDate"/>
+                        <oa:formValue id="LastUpdatedBy" dataType="NUMBER" prompt="LastUpdatedBy" viewName="CuxApExpTravelSubsidyVO1" viewAttr="LastUpdatedBy"/>
+                        <oa:formValue id="LastUpdateLogin" dataType="NUMBER" prompt="LastUpdateLogin" viewName="CuxApExpTravelSubsidyVO1" viewAttr="LastUpdateLogin"/>
+                        <oa:formValue id="AttributeCategory" dataType="VARCHAR2" prompt="AttributeCategory" viewName="CuxApExpTravelSubsidyVO1" viewAttr="AttributeCategory"/>
+                        <oa:formValue id="Attribute1" dataType="VARCHAR2" prompt="Attribute1" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute1"/>
+                        <oa:formValue id="Attribute2" dataType="VARCHAR2" prompt="Attribute2" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute2"/>
+                        <oa:formValue id="Attribute3" dataType="VARCHAR2" prompt="Attribute3" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute3"/>
+                        <oa:formValue id="Attribute4" dataType="VARCHAR2" prompt="Attribute4" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute4"/>
+                        <oa:formValue id="Attribute5" dataType="VARCHAR2" prompt="Attribute5" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute5"/>
+                        <oa:formValue id="Attribute6" dataType="VARCHAR2" prompt="Attribute6" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute6"/>
+                        <oa:formValue id="Attribute7" dataType="VARCHAR2" prompt="Attribute7" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute7"/>
+                        <oa:formValue id="Attribute8" dataType="VARCHAR2" prompt="Attribute8" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute8"/>
+                        <oa:formValue id="Attribute9" dataType="VARCHAR2" prompt="Attribute9" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute9"/>
+                        <oa:formValue id="Attribute10" dataType="VARCHAR2" prompt="Attribute10" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute10"/>
+                        <oa:formValue id="Attribute11" dataType="VARCHAR2" prompt="Attribute11" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute11"/>
+                        <oa:formValue id="Attribute12" dataType="VARCHAR2" prompt="Attribute12" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute12"/>
+                        <oa:formValue id="Attribute13" dataType="VARCHAR2" prompt="Attribute13" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute13"/>
+                        <oa:formValue id="Attribute14" dataType="VARCHAR2" prompt="Attribute14" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute14"/>
+                        <oa:formValue id="Attribute15" dataType="VARCHAR2" prompt="Attribute15" viewName="CuxApExpTravelSubsidyVO1" viewAttr="Attribute15"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41119">
+                           <ui:contents>
+                              <oa:submitButton id="TravelSubsidyAddOneRow" text="增加另一行" prompt="增加另一行" serverUnvalidated="true" unvalidated="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+                  <oa:table id="CuxApExpTrafficReimbVO1" width="100%" text="交通费报销" detailViewAttr="ShowDetail" blockSize="6">
+                     <ui:contents>
+                        <oa:image id="DeleteBTN11" source="deleteicon_enabled.gif" prompt="删除" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentRow" unvalidated="true" id="fireAction1"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:messageLovInput id="EmployeeNumber4" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpTrafficReimbVO1" viewAttr="EmployeeNumber" required="yes" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelEmpLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap11" lovItem="EmpId" resultTo="EmpId2"/>
+                              <lovMap id="lovMap12" lovItem="EmpNumber" resultTo="EmployeeNumber4" criteriaFrom="EmployeeNumber4"/>
+                              <lovMap id="lovMap13" lovItem="EmpName" resultTo="EmpName21"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="LineNumber1" dataType="NUMBER" prompt="行" viewName="CuxApExpTrafficReimbVO1" viewAttr="LineNumber" rendered="false"/>
+                        <oa:messageStyledText id="EmpName2" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpTrafficReimbVO1" viewAttr="EmpName" maximumLength="240"/>
+                        <oa:messageChoice id="FeeType1" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpTrafficReimbVO1" viewAttr="FeeType" pickListViewDef="cux.oracle.apps.ap.oie.entry.header.poplist.server.CuxApExpTrafficTypeListVO" pickListValAttr="FlexValue" pickListDispAttr="Description" required="yes"/>
+                        <oa:messageTextInput id="StartDate1" dataType="DATETIME" prompt="从(日期、时间)" viewName="CuxApExpTrafficReimbVO1" viewAttr="StartDate" required="yes"/>
+                        <oa:messageTextInput id="EndDate1" dataType="DATETIME" prompt="至(日期、时间)" viewName="CuxApExpTrafficReimbVO1" viewAttr="EndDate" required="yes"/>
+                        <oa:messageTextInput id="StartSite" dataType="VARCHAR2" prompt="出发地点" viewName="CuxApExpTrafficReimbVO1" viewAttr="StartSite" maximumLength="150" required="yes"/>
+                        <oa:messageTextInput id="EndSite" dataType="VARCHAR2" prompt="到达地点" viewName="CuxApExpTrafficReimbVO1" viewAttr="EndSite" maximumLength="150" required="yes"/>
+                        <oa:messageLovInput id="TrafficType" dataType="VARCHAR2" prompt="交通工具" viewName="CuxApExpTrafficReimbVO1" viewAttr="TrafficType" maximumLength="150" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxVehicleCategoryLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap7" lovItem="Description" criteriaFrom="TrafficType" resultTo="TrafficType"/>
+                              <lovMap id="lovMap8" lovItem="ParentFlexValueLow" criteriaFrom="FeeType1"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="TrafficNumber" dataType="VARCHAR2" prompt="航班号(车次)" viewName="CuxApExpTrafficReimbVO1" viewAttr="TrafficNumber" maximumLength="150"/>
+                        <oa:messageTextInput id="TrafficFee" dataType="NUMBER" prompt="交通费" viewName="CuxApExpTrafficReimbVO1" viewAttr="TrafficFee" required="yes"/>
+                        <oa:messageTextInput id="BuyTicketFee" dataType="NUMBER" prompt="订退票费" viewName="CuxApExpTrafficReimbVO1" viewAttr="BuyTicketFee"/>
+                        <oa:messageStyledText id="LevelSubsidy" dataType="NUMBER" prompt="不买卧铺补贴" viewName="CuxApExpTrafficReimbVO1" viewAttr="LevelSubsidy"/>
+                        <oa:messageStyledText id="OvertimeSubsidy" dataType="NUMBER" prompt="超时补贴" viewName="CuxApExpTrafficReimbVO1" viewAttr="OvertimeSubsidy"/>
+                        <oa:messageTextInput id="PublicTrafficFeeInJing" dataType="NUMBER" prompt="在京公交费" viewName="CuxApExpTrafficReimbVO1" viewAttr="PublicTrafficFeeInJing"/>
+                        <oa:messageTextInput id="TaxiFeeInJing" dataType="NUMBER" prompt="在京出租车费" viewName="CuxApExpTrafficReimbVO1" viewAttr="TaxiFeeInJing"/>
+                        <oa:messageTextInput id="TotalTrafficFeeOutJing" dataType="NUMBER" prompt="市外交通费" viewName="CuxApExpTrafficReimbVO1" viewAttr="TotalTrafficFeeOutJing"/>
+                        <oa:messageTextInput id="Remark" dataType="VARCHAR2" prompt="超标说明" viewName="CuxApExpTrafficReimbVO1" viewAttr="Remark" maximumLength="4000"/>
+                        <oa:formValue id="TrafficReimbLineId" dataType="NUMBER" prompt="TrafficReimbLineId" viewName="CuxApExpTrafficReimbVO1" viewAttr="TrafficReimbLineId"/>
+                        <oa:formValue id="RelationshipId1" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpTrafficReimbVO1" viewAttr="RelationshipId"/>
+                        <oa:formValue id="EmpId2" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpTrafficReimbVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="EmpName21" prompt="出差人" viewName="CuxApExpTrafficReimbVO1" viewAttr="EmpName"/>
+                        <oa:formValue id="CreationDate1" dataType="DATE" prompt="CreationDate" viewName="CuxApExpTrafficReimbVO1" viewAttr="CreationDate"/>
+                        <oa:formValue id="CreatedBy1" dataType="NUMBER" prompt="CreatedBy" viewName="CuxApExpTrafficReimbVO1" viewAttr="CreatedBy"/>
+                        <oa:formValue id="LastUpdateDate1" dataType="DATE" prompt="LastUpdateDate" viewName="CuxApExpTrafficReimbVO1" viewAttr="LastUpdateDate"/>
+                        <oa:formValue id="LastUpdatedBy1" dataType="NUMBER" prompt="LastUpdatedBy" viewName="CuxApExpTrafficReimbVO1" viewAttr="LastUpdatedBy"/>
+                        <oa:formValue id="LastUpdateLogin1" dataType="NUMBER" prompt="LastUpdateLogin" viewName="CuxApExpTrafficReimbVO1" viewAttr="LastUpdateLogin"/>
+                        <oa:formValue id="AttributeCategory1" dataType="VARCHAR2" prompt="AttributeCategory" viewName="CuxApExpTrafficReimbVO1" viewAttr="AttributeCategory"/>
+                        <oa:formValue id="Attribute51" dataType="VARCHAR2" prompt="Attribute5" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute5"/>
+                        <oa:formValue id="Attribute61" dataType="VARCHAR2" prompt="Attribute6" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute6"/>
+                        <oa:formValue id="Attribute71" dataType="VARCHAR2" prompt="Attribute7" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute7"/>
+                        <oa:formValue id="Attribute81" dataType="VARCHAR2" prompt="Attribute8" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute8"/>
+                        <oa:formValue id="Attribute91" dataType="VARCHAR2" prompt="Attribute9" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute9"/>
+                        <oa:formValue id="Attribute101" dataType="VARCHAR2" prompt="Attribute10" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute10"/>
+                        <oa:formValue id="Attribute111" dataType="VARCHAR2" prompt="Attribute11" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute11"/>
+                        <oa:formValue id="Attribute121" dataType="VARCHAR2" prompt="Attribute12" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute12"/>
+                        <oa:formValue id="Attribute131" dataType="VARCHAR2" prompt="Attribute13" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute13"/>
+                        <oa:formValue id="Attribute141" dataType="VARCHAR2" prompt="Attribute14" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute14"/>
+                        <oa:formValue id="Attribute151" dataType="VARCHAR2" prompt="Attribute15" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute15"/>
+                     </ui:contents>
+                     <ui:detail>
+                        <oa:flowLayout id="region41112">
+                           <ui:contents>
+                              <oa:rowLayout id="region3">
+                                 <ui:contents>
+                                    <oa:tip id="LevelTip" text="一般人员乘坐软卧或飞机请选择理由："/>
+                                    <oa:messageCheckBox id="Attribute16" dataType="VARCHAR2" prompt="软卧费用低于高铁二等座费用" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute1" text="软卧费用低于高铁二等座费用" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                    <oa:messageCheckBox id="Attribute21" dataType="VARCHAR2" prompt="单程超过1500公里" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute2" text="单程超过1500公里" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                    <oa:messageCheckBox id="Attribute31" dataType="VARCHAR2" prompt="乘坐其他交通工具票价高于机票" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute3" text="乘坐其他交通工具票价高于机票" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                    <oa:messageCheckBox id="Attribute41" dataType="VARCHAR2" prompt="陪同外宾或重要客户" viewName="CuxApExpTrafficReimbVO1" viewAttr="Attribute4" defaultValue="N" checkedValue="Y" unCheckedValue="N" text="陪同外宾或重要客户"/>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:detail>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41117">
+                           <ui:contents>
+                              <oa:submitButton id="TrafficTableAddOneRow" text="增加另一行" prompt="增加另一行" serverUnvalidated="true" unvalidated="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+                  <oa:table id="CuxApExpAccomFeeVO1" detailViewAttr="ShowDetail" width="100%" text="住宿费报销" blockSize="5">
+                     <ui:contents>
+                        <oa:image id="DeleteBTN112" source="deleteicon_enabled.gif" prompt="删除" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentRow" unvalidated="true" id="fireAction13"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:messageLovInput id="EmployeeNumber2" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpAccomFeeVO1" viewAttr="EmployeeNumber" maximumLength="30" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelEmpLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap21" lovItem="EmpNumber" resultTo="EmployeeNumber2" criteriaFrom="EmployeeNumber2"/>
+                              <lovMap id="lovMap22" lovItem="EmpName" resultTo="EmpName3"/>
+                              <lovMap id="lovMap23" lovItem="EmpId" resultTo="EmpId3"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="LineNumber2" dataType="NUMBER" prompt="行" viewName="CuxApExpAccomFeeVO1" viewAttr="LineNumber" rendered="false"/>
+                        <oa:messageStyledText id="EmpName3" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpAccomFeeVO1" viewAttr="EmpName" maximumLength="240"/>
+                        <oa:messageStyledText id="FeeType2" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpAccomFeeVO1" viewAttr="FeeType" maximumLength="150"/>
+                        <oa:messageTextInput id="StartDate2" dataType="DATE" prompt="从(日期)" viewName="CuxApExpAccomFeeVO1" viewAttr="StartDate" required="yes" serverUnvalidated="true"/>
+                        <oa:messageTextInput id="EndDate2" dataType="DATE" prompt="到(日期)" viewName="CuxApExpAccomFeeVO1" viewAttr="EndDate" required="yes" serverUnvalidated="true"/>
+                        <oa:messageStyledText id="AccomDaysNumber" dataType="NUMBER" prompt="住宿天数" viewName="CuxApExpAccomFeeVO1" viewAttr="AccomDaysNumber"/>
+                        <oa:messageLovInput id="AccomSite" dataType="VARCHAR2" prompt="住宿地点" viewName="CuxApExpAccomFeeVO1" viewAttr="AccomSite" maximumLength="150" required="yes" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxSiteLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap17" lovItem="FlexValue" resultTo="AccomSite" criteriaFrom="AccomSite"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="FeePerDay1" dataType="NUMBER" prompt="住宿费" viewName="CuxApExpAccomFeeVO1" viewAttr="FeePerDay" required="yes"/>
+                        <oa:messageTextInput id="Remark1" dataType="VARCHAR2" prompt="超标说明" viewName="CuxApExpAccomFeeVO1" viewAttr="Remark" maximumLength="4000"/>
+                        <oa:formValue id="CreationDate2" prompt="CreationDate" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="CreatedBy2" prompt="CreatedBy" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="LastUpdateDate2" prompt="LastUpdateDate" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="LastUpdatedBy2" prompt="LastUpdatedBy" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="LastUpdateLogin2" prompt="LastUpdateLogin" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="AttributeCategory2" prompt="AttributeCategory" viewName="CuxApExpAccomFeeVO1"/>
+                        <oa:formValue id="AccomFeeLineId" dataType="NUMBER" prompt="AccomFeeLineId" viewName="CuxApExpAccomFeeVO1" viewAttr="AccomFeeLineId"/>
+                        <oa:formValue id="RelationshipId2" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpAccomFeeVO1" viewAttr="RelationshipId"/>
+                        <oa:formValue id="EmpId3" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpAccomFeeVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="Attribute42" dataType="VARCHAR2" prompt="Attribute4" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute4"/>
+                        <oa:formValue id="Attribute52" dataType="VARCHAR2" prompt="Attribute5" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute5"/>
+                        <oa:formValue id="Attribute62" dataType="VARCHAR2" prompt="Attribute6" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute6"/>
+                        <oa:formValue id="Attribute72" dataType="VARCHAR2" prompt="Attribute7" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute7"/>
+                        <oa:formValue id="Attribute82" dataType="VARCHAR2" prompt="Attribute8" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute8"/>
+                        <oa:formValue id="Attribute92" dataType="VARCHAR2" prompt="Attribute9" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute9"/>
+                        <oa:formValue id="Attribute102" dataType="VARCHAR2" prompt="Attribute10" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute10"/>
+                        <oa:formValue id="Attribute112" dataType="VARCHAR2" prompt="Attribute11" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute11"/>
+                        <oa:formValue id="Attribute122" dataType="VARCHAR2" prompt="Attribute12" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute12"/>
+                        <oa:formValue id="Attribute132" dataType="VARCHAR2" prompt="Attribute13" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute13"/>
+                        <oa:formValue id="Attribute142" dataType="VARCHAR2" prompt="Attribute14" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute14"/>
+                        <oa:formValue id="Attribute152" dataType="VARCHAR2" prompt="Attribute15" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute15"/>
+                     </ui:contents>
+                     <ui:detail>
+                        <oa:flowLayout id="region41113">
+                           <ui:contents>
+                              <oa:rowLayout id="region41114">
+                                 <ui:contents>
+                                    <oa:tip id="LevelTip1" text="住宿费超标请选择理由，非以下理由超标部分不予报销："/>
+                                    <oa:messageCheckBox id="Attribute17" dataType="VARCHAR2" text="参加外部会议同一安排凭通知据实报销" prompt="参加外部会议同一安排凭通知据实报销" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute1" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                    <oa:messageCheckBox id="Attribute22" dataType="VARCHAR2" text="上级主管部门安排" prompt="上级主管部门安排" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute2" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                    <oa:messageCheckBox id="Attribute32" dataType="VARCHAR2" prompt="陪同外宾或重要客户" viewName="CuxApExpAccomFeeVO1" viewAttr="Attribute3" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:detail>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41118">
+                           <ui:contents>
+                              <oa:submitButton id="AccomFeeAddOneRow" text="增加另一行" prompt="增加另一行" serverUnvalidated="true" unvalidated="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+                  <oa:table id="CuxApExpOtherFeeVO1" width="100%" text="其他差旅费报销" blockSize="5">
+                     <ui:contents>
+                        <oa:image id="DeleteBTN1" source="deleteicon_enabled.gif" prompt="删除" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentRow" unvalidated="true" id="fireAction2"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:messageStyledText id="LineNumber3" dataType="NUMBER" prompt="行" viewName="CuxApExpOtherFeeVO1" viewAttr="LineNumber" rendered="false"/>
+                        <oa:messageLovInput id="EmployeeNumber3" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpOtherFeeVO1" viewAttr="EmployeeNumber" required="yes" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOATravelEmpLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap14" lovItem="EmpId" resultTo="EmpId4"/>
+                              <lovMap id="lovMap15" lovItem="EmpNumber" resultTo="EmployeeNumber3" criteriaFrom="EmployeeNumber3"/>
+                              <lovMap id="lovMap16" lovItem="EmpName" resultTo="EmpName41"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="EmpName4" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpOtherFeeVO1" viewAttr="EmpName" maximumLength="240"/>
+                        <oa:messageStyledText id="FeeType3" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpOtherFeeVO1" viewAttr="FeeType" maximumLength="150" required="yes"/>
+                        <oa:messageTextInput id="FeeDate" dataType="DATE" prompt="费用发生日期" viewName="CuxApExpOtherFeeVO1" viewAttr="FeeDate" required="yes"/>
+                        <oa:messageTextInput id="FeeAmount" dataType="NUMBER" prompt="费用金额" viewName="CuxApExpOtherFeeVO1" viewAttr="FeeAmount"/>
+                        <oa:messageTextInput id="Remark2" dataType="VARCHAR2" prompt="费用说明" viewName="CuxApExpOtherFeeVO1" viewAttr="Remark" maximumLength="4000"/>
+                        <oa:formValue id="EmpId4" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpOtherFeeVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="EmpName41" prompt="出差人" viewName="CuxApExpOtherFeeVO1" viewAttr="EmpName"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41115">
+                           <ui:contents>
+                              <oa:submitButton id="OtherTableAddOneRow" text="增加另一行" prompt="增加另一行" serverUnvalidated="true" unvalidated="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+                  <oa:table id="CuxApExpTotalFeeVO1" width="100%" text="报销费用汇总">
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpNumber" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpTotalFeeVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                        <oa:messageStyledText id="EmpName5" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpTotalFeeVO1" viewAttr="EmpName" maximumLength="9"/>
+                        <oa:formValue id="LineNumber4" dataType="NUMBER" prompt="LineNumber" viewName="CuxApExpTotalFeeVO1" viewAttr="LineNumber"/>
+                        <oa:formValue id="EmpId5" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpTotalFeeVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="TravelType1" dataType="VARCHAR2" prompt="TravelType" viewName="CuxApExpTotalFeeVO1" viewAttr="TravelType"/>
+                        <oa:formValue id="RelationshipId3" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpTotalFeeVO1" viewAttr="RelationshipId"/>
+                        <oa:messageStyledText id="TravelSubsidy" dataType="NUMBER" prompt="国内差旅-补助费" viewName="CuxApExpTotalFeeVO1" viewAttr="TravelSubsidy" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeePlane" dataType="NUMBER" prompt="国内差旅-飞机" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeePlane" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeeTrain" dataType="NUMBER" prompt="国内差旅-火车" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeeTrain" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeeAutomobile" dataType="NUMBER" prompt="国内差旅-汽车" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeeAutomobile" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeeShip" dataType="NUMBER" prompt="国内差旅-轮船" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeeShip" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeeInJing" dataType="NUMBER" prompt="国内差旅-市内交通费" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeeInJing" totalValue="true"/>
+                        <oa:messageStyledText id="TrafficFeeOutJing" dataType="NUMBER" prompt="国内差旅-市外交通费" viewName="CuxApExpTotalFeeVO1" viewAttr="TrafficFeeOutJing" totalValue="true"/>
+                        <oa:messageStyledText id="AccomFee" dataType="NUMBER" prompt="国内差旅-住宿费" viewName="CuxApExpTotalFeeVO1" viewAttr="AccomFee" totalValue="true"/>
+                        <oa:messageStyledText id="OtherFee" dataType="NUMBER" prompt="国内差旅-其他费用" viewName="CuxApExpTotalFeeVO1" viewAttr="OtherFee" totalValue="true"/>
+                        <oa:messageStyledText id="EmpTotal" dataType="NUMBER" prompt="合计" viewName="CuxApExpTotalFeeVO1" viewAttr="EmpTotal" totalValue="true"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+         <ui:productBranding>
+            <oa:image id="productBranding" source="/OA_MEDIA/OIEENTRYBRAND.gif" shortDesc="Internet Expenses"/>
+         </ui:productBranding>
+         <ui:location>
+            <oa:train id="OIETrain" extends="/oracle/apps/ap/oie/entry/webui/EntryTrainRN"/>
+         </ui:location>
+      </oa:pageLayout>
+   </content>
+</page>

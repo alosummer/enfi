@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM" controllerClass="cux.oracle.apps.per.aprprocess.webui.KpiRptCO" windowTitle="KPI报表" title="KPI报表">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:staticStyledText id="NoDataInfo" messageName="CUX_KPI_REPORT_NODATA" messageAppShortName="CUX"/>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="Return" text="返回" prompt="返回" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

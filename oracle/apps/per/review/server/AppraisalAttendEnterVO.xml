@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AppraisalAttendEnterVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.AppraisalAttendEnterVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.AppraisalAttendEnterVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT AppraisalAttendEO.ATTEND_ID, 
+       AppraisalAttendEO.APPRAISAL_ID, 
+       AppraisalAttendEO.PERSON_ID, 
+       AppraisalAttendEO.APP_SEQ, 
+       AppraisalAttendEO.PERSON_TYPE, 
+       AppraisalAttendEO.ENABLEED, 
+       AppraisalAttendEO.OPINION_DATE, 
+       AppraisalAttendEO.OPINION_RESULT, 
+       AppraisalAttendEO.DESCRIPTION, 
+       AppraisalAttendEO.MARK_DATE, 
+       AppraisalAttendEO.MARK, 
+       AppraisalAttendEO.LEVEL_ID, 
+       AppraisalAttendEO.MARK_LEVEL, 
+       AppraisalAttendEO.ATTRIBUTE_CATEGORY, 
+       AppraisalAttendEO.ATTRIBUTE1, 
+       AppraisalAttendEO.ATTRIBUTE2, 
+       AppraisalAttendEO.ATTRIBUTE3, 
+       AppraisalAttendEO.ATTRIBUTE4, 
+       AppraisalAttendEO.ATTRIBUTE5, 
+       AppraisalAttendEO.ATTRIBUTE6, 
+       AppraisalAttendEO.ATTRIBUTE7, 
+       AppraisalAttendEO.ATTRIBUTE8, 
+       AppraisalAttendEO.ATTRIBUTE9, 
+       AppraisalAttendEO.ATTRIBUTE10, 
+       AppraisalAttendEO.LAST_UPDATE_DATE, 
+       AppraisalAttendEO.LAST_UPDATED_BY, 
+       AppraisalAttendEO.LAST_UPDATE_LOGIN, 
+       AppraisalAttendEO.CREATED_BY, 
+       AppraisalAttendEO.CREATION_DATE
+FROM CUX_APPRAISAL_ATTEND AppraisalAttendEO
+    , fnd_user fu
+ WHERE AppraisalAttendEO.PERSON_ID = fu.employee_id
+   AND fu.user_id = fnd_global.user_id
+   AND AppraisalAttendEO.attribute3=cux_jxkh_common_pkg.get_appraisal_phase(AppraisalAttendEO.appraisal_id)
+   AND (
+        ( (cux_jxkh_common_pkg.get_appraisal_phase(AppraisalAttendEO.appraisal_id) = 'APPEAL') AND 
+         (
+          (AppraisalAttendEO.ATTRIBUTE3 = 'REVIEW' AND AppraisalAttendEO.person_type = 0)
+          OR
+          (AppraisalAttendEO.ATTRIBUTE3 = 'APPEAL' AND AppraisalAttendEO.person_type <> 0)
+         )
+       ) OR
+         (cux_jxkh_common_pkg.get_appraisal_phase(AppraisalAttendEO.appraisal_id) <> 'APPEAL')
+       )
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="AppraisalAttendEO"
+      Entity="cux.oracle.apps.per.review.server.AppraisalAttendEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="AttendId"
+      IsNotNull="true"
+      EntityAttrName="AttendId"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTEND_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalId"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonId"
+      IsNotNull="true"
+      EntityAttrName="PersonId"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppSeq"
+      IsNotNull="true"
+      EntityAttrName="AppSeq"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="APP_SEQ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonType"
+      IsNotNull="true"
+      EntityAttrName="PersonType"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="PERSON_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Enableed"
+      EntityAttrName="Enableed"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ENABLEED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OpinionDate"
+      EntityAttrName="OpinionDate"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="OPINION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OpinionResult"
+      EntityAttrName="OpinionResult"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="OPINION_RESULT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MarkDate"
+      EntityAttrName="MarkDate"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="MARK_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Mark"
+      EntityAttrName="Mark"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelId"
+      EntityAttrName="LevelId"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="LEVEL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MarkLevel"
+      EntityAttrName="MarkLevel"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="MARK_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10"
+      EntityAttrName="Attribute10"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="ATTRIBUTE10" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="AppraisalAttendEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

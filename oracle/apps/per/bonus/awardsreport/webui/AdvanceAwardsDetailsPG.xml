@@ -1,0 +1,155 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="员工奖金明细" title="员工奖金明细" amDefName="cux.oracle.apps.per.bonus.awardsreport.server.AwardsReportAM" controllerClass="cux.oracle.apps.per.bonus.awardsreport.webui.AdvanceAwardsDetailsCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageTextInput id="QueryYear" readOnly="true" prompt="查询年份"/>
+            <oa:messageTextInput id="PersonNumber" readOnly="true" prompt="员工工号"/>
+            <oa:messageTextInput id="PersonName" readOnly="true" prompt="员工姓名"/>
+            <oa:header id="PersonDetailsHeader" text="员工奖金明细">
+               <ui:contents>
+                  <oa:advancedTable id="PersonDetailsTable" viewName="PersonDistDetailsVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="BonusTypeCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="奖金类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="BonusType" viewAttr="TypeName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="BonusSourceCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="奖金来源"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="BonusSource" viewAttr="AwardsSource"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonJanCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="一月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonJan" dataType="NUMBER" viewAttr="JanDist" prompt="一月"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonFebCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="二月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonFeb" viewAttr="FebDist" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonMarCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="三月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonMar" dataType="NUMBER" viewAttr="MarDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonAprCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="四月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonApr" dataType="NUMBER" viewAttr="AprDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonMayCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader6" prompt="五月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonMay" dataType="NUMBER" viewAttr="MayDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonJunCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7" prompt="六月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonJun" dataType="NUMBER" viewAttr="JunDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonJulCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader8" prompt="七月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonJul" dataType="NUMBER" viewAttr="JulDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonAugCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader9" prompt="八月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonAug" dataType="NUMBER" viewAttr="AugDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonSepCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader10" prompt="九月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonSep" dataType="NUMBER" viewAttr="SepDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonOctCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="十月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonOct" dataType="NUMBER" viewAttr="OctDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonNovCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader12" prompt="十一月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonNov" dataType="NUMBER" viewAttr="NovDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonDecCol" columnDataFormat="numberFormat" totalValue="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader13" prompt="十二月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonDec" dataType="NUMBER" viewAttr="DecDist"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PersonTotalCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader14" prompt="合计"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonTotal" dataType="NUMBER" viewAttr="TotalDist"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

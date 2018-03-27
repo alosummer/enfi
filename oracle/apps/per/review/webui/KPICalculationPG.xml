@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="layoutRN" amDefName="cux.oracle.apps.per.review.server.KeyPIAM" controllerClass="cux.oracle.apps.per.review.webui.KPICalculationCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="KeyPIVO2">
+               <ui:contents>
+                  <oa:formValue id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="KeyPIVO2" viewAttr="KpiId"/>
+                  <oa:formValue id="KpiName" dataType="VARCHAR2" prompt="KpiName" viewName="KeyPIVO2" viewAttr="KpiName"/>
+                  <oa:messageChoice id="CalType" dataType="VARCHAR2" prompt="类型" viewName="KeyPIVO2" viewAttr="CalType" pickListViewDef="cux.oracle.apps.per.poplist.server.EpmCalType" pickListDispAttr="Meaning" pickListValAttr="LookupCode" required="no"/>
+                  <oa:messageTextInput id="CalText" dataType="VARCHAR2" viewName="KeyPIVO2" viewAttr="CalText" prompt="内容" rows="10" maximumLength="20000" columns="55" required="no"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                  <oa:spacer id="item2" width="5"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

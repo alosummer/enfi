@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+
+<ViewLink
+   Name="ContractClassContentVL" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <ViewLinkDefEnd
+      Name="ContractClassVO"
+      Cardinality="1"
+      Owner="cux.oracle.apps.per.review.server.ContractClassVO"
+      Source="true" >
+      <AttrArray Name="Attributes">
+         <Item Value="cux.oracle.apps.per.review.server.ContractClassVO.KpiClass" />
+         <Item Value="cux.oracle.apps.per.review.server.ContractClassVO.AppraisalId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_finderName" Value="ContractClassVO" />
+         <Attr Name="_accessor" Value="true" />
+         <Attr Name="_isUpdateable" Value="true" />
+      </DesignTime>
+   </ViewLinkDefEnd>
+   <ViewLinkDefEnd
+      Name="ContractContentVO"
+      Cardinality="-1"
+      Owner="cux.oracle.apps.per.review.server.ContractContentVO" >
+      <AttrArray Name="Attributes">
+         <Item Value="cux.oracle.apps.per.review.server.ContractContentVO.KpiClass" />
+         <Item Value="cux.oracle.apps.per.review.server.ContractContentVO.AppraisalId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_finderName" Value="ContractContentVO" />
+         <Attr Name="_isUpdateable" Value="true" />
+      </DesignTime>
+   </ViewLinkDefEnd>
+</ViewLink>

@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="LevelProrateVO"
+   OrderBy="APPRAISAL_YEAR"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.LevelProrateVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.LevelProrateVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT A.*,
+      (SELECT MEANING FROM FND_LOOKUP_VALUES WHERE LOOKUP_TYPE='EPM_FLOW_STATUS' AND LOOKUP_CODE=A.WF_STATUS_CODE AND LANGUAGE='ZHS') WF_STATUS
+FROM 
+(
+SELECT 'N' SELECTFLG,APT.APPRAISAL_YEAR,APT.PERIOD_TYPE_ID,
+       CPMT.GROUP_ID  AS APPRAISAL_GROUP_ID,CPMT.PACKET_NUM,
+       (SELECT MEANING FROM FND_LOOKUP_VALUES WHERE LOOKUP_TYPE='EPM_PERIOD' AND LOOKUP_CODE=APT.PERIOD_TYPE_ID AND LANGUAGE='ZHS') PERIOD_NAME,
+       (SELECT GROUP_NAME FROM CUX_REVIEW_GROUP_T WHERE GROUP_ID = CPMT.GROUP_ID) GROUP_NAME,
+       cux_jxkh_workflow_set_pkg.get_OrgName_by_PacketNum(CPMT.PACKET_NUM) AS ORG_NAME,       
+       SUM(PER_NUM) PER_NUM,
+       SUM(PER_CPL_NUM) PER_CPL_NUM,
+       SUM(PER_PUB_NUM) PER_PUB_NUM,
+       SUM(PER_FRE_NUM) PER_FRE_NUM,
+       SUM(APT.LEVEL_A) LEVEL_A,
+       SUM(APT.LEVEL_B) LEVEL_B,
+       SUM(APT.LEVEL_C) LEVEL_C,
+       SUM(APT.LEVEL_D) LEVEL_D,
+       SUM(APT.LEVEL_E) LEVEL_E,
+       SUM(APT.PER_CPL_NUM_T) PER_CPL_NUM_T,
+       DECODE(SIGN(SUM(APT.PER_NUM - APT.PER_CPL_NUM)),
+              0,
+              'COMPLETED',
+              DECODE(SIGN(SUM(APT.PER_NUM - APT.PER_PUB_NUM)),
+                     0,
+                     'PUBLISHED',
+                     DECODE(SIGN(SUM(APT.PER_NUM - APT.PER_FRE_NUM)),
+                            0,
+                            'FREEZED',
+                            DECODE(SIGN(SUM(APT.PER_NUM -
+                                        APT.PER_FRE_NUM -
+                                        APT.PER_PUB_NUM -
+                                        APT.PER_CPL_NUM)),
+                                   0,
+                                   'COMPLETED',
+                                   'PROCESSING')))) AS WF_STATUS_CODE,
+       DECODE(SIGN(SUM(APT.PER_NUM - APT.PER_CPL_NUM - APT.PER_PUB_NUM -
+                   APT.PER_FRE_NUM)),
+              0,
+              'N',
+              'Y') AS SELECT_IS_DISABLE
+  FROM (select app.APPRAISAL_ID,
+               app.APPRAISAL_PERSON_ID,
+               app.APPRAISAL_YEAR,
+               app.PERIOD_TYPE_ID,
+               app.STATUS_ID,
+               app.APPRAISAL_GROUP_ID,
+               app.ORGANIZATION_ID,
+               DECODE(APP.STATUS_ID,'CLOSED',0,1) PER_NUM,
+               DECODE(APP.STATUS_ID,'COMPLETED',1,0) PER_CPL_NUM,
+               DECODE(APP.STATUS_ID,'PUBLISHED',1,0) PER_PUB_NUM,
+               DECODE(APP.STATUS_ID,'FREEZED',1,0) PER_FRE_NUM,
+               DECODE(APP.STATUS_ID,'COMPLETED',1,'PUBLISHED',1,'FREEZED',1,0) PER_CPL_NUM_T,
+               DECODE(APP.FINAL_LEVEL,'A',1,0) LEVEL_A,               
+               DECODE(APP.FINAL_LEVEL,'B',1,0) LEVEL_B,               
+               DECODE(APP.FINAL_LEVEL,'C',1,0) LEVEL_C,               
+               DECODE(APP.FINAL_LEVEL,'D',1,0) LEVEL_D,               
+               DECODE(APP.FINAL_LEVEL,'E',1,0) LEVEL_E,               
+               cux_jxkh_common_pkg.get_prorate_id(app.appraisal_group_id,
+                                                  app.ORGANIZATION_ID,nvl(app.sign_date,SYSDATE)) prorate_id,nvl(app.sign_date,SYSDATE) sign_date
+          from cux_appraisal_t app
+         where app.PHASE_ID in ('REVIEW','APPEAL')
+       AND app.STATUS_ID <> 'CLOSED') APT,
+       CUX_PRORATE_MANAGE_T cpmt,
+       CUX_GROUP_ROLE_T cgrt,
+       fnd_user fu
+ WHERE apt.prorate_id = cpmt.prorate_id
+   AND cpmt.GROUP_ID = cgrt.group_id
+   AND cgrt.person_id = fu.employee_id
+   AND fu.user_id = fnd_global.user_id
+   AND cpmt.ORG_ID IN
+       (SELECT E.ORGANIZATION_ID_CHILD org_id
+          FROM PER_ORG_STRUCTURE_ELEMENTS E
+         WHERE E.ORG_STRUCTURE_VERSION_ID =
+               cux_jxkh_common_pkg.get_org_structure_version(apt.sign_date)
+        CONNECT BY E.ORGANIZATION_ID_PARENT = PRIOR E.ORGANIZATION_ID_CHILD
+               AND E.ORG_STRUCTURE_VERSION_ID =
+                   cux_jxkh_common_pkg.get_org_structure_version(apt.sign_date)
+         START WITH E.ORGANIZATION_ID_PARENT = cgrt.org_id
+                AND E.ORG_STRUCTURE_VERSION_ID =
+                    cux_jxkh_common_pkg.get_org_structure_version(apt.sign_date)
+        UNION ALL
+        SELECT cgrt.org_id org_id FROM dual)
+--   AND CPMT.ORG_ID = 90        
+
+   GROUP BY APT.APPRAISAL_YEAR,APT.PERIOD_TYPE_ID,CPMT.GROUP_ID,CPMT.PACKET_NUM
+) A
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="Selectflg"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="SELECTFLG"
+      Expression="SELECTFLG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalYear"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPRAISAL_YEAR"
+      Expression="APPRAISAL_YEAR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodTypeId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_TYPE_ID"
+      Expression="PERIOD_TYPE_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalGroupId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPRAISAL_GROUP_ID"
+      Expression="APPRAISAL_GROUP_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PacketNum"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PACKET_NUM"
+      Expression="PACKET_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_NAME"
+      Expression="PERIOD_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupName"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="GROUP_NAME"
+      Expression="GROUP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerNum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PER_NUM"
+      Expression="PER_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerCplNum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PER_CPL_NUM"
+      Expression="PER_CPL_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerPubNum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PER_PUB_NUM"
+      Expression="PER_PUB_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerFreNum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PER_FRE_NUM"
+      Expression="PER_FRE_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelA"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LEVEL_A"
+      Expression="LEVEL_A"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelB"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LEVEL_B"
+      Expression="LEVEL_B"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelC"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LEVEL_C"
+      Expression="LEVEL_C"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelD"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LEVEL_D"
+      Expression="LEVEL_D"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelE"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LEVEL_E"
+      Expression="LEVEL_E"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerCplNumT"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PER_CPL_NUM_T"
+      Expression="PER_CPL_NUM_T"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfStatusCode"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WF_STATUS_CODE"
+      Expression="WF_STATUS_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelectIsDisable"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SELECT_IS_DISABLE"
+      Expression="SELECT_IS_DISABLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfStatus"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WF_STATUS"
+      Expression="WF_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Selectflag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="SELECTFLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="GROUP_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReadOnlyFlag"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      Passivate="true"
+      SQLType="BIT" >
+   </ViewAttribute>
+</ViewObject>

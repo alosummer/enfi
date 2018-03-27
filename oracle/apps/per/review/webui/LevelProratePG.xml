@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.LevelProrateCO" amDefName="cux.oracle.apps.per.review.server.LevelProrateAM" windowTitle="评分结果管理" title="评分结果管理">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="MainRN" mode="autoCustomizationCriteria">
+               <ui:contents>
+                  <oa:table id="LevelProrateVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageCheckBox id="SelectFlag" defaultValue="N" checkedValue="Y" unCheckedValue="N" viewName="LevelProrateVO1" viewAttr="Selectflag"/>
+                        <oa:messageStyledText id="AppraisalYear" viewName="LevelProrateVO1" viewAttr="AppraisalYear" prompt="年度"/>
+                        <oa:messageStyledText id="PeriodName" viewName="LevelProrateVO1" viewAttr="PeriodName" prompt="周期"/>
+                        <oa:messageStyledText id="GroupName" viewName="LevelProrateVO1" viewAttr="GroupName" prompt="考群"/>
+                        <oa:messageStyledText id="OrgName" viewName="LevelProrateVO1" viewAttr="OrgName" prompt="组织"/>
+                        <oa:messageStyledText id="PerNum" viewName="LevelProrateVO1" viewAttr="PerNum" prompt="人数"/>
+                        <oa:messageStyledText id="PerCplNum" viewName="LevelProrateVO1" viewAttr="PerCplNumT" prompt="完成评估人数" columns="3"/>
+                        <oa:messageStyledText id="LevelA" viewName="LevelProrateVO1" viewAttr="LevelA" prompt="A"/>
+                        <oa:messageStyledText id="LevelB" viewName="LevelProrateVO1" viewAttr="LevelB" prompt="B"/>
+                        <oa:messageStyledText id="LevelC" viewName="LevelProrateVO1" viewAttr="LevelC" prompt="C"/>
+                        <oa:messageStyledText id="LevelD" viewName="LevelProrateVO1" viewAttr="LevelD" prompt="D"/>
+                        <oa:messageStyledText id="LevelE" viewName="LevelProrateVO1" viewAttr="LevelE" prompt="E"/>
+                        <oa:messageLovInput id="WfStatus" viewName="LevelProrateVO1" viewAttr="WfStatus" prompt="状态" externalListOfValues="/cux/oracle/apps/per/lov/webui/WfStatusRN" columns="3" readOnly="false" disabled="false">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="EpmPhaseName" resultTo="WfStatus" criteriaFrom="WfStatus"/>
+                              <lovMap id="lovMap2" lovItem="EpmPhaseCode" resultTo="WfStatusCode" criteriaFrom="WfStatusCode"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="PeriodTypeId" viewName="LevelProrateVO1" viewAttr="PeriodTypeId"/>
+                        <oa:formValue id="GroupId" viewName="LevelProrateVO1" viewAttr="AppraisalGroupId"/>
+                        <oa:image id="detail" prompt="详细内容" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail">
+                                 <ui:parameters>
+                                    <ui:parameter key="AppraisalYear" value="${oa.LevelProrateVO1.AppraisalYear}"/>
+                                    <ui:parameter key="AppraisalGroupId" value="${oa.LevelProrateVO1.AppraisalGroupId}"/>
+                                    <ui:parameter key="PacketNum" value="${oa.LevelProrateVO1.PacketNum}"/>
+                                    <ui:parameter key="PeriodTypeId" value="${oa.LevelProrateVO1.PeriodTypeId}"/>
+                                    <ui:parameter key="uiLevelA" value="${oa.LevelProrateVO1.LevelA}"/>
+                                    <ui:parameter key="uiLevelB" value="${oa.LevelProrateVO1.LevelB}"/>
+                                    <ui:parameter key="uiLevelC" value="${oa.LevelProrateVO1.LevelC}"/>
+                                    <ui:parameter key="uiLevelD" value="${oa.LevelProrateVO1.LevelD}"/>
+                                    <ui:parameter key="uiLevelE" value="${oa.LevelProrateVO1.LevelE}"/>
+                                    <ui:parameter key="wfStatusCode" value="${oa.LevelProrateVO1.WfStatusCode}"/>
+                                    <ui:parameter key="perNum" value="${oa.LevelProrateVO1.PerNum}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="WfStatusCode" viewName="LevelProrateVO1" viewAttr="WfStatusCode"/>
+                        <oa:formValue id="PacketNum" dataType="NUMBER" viewName="LevelProrateVO1" viewAttr="PacketNum"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="AutoProrate" text="自动分布比例" prompt="自动分布比例"/>
+                              <oa:submitButton id="Save" text="保存" prompt="保存"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="评分结果查询" id="LevelProrateSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageChoice id="SearchGroupName" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupName" prompt="考群"/>
+                              <oa:messageLovInput id="SearchOrgName" dataType="VARCHAR2" prompt="组织" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" queryable="true">
+                                 <lovMappings>
+                                    <lovMap id="ToOrgName" lovItem="OrganizationName" resultTo="SearchOrgName" criteriaFrom="SearchOrgName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchPeriod" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPeriodVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="评价周期"/>
+                              <oa:messageTextInput id="SearchYear" prompt="评价年份"/>
+                              <oa:messageTextInput id="SearchStatus" prompt="评估状态"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="groupNameMap" criteriaItem="SearchGroupName" resultsItem="GroupName"/>
+                  <oa:queryCriteriaMap id="orgNameMap" criteriaItem="SearchOrgName" resultsItem="OrgName"/>
+                  <oa:queryCriteriaMap id="periodMap" criteriaItem="SearchPeriod" resultsItem="PeriodName"/>
+                  <oa:queryCriteriaMap id="YearMap" criteriaItem="SearchYear" resultsItem="AppraisalYear"/>
+                  <oa:queryCriteriaMap id="StatusMap" criteriaItem="SearchStatus" resultsItem="WfStatus"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

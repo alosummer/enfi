@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.ProrateManageCO" windowTitle="比例分布管理" title="比例分布管理" amDefName="cux.oracle.apps.per.review.server.ProrateManageAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="regionRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageChoice id="SearchGroupName" prompt="考群" pickListViewName="" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId" dataType="NUMBER"/>
+                        <oa:messageLovInput id="SearchOrg" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" unvalidated="true" prompt="组织" selectiveSearchCriteria="true" translatableDefaultValue="">
+                           <lovMappings>
+                              <lovMap id="MapToOrg" lovItem="OrganizationName" resultTo="SearchOrg" criteriaFrom="SearchOrg"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="SearchFlag" pickListViewDef="cux.oracle.apps.per.poplist.server.FlagVO" pickListDispAttr="FlagMeanig" pickListValAttr="FlagCode" defaultValue="Y" prompt="是否包括下层组织" selectiveSearchCriteria="true" allowBlankValue="false"/>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:flowLayout id="region3">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                              <oa:spacer id="item1" width="5"/>
+                              <oa:resetButton id="Clear" text="清除"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:footer>
+                  </oa:messageComponentLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="ProrateManageVO1" width="100%">
+               <ui:contents>
+                  <oa:messageTextInput id="PacketNum" dataType="NUMBER" prompt="序号" viewName="ProrateManageVO1" viewAttr="PacketNum" maximumLength="10" required="yes" columns="3" sortState="yes" initSortSeq="first"/>
+                  <oa:messageChoice id="GroupName" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId" viewName="ProrateManageVO1" viewAttr="GroupId" dataType="NUMBER" prompt="考群" required="yes" sortState="yes" initSortSeq="third"/>
+                  <oa:messageLovInput id="OrgName" dataType="VARCHAR2" prompt="组织" viewName="ProrateManageVO1" viewAttr="OrgName" maximumLength="240" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" required="yes" sortState="yes" initSortSeq="second">
+                     <lovMappings>
+                        <lovMap id="ToOrgName" lovItem="OrganizationName" resultTo="OrgName" criteriaFrom="OrgName"/>
+                        <lovMap id="ToOrgId" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="LevelA" viewName="ProrateManageVO1" viewAttr="LevelA" prompt="A(%)" translatableDefaultValue="0" dataType="NUMBER" tipType="none" cellNoWrapFormat="true" shortDesc="输入0～100正整数" columns="5"/>
+                  <oa:messageTextInput id="LevelB" viewName="ProrateManageVO1" viewAttr="LevelB" prompt="B(%)" dataType="NUMBER" cellNoWrapFormat="true" shortDesc="输入0～100正整数" columns="5"/>
+                  <oa:messageTextInput id="LevelC" viewName="ProrateManageVO1" viewAttr="LevelC" prompt="C(%)" dataType="NUMBER" shortDesc="输入0～100正整数" columns="5"/>
+                  <oa:messageTextInput id="LevelD" viewName="ProrateManageVO1" viewAttr="LevelD" prompt="D(%)" dataType="NUMBER" shortDesc="输入0～100正整数" columns="5"/>
+                  <oa:messageTextInput id="LevelE" viewName="ProrateManageVO1" viewAttr="LevelE" prompt="E(%)" dataType="NUMBER" translatableDefaultValue="0" shortDesc="输入0～100正整数" columns="5"/>
+                  <oa:messageTextInput id="Adjust" dataType="NUMBER" prompt="调整比例" viewName="ProrateManageVO1" viewAttr="Adjust" columns="5"/>
+                  <oa:messageCheckBox id="Constraint" text="强制比例" prompt="强制比例" viewName="ProrateManageVO1" viewAttr="Attribute1" checkedValue="Y" unCheckedValue="N"/>
+                  <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="deleteProrate" id="fireAction1">
+                           <ui:parameters>
+                              <ui:parameter key="ProrateId" value="${oa.ProrateManageVO1.ProrateId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+                  <oa:formValue id="OrgId" viewName="ProrateManageVO1" viewAttr="OrgId" dataType="NUMBER"/>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="TableActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+                        <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

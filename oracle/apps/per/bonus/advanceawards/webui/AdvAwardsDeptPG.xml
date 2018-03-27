@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAM" windowTitle="发放部门选择页面" title="部门选择" styleClass="OraDataText" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.AdvAwardsDeptCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif" styleClass="OraDataText"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageChoice id="DistDept" prompt="发放部门" styleClass="OraDataText" pickListViewName="AdvAwardsDeptLovVO1" pickListDispAttr="DeptName" pickListValAttr="OrganizationId" allowBlankValue="false"/>
+            <oa:submitButton id="EnterButton" text="确定" prompt="确定" styleClass="OraDataText"/>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

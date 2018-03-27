@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KPIConObjVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.poplist.server.KPIConObjVORowImpl"
+   ComponentClass="cux.oracle.apps.per.poplist.server.KPIConObjVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT to_char(p.person_id) AS epm_co_code
+     , p.full_name          AS epm_co_name
+     , 'SM'                 AS epm_co_type
+  FROM CUX_REVIEW_GROUP_T g
+     , CUX_GROUP_RANGE_T r
+     , cux_jobs_v j
+     , per_all_people_f p
+     , per_all_assignments_f a
+ WHERE g.group_name = '高管'
+   AND g.group_id = r.group_id
+   AND r.job_id = j.job_id
+   AND j.job_id = a.job_id
+   AND a.person_id = p.person_id
+   AND SYSDATE BETWEEN nvl(p.effective_start_date,SYSDATE) AND nvl(p.effective_end_date,SYSDATE)
+   AND SYSDATE BETWEEN nvl(a.effective_start_date,SYSDATE) AND nvl(a.effective_end_date,SYSDATE)
+   and :1 = 'SM'
+UNION ALL
+SELECT to_char(Organization_Id)  AS epm_co_code
+     , NAME                      AS epm_co_name
+     , 'DEPT'                    AS epm_co_type
+  FROM hr_all_organization_units haou
+ WHERE haou.attribute3 = '二层'
+   and :1 in ('DEPARTMENT','POSITION')
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="EpmCoCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="40"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CO_CODE"
+      Expression="EPM_CO_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="40" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCoName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CO_NAME"
+      Expression="EPM_CO_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCoType"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CO_TYPE"
+      Expression="EPM_CO_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

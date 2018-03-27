@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="DlvCfgVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.dlv.server.DlvCfgVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.dlv.server.DlvCfgVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pdc.dlv_cfg_id
+      ,pdc.project_id
+      ,pdc.speciality_manager
+      ,pdc.designer
+      ,cux_common_pkg.get_last_name_by_persionid(pdc.designer) designer_name
+      ,pdc.checker
+      ,cux_common_pkg.get_last_name_by_persionid(pdc.checker) checker_name
+      ,pdc.verifier
+      ,cux_common_pkg.get_last_name_by_persionid(pdc.verifier) verifier_name
+      ,pdc.authorizer
+      ,cux_common_pkg.get_last_name_by_persionid(pdc.authorizer) authorizer_name
+FROM   cux_pa_dlv_cfg_t pdc
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="DlvCfgEO"
+      Entity="cux.oracle.apps.pa.dlv.server.DlvCfgEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="DlvCfgId"
+      EntityAttrName="DlvCfgId"
+      EntityUsage="DlvCfgEO"
+      AliasName="DLV_CFG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="DlvCfgEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpecialityManager"
+      EntityAttrName="SpecialityManager"
+      EntityUsage="DlvCfgEO"
+      AliasName="SPECIALITY_MANAGER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Designer"
+      EntityAttrName="Designer"
+      EntityUsage="DlvCfgEO"
+      AliasName="DESIGNER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DesignerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESIGNER_NAME"
+      Expression="DESIGNER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Checker"
+      EntityAttrName="Checker"
+      EntityUsage="DlvCfgEO"
+      AliasName="CHECKER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CheckerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHECKER_NAME"
+      Expression="CHECKER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Verifier"
+      EntityAttrName="Verifier"
+      EntityUsage="DlvCfgEO"
+      AliasName="VERIFIER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VerifierName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VERIFIER_NAME"
+      Expression="VERIFIER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Authorizer"
+      EntityAttrName="Authorizer"
+      EntityUsage="DlvCfgEO"
+      AliasName="AUTHORIZER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AuthorizerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AUTHORIZER_NAME"
+      Expression="AUTHORIZER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

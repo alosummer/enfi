@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.bonus.reports.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="BonusActualDistributionVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.BonusActualDistributionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BonusDistributionVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.BonusDistributionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BonusReportsAM"
+      FullName="cux.oracle.apps.per.bonus.reports.server.BonusReportsAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CuxBonusDepDistributionEO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.CuxBonusDepDistributionEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="DeptBonusDetailVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.DeptBonusDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MonthListVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.MonthListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectManagementBonusVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.ProjectManagementBonusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectManBonusVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.ProjectManBonusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.ProjectVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="YearListVO"
+      FullName="cux.oracle.apps.per.bonus.reports.server.YearListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

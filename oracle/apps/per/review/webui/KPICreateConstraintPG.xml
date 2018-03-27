@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.KeyPIAM" windowTitle="创建指标约束" title="创建指标约束" controllerClass="cux.oracle.apps.per.review.webui.KPICreateConstraintCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="MainRN">
+               <ui:contents>
+                  <oa:messageChoice id="ConstraintType" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIObjectClassVO" pickListDispAttr="EpmOcName" pickListValAttr="EpmOcCode" pickListViewName="" prompt="类型" allowBlankValue="true" viewName="KPIConstraintVO1" viewAttr="ConstraintType">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="refreshLov"/>
+                     </ui:primaryClientAction>
+                  </oa:messageChoice>
+                  <oa:messageChoice id="ConstraintObj" pickListViewName="KPIConstraintObjVO1" pickListDispAttr="EpmCoName" pickListValAttr="EpmCoCode" pickListViewDef="" prompt="受约对象" viewName="KPIConstraintVO1" viewAttr="ConstraintObj"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:pageButtonBar id="ButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                  <oa:submitButton id="Cancel" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

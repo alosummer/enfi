@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PrjDisExportPG" windowTitle="项目管理奖发放数据导出" title="项目管理奖发放数据导出" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjDisExportCO" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="ExportRN">
+               <ui:contents>
+                  <oa:table id="PrjDisExportTable" blockSize="1000" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="LotId1" dataType="VARCHAR2" prompt="批次" viewName="PrjDisExportVO1" viewAttr="LotId" maximumLength="66"/>
+                        <oa:messageStyledText id="CreationDate" dataType="VARCHAR2" prompt="发放日期" viewName="PrjDisExportVO1" viewAttr="CreationDate" maximumLength="10"/>
+                        <oa:messageStyledText id="EmpNo" dataType="VARCHAR2" prompt="工号" viewName="PrjDisExportVO1" viewAttr="EmpNo" maximumLength="30"/>
+                        <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="姓名" viewName="PrjDisExportVO1" viewAttr="EmpName" maximumLength="150"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="组织" viewName="PrjDisExportVO1" viewAttr="OrgName" maximumLength="150"/>
+                        <oa:messageStyledText id="DistributionAmount1" dataType="NUMBER" prompt="奖金(元)" viewName="PrjDisExportVO1" viewAttr="DistributionAmount"/>
+                        <oa:messageStyledText id="Note" dataType="VARCHAR2" prompt="备注" viewName="PrjDisExportVO1" viewAttr="Note" maximumLength="150"/>
+                        <oa:messageStyledText id="ApprovedStatus" dataType="VARCHAR2" prompt="审批状态" viewName="PrjDisExportVO1" viewAttr="ApprovedStatus" maximumLength="10"/>
+                        <oa:messageStyledText id="ApprovedDate1" dataType="VARCHAR2" prompt="审批日期" viewName="PrjDisExportVO1" viewAttr="ApprovedDate" maximumLength="10"/>
+                        <oa:messageStyledText id="ImportStatus" dataType="VARCHAR2" prompt="ERP导入状态" viewName="PrjDisExportVO1" viewAttr="ImportStatus" maximumLength="10"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回" styleClass="OraDataText" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:exportButton id="Export" text="Excel导出" serverUnvalidated="true" unvalidated="true" styleClass="OraDataText" viewName="PrjDisExportVO1" exportAllRows="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:stackLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <ui:contents>
+      <oa:messageLovInput id="EMainPoNum" externalListOfValues="/cux/oracle/apps/po/autocreate/lov/webui/PoHeaderRN" queryable="true" viewName="PoHeaderMergeVO" viewAttr="Attribute3" prompt="主合同编号">
+         <lovMappings>
+            <lovMap id="lovMap1" lovItem="Segment1" resultTo="EMainPoNum" criteriaFrom="EMainPoNum"/>
+         </lovMappings>
+      </oa:messageLovInput>
+      <oa:formValue id="EPurTypeCode" viewName="PoHeaderMergeVO" viewAttr="Attribute4"/>
+      <oa:messageLovInput id="EPurTypeName" queryable="true" externalListOfValues="/cux/oracle/apps/po/autocreate/lov/webui/PurTypeRN" prompt="采购类型" showRequired="false">
+         <lovMappings>
+            <lovMap id="lovMap2" lovItem="LookupCode" resultTo="item1" criteriaFrom="item1"/>
+            <lovMap id="lovMap3" lovItem="Meaning" resultTo="EPurTypeName" criteriaFrom="EPurTypeName"/>
+         </lovMappings>
+      </oa:messageLovInput>
+      <oa:messageTextInput id="item11" prompt="测试" viewName="PoHeaderMergeVO" viewAttr="Attribute4"/>
+   </ui:contents>
+</oa:stackLayout>

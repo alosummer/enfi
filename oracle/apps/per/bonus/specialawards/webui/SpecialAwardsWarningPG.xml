@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsAM" windowTitle="警告" title="删除警告" controllerClass="cux.oracle.apps.per.bonus.specialawards.webui.SpecialAwardsWarningCO" styleClass="OraDataText">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif" styleClass="OraDataText"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageTextInput id="Warning" readOnly="true" prompt="警告:" styleClass="OraDataText"/>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="YesButton" text="确定" prompt="确定" styleClass="OraDataText"/>
+                  <oa:submitButton id="NoButton" text="取消" prompt="取消" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpContactCO" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="联络方式及通讯">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="FirstPartyHdr" text="甲方项目主要人员联系方式">
+               <ui:contents>
+                  <oa:table id="PmpConractFirstVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum" dataType="NUMBER" prompt="序号" viewName="PmpConractFirstVO1" viewAttr="SeqNum"/>
+                        <oa:messageTextInput id="Position" dataType="VARCHAR2" prompt="职务" viewName="PmpConractFirstVO1" viewAttr="Position" maximumLength="150"/>
+                        <oa:messageTextInput id="FullName" dataType="VARCHAR2" prompt="姓名" viewName="PmpConractFirstVO1" viewAttr="FullName" maximumLength="30"/>
+                        <oa:messageTextInput id="Tel" dataType="VARCHAR2" prompt="电话" viewName="PmpConractFirstVO1" viewAttr="Tel" maximumLength="30"/>
+                        <oa:messageTextInput id="Email" dataType="VARCHAR2" prompt="E-Mail" viewName="PmpConractFirstVO1" viewAttr="Email" maximumLength="300"/>
+                        <oa:messageTextInput id="Mobile" dataType="VARCHAR2" prompt="移动电话" viewName="PmpConractFirstVO1" viewAttr="Mobile" maximumLength="30"/>
+                        <oa:image id="DeleteF" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteF"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="AddFirst" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddFirst"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="SecondPartyHdr" text="乙方项目主要人员联系方式">
+               <ui:contents>
+                  <oa:table id="PmpContractSecondVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum1" dataType="NUMBER" prompt="序号" viewName="PmpContractSecondVO1" viewAttr="SeqNum"/>
+                        <oa:messageTextInput id="Position1" dataType="VARCHAR2" prompt="职务" viewName="PmpContractSecondVO1" viewAttr="Position" maximumLength="150"/>
+                        <oa:messageTextInput id="FullName1" dataType="VARCHAR2" prompt="姓名" viewName="PmpContractSecondVO1" viewAttr="FullName" maximumLength="30"/>
+                        <oa:messageTextInput id="Tel1" dataType="VARCHAR2" prompt="电话" viewName="PmpContractSecondVO1" viewAttr="Tel" maximumLength="30"/>
+                        <oa:messageTextInput id="Email1" dataType="VARCHAR2" prompt="E-Mail" viewName="PmpContractSecondVO1" viewAttr="Email" maximumLength="300"/>
+                        <oa:messageTextInput id="Mobile1" dataType="VARCHAR2" prompt="移动电话" viewName="PmpContractSecondVO1" viewAttr="Mobile" maximumLength="30"/>
+                        <oa:image id="DeleteS" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteS"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region3">
+                           <ui:contents>
+                              <oa:button id="AddSecond" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddSecond"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="CuxApExpNtfAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>enfi_dev</JDBCName>
+         <jbo.project>OAProject1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpNtfAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpNtfAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

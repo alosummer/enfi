@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="审批确认" title="审批确认" amDefName="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsAM" controllerClass="cux.oracle.apps.per.bonus.specialawards.webui.SpecialAwardsExamCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="region2">
+               <ui:contents>
+                  <oa:table id="ExamTable">
+                     <ui:contents>
+                        <oa:messageStyledText id="DepName" dataType="VARCHAR2" prompt="部门" viewName="SpecialAwardsExamVO1" viewAttr="DepName" maximumLength="150"/>
+                        <oa:messageStyledText id="DistributionAmount" dataType="NUMBER" prompt="奖金" viewName="SpecialAwardsExamVO1" viewAttr="DistributionAmount"/>
+                        <oa:messageStyledText id="Note" dataType="VARCHAR2" prompt="备注" viewName="SpecialAwardsExamVO1" viewAttr="Note" maximumLength="150"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

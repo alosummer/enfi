@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.awardsreport.server.AwardsReportAM" windowTitle="项目管理奖报表" title="表报内容" controllerClass="cux.oracle.apps.per.bonus.awardsreport.webui.ProjectAwardsReportCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="QueryRN">
+               <ui:contents>
+                  <oa:messageChoice id="QueryYear" prompt="年份" pickListViewName="QueryYearVO1" pickListDispAttr="QueryYear" pickListValAttr="QueryYear" allowBlankValue="false"/>
+                  <oa:messageTextInput id="ProjectNumber" prompt="项目编号"/>
+                  <oa:submitButton id="SearchButton" text="查询" prompt="查询"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:header id="ProjectAwardsHeader" text="项目管理奖汇总">
+               <ui:contents>
+                  <oa:advancedTable id="ProjectAwardsTable" viewName="ProjectAwardsVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="ProjNumberCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="项目编号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:link id="ProjNumber" viewAttr="ProjectNumber" destination="OA.jsp?page=/cux/oracle/apps/per/bonus/awardsreport/webui/ProjectAwardsDetailsPG">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="goPersonDetails">
+                                       <ui:parameters>
+                                          <ui:parameter key="queryProjectNumber" value="${oa.ProjectAwardsVO1.ProjectNumber}"/>
+                                          <ui:parameter key="queryDistDate" value="${oa.ProjectAwardsVO1.DistributionDate}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:link>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ProjNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="项目名称"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjName" viewAttr="ProjectName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ProjManagerCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="项目经理"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjManager" viewAttr="ProjectManager"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ProjBudgetCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="项目管理奖预算总额"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjBudget" viewAttr="ProjectBudget"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="下发日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistDate" viewAttr="DistributionDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistAmountCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader/>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistAmount" dataType="NUMBER" viewAttr="DistributionAmount"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

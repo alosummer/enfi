@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="BonusActualDistributionVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.reports.server.BonusActualDistributionVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT TEMP.DEP 部门,
+       TEMP.DISTRDEP 计奖部门,
+       AVG(DECODE(MON, 201201, AMOUNT, NULL)) 一月,
+       AVG(DECODE(MON, 201202, AMOUNT, NULL)) 二月,
+       AVG(DECODE(MON, 201203, AMOUNT, NULL)) 三月,
+       AVG(DECODE(MON, 201204, AMOUNT, NULL)) 四月,
+       AVG(DECODE(MON, 201205, AMOUNT, NULL)) 五月,
+       AVG(DECODE(MON, 201206, AMOUNT, NULL)) 六月,
+       AVG(DECODE(MON, 201207, AMOUNT, NULL)) 七月,
+       AVG(DECODE(MON, 201208, AMOUNT, NULL)) 八月,
+       AVG(DECODE(MON, 201209, AMOUNT, NULL)) 九月,
+       AVG(DECODE(MON, 201210, AMOUNT, NULL)) 十月,
+       AVG(DECODE(MON, 201211, AMOUNT, NULL)) 十一月,
+       AVG(DECODE(MON, 201212, AMOUNT, NULL)) 十二月,
+       NVL((SELECT SUM(cbpd.distribution_amount)
+             FROM CUX_BONUS_PERSON_DISTRIBUTION cbpd, cux_bonus_type cbt
+            WHERE cbpd.dep_name = TEMP.DEP
+              and cbpd.type_id = cbt.type_id
+              and cbt.type_name = '年终奖金'
+              and cbpd.distribution_status NOT IN ('已删除', '已退回')
+              and cbpd.distribution_date between
+                  to_date('2012-01-01 00:00:00', 'YYYY-MM-DD HH24-:MI:SS') and
+                  to_date('2012-12-31 23:59:59', 'YYYY-MM-DD HH24-:MI:SS')),
+           0) 年终奖金,
+       NVL((SELECT SUM(cbpd.distribution_amount)
+             FROM CUX_BONUS_PERSON_DISTRIBUTION cbpd, cux_bonus_type cbt
+            WHERE cbpd.dep_name = TEMP.DEP
+              and cbpd.type_id = cbt.type_id
+              and cbt.type_name = '年终奖金'
+              and cbpd.distribution_status NOT IN ('已删除', '已退回')
+              and cbpd.distribution_date between
+                  to_date('2012-01-01 00:00:00', 'YYYY-MM-DD HH24-:MI:SS') and
+                  to_date('2012-12-31 23:59:59', 'YYYY-MM-DD HH24-:MI:SS')),
+           0) + SUM(AMOUNT) 总金额
+  FROM (SELECT HAOU.attribute7 DISTRDEP,
+               CBDD.Dep_Name DEP,
+               CBDD.DISTRIBUTION_PERIOD MON,
+               SUM(CBDD.DISTRIBUTION_AMOUNT) AMOUNT
+          FROM HR_ALL_ORGANIZATION_UNITS  HAOU,
+               HR_LOOKUPS                 HL,
+               cux_bonus_dep_distribution CBDD
+         WHERE HL.LOOKUP_TYPE(+) = 'cux.PROJECT_AWARD_TYPE'
+           AND ENABLED_FLAG(+) = 'Y'
+           AND HAOU.ATTRIBUTE8 = HL.LOOKUP_CODE(+)
+           AND CBDD.DEP_ID = HAOU.ORGANIZATION_ID
+           AND CBDD.DISTRIBUTION_PERIOD BETWEEN 201200 AND 201213
+         GROUP BY CBDD.DISTRIBUTION_PERIOD, CBDD.Dep_Name, HAOU.ATTRIBUTE7) TEMP
+ GROUP BY TEMP.DEP, TEMP.DISTRDEP
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="部门"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="部门"
+      Expression="部门"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="计奖部门"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="计奖部门"
+      Expression="计奖部门"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="一月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="一月"
+      Expression="一月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="二月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="二月"
+      Expression="二月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="三月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="三月"
+      Expression="三月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="四月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="四月"
+      Expression="四月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="五月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="五月"
+      Expression="五月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="六月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="六月"
+      Expression="六月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="七月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="七月"
+      Expression="七月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="八月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="八月"
+      Expression="八月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="九月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="九月"
+      Expression="九月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="十月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="十月"
+      Expression="十月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="十一月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="十一月"
+      Expression="十一月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="十二月"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="十二月"
+      Expression="十二月"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="年终奖金"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="年终奖金"
+      Expression="年终奖金"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="总金额"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="总金额"
+      Expression="总金额"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

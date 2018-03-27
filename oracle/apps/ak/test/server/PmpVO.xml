@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpVO"
+   SelectList="PmpEO.PROJECT_ID, 
+       PmpEO.VERSION_NUM, 
+       PmpEO.VERIFY_STATUS, 
+       PmpEO.APPROVE_STATUS, 
+       PmpEO.VERIFY_WF_ITEMTYPE, 
+       PmpEO.VERIFY_WF_ITEMKEY, 
+       PmpEO.APPROVE_WF_ITEMTYPE, 
+       PmpEO.APPROVE_WF_ITEMKEY, 
+       PmpEO.ATTRIBUTE1, 
+       PmpEO.ATTRIBUTE2, 
+       PmpEO.ATTRIBUTE3, 
+       PmpEO.ATTRIBUTE4, 
+       PmpEO.ATTRIBUTE5, 
+       PmpEO.ATTRIBUTE6, 
+       PmpEO.ATTRIBUTE7, 
+       PmpEO.ATTRIBUTE8, 
+       PmpEO.ATTRIBUTE9, 
+       PmpEO.CREATED_BY, 
+       PmpEO.CREATION_DATE, 
+       PmpEO.LAST_UPDATED_BY, 
+       PmpEO.LAST_UPDATE_DATE, 
+       PmpEO.LAST_UPDATE_LOGIN, 
+       PmpEO.PMP_ID, 
+       PmpEO.ROWID"
+   FromList="CUX.CUX_PA_PMP_T PmpEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.ak.test.server.PmpVORowImpl"
+   ComponentClass="cux.oracle.apps.ak.test.server.PmpVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PmpEO"
+      Entity="cux.oracle.apps.ak.test.server.PmpEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="PmpEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNum"
+      EntityAttrName="VersionNum"
+      EntityUsage="PmpEO"
+      AliasName="VERSION_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VerifyStatus"
+      EntityAttrName="VerifyStatus"
+      EntityUsage="PmpEO"
+      AliasName="VERIFY_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveStatus"
+      EntityAttrName="ApproveStatus"
+      EntityUsage="PmpEO"
+      AliasName="APPROVE_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VerifyWfItemtype"
+      EntityAttrName="VerifyWfItemtype"
+      EntityUsage="PmpEO"
+      AliasName="VERIFY_WF_ITEMTYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VerifyWfItemkey"
+      EntityAttrName="VerifyWfItemkey"
+      EntityUsage="PmpEO"
+      AliasName="VERIFY_WF_ITEMKEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveWfItemtype"
+      EntityAttrName="ApproveWfItemtype"
+      EntityUsage="PmpEO"
+      AliasName="APPROVE_WF_ITEMTYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveWfItemkey"
+      EntityAttrName="ApproveWfItemkey"
+      EntityUsage="PmpEO"
+      AliasName="APPROVE_WF_ITEMKEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="PmpEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="PmpEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="PmpEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="PmpEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="PmpEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="PmpEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PmpId"
+      EntityAttrName="PmpId"
+      EntityUsage="PmpEO"
+      AliasName="PMP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="PmpEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

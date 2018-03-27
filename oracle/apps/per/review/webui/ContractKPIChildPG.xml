@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.AppraisalAM" windowTitle="绩效合同" title="绩效合同" addForm="true" controllerClass="cux.oracle.apps.per.review.webui.ContractKPIChildCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="AppraisalKPIVO1" width="100%">
+               <ui:contents>
+                  <oa:messageChoice id="KpiArea" dataType="VARCHAR2" prompt="考核层面" viewName="ContractKPIDetailVO1" viewAttr="KpiArea" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIAreaVO" pickListDispAttr="EpmIlName" pickListValAttr="EpmIlCode"/>
+                  <oa:messageLovInput id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="ContractKPIDetailVO1" viewAttr="KpiName" maximumLength="300" externalListOfValues="/cux/oracle/apps/per/lov/webui/KeyPIRN" unvalidated="true">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="KpiArea" resultTo="KpiArea" criteriaFrom="KpiArea"/>
+                        <lovMap id="lovMap2" lovItem="KpiId" resultTo="KpiId"/>
+                        <lovMap id="lovMap3" lovItem="KpiName" resultTo="KpiName" criteriaFrom="KpiName"/>
+                        <lovMap id="lovMap4" lovItem="KpiDesc" resultTo="KpiDesc" criteriaFrom="KpiDesc"/>
+                        <lovMap id="lovMap5" lovItem="KpiDataSource" resultTo="KpiDataSource"/>
+                        <lovMap id="lovMap6" lovItem="KpiScoringMethod" resultTo="KpiScoringMethod"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="ContractKPIDetailVO1" viewAttr="KpiDesc" maximumLength="1000"/>
+                  <oa:messageTextInput id="Weight" dataType="VARCHAR2" prompt="权重(%)" viewName="ContractKPIDetailVO1" viewAttr="Weight" maximumLength="20" columns="5"/>
+                  <oa:messageTextInput id="TargetValue" dataType="NUMBER" prompt="目标值" viewName="ContractKPIDetailVO1" viewAttr="TargetValue" maximumLength="10" columns="5"/>
+                  <oa:messageTextInput id="MinimumValue" dataType="NUMBER" prompt="下限值" viewName="ContractKPIDetailVO1" viewAttr="MinimumValue" maximumLength="10" columns="5"/>
+                  <oa:messageTextInput id="ActualValue" dataType="NUMBER" prompt="实际值" viewName="ContractKPIDetailVO1" viewAttr="ActualValue" maximumLength="10"/>
+                  <oa:messageTextInput id="SelfEvalValue" dataType="NUMBER" viewName="ContractKPIDetailVO1" viewAttr="SelfEvalValue" prompt="自评分" maximumLength="10" columns="4"/>
+                  <oa:messageTextInput id="ScoreValue" dataType="NUMBER" prompt="得分" viewName="ContractKPIDetailVO1" viewAttr="ScoreValue" maximumLength="10"/>
+                  <oa:messageChoice id="KpiDataSource" dataType="VARCHAR2" prompt="来源" viewName="ContractKPIDetailVO1" viewAttr="KpiDataSource" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceVO" pickListDispAttr="EpmDsName" pickListValAttr="EpmDsCode"/>
+                  <oa:messageStyledText id="ParentContractId" dataType="NUMBER" rendered="false" viewName="ContractKPIDetailVO1" viewAttr="ParentContractId"/>
+                  <oa:formValue id="ContractId" dataType="NUMBER" prompt="ContractId" viewName="ContractKPIDetailVO1" viewAttr="ContractId"/>
+                  <oa:formValue id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="ContractKPIDetailVO1" viewAttr="AppraisalId"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="ContractKPIDetailVO1" viewAttr="TmplId"/>
+                  <oa:formValue id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="ContractKPIDetailVO1" viewAttr="KpiId" rendered="false"/>
+                  <oa:formValue id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="ContractKPIDetailVO1" viewAttr="KpiClass" rendered="false"/>
+                  <oa:messageTextInput id="KpiScoringMethod" dataType="VARCHAR2" prompt="KpiScoringMethod" viewName="ContractKPIDetailVO1" viewAttr="KpiScoringMethod" maximumLength="150" rendered="false"/>
+                  <oa:switcher regionName="" viewName="ContractKPIDetailVO1" viewAttr="DeleteImage" id="DeleteSwitcher" use="/oracle/apps/fnd/attributesets/Buttons/Delete">
+                     <ui:case name="DeleteEnabled">
+                        <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" shortDesc="Select to delete information." viewName="ContractKPIDetailVO1" viewAttr="DeleteImage">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delete" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="contractId" value="${oa.ContractKPIDetailVO1.ContractId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:case>
+                     <ui:case name="case2">
+                        <oa:image source="deleteicon_disabled.gif" shortDesc="Delete functionality disabled." id="DeleteDisabled" imageHeight="24" imageWidth="24"/>
+                     </ui:case>
+                  </oa:switcher>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region2">
+               <ui:contents>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+                  <oa:spacer id="item4" width="5"/>
+                  <oa:submitButton id="Cancel" text="返回" prompt="返回" unvalidated="true" serverUnvalidated="true"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.source.server.HrSourceAM" windowTitle="人员承担项目列表" controllerClass="cux.oracle.apps.pa.source.webui.EmployeeProjectListCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="ProjectListRN" text="人员承担项目列表">
+               <ui:contents>
+                  <oa:table id="HrSourceDetailVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="PersonName" dataType="VARCHAR2" prompt="姓名" viewName="HrSourceDetailVO1" viewAttr="PersonName" maximumLength="4000"/>
+                        <oa:messageStyledText id="ProjectNum" dataType="VARCHAR2" prompt="项目编号" viewName="HrSourceDetailVO1" viewAttr="ProjectNum" maximumLength="25"/>
+                        <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="HrSourceDetailVO1" viewAttr="ProjectName" maximumLength="30"/>
+                        <oa:messageStyledText id="ProjectClass" dataType="VARCHAR2" prompt="项目类型" viewName="HrSourceDetailVO1" viewAttr="ProjectClass" maximumLength="4000"/>
+                        <oa:messageStyledText id="OkeShejAmount" viewName="HrSourceDetailVO1" viewAttr="OkeShejAmount" prompt="设计合同额"/>
+                        <oa:messageStyledText id="OkeCaigAmount" viewName="HrSourceDetailVO1" viewAttr="OkeCaigAmount" prompt="采购合同额"/>
+                        <oa:messageStyledText id="OkeShigAmount" viewName="HrSourceDetailVO1" viewAttr="OkeShigAmount" prompt="施工合同额"/>
+                        <oa:messageStyledText id="OkeXmglAmount" viewName="HrSourceDetailVO1" viewAttr="OkeXmglAmount" prompt="项目管理合同额"/>
+                        <oa:messageStyledText id="ProjectScale" dataType="VARCHAR2" prompt="建设规模" viewName="HrSourceDetailVO1" viewAttr="ProjectScale" maximumLength="4000"/>
+                        <oa:messageStyledText id="ProjectInvestment" viewName="HrSourceDetailVO1" viewAttr="ProjectInvestment" prompt="工程总投资(万元)"/>
+                        <oa:messageStyledText id="ProjectStatusName" dataType="VARCHAR2" prompt="项目状态" viewName="HrSourceDetailVO1" viewAttr="ProjectStatusName" maximumLength="80"/>
+                        <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="项目角色" viewName="HrSourceDetailVO1" viewAttr="Meaning" maximumLength="80"/>
+                        <oa:messageStyledText id="StartDateActive" dataType="DATE" prompt="角色起效日期" viewName="HrSourceDetailVO1" viewAttr="StartDateActive"/>
+                        <oa:messageStyledText id="EndDateActive" dataType="DATE" prompt="角色失效日期" viewName="HrSourceDetailVO1" viewAttr="EndDateActive"/>
+                        <oa:messageStyledText id="ProjectPerformance" dataType="VARCHAR2" prompt="考核结果" viewName="HrSourceDetailVO1" viewAttr="ProjectPerformance" maximumLength="4000"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="return" destination="OA.jsp?page=/cux/oracle/apps/pa/source/webui/HrSourcePG&amp;retainAM=Y" text="返回人才库"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

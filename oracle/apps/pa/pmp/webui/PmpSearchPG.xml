@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpSearchCO" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" warnAboutChanges="true">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryHdr" text="项目管理计划查询">
+               <ui:contents>
+                  <oa:formValue id="projectId"/>
+                  <oa:messageLovInput id="projectName" externalListOfValues="/cux/oracle/apps/pa/pmp/lov/webui/ProjectLOV" maximumLength="4000" prompt="项目名称" queryable="true" required="yes" rendered="true" warnAboutChanges="false">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="ProjectId" resultTo="projectId"/>
+                        <lovMap id="lovMap2" lovItem="projectName" resultTo="projectName" criteriaFrom="projectName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:button id="Search" text="查询" prompt="查询">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="Search" id="firePartialAction1"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ResultHdr" text="">
+               <ui:contents>
+                  <oa:table id="PmpVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="Segment1" dataType="VARCHAR2" prompt="项目编号" viewName="PmpVO1" viewAttr="Segment1" maximumLength="25"/>
+                        <oa:messageStyledText id="item1" dataType="VARCHAR2" prompt="项目名称" viewName="PmpVO1" viewAttr="Name" maximumLength="30"/>
+                        <oa:messageStyledText id="VersionNum" dataType="NUMBER" prompt="版本" viewName="PmpVO1" viewAttr="VersionNum"/>
+                        <oa:messageStyledText id="VerifyStatusName" dataType="VARCHAR2" prompt="审核状态" viewName="PmpVO1" viewAttr="VerifyStatusName" maximumLength="80"/>
+                        <oa:messageStyledText id="ApproveStatusName" dataType="VARCHAR2" prompt="审批状态" viewName="PmpVO1" viewAttr="ApproveStatusName" maximumLength="80"/>
+                        <oa:image id="Detail" source="detailsicon_enabled.gif" prompt="详情" warnAboutChanges="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="Detail" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="ProjectId" value="${oa.current.ProjectId}"/>
+                                    <ui:parameter key="VersionNum" value="${oa.current.VersionNum}"/>
+                                    <ui:parameter key="PmpId" value="${oa.current.PmpId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:messageTextInput id="Attribute1" dataType="VARCHAR2" prompt="管理计划备注" viewName="PmpVO1" viewAttr="Attribute1" rendered="false" maximumLength="900"/>
+                        <oa:messageTextInput id="Attribute2" dataType="VARCHAR2" prompt="奖金备注" viewName="PmpVO1" viewAttr="Attribute2" maximumLength="300" rendered="false"/>
+                        <oa:switcher id="region3" prompt="删除" viewName="PmpVO1" viewAttr="DeleteAble">
+                           <ui:case name="deleteAllowed">
+                              <oa:image id="deleteAllowed" source="deleteicon_enabled.gif" warnAboutChanges="false">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="Delete">
+                                       <ui:parameters>
+                                          <ui:parameter key="ProjectId" value="${oa.current.ProjectId}"/>
+                                          <ui:parameter key="VersionNum" value="${oa.current.VersionNum}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                           <ui:case name="deleteDisallowed">
+                              <oa:image id="deleteDisallowed" source="deleteicon_disabled.gif" warnAboutChanges="false"/>
+                           </ui:case>
+                        </oa:switcher>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="newVersion" text="新增管理计划版本" prompt="新增管理计划版本">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="NewVersion"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                              <oa:submitButton id="save" text="保存" prompt="保存" disabled="false" rendered="false">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="Save" id="fireAction2"/>
+                                 </ui:primaryClientAction>
+                              </oa:submitButton>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

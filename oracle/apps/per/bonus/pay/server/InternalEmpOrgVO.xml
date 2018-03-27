@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="InternalEmpOrgVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.pay.server.InternalEmpOrgVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select distinct hv.organization_id as emp_orgid,
+       hv.name as emp_orgname
+  from hr_all_organization_units hv,
+       (select decode(houv.attribute3,
+                              '三层',
+                              CUX_HR_BONUS.GET_ORGID_LEVEL2(DIST_EMP.DEP_ID),
+                              '四层',
+                              CUX_HR_BONUS.GET_ORGID_LEVEL2(DIST_EMP.DEP_ID),
+                              DIST_EMP.DEP_ID) as ORG_ID               
+          from (select distinct CBP.DEP_ID 
+                  from CUX_BONUS_PERSON_DISTRIBUTION CBP 
+                 where CBP.ATTRIBUTE4 = 'INTERNAL'
+               ) DIST_EMP, 
+              (SELECT A1.ORGANIZATION_ID_CHILD as ORGANIZATION_ID
+                  FROM APPS.PER_ORG_STRUCTURE_ELEMENTS_V A1
+                 WHERE A1.ORG_STRUCTURE_VERSION_ID = CUX_PER_TC_PKG.GET_ORG_STR_VER_ID
+                 START WITH A1.ORGANIZATION_ID_PARENT = :1  --CUX_HR_BONUS.GET_COMP_ID_BYRESP
+                        AND A1.ORG_STRUCTURE_VERSION_ID = CUX_PER_TC_PKG.GET_ORG_STR_VER_ID
+                CONNECT BY PRIOR A1.ORGANIZATION_ID_CHILD = A1.ORGANIZATION_ID_PARENT
+                       AND A1.ORG_STRUCTURE_VERSION_ID = CUX_PER_TC_PKG.GET_ORG_STR_VER_ID
+                union all
+                SELECT CUX_HR_BONUS.GET_COMP_ID_BYRESP FROM DUAL
+                ) T,
+                hr_all_organization_units houv
+         where DIST_EMP.DEP_ID = T.ORGANIZATION_ID
+           and DIST_EMP.DEP_ID = houv.organization_id
+       ) M
+ where hv.organization_id = M.ORG_ID
+order by nlssort(hv.name,'NLS_SORT=SCHINESE_PINYIN_M')
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="EmpOrgid"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EMP_ORGID"
+      Expression="EMP_ORGID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpOrgname"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_ORGNAME"
+      Expression="EMP_ORGNAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sortflag"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SORTFLAG"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

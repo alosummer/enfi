@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.pa.docnum.server.GenDocNumAM" windowTitle="项目文档要号系统" title="批量要号申请" warnAboutChanges="true" controllerClass="cux.oracle.apps.pa.docnum.webui.CreateHeadBatchCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:messageChoice id="DlvrTypeName" prompt="交付物类型" viewName="CreateDocNumHeadVO1" viewAttr="Col1" required="yes" pickListViewDef="cux.oracle.apps.pa.poplist.server.DlvrTypeNameVO" pickListDispAttr="DlvrTypeName" pickListValAttr="DlvrTypeName"/>
+                  <oa:messageLovInput id="ProjectNumber" dataType="VARCHAR2" prompt="项目号" viewName="CreateDocNumHeadVO1" viewAttr="ProjectNumber" maximumLength="25" required="yes" externalListOfValues="/cux/oracle/apps/pa/lov/webui/AllProjectsListRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="Segment1" resultTo="ProjectNumber" criteriaFrom="ProjectNumber"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="Description" viewName="CreateDocNumHeadVO1" viewAttr="Description" prompt="描述" maximumLength="240" columns="80"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:pageButtonBar id="PageButtons">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" serverUnvalidated="true" unvalidated="true" text="取消" prompt="取消"/>
+                  <oa:submitButton id="Apply" text="申请并返回" prompt="申请并返回" serverUnvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

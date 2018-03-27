@@ -1,0 +1,66 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:stackLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.cux.qhse.rectify.webui.QhseRectifyNtfRNCO" amDefName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyAM">
+   <ui:contents>
+      <oa:header id="Header" text="问题基本信息">
+         <ui:contents>
+            <oa:messageComponentLayout id="HeaderLayout" columns="2" rows="1" width="60%" promptWidth="1%">
+               <ui:contents>
+                  <oa:messageStyledText id="DocTypeDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="DocTypeDis" dataType="VARCHAR2" prompt="单据类型"/>
+                  <oa:messageStyledText id="ManDeptName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ManDeptName" prompt="管理部门"/>
+                  <oa:messageStyledText id="CiTypeName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="CiTypeName" prompt="控制项" dataType="NUMBER"/>
+                  <oa:messageStyledText id="StatusDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="StatusDis" prompt="状态" dataType="VARCHAR2"/>
+                  <oa:messageStyledText id="ProblemCategoryDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProblemCategoryDis" prompt="分类" dataType="NUMBER"/>
+                  <oa:messageStyledText id="ReasonDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ReasonDis" prompt="原因" dataType="NUMBER"/>
+                  <oa:messageStyledText id="DutyPersonName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="DutyPersonName" prompt="责任人"/>
+                  <oa:messageStyledText id="TaskName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="TaskName" prompt="任务"/>
+                  <oa:messageStyledText id="CompleteDate" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="CompleteDate" dataType="DATE" prompt="完成日期"/>
+                  <oa:messageLayout id="messageLayout1">
+                     <ui:contents>
+                        <oa:formValue id="HeaderId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="HeaderId" dataType="NUMBER"/>
+                        <oa:formValue id="OrgId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="OrgId" dataType="NUMBER"/>
+                        <oa:formValue id="ProjectId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectId" dataType="NUMBER"/>
+                        <oa:formValue id="ProjectName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectName" dataType="VARCHAR2"/>
+                        <oa:formValue id="ProjectOrgName" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectOrgName" dataType="VARCHAR2"/>
+                        <oa:formValue id="ManDeptId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ManDeptId" dataType="NUMBER"/>
+                        <oa:formValue id="DutyPersonId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="DutyPersonId" dataType="NUMBER"/>
+                        <oa:formValue id="TaskId" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="TaskId" dataType="NUMBER"/>
+                        <oa:formValue id="CreatedBy" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="CreatedBy" dataType="NUMBER"/>
+                        <oa:attachmentLink id="AttachmentLink" viewName="CuxRectifyNotifyHeaderResultVO2" prompt="文档附件" serverUnvalidated="false" unvalidated="false">
+                           <oa:entityMappings>
+                              <oa:entityMap id="entityMap1" entityId="CUX_RECTIFY_NOTIFY_HEADERS" insertAllowed="false" updateAllowed="false" deleteAllowed="false">
+                                 <oa:primaryKeys>
+                                    <oa:primaryKey id="primaryKey1" viewAttr="HeaderId"/>
+                                 </oa:primaryKeys>
+                              </oa:entityMap>
+                           </oa:entityMappings>
+                        </oa:attachmentLink>
+                     </ui:contents>
+                  </oa:messageLayout>
+                  <oa:messageStyledText id="ProjectNumber" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectNumber" prompt="项目编号"/>
+                  <oa:messageStyledText id="ProjectNameDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectName" prompt="项目名称"/>
+                  <oa:messageStyledText id="ProjectOrgNameDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="ProjectOrgName" prompt="项目组织"/>
+                  <oa:messageStyledText id="PriorityLevelDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="PriorityLevelDis" prompt="优先级" dataType="VARCHAR2"/>
+                  <oa:messageStyledText id="WorkLevelDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="WorkLevelDis" prompt="工作级别" dataType="VARCHAR2"/>
+                  <oa:messageStyledText id="Price" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="Price" prompt="价格" dataType="NUMBER"/>
+                  <oa:messageStyledText id="SourceTypeDis" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="SourceTypeDis" prompt="来源类型" dataType="VARCHAR2"/>
+                  <oa:messageStyledText id="CreationDate" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="CreationDate" dataType="DATE" prompt="创建日期"/>
+                  <oa:messageStyledText id="CreatePerson" viewName="CuxRectifyNotifyHeaderResultVO2" viewAttr="CreatePerson" dataType="VARCHAR2" prompt="创建者"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+         </ui:contents>
+      </oa:header>
+      <oa:table id="CuxRectifyNotifyLinesResultVO2" text="创建问题描述" width="100%">
+         <ui:contents>
+            <oa:messageStyledText id="ProblemName" dataType="VARCHAR2" prompt="问题名称" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="ProblemName" maximumLength="50" required="yes"/>
+            <oa:messageStyledText id="ProblemDesc" dataType="VARCHAR2" prompt="问题描述" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="ProblemDesc" maximumLength="240" required="yes"/>
+            <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="状态" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="StatusName"/>
+            <oa:messageChoice id="ProblemCategory" dataType="VARCHAR2" prompt="问题分类" viewName="CuxRectifyNotifyLinesVO1" viewAttr="ProblemCategory" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVO" pickListValAttr="ClassCodeId" pickListDispAttr="ClassCode" readOnly="true"/>
+            <oa:formValue id="ProDutyPersonId" dataType="NUMBER" prompt="ProDutyPersonId" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="ProDutyPersonId"/>
+            <oa:messageStyledText id="ProDutyPersonName" dataType="VARCHAR2" prompt="问题责任人" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="ProDutyPersonName" maximumLength="240" required="yes"/>
+            <oa:messageStyledText id="CompleteDate1" dataType="DATE" prompt="完成日期" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="CompleteDate" required="yes"/>
+            <oa:messageStyledText id="CheckDate" dataType="DATE" prompt="受检日期" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="CheckDate" required="yes"/>
+            <oa:messageStyledText id="CheckRange" dataType="VARCHAR2" prompt="检查范围" viewName="CuxRectifyNotifyLinesResultVO2" viewAttr="CheckRange" maximumLength="80" required="yes"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:stackLayout>

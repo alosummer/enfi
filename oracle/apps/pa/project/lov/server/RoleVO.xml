@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RoleVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.pa.project.lov.server.RoleVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select ppr.project_role_id,
+       ppr.project_role_type,
+       ppr.meaning,
+       ppr.schedulable_flag,
+       ppr.description,
+       ppr.default_min_job_level,
+       ppr.default_max_job_level,
+       ppr.start_date_active,
+       ppr.end_date_active,
+       ppr.role_party_class,
+       pl.meaning schedulable_meaning
+  from pa_project_roles_lov_v ppr, fnd_lookups pl
+ where pl.lookup_type = 'YES_NO'
+   and ppr.schedulable_flag = pl.lookup_code
+   AND ppr.MEANING in
+       (SELECT FFVC.DESCRIPTION
+          FROM FND_FLEX_VALUE_CHILDREN_V FFVC,
+               FND_FLEX_VALUE_SETS       FFVS,
+               FND_FLEX_VALUES_VL        FFVL
+         WHERE FFVC.FLEX_VALUE_SET_ID = FFVS.FLEX_VALUE_SET_ID
+           AND FFVS.FLEX_VALUE_SET_NAME = 'CUX_PA_TEAM_MEM_ROLE'
+           AND FFVL.FLEX_VALUE_SET_ID = FFVS.FLEX_VALUE_SET_ID
+           AND FFVL.FLEX_VALUE = FFVC.parent_flex_value
+           AND FFVL.DESCRIPTION IN
+               (SELECT PPRT.MEANING
+                  FROM PA_PROJECT_PARTIES PPP, PA_PROJECT_ROLE_TYPES_TL PPRT
+                 WHERE PPP.PROJECT_ROLE_ID = PPRT.project_role_id
+                   AND PPRT.LANGUAGE = 'ZHS'
+                   AND PPRT.SOURCE_LANG = 'ZHS'
+                   AND PPP.RESOURCE_TYPE_ID = 101
+                   AND PPP.RESOURCE_SOURCE_ID = FND_GLOBAL.EMPLOYEE_ID
+                   AND PPP.PROJECT_ID = :1))
+ order by meaning
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ProjectRoleId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ROLE_ID"
+      Expression="PROJECT_ROLE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRoleType"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_ROLE_TYPE"
+      Expression="PROJECT_ROLE_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SchedulableFlag"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SCHEDULABLE_FLAG"
+      Expression="SCHEDULABLE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESCRIPTION"
+      Expression="DESCRIPTION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DefaultMinJobLevel"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DEFAULT_MIN_JOB_LEVEL"
+      Expression="DEFAULT_MIN_JOB_LEVEL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DefaultMaxJobLevel"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DEFAULT_MAX_JOB_LEVEL"
+      Expression="DEFAULT_MAX_JOB_LEVEL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDateActive"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="START_DATE_ACTIVE"
+      Expression="START_DATE_ACTIVE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDateActive"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="END_DATE_ACTIVE"
+      Expression="END_DATE_ACTIVE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RolePartyClass"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ROLE_PARTY_CLASS"
+      Expression="ROLE_PARTY_CLASS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SchedulableMeaning"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SCHEDULABLE_MEANING"
+      Expression="SCHEDULABLE_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

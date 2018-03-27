@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="WorkflowControlSearchVO"
+   OrderBy="APPRAISAL_ID"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.WorkflowControlSearchVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.WorkflowControlSearchVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT apa.appraisal_id AS APPRAISAL_ID,
+       emp1.last_name AS EMP_NAME,
+       emp1.employee_number,
+       ppos.date_start AS DATE_START,
+       haou.NAME AS ORG_NAME,
+       haou.organization_id AS ORG_ID,
+       rg.group_name AS GROUP_NAME,
+       rg.group_id AS GROUP_ID,
+       phase.meaning AS PHASE_NAME,
+       apa.phase_id AS PHASE_ID,
+       apa.appraisal_year AS APPRAISAL_YEAR,
+       cux_jxkh_common_pkg.get_appraisal_status(apa.APPRAISAL_ID) AS STATUS_ID,
+       decode(cux_jxkh_common_pkg.get_appraisal_status(apa.APPRAISAL_ID),
+              'COMPLETED',
+              'AdjustDisabled',
+              'AdjustEnabled') AS ADJUST_SWITCHER,
+       decode(cux_jxkh_common_pkg.get_appraisal_status(apa.APPRAISAL_ID),
+              'COMPLETED',
+              'SubmitDisabled',
+              'SubmitEnabled') AS SUBMIT_SWITCHER,
+       decode(cux_jxkh_common_pkg.get_appraisal_status(apa.APPRAISAL_ID),
+              'PROCESSING',
+              '进行中',
+              'SUBMITED',
+              '已提交',
+              'WAITING',
+              '待处理',
+              flow_status.meaning) AS status_name,
+       cux_jxkh_common_pkg.get_appraisal_performer(apa.APPRAISAL_ID) AS PROMISER_NAME,
+       apa.period_id AS PERIOD_ID,
+       period.meaning AS PERIOD_NAME,
+       apa.sign_date
+  FROM CUX_APPRAISAL_T apa,
+       per_all_people_f emp1,
+       per_all_assignments_f papf,
+       hr_all_organization_units haou,
+       cux_review_group_t rg,
+       CUX_PER_PERIODS_OF_SERVICE_MV ppos,
+       (SELECT lv.lookup_code, lv.meaning, lv.DESCRIPTION
+          FROM fnd_lookup_values lv
+         WHERE lv.lookup_type = 'EPM_FLOW_STATUS'
+           AND lv.LANGUAGE = userenv('LANG')           
+           AND lv.enabled_flag = 'Y') flow_status,
+       (SELECT lv.lookup_code, lv.meaning, lv.DESCRIPTION
+          FROM fnd_lookup_values lv
+         WHERE lv.lookup_type = 'EPM_PHASE_CLASS'
+           AND lv.LANGUAGE = userenv('LANG')           
+           AND lv.enabled_flag = 'Y') phase,
+       (SELECT lv.lookup_code, lv.meaning, lv.DESCRIPTION
+          FROM fnd_lookup_values lv
+         WHERE lv.lookup_type = 'EPM_PERIOD'
+           AND lv.LANGUAGE = userenv('LANG')           
+           AND lv.enabled_flag = 'Y') period,
+       CUX_GROUP_ROLE_T cgrt
+ WHERE apa.appraisal_person_id = emp1.person_id
+   AND apa.sign_date BETWEEN
+       nvl(emp1.effective_start_date, apa.sign_date) AND
+       nvl(emp1.effective_end_date, apa.sign_date)
+   and papf.person_id = emp1.person_id
+   AND PAPF.PRIMARY_FLAG = 'Y'
+   and apa.sign_date between
+       nvl(papf.effective_start_date, apa.sign_date - 1) and
+       nvl(papf.effective_end_date, apa.sign_date + 1)
+   AND papf.organization_id = haou.organization_id
+   AND (nvl(haou.date_from, apa.sign_date) <= apa.sign_date  AND  
+        nvl(haou.Date_To, apa.sign_date) >= apa.sign_date)
+   AND apa.appraisal_group_id = rg.group_id
+   AND apa.phase_id = phase.lookup_code
+   AND apa.period_type_id = period.lookup_code
+   AND apa.appraisal_person_id = ppos.person_id
+   AND apa.status_id = flow_status.lookup_code   
+   AND apa.appraisal_group_id = cgrt.group_id
+   AND papf.organization_id IN
+       (SELECT E.ORGANIZATION_ID_CHILD org_id
+          FROM PER_ORG_STRUCTURE_ELEMENTS E
+         WHERE E.ORG_STRUCTURE_VERSION_ID =
+               cux_jxkh_common_pkg.get_org_structure_version(apa.sign_date)
+        CONNECT BY E.ORGANIZATION_ID_PARENT = PRIOR E.ORGANIZATION_ID_CHILD
+               AND E.ORG_STRUCTURE_VERSION_ID =
+                   cux_jxkh_common_pkg.get_org_structure_version(apa.sign_date)
+         START WITH E.ORGANIZATION_ID_PARENT = cgrt.org_id
+                AND E.ORG_STRUCTURE_VERSION_ID =
+                    cux_jxkh_common_pkg.get_org_structure_version(apa.sign_date)
+        UNION ALL
+        SELECT cgrt.org_id org_id FROM dual)
+   AND cgrt.person_id = fnd_global.EMPLOYEE_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APPRAISAL_ID"
+      Expression="APPRAISAL_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmployeeNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPLOYEE_NUMBER"
+      Expression="EMPLOYEE_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateStart"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DATE_START"
+      Expression="DATE_START"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORG_ID"
+      Expression="ORG_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupName"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="GROUP_NAME"
+      Expression="GROUP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="GROUP_ID"
+      Expression="GROUP_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_NAME"
+      Expression="PHASE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_ID"
+      Expression="PHASE_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalYear"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPRAISAL_YEAR"
+      Expression="APPRAISAL_YEAR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_ID"
+      Expression="STATUS_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AdjustSwitcher"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ADJUST_SWITCHER"
+      Expression="ADJUST_SWITCHER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SubmitSwitcher"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUBMIT_SWITCHER"
+      Expression="SUBMIT_SWITCHER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_NAME"
+      Expression="STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiserName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROMISER_NAME"
+      Expression="PROMISER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_ID"
+      Expression="PERIOD_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_NAME"
+      Expression="PERIOD_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SIGN_DATE"
+      Expression="SIGN_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="SpecialAwardsSummaryVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsSummaryVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT DISTINCT (cd.dep_name) DepName,
+                ct.type_name TypeName,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201201),
+                    0) Jan,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201202),
+                    0) Feb,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201203),
+                    0) Mar,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201204),
+                    0) Apr,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201205),
+                    0) May,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201206),
+                    0) Jun,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201207),
+                    0) Jul,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201208),
+                    0) Aug,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201209),
+                    0) Sep,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201210),
+                    0) Oct,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201211),
+                    0) Nov,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period = 201212),
+                    0) Dec,
+                NVL((SELECT SUM(cd1.distribution_amount)
+                      FROM cux_bonus_dep_distribution cd1
+                     WHERE cd1.type_id = cd.type_id
+                       AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                       AND cd1.dep_name = cd.dep_name
+                       AND cd1.distribution_period BETWEEN 201201 AND
+                           201212),
+                    0) Total,
+		NVL((SELECT SUM(cd1.distribution_amount)
+                       FROM cux_bonus_dep_distribution cd1
+                      WHERE cd1.type_id = cd.type_id
+                        AND cd1.distribution_status NOT IN
+                           ('已删除', '已退回')
+                        AND cd1.distribution_period BETWEEN 201201 AND
+                            201212),
+                    0) DistTotal
+  FROM cux_bonus_dep_distribution cd, cux_bonus_type ct
+ORDER BY cux_hr_bonus.GET_DEP_NAME(cd.dep_name),NLSSORT(cd.dep_name, 'NLS_SORT=SCHINESE_PINYIN_M')
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.15" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="Depname"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEPNAME"
+      Expression="DEPNAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Typename"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TYPENAME"
+      Expression="TYPENAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jan"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Jan"
+      Expression="JAN"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Feb"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Feb"
+      Expression="FEB"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Mar"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Mar"
+      Expression="MAR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Apr"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Apr"
+      Expression="APR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="May"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="May"
+      Expression="MAY"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jun"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Jun"
+      Expression="JUN"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jul"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Jul"
+      Expression="JUL"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aug"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Aug"
+      Expression="AUG"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sep"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Sep"
+      Expression="SEP"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Oct"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Oct"
+      Expression="OCT"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nov"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Nov"
+      Expression="NOV"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Dec"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Dec"
+      Expression="DEC"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Total"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="Total"
+      Expression="TOTAL"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Disttotal"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTTOTAL"
+      Expression="DISTTOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

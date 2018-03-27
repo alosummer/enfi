@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PmpAMLocal">
+         <AppModuleJndiName>cux.oracle.apps.ak.test.server.PmpAM</AppModuleJndiName>
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>Enfisit</JDBCName>
+         <ApplicationName>cux.oracle.apps.ak.test.server.PmpAM</ApplicationName>
+         <jbo.project>EnfiSit1</jbo.project>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="Enfisit">
+      <ENTRY name="JDBC_PORT" value="1521"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="10.10.6.46"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="Enfisit"/>
+      <ENTRY name="SID" value="SIT"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}05EEA682A9333D3937CE4EAD3FD969234E]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>

@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.review.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AppraisalAM"
+      FullName="cux.oracle.apps.per.review.server.AppraisalAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="AppraisalAttendEnterVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalAttendEnterVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalAttendEO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalAttendEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="AppraisalAttendNoteVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalAttendNoteVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalAttendVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalAttendVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalCopyVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalCopyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalEmpVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalEmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalEO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="AppraisalKPIVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalKPIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AppraisalVO"
+      FullName="cux.oracle.apps.per.review.server.AppraisalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ApproverLovVO"
+      FullName="cux.oracle.apps.per.review.server.ApproverLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContractClassContentVL"
+      FullName="cux.oracle.apps.per.review.server.ContractClassContentVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="ContractClassEO"
+      FullName="cux.oracle.apps.per.review.server.ContractClassEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ContractClassVO"
+      FullName="cux.oracle.apps.per.review.server.ContractClassVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContractContentVO"
+      FullName="cux.oracle.apps.per.review.server.ContractContentVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContractEO"
+      FullName="cux.oracle.apps.per.review.server.ContractEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ContractKPIDetailVO"
+      FullName="cux.oracle.apps.per.review.server.ContractKPIDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContractVO"
+      FullName="cux.oracle.apps.per.review.server.ContractVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpChangeEO"
+      FullName="cux.oracle.apps.per.review.server.EmpChangeEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="EmpChangeVO"
+      FullName="cux.oracle.apps.per.review.server.EmpChangeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpManageAM"
+      FullName="cux.oracle.apps.per.review.server.EmpManageAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="EmpManageVO"
+      FullName="cux.oracle.apps.per.review.server.EmpManageVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KeyPIAM"
+      FullName="cux.oracle.apps.per.review.server.KeyPIAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="KeyPIEO"
+      FullName="cux.oracle.apps.per.review.server.KeyPIEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="KeyPIVO"
+      FullName="cux.oracle.apps.per.review.server.KeyPIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIConstraintEO"
+      FullName="cux.oracle.apps.per.review.server.KPIConstraintEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="KPIConstraintReadonlyVO"
+      FullName="cux.oracle.apps.per.review.server.KPIConstraintReadonlyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIConstraintVL"
+      FullName="cux.oracle.apps.per.review.server.KPIConstraintVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="KPIConstraintVO"
+      FullName="cux.oracle.apps.per.review.server.KPIConstraintVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KpiCtrValueEO"
+      FullName="cux.oracle.apps.per.review.server.KpiCtrValueEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="KpiCtrValueVO"
+      FullName="cux.oracle.apps.per.review.server.KpiCtrValueVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDetailsVO"
+      FullName="cux.oracle.apps.per.review.server.KPIDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KpiDimensionEO"
+      FullName="cux.oracle.apps.per.review.server.KpiDimensionEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="KPIDimensionVO"
+      FullName="cux.oracle.apps.per.review.server.KPIDimensionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KpiReportAM"
+      FullName="cux.oracle.apps.per.review.server.KpiReportAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="LevelAppraisalEO"
+      FullName="cux.oracle.apps.per.review.server.LevelAppraisalEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="LevelAppraisalVO"
+      FullName="cux.oracle.apps.per.review.server.LevelAppraisalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="LevelProrateAM"
+      FullName="cux.oracle.apps.per.review.server.LevelProrateAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="LevelProrateDetailsVO"
+      FullName="cux.oracle.apps.per.review.server.LevelProrateDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="LevelProrateVO"
+      FullName="cux.oracle.apps.per.review.server.LevelProrateVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerGroupRangeEO"
+      FullName="cux.oracle.apps.per.review.server.PerGroupRangeEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PerGroupRangeVO"
+      FullName="cux.oracle.apps.per.review.server.PerGroupRangeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerGrpRangeAO"
+      FullName="cux.oracle.apps.per.review.server.PerGrpRangeAO"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="PerGrpRangeVL"
+      FullName="cux.oracle.apps.per.review.server.PerGrpRangeVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="PerGrpRangeVO"
+      FullName="cux.oracle.apps.per.review.server.PerGrpRangeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerKPILovVO"
+      FullName="cux.oracle.apps.per.review.server.PerKPILovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerReviewAM"
+      FullName="cux.oracle.apps.per.review.server.PerReviewAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="PerReviewGroupEO"
+      FullName="cux.oracle.apps.per.review.server.PerReviewGroupEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PerReviewGroupVO"
+      FullName="cux.oracle.apps.per.review.server.PerReviewGroupVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerReviewGrpVO"
+      FullName="cux.oracle.apps.per.review.server.PerReviewGrpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProrateManageAM"
+      FullName="cux.oracle.apps.per.review.server.ProrateManageAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ProrateManageEO"
+      FullName="cux.oracle.apps.per.review.server.ProrateManageEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ProrateManageVO"
+      FullName="cux.oracle.apps.per.review.server.ProrateManageVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowAM"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowEO"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowFilVO"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowFilVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowLevelEO"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowLevelEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowLevelVO"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowLevelVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ReviewWorkflowVO"
+      FullName="cux.oracle.apps.per.review.server.ReviewWorkflowVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RoleManageAM"
+      FullName="cux.oracle.apps.per.review.server.RoleManageAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="RoleManageCreateVO"
+      FullName="cux.oracle.apps.per.review.server.RoleManageCreateVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RoleManageEO"
+      FullName="cux.oracle.apps.per.review.server.RoleManageEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RoleManageVO"
+      FullName="cux.oracle.apps.per.review.server.RoleManageVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TemplateClassEO"
+      FullName="cux.oracle.apps.per.review.server.TemplateClassEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TemplateClassVO"
+      FullName="cux.oracle.apps.per.review.server.TemplateClassVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TemplateContentEO"
+      FullName="cux.oracle.apps.per.review.server.TemplateContentEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TemplateContentVL"
+      FullName="cux.oracle.apps.per.review.server.TemplateContentVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="TemplateContentVO"
+      FullName="cux.oracle.apps.per.review.server.TemplateContentVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TemplateEO"
+      FullName="cux.oracle.apps.per.review.server.TemplateEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TemplateKPIVO"
+      FullName="cux.oracle.apps.per.review.server.TemplateKPIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TemplateVO"
+      FullName="cux.oracle.apps.per.review.server.TemplateVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TmplContentVL"
+      FullName="cux.oracle.apps.per.review.server.TmplContentVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="TmplDetailVO"
+      FullName="cux.oracle.apps.per.review.server.TmplDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TmplEmpEO"
+      FullName="cux.oracle.apps.per.review.server.TmplEmpEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TmplEmpVO"
+      FullName="cux.oracle.apps.per.review.server.TmplEmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TmplJobEO"
+      FullName="cux.oracle.apps.per.review.server.TmplJobEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TmplJobVO"
+      FullName="cux.oracle.apps.per.review.server.TmplJobVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TmplManageAM"
+      FullName="cux.oracle.apps.per.review.server.TmplManageAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="TmplOrgEO"
+      FullName="cux.oracle.apps.per.review.server.TmplOrgEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="TmplOrgVO"
+      FullName="cux.oracle.apps.per.review.server.TmplOrgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WorkflowAttendVO"
+      FullName="cux.oracle.apps.per.review.server.WorkflowAttendVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WorkflowControlAM"
+      FullName="cux.oracle.apps.per.review.server.WorkflowControlAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="WorkflowControlSearchVO"
+      FullName="cux.oracle.apps.per.review.server.WorkflowControlSearchVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WorkFlowInfoVO"
+      FullName="cux.oracle.apps.per.review.server.WorkFlowInfoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WorkflowLineToHeadVL"
+      FullName="cux.oracle.apps.per.review.server.WorkflowLineToHeadVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="WorkflowLineVO"
+      FullName="cux.oracle.apps.per.review.server.WorkflowLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WorkflowUpdateAM"
+      FullName="cux.oracle.apps.per.review.server.WorkflowUpdateAM"
+      ObjectType="AppModule" >
+   </Containee>
+</JboPackage>

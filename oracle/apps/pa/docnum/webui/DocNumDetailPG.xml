@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.docnum.server.DocNumReqAM" windowTitle="查询要号详情" controllerClass="cux.oracle.apps.pa.docnum.webui.DocNumDetailCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:button id="cancel" text="取消" prompt="取消">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="cancel"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="revert" text="撤销申请" prompt="撤销申请">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="revert">
+                           <ui:parameters>
+                              <ui:parameter key="ReqBatchId" value="${oa.DocnumDetailHeaderVO1.DocnumReqId}"/>
+                           </ui:parameters>
+                        </ui:firePartialAction>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="approve" text="通过审核" prompt="通过审核">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="approve">
+                           <ui:parameters>
+                              <ui:parameter key="ReqBatchId" value="${oa.DocnumDetailHeaderVO1.DocnumReqId}"/>
+                           </ui:parameters>
+                        </ui:firePartialAction>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="reject" text="拒绝" prompt="拒绝">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="reject">
+                           <ui:parameters>
+                              <ui:parameter key="ReqBatchId" value="${oa.DocnumDetailHeaderVO1.DocnumReqId}"/>
+                           </ui:parameters>
+                        </ui:firePartialAction>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:header id="HeaderRN" text="要号申请头信息">
+               <ui:contents>
+                  <oa:messageStyledText id="DocnumReqId" dataType="NUMBER" prompt="批次" viewName="DocnumDetailHeaderVO1" viewAttr="DocnumReqId"/>
+                  <oa:messageStyledText id="Segment1" dataType="VARCHAR2" prompt="项目号" viewName="DocnumDetailHeaderVO1" viewAttr="Segment1" maximumLength="25"/>
+                  <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="DocnumDetailHeaderVO1" viewAttr="Name" maximumLength="30"/>
+                  <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="状态" viewName="DocnumDetailHeaderVO1" viewAttr="StatusName" maximumLength="4000"/>
+                  <oa:messageStyledText id="CreatedByName" dataType="VARCHAR2" prompt="申请人" viewName="DocnumDetailHeaderVO1" viewAttr="CreatedByName" maximumLength="4000"/>
+                  <oa:messageStyledText id="ReqDesc" dataType="VARCHAR2" prompt="描述" viewName="DocnumDetailHeaderVO1" viewAttr="ReqDesc" maximumLength="3000"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="LineRN" text="要号申请详细信息">
+               <ui:contents>
+                  <oa:table id="DocnumDetailLineVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum" dataType="NUMBER" prompt="序号" viewName="DocnumDetailLineVO1" viewAttr="SeqNum" exportByViewAttr="SeqNum"/>
+                        <oa:messageTextInput id="DocNum" dataType="VARCHAR2" prompt="文档编号" viewName="DocnumDetailLineVO1" viewAttr="DocNum" maximumLength="300" exportByViewAttr="DocNum"/>
+                        <oa:messageStyledText id="DocName" dataType="VARCHAR2" prompt="文档名称" viewName="DocnumDetailLineVO1" viewAttr="DocName" maximumLength="300" exportByViewAttr="DocName"/>
+                        <oa:messageStyledText id="DocTypeName" dataType="VARCHAR2" prompt="文档类型" viewName="DocnumDetailLineVO1" viewAttr="DocTypeName" maximumLength="4000" exportByViewAttr="DocTypeName"/>
+                        <oa:messageStyledText id="ElementNumber" dataType="VARCHAR2" prompt="WBS任务号" viewName="DocnumDetailLineVO1" viewAttr="ElementNumber" maximumLength="100" exportByViewAttr="ElementNumber"/>
+                        <oa:messageStyledText id="DesignerName" dataType="VARCHAR2" prompt="设计人" viewName="DocnumDetailLineVO1" viewAttr="DesignerName" maximumLength="4000" exportByViewAttr="DesignerName"/>
+                        <oa:messageStyledText id="CheckerName" dataType="VARCHAR2" prompt="校核人" viewName="DocnumDetailLineVO1" viewAttr="CheckerName" maximumLength="4000" exportByViewAttr="CheckerName"/>
+                        <oa:messageStyledText id="VerifierName" dataType="VARCHAR2" prompt="审核人" viewName="DocnumDetailLineVO1" viewAttr="VerifierName" maximumLength="4000" exportByViewAttr="VerifierName"/>
+                        <oa:messageStyledText id="AuthorizerName" dataType="VARCHAR2" prompt="审定人" viewName="DocnumDetailLineVO1" viewAttr="AuthorizerName" maximumLength="4000" exportByViewAttr="AuthorizerName"/>
+                        <oa:messageStyledText id="ReleaseDeptName" dataType="VARCHAR2" prompt="发出部门" viewName="DocnumDetailLineVO1" viewAttr="ReleaseDeptName" maximumLength="4000" exportByViewAttr="ReleaseDeptName"/>
+                        <oa:messageStyledText id="ReleaseSpecialtyName" dataType="VARCHAR2" prompt="发出专业" viewName="DocnumDetailLineVO1" viewAttr="ReleaseSpecialtyName" maximumLength="4000" exportByViewAttr="ReleaseSpecialtyName"/>
+                        <oa:messageTextInput id="LineDesc" dataType="VARCHAR2" prompt="行描述" viewName="DocnumDetailLineVO1" viewAttr="LineDesc" maximumLength="3000" exportByViewAttr="LineDesc"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:exportButton id="export" exportAllRows="true" text="导出数据" viewName="DocnumDetailLineVO1"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

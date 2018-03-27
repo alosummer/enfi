@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.pa.dlv.lov.server.DlvLovAM">
+   <ui:contents>
+      <oa:table name="DsJtdLovVO" id="DsJtdVO1">
+         <ui:contents>
+            <oa:formValue id="ScheduleId" dataType="NUMBER" prompt="ScheduleId" viewName="DsJtdVO1" viewAttr="ScheduleId"/>
+            <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="DsJtdVO1" viewAttr="ProjectId"/>
+            <oa:formValue id="TaskId" dataType="NUMBER" prompt="TaskId" viewName="DsJtdVO1" viewAttr="TaskId"/>
+            <oa:messageStyledText id="NodeTypeName" dataType="VARCHAR2" prompt="节点类型" viewName="DsJtdVO1" viewAttr="NodeTypeName" maximumLength="4000"/>
+            <oa:messageStyledText id="DesignNode" dataType="VARCHAR2" prompt="设计节点" viewName="DsJtdVO1" viewAttr="DesignNode" maximumLength="300" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

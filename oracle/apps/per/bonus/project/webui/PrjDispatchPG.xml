@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjDispatchCO" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM" windowTitle="项目管理奖发放详细信息（劳务派遣人员）" title="项目管理奖发放详细信息（劳务派遣人员）">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="SearchRN">
+               <ui:contents>
+                  <oa:messageChoice id="QueryPeriod" prompt="项目奖发放月份" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.PeriodVO" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" defaultValue="" allowBlankValue="false"/>
+                  <oa:messageLayout id="ButtonLayoutRN">
+                     <ui:contents>
+                        <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:separator id="separator"/>
+            <oa:advancedTable id="PersonDisTable" blockSize="200" width="100%" viewName="PrjDispatchVO1">
+               <ui:contents>
+                  <oa:column id="EmpNoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader15" prompt="工号"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpNo" viewAttr="EmpNo"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EmpNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader7" prompt="姓名"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpName" viewAttr="EmpName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="OrgNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader8" prompt="部门"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="OrgName" viewAttr="OrgName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DistAmountCol" totalValue="true">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader9" prompt="奖金(元)"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="DistAmount" viewAttr="DistAmount" dataType="NUMBER"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PrjNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="项目名称"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PrjName" viewAttr="PrjName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PrjNumCol" totalValue="false" columnDataFormat="textFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader12" prompt="项目编号"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PrjNum" viewAttr="PrjNum"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="ApprovedDateCol" totalValue="false" columnDataFormat="textFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader121" prompt="批准日期"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="ApprovedDate" viewAttr="ApprovedDate"/>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:footer>
+                  <oa:tableFooter id="tableFooter2">
+                     <ui:total>
+                        <oa:totalRow id="totalRow2" readOnly="true"/>
+                     </ui:total>
+                  </oa:tableFooter>
+               </ui:footer>
+               <ui:tableActions>
+                  <oa:flowLayout id="tableActionRN">
+                     <ui:contents>
+                        <oa:exportButton id="Export" exportAllRows="true" text="导出" viewName="PrjDispatchVO1"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:advancedTable>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

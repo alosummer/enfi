@@ -1,0 +1,160 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TemplateContentCO" windowTitle="定义考核模板" title="定义考核模板" addForm="true">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultDoubleColumn id="TmplRN" text="绩效合同模板">
+               <ui:contents>
+                  <oa:messageStyledText id="TmplName" prompt="模板名称:" viewName="TmplDetailVO1" viewAttr="TmplName"/>
+                  <oa:messageStyledText id="TmplGroup" prompt="适用考群:" columns="200" viewName="TmplDetailVO1" viewAttr="GroupName"/>
+               </ui:contents>
+            </oa:defaultDoubleColumn>
+            <oa:advancedTable id="TemplateClassVO1" detailViewAttr="Attribute10" width="100%" viewName="TemplateClassVO1">
+               <ui:contents>
+                  <oa:formValue id="ClassId" dataType="NUMBER" prompt="ClassId" viewName="TemplateClassVO1" viewAttr="ClassId"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="TemplateClassVO1" viewAttr="TmplId"/>
+                  <oa:formValue id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="TemplateClassVO1" viewAttr="KpiClass"/>
+                  <oa:formValue id="Attribute4" viewAttr="Attribute4"/>
+                  <oa:formValue id="Attribute5" viewAttr="Attribute5"/>
+                  <oa:formValue id="KpiClassTag" dataType="VARCHAR2" prompt="KpiClassTag" viewName="TemplateClassVO1" viewAttr="KpiClassTag"/>
+                  <oa:column id="KpiClassMeaningCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader9" prompt="考核层面"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="KpiClassMeaning" viewAttr="KpiDesc"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="WeightCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader10" prompt="权重"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Weight" viewAttr="Weight"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DetailCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="明细"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:image id="Detail" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateTmplClass">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateClassVO1.TmplId}"/>
+                                    <ui:parameter key="kpiClass" value="${oa.TemplateClassVO1.KpiClass}"/>
+                                    <ui:parameter key="kpiClassType" value="${oa.TemplateClassVO1.Attribute4}"/>
+                                    <ui:parameter key="kpiWeightCheckMethod" value="${oa.TemplateClassVO1.Attribute9}"/>
+                                    <ui:parameter key="kpiClassWeight" value="${oa.TemplateClassVO1.Weight}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:detail>
+                  <oa:header id="InnerHeaderRN">
+                     <ui:contents>
+                        <oa:advancedTable id="TemplateContentVO1" viewName="TemplateContentVO1" width="100%">
+                           <ui:contents>
+                              <oa:column id="KpiAreaCol" width="10%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1" prompt="考核层面" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiArea" viewName="TemplateContentVO1" viewAttr="KpiAreaMeaning" prompt="考核层面" maximumLength="150" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="KpiNameCol" width="12%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader2" prompt="考核指标" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiName" viewName="TemplateContentVO1" viewAttr="KpiName" unvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="KpiDescCol" width="25%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader3" prompt="描述" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiDesc" viewName="TemplateContentVO1" viewAttr="KpiDesc" maximumLength="1000" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="Attribute5Col">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader12" prompt="备注" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Comments" viewName="TemplateContentVO1" viewAttr="Attribute5" serverUnvalidated="true" maximumLength="200"/>
+                                 </ui:contents>
+                              </oa:column>                              
+                              <oa:column id="KpiWeightCol" width="3%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader4" prompt="权重(%)" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Weight1" dataType="VARCHAR2" viewName="TemplateContentVO1" viewAttr="Weight" maximumLength="3" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="KpiTargetValueCol" width="3%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader5" prompt="目标值" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TargetValue" dataType="NUMBER" viewName="TemplateContentVO1" viewAttr="TargetValue" maximumLength="10" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="MininumValueCol" width="3%" cellNoWrapFormat="true">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader6" prompt="下限值" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="MininumValue" dataType="NUMBER" viewName="TemplateContentVO1" viewAttr="MinimumValue" maximumLength="10" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="ScoringMethodCol" width="10%" cellNoWrapFormat="true">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader7" prompt="评分方法" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiScoringMethod" viewName="TemplateContentVO1" viewAttr="KpiScoringMethodMeaning" maximumLength="150" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DataSourceCol" width="10%">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader8" prompt="数据来源" cellNoWrapFormat="true"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="KpiDataSource" viewName="TemplateContentVO1" viewAttr="KpiDataSourceMeaning" maximumLength="150" serverUnvalidated="true"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:formValue id="KpiClass1" viewName="TemplateContentVO1" viewAttr="KpiClass" dataType="VARCHAR2"/>
+                              <oa:formValue id="TmplId1" viewName="TemplateContentVO1" viewAttr="TmplId" dataType="NUMBER"/>
+                              <oa:formValue id="ContentId" dataType="NUMBER" viewName="TemplateContentVO1" viewAttr="ContentId"/>
+                              <oa:formValue id="KpiId" dataType="NUMBER" viewName="TemplateContentVO1" viewAttr="KpiId" rendered="true"/>
+                           </ui:contents>
+                        </oa:advancedTable>
+                     </ui:contents>
+                  </oa:header>
+               </ui:detail>
+               <ui:tableActions>
+                  <oa:flowLayout id="tableActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Update" text="维护模板指标" prompt="维护模板指标" rendered="false"/>
+                        <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                        <oa:spacer id="item1" width="5"/>
+                        <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:advancedTable>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

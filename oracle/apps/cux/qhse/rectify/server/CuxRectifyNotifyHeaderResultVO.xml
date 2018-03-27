@@ -1,0 +1,749 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxRectifyNotifyHeaderResultVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeaderResultVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeaderResultVOImpl"
+   UseGlueCode="false" >
+   <Properties>
+      <Property Name ="VO_ATTR.CuxRectifyNotifyLinesResultVO.VO_DATATYPE" Value ="Number" />
+      <Property Name ="VO_ATTR.CuxRectifyNotifyLinesResultVO.VO_QUALIFIED_NAME" Value ="Number" />
+   </Properties>
+   <SQLQuery><![CDATA[
+SELECT cuxrectifynotifyheaderseo.header_id,
+       cuxrectifynotifyheaderseo.org_id,
+       cuxrectifynotifyheaderseo.doc_type,
+       pal.meaning doc_type_dis,
+       cuxrectifynotifyheaderseo.project_id,
+       ppa.segment1 project_number,
+       nvl(ppa.long_name,
+           ppa.name) project_name,
+       (SELECT ctv.code_description
+          FROM apps.pa_project_class_totals_v ctv
+         WHERE ctv.project_id = ppa.project_id
+           AND ctv.class_category = '项目所属部门') project_org_name,
+       cuxrectifynotifyheaderseo.man_dept_id,
+       hou.name man_dept_name,
+       cuxrectifynotifyheaderseo.ci_type_id,
+       pci.name ci_type_name,
+       cuxrectifynotifyheaderseo.task_id,
+       pt.task_name,
+       cuxrectifynotifyheaderseo.status,
+       pal1.meaning status_dis,
+       cuxrectifynotifyheaderseo.priority_level,
+       pal2.meaning priority_level_dis,
+       cuxrectifynotifyheaderseo.problem_category_id,
+       pcc.class_code problem_category_dis,
+       cuxrectifynotifyheaderseo.reason_id,
+       pcc1.class_code reason_dis,
+       cuxrectifynotifyheaderseo.work_level,
+       pal3.meaning work_level_dis,
+       cuxrectifynotifyheaderseo.sourec_type,
+       pal4.meaning source_type_dis,
+       cuxrectifynotifyheaderseo.price,
+       cuxrectifynotifyheaderseo.duty_person_id,
+       ppf.full_name || '(' || ppf.employee_number || ')' duty_person_name,
+       cuxrectifynotifyheaderseo.complete_date,
+       cuxrectifynotifyheaderseo.creation_date,
+       cuxrectifynotifyheaderseo.created_by,
+       ppf1.full_name || '(' || ppf1.employee_number || ')' create_person,
+       cuxrectifynotifyheaderseo.last_update_date,
+       cuxrectifynotifyheaderseo.last_updated_by,
+       cuxrectifynotifyheaderseo.last_update_login,
+       cuxrectifynotifyheaderseo.attribute_category,
+       cuxrectifynotifyheaderseo.attribute1,
+       cuxrectifynotifyheaderseo.attribute2,
+       cuxrectifynotifyheaderseo.attribute3,
+       cuxrectifynotifyheaderseo.attribute4,
+       cuxrectifynotifyheaderseo.attribute5,
+       :1 AS show_detail,
+       decode(cuxrectifynotifyheaderseo.status,
+              'ENTRING',
+              'SUBMIT_ENABLE',
+              'SUBMIT_DISABLE') submit_switch
+  FROM cux.cux_rectify_notify_headers cuxrectifynotifyheaderseo,
+       pa_projects_all ppa,
+       pa_lookups pal,
+       hr_all_organization_units hou,
+       pa_ci_types_v pci,
+       (SELECT ppe.proj_element_id AS task_id,
+               ppe.name            AS task_name,
+               ppe.project_id      AS project_id
+          FROM pa_proj_elements          ppe,
+               pa_proj_element_versions  ppev,
+               pa_proj_elem_ver_schedule ppevsch,
+               pa_task_types             ptt,
+               pa_projects_all           ppa,
+               per_all_people_f          papf,
+               pa_percent_completes      ppc,
+               pa_project_statuses       status,
+               pa_project_statuses       progress,
+               pa_lookups                priority,
+               pa_lookups                CLASS,
+               pa_progress_rollup        ppr
+         WHERE priority.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+           AND priority.lookup_code(+) = ppe.priority_code
+           AND class.lookup_type = 'PA_OBJECTS'
+           AND class.lookup_code = 'PA_TASKS'
+           AND ptt.task_type_id(+) = ppe.type_id
+           AND progress.status_type(+) = 'PROGRESS'
+           AND progress.project_status_code(+) = ppc.progress_status_code
+           AND status.status_type(+) = 'TASK'
+           AND status.project_status_code(+) = ppe.status_code
+           AND ppe.object_type = 'PA_TASKS'
+           AND ppe.project_id = ppa.project_id
+           AND ppev.proj_element_id = ppe.proj_element_id
+           AND ppev.parent_structure_version_id =
+               pa_project_structure_utils.get_latest_wp_version(ppe.project_id)
+           AND ppevsch.element_version_id(+) = ppev.element_version_id
+           AND ppr.project_id(+) = ppc.project_id
+           AND ppr.object_id(+) = ppc.object_id
+           AND ppr.object_type(+) = ppc.object_type
+           AND ppr.current_flag(+) = 'Y'
+           AND ppr.structure_type(+) = 'WORKPLAN'
+           AND ppr.structure_version_id(+) IS NULL
+           AND ppe.manager_person_id = papf.person_id(+)
+           AND trunc(SYSDATE) BETWEEN papf.effective_start_date(+) AND
+               papf.effective_end_date(+)
+           AND ppc.object_id(+) = ppe.proj_element_id
+           AND ppc.object_type(+) = 'PA_TASKS'
+           AND ppc.project_id(+) = ppe.project_id
+           AND ppc.current_flag(+) = 'Y'
+           AND ppc.current_flag(+) = 'Y'
+           AND ppc.published_flag(+) = 'Y'
+           AND ppc.structure_type(+) = 'WORKPLAN'
+           AND nvl(ppa.template_flag,
+                   'N') <> 'Y'
+           AND ppe.link_task_flag = 'N') pt,
+       pa_lookups pal1,
+       pa_lookups pal2,
+       pa_lookups pal3,
+       pa_lookups pal4,
+       pa_class_codes pcc,
+       pa_class_codes pcc1,
+       per_all_people_f ppf,
+       per_all_people_f ppf1,
+       fnd_user fu
+ WHERE ppa.project_id(+) = cuxrectifynotifyheaderseo.project_id
+   AND pci.ci_type_id = cuxrectifynotifyheaderseo.ci_type_id
+   AND pt.task_id(+) = cuxrectifynotifyheaderseo.task_id
+   AND hou.organization_id = cuxrectifynotifyheaderseo.man_dept_id
+   AND trunc(SYSDATE) BETWEEN nvl(hou.date_from,
+                                  SYSDATE) AND
+       nvl(hou.date_to,
+           SYSDATE)
+   AND pal.lookup_code = cuxrectifynotifyheaderseo.doc_type
+   AND pal.lookup_type = 'ISSUE_DOCUMENTS_TYPE'
+   AND pal1.lookup_code = cuxrectifynotifyheaderseo.status
+   AND pal1.lookup_type = 'ISSUE_CHANGE_STATUS'
+   AND pal2.lookup_code(+) = cuxrectifynotifyheaderseo.priority_level
+   AND pal2.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+   AND pal3.lookup_code = cuxrectifynotifyheaderseo.work_level
+   AND pal3.lookup_type = 'PA_CI_EFFORT_LEVELS'
+   AND pal4.lookup_code = cuxrectifynotifyheaderseo.sourec_type
+   AND pal4.lookup_type = 'PA_CI_SOURCE_TYPES'
+   AND pcc.class_code_id = cuxrectifynotifyheaderseo.problem_category_id
+   AND pcc.class_category = '项目问题'
+   AND pcc1.class_code_id(+) = cuxrectifynotifyheaderseo.reason_id
+   AND pcc1.class_category(+) = '问题原因'
+   AND ppf.person_id = cuxrectifynotifyheaderseo.duty_person_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf.effective_end_date,
+           SYSDATE)
+   AND ppf1.person_id = fu.employee_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf1.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf1.effective_end_date,
+           SYSDATE)
+   AND cuxrectifynotifyheaderseo.created_by = fu.user_id
+   AND trunc(SYSDATE) BETWEEN nvl(fu.start_date,
+                                  SYSDATE) AND
+       nvl(fu.end_date,
+           SYSDATE)
+/*  AND cuxrectifynotifyheaderseo.org_id = fnd_global.ORG_ID*/
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="HeaderId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="HEADER_ID"
+      Expression="HEADER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORG_ID"
+      Expression="ORG_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocType"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_TYPE"
+      Expression="DOC_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocTypeDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_TYPE_DIS"
+      Expression="DOC_TYPE_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ID"
+      Expression="PROJECT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectNumber"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUMBER"
+      Expression="PROJECT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NAME"
+      Expression="PROJECT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectOrgName"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_ORG_NAME"
+      Expression="PROJECT_ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManDeptId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MAN_DEPT_ID"
+      Expression="MAN_DEPT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManDeptName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MAN_DEPT_NAME"
+      Expression="MAN_DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CiTypeId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CI_TYPE_ID"
+      Expression="CI_TYPE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CiTypeName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CI_TYPE_NAME"
+      Expression="CI_TYPE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASK_ID"
+      Expression="TASK_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_DIS"
+      Expression="STATUS_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityLevel"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIORITY_LEVEL"
+      Expression="PRIORITY_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityLevelDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIORITY_LEVEL_DIS"
+      Expression="PRIORITY_LEVEL_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemCategoryId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROBLEM_CATEGORY_ID"
+      Expression="PROBLEM_CATEGORY_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemCategoryDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROBLEM_CATEGORY_DIS"
+      Expression="PROBLEM_CATEGORY_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReasonId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="REASON_ID"
+      Expression="REASON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReasonDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REASON_DIS"
+      Expression="REASON_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkLevel"
+      IsPersistent="false"
+      Precision="6"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORK_LEVEL"
+      Expression="WORK_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkLevelDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORK_LEVEL_DIS"
+      Expression="WORK_LEVEL_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourecType"
+      IsPersistent="false"
+      Precision="40"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SOUREC_TYPE"
+      Expression="SOUREC_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="40" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourceTypeDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SOURCE_TYPE_DIS"
+      Expression="SOURCE_TYPE_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Price"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRICE"
+      Expression="PRICE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutyPersonId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DUTY_PERSON_ID"
+      Expression="DUTY_PERSON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutyPersonName"
+      IsPersistent="false"
+      Precision="272"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DUTY_PERSON_NAME"
+      Expression="DUTY_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="272" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompleteDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="COMPLETE_DATE"
+      Expression="COMPLETE_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="CREATION_DATE"
+      Expression="CREATION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CREATED_BY"
+      Expression="CREATED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatePerson"
+      IsPersistent="false"
+      Precision="272"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CREATE_PERSON"
+      Expression="CREATE_PERSON"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="272" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="LAST_UPDATE_DATE"
+      Expression="LAST_UPDATE_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LAST_UPDATED_BY"
+      Expression="LAST_UPDATED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LAST_UPDATE_LOGIN"
+      Expression="LAST_UPDATE_LOGIN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      IsPersistent="false"
+      Precision="50"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE_CATEGORY"
+      Expression="ATTRIBUTE_CATEGORY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE1"
+      Expression="ATTRIBUTE1"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE2"
+      Expression="ATTRIBUTE2"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE3"
+      Expression="ATTRIBUTE3"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE4"
+      Expression="ATTRIBUTE4"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      IsPersistent="false"
+      Precision="250"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE5"
+      Expression="ATTRIBUTE5"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowDetail"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="SHOW_DETAIL"
+      Expression="SHOW_DETAIL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SubmitSwitch"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUBMIT_SWITCH"
+      Expression="SUBMIT_SWITCH"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="CuxRectifyNotifyLinesResultVO"
+      ViewLink="cux.oracle.apps.cux.qhse.rectify.server.HeaderResultTOLineVL"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+</ViewObject>

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="PmpAM"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="PmpSummaryVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpCoordinationVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpCoordinationVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpMeetingVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpMeetingVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpReportVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpReportVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpConractFirstVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpContactFirstVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpContractSecondVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpContactSecondVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpContractSiteFirstVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpContactSiteFirstVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpContractSiteSecondVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpContactSiteSecondVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpLogisticalVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpLogisticalVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpQhseHseHeaderVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpQhseHseHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpQhseHseLineVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpQhseHseLineVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpQhseQualityHeaerVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpQhseQualityHeaerVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpQhseQualityLineVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpQhseQualityLineVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpRiskVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpRiskVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpDocManagementVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpDocManagementVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpRoleVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpRoleVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AMEActionHistoryVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.AMEActionHistoryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="AMEActionHistoryVO2"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.AMEActionHistoryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpStatusVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpProgressVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpProgressVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpReceiptPlanVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpReceiptPlanVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpManHourVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpManHourVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpBudgetDetailVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpBudgetDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpProjectInfoVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpProjectInfoVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PmpAttatchmentVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.server.PmpAttatchmentVO" >
+   </ViewUsage>
+</AppModule>

@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.WorkflowControlSearchCO" amDefName="cux.oracle.apps.per.review.server.WorkflowControlAM" windowTitle="考核流程控制" title="考核流程控制">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="MainRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageChoice id="SearchGroupName" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupName" prompt="考群"/>
+                        <oa:messageLovInput id="SearchOrgName" dataType="VARCHAR2" prompt="组织" externalListOfValues="/cux/oracle/apps/per/lov/webui/OrganizationRN" unvalidated="true">
+                           <lovMappings>
+                              <lovMap id="OrgNameMap" lovItem="OrganizationName" resultTo="SearchOrgName" criteriaFrom="SearchOrgName"/>
+                              <lovMap id="OrgIdMap" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="SearchPhase" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPhaseVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="评估阶段"/>
+                        <oa:messageChoice id="SearchPeriod" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPeriodVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="评价周期"/>
+                        <oa:messageTextInput id="SearchYear" prompt="评价起始年份"/>
+                        <oa:messageTextInput id="SearchEndYear" prompt="评价截止年份"/>
+                        <oa:messageChoice id="SearchStatus" prompt="评估状态" pickListViewDef="cux.oracle.apps.per.poplist.server.EpmStatusVO" pickListDispAttr="EpmFsName" pickListValAttr="EpmFsCode"/>
+                        <oa:messageLovInput id="SearchEmpName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmpRN" unvalidated="true" queryable="true" prompt="被评估人">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="LastName" resultTo="SearchEmpName" criteriaFrom="SearchEmpName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:separator id="separator"/>
+                  <oa:table id="WorkflowControlSearchVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="AppraisalId" dataType="NUMBER" viewName="WorkflowControlSearchVO1" viewAttr="AppraisalId" prompt="序号" sortState="yes" initSortSeq="first"/>
+                        <oa:messageStyledText id="EmployeeNumber" viewName="WorkflowControlSearchVO1" viewAttr="EmployeeNumber" prompt="被评估人员工号" queryable="false" sortState="yes" initSortSeq="second"/>
+                        <oa:messageStyledText id="EmpName" viewName="WorkflowControlSearchVO1" viewAttr="EmpName" prompt="被评估人" sortState="yes"/>
+                        <oa:messageStyledText id="DateStart" dataType="DATE" viewName="WorkflowControlSearchVO1" viewAttr="DateStart" prompt="入职时间" sortState="yes"/>
+                        <oa:messageStyledText id="OrgName" viewName="WorkflowControlSearchVO1" viewAttr="OrgName" prompt="组织" sortState="yes" initSortSeq="third"/>
+                        <oa:messageStyledText id="GroupName" viewName="WorkflowControlSearchVO1" viewAttr="GroupName" prompt="考群" sortState="yes"/>
+                        <oa:messageStyledText id="PhaseName" viewName="WorkflowControlSearchVO1" viewAttr="PhaseName" prompt="阶段" sortState="yes"/>
+                        <oa:messageStyledText id="AppraisalYear" viewName="WorkflowControlSearchVO1" viewAttr="AppraisalYear" prompt="年份" sortState="yes"/>
+                        <oa:messageStyledText id="StatusName" viewName="WorkflowControlSearchVO1" viewAttr="StatusName" prompt="状态" sortState="yes"/>
+                        <oa:messageStyledText id="StatusId" viewName="WorkflowControlSearchVO1" viewAttr="StatusId" prompt="状态ID" rendered="false"/>
+                        <oa:messageStyledText id="PromiserName" viewName="WorkflowControlSearchVO1" viewAttr="PromiserName" prompt="当期处理人" sortState="yes" initSortSeq="none"/>
+                        <oa:messageStyledText id="SignDate" prompt="生效日期" viewName="WorkflowControlSearchVO1" viewAttr="SignDate"/>
+                        <oa:formValue id="PeriodName" viewName="WorkflowControlSearchVO1" viewAttr="PeriodName"/>
+                        <oa:image id="Close" prompt="关闭" source="criticalind_active.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="close">
+                                 <ui:parameters>
+                                    <ui:parameter key="appraisalId" value="${oa.WorkflowControlSearchVO1.AppraisalId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delete">
+                                 <ui:parameters>
+                                    <ui:parameter key="appraisalId" value="${oa.WorkflowControlSearchVO1.AppraisalId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="OrgId" dataType="NUMBER" viewName="WorkflowControlSearchVO1" viewAttr="OrgId"/>
+                        <oa:formValue id="GroupId" dataType="NUMBER" viewName="WorkflowControlSearchVO1" viewAttr="GroupId"/>
+                        <oa:formValue id="PhaseId" viewName="WorkflowControlSearchVO1" viewAttr="PhaseId"/>
+                        <oa:formValue id="PeriodId" viewName="WorkflowControlSearchVO1" viewAttr="PeriodId"/>
+                        <oa:switcher id="AdjustSwitcher" viewName="WorkflowControlSearchVO1" viewAttr="AdjustSwitcher" prompt="调整" rendered="true">
+                           <ui:case name="AdjustDisabled">
+                              <oa:image id="AdjustDisabled" source="converttohtml_disabled.gif" prompt="调整"/>
+                           </ui:case>
+                           <ui:case name="AdjustEnabled">
+                              <oa:image id="AdjustEnabled" viewName="WorkflowControlSearchVO1" viewAttr="AdjustSwitcher" source="converttohtml_enabled.gif" prompt="调整">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="adjust">
+                                       <ui:parameters>
+                                          <ui:parameter key="appraisalId" value="${oa.WorkflowControlSearchVO1.AppraisalId}"/>
+                                          <ui:parameter key="phaseId" value="${oa.WorkflowControlSearchVO1.PhaseId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                        </oa:switcher>
+                        <oa:switcher id="SubmitSwitcher" prompt="提交" viewName="WorkflowControlSearchVO1" viewAttr="SubmitSwitcher">
+                           <ui:case name="SubmitDisabled">
+                              <oa:image id="SubmitDisabled" source="submitclaim_disabled.gif"/>
+                           </ui:case>
+                           <ui:case name="SubmitEnabled">
+                              <oa:image id="SubmitEnabled" source="submitclaim_enabled.gif">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="submit">
+                                       <ui:parameters>
+                                          <ui:parameter key="appraisalId" value="${oa.WorkflowControlSearchVO1.AppraisalId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                        </oa:switcher>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Save" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

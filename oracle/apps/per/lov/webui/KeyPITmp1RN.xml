@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.lov.server.PerLovAM">
+   <ui:contents>
+      <oa:table name="KeyPITmp1RN" id="PerKPITmp1VO1">
+         <ui:contents>
+            <oa:messageStyledText id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="PerKPITmp1VO1" viewAttr="KpiId" maximumLength="10" rendered="false"/>
+            <oa:messageStyledText id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="PerKPITmp1VO1" viewAttr="KpiClass" maximumLength="150" rendered="false"/>
+            <oa:messageStyledText id="KpiAreaName" dataType="VARCHAR2" prompt="考核层面" viewName="PerKPITmp1VO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+            <oa:messageStyledText id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="PerKPITmp1VO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+            <oa:messageStyledText id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="PerKPITmp1VO1" viewAttr="KpiDesc" maximumLength="500"/>
+            <oa:messageStyledText id="KpiScoringMethodName" dataType="VARCHAR2" prompt="评分方法" viewName="PerKPITmp1VO1" viewAttr="KpiScoringMethodName" maximumLength="80"/>
+            <oa:messageStyledText id="KpiDataSourceName" dataType="VARCHAR2" prompt="数据来源" viewName="PerKPITmp1VO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+            <oa:messageStyledText id="KpiDataSource" dataType="VARCHAR2" prompt="KpiDataSource" viewName="PerKPITmp1VO1" viewAttr="KpiDataSource" maximumLength="150" rendered="false"/>
+            <oa:messageStyledText id="KpiArea" dataType="VARCHAR2" prompt="KpiArea" viewName="PerKPITmp1VO1" viewAttr="KpiArea" maximumLength="200" rendered="false"/>
+            <oa:messageStyledText id="KpiScoringMethod" dataType="VARCHAR2" prompt="KpiScoringMethod" viewName="PerKPITmp1VO1" viewAttr="KpiScoringMethod" maximumLength="150" rendered="false"/>
+            <oa:messageStyledText id="Attribute5" dataType="VARCHAR2" prompt="取值范围" viewName="PerKPITmp1VO1" viewAttr="Attribute5" maximumLength="150"/>
+            <oa:messageStyledText id="Attribute1" dataType="VARCHAR2" prompt="指标目标值范围" viewName="PerKPITmp1VO1" viewAttr="Attribute1" maximumLength="150"/>
+            <oa:messageStyledText id="Attribute2" dataType="VARCHAR2" prompt="指标下限值范围" viewName="PerKPITmp1VO1" viewAttr="Attribute2" maximumLength="150"/>
+            <oa:messageStyledText id="Attribute3" dataType="VARCHAR2" prompt="指标目标值默认值" viewName="PerKPITmp1VO1" viewAttr="Attribute3" maximumLength="150"/>
+            <oa:messageStyledText id="Attribute4" dataType="VARCHAR2" prompt="指标下限值默认值" viewName="PerKPITmp1VO1" viewAttr="Attribute3" maximumLength="150"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

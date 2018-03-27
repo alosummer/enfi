@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TmplEmpCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="TmplEmpVO1" width="100%" blockSize="1000">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="TmplEmpVO1" viewAttr="Rownum"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="TmplEmpVO1" viewAttr="TmplId"/>
+                  <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="TmplEmpVO1" viewAttr="PersonId"/>
+                  <oa:messageLovInput id="EmpName" dataType="VARCHAR2" prompt="人员" viewName="TmplEmpVO1" viewAttr="EmpName" maximumLength="150" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" unvalidated="true">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="EmployeeName" resultTo="EmpName" criteriaFrom="EmpName"/>
+                        <lovMap id="lovMap2" lovItem="PersonId" resultTo="PersonId" criteriaFrom="PersonId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="tmplId" value="${oa.TmplEmpVO1.TmplId}"/>
+                              <ui:parameter key="personId" value="${oa.TmplEmpVO1.PersonId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:spacer id="item1"/>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

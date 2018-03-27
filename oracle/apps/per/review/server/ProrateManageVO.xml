@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ProrateManageVO"
+   OrderBy="Packet_Num"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.ProrateManageVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.ProrateManageVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ProrateManageEO.PRORATE_ID,
+       ProrateManageEO.GROUP_ID,
+       ProrateManageEO.ORG_ID,
+       ProrateManageEO.PRORATE_CODE,
+       ProrateManageEO.LEVEL_A,
+       ProrateManageEO.LEVEL_B,
+       ProrateManageEO.LEVEL_C,
+       ProrateManageEO.LEVEL_D,
+       ProrateManageEO.LEVEL_E,
+       ProrateManageEO.ATTRIBUTE1,
+       ProrateManageEO.ATTRIBUTE2,
+       ProrateManageEO.ATTRIBUTE3,
+       ProrateManageEO.ATTRIBUTE4,
+       ProrateManageEO.ATTRIBUTE5,
+       ProrateManageEO.ATTRIBUTE6,
+       ProrateManageEO.ATTRIBUTE7,
+       ProrateManageEO.ATTRIBUTE8,
+       ProrateManageEO.ATTRIBUTE9,
+       ProrateManageEO.ATTRIBUTE10,
+       ProrateManageEO.LAST_UPDATE_LOGIN,
+       ProrateManageEO.LAST_UPDATED_BY,
+       ProrateManageEO.LAST_UPDATE_DATE,
+       ProrateManageEO.CREATED_BY,
+       ProrateManageEO.CREATION_DATE,
+       houv.name Org_Name,
+       ProrateManageEO.Packet_Num,
+       ProrateManageEO.Adjust
+  from CUX_PRORATE_MANAGE_T ProrateManageEO, hr_all_organization_units houv
+ WHERE ProrateManageEO.Org_Id = houv.organization_id(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ProrateManageEO"
+      Entity="cux.oracle.apps.per.review.server.ProrateManageEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProrateId"
+      IsNotNull="true"
+      EntityAttrName="ProrateId"
+      EntityUsage="ProrateManageEO"
+      AliasName="PRORATE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      EntityAttrName="GroupId"
+      EntityUsage="ProrateManageEO"
+      AliasName="GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      EntityAttrName="OrgId"
+      EntityUsage="ProrateManageEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProrateCode"
+      EntityAttrName="ProrateCode"
+      EntityUsage="ProrateManageEO"
+      AliasName="PRORATE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelA"
+      EntityAttrName="LevelA"
+      EntityUsage="ProrateManageEO"
+      AliasName="LEVEL_A" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelB"
+      EntityAttrName="LevelB"
+      EntityUsage="ProrateManageEO"
+      AliasName="LEVEL_B" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelC"
+      EntityAttrName="LevelC"
+      EntityUsage="ProrateManageEO"
+      AliasName="LEVEL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelD"
+      EntityAttrName="LevelD"
+      EntityUsage="ProrateManageEO"
+      AliasName="LEVEL_D" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LevelE"
+      EntityAttrName="LevelE"
+      EntityUsage="ProrateManageEO"
+      AliasName="LEVEL_E" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10"
+      EntityAttrName="Attribute10"
+      EntityUsage="ProrateManageEO"
+      AliasName="ATTRIBUTE10" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="ProrateManageEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="ProrateManageEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="ProrateManageEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ProrateManageEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="ProrateManageEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PacketNum"
+      EntityAttrName="PacketNum"
+      EntityUsage="ProrateManageEO"
+      AliasName="PACKET_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Adjust"
+      EntityAttrName="Adjust"
+      EntityUsage="ProrateManageEO"
+      AliasName="ADJUST" >
+   </ViewAttribute>
+</ViewObject>

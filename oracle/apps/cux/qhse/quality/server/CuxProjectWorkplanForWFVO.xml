@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxProjectWorkplanForWFVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.quality.server.CuxProjectWorkplanForWFVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.quality.server.CuxProjectWorkplanForWFVOImpl"
+   UseGlueCode="false" >
+   <Properties>
+      <Property Name ="VO_ATTR.CuxQualityMagDetailForWFVO.VO_DATATYPE" Value ="Number" />
+      <Property Name ="VO_ATTR.CuxQualityMagDetailForWFVO.VO_QUALIFIED_NAME" Value ="Number" />
+   </Properties>
+   <SQLQuery><![CDATA[
+/*SELECT ppe.proj_element_id,
+       ppev.element_version_id,
+       (SELECT pps.project_status_name
+          FROM pa_proj_elements         ppe_top_task,
+               pa_proj_element_versions ppev_phase,
+               pa_proj_elements         ppe_phase,
+               pa_project_statuses      pps
+         WHERE ppe_top_task.proj_element_id =
+               (SELECT pa_proj_elements_utils.get_top_task_id(ppev.element_version_id)
+                  FROM pa_proj_element_versions   ppev,
+                       pa_proj_elem_ver_structure ppevs
+                 WHERE ppev.parent_structure_version_id =
+                       ppevs.element_version_id
+                   AND ppevs.latest_eff_published_flag = 'Y'
+                   AND ppev.proj_element_id = ppe.proj_element_id)
+           AND ppe_top_task.phase_version_id = ppev_phase.element_version_id
+           AND ppev_phase.proj_element_id = ppe_phase.proj_element_id
+           AND pps.project_status_code = ppe_phase.phase_code) phase_name,
+       ppev.parent_structure_version_id,
+       ptt.task_type,
+       ppe.name task_name,
+       ppe.element_number,
+       ppe.description,
+       ppe.project_id,
+       status.project_status_name,
+       status.status_icon_active_ind,
+       status.project_system_status_code,
+       ppevsch.scheduled_start_date,
+       ppevsch.scheduled_finish_date,
+       decode((SELECT COUNT(1)
+                FROM cux_quality_mag_detail cqmd
+               WHERE cqmd.task_id = ppe.proj_element_id),
+              0,
+              '否',
+              '是') AS is_planed,
+       decode((SELECT COUNT(1)
+                FROM cux_quality_mag_detail cqmd
+               WHERE cqmd.task_id = ppe.proj_element_id),
+              0,
+              'N',
+              'Y') AS show_detail
+  FROM pa_proj_elements          ppe,
+       pa_proj_element_versions  ppev,
+       pa_proj_elem_ver_schedule ppevsch,
+       pa_task_types             ptt,
+       pa_projects_all           ppa,
+       per_all_people_f          papf,
+       pa_percent_completes      ppc,
+       pa_project_statuses       status,
+       pa_project_statuses       progress,
+       pa_lookups                priority,
+       pa_lookups                CLASS,
+       pa_progress_rollup        ppr,
+       cux_quality_mag_header    cqmh
+ WHERE priority.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+   AND priority.lookup_code(+) = ppe.priority_code
+   AND class.lookup_type = 'PA_OBJECTS'
+   AND class.lookup_code = 'PA_TASKS'
+   AND ptt.task_type_id(+) = ppe.type_id
+   AND progress.status_type(+) = 'PROGRESS'
+   AND progress.project_status_code(+) = ppc.progress_status_code
+   AND status.status_type(+) = 'TASK'
+   AND status.project_status_code(+) = ppe.status_code
+   AND ppe.object_type = 'PA_TASKS'
+   AND ppe.project_id = ppa.project_id
+   AND ppev.proj_element_id = ppe.proj_element_id
+   AND ppev.parent_structure_version_id =
+       pa_project_structure_utils.get_latest_wp_version(ppe.project_id)
+   AND ppevsch.element_version_id(+) = ppev.element_version_id
+   AND ppr.project_id(+) = ppc.project_id
+   AND ppr.object_id(+) = ppc.object_id
+   AND ppr.object_type(+) = ppc.object_type
+   AND ppr.current_flag(+) = 'Y'
+   AND ppr.structure_type(+) = 'WORKPLAN'
+   AND ppr.structure_version_id(+) IS NULL
+   AND ppe.manager_person_id = papf.person_id(+)
+   AND trunc(SYSDATE) BETWEEN papf.effective_start_date(+) AND
+       papf.effective_end_date(+)
+   AND ppc.object_id(+) = ppe.proj_element_id
+   AND ppc.object_type(+) = 'PA_TASKS'
+   AND ppc.project_id(+) = ppe.project_id
+   AND ppc.current_flag(+) = 'Y'
+   AND ppc.current_flag(+) = 'Y'
+   AND ppc.published_flag(+) = 'Y'
+   AND ppc.structure_type(+) = 'WORKPLAN'
+   AND nvl(ppa.template_flag,
+           'N') <> 'Y'
+   AND ppe.link_task_flag = 'N'
+   AND ppe.project_id = cqmh.project_id
+   AND cqmh.header_id = :1
+*/  
+SELECT proj_element_id,
+       element_version_id,
+       '' AS phase_name,
+       element_version_id AS parent_structure_version_id,
+       '' AS task_type,
+       structure_version_name AS task_name,
+       fnd_css_pkg.encode(to_char(structure_version_number)) AS element_number,
+       description,
+       pa_structure_versions_v.project_id,
+       NULL AS project_status_name,
+       NULL AS status_icon_active_ind,
+       NULL AS project_system_status_code,
+       scheduled_start_date,
+       scheduled_finish_date,
+       decode((SELECT COUNT(1)
+                FROM cux_quality_mag_detail cqmd
+               WHERE cqmd.task_id = proj_element_id),
+              0,
+              '否',
+              '是') AS is_planed,
+       decode((SELECT COUNT(1)
+                FROM cux_quality_mag_detail cqmd
+               WHERE cqmd.task_id = proj_element_id),
+              0,
+              'N',
+              'Y') AS show_detail
+  FROM pa_structure_versions_v,
+       cux_quality_mag_header cqmh
+ WHERE element_version_id =
+       pa_project_structure_utils.get_latest_wp_version(pa_structure_versions_v.project_id)
+   AND structure_type = 'WORKPLAN'
+   AND pa_structure_versions_v.project_id = cqmh.project_id
+   AND cqmh.header_id = :1
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ProjElementId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJ_ELEMENT_ID"
+      Expression="PROJ_ELEMENT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ElementVersionId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ELEMENT_VERSION_ID"
+      Expression="ELEMENT_VERSION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseName"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_NAME"
+      Expression="PHASE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ParentStructureVersionId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PARENT_STRUCTURE_VERSION_ID"
+      Expression="PARENT_STRUCTURE_VERSION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskType"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_TYPE"
+      Expression="TASK_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ElementNumber"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ELEMENT_NUMBER"
+      Expression="ELEMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      IsPersistent="false"
+      Precision="2000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESCRIPTION"
+      Expression="DESCRIPTION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ID"
+      Expression="PROJECT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectStatusName"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_STATUS_NAME"
+      Expression="PROJECT_STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusIconActiveInd"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_ICON_ACTIVE_IND"
+      Expression="STATUS_ICON_ACTIVE_IND"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectSystemStatusCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_SYSTEM_STATUS_CODE"
+      Expression="PROJECT_SYSTEM_STATUS_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduledStartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SCHEDULED_START_DATE"
+      Expression="SCHEDULED_START_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduledFinishDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SCHEDULED_FINISH_DATE"
+      Expression="SCHEDULED_FINISH_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsPlaned"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_PLANED"
+      Expression="IS_PLANED"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowDetail"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SHOW_DETAIL"
+      Expression="SHOW_DETAIL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="CuxQualityMagDetailForWFVO"
+      ViewLink="cux.oracle.apps.cux.qhse.quality.server.WorkplanToDetail"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+</ViewObject>

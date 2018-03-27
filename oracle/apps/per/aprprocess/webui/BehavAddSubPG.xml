@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" controllerClass="cux.oracle.apps.per.aprprocess.webui.BehavAddSubCO" windowTitle="行为规范" title="行为规范" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="BehavAddSubVO1" blockSize="20">
+               <ui:contents>
+                  <oa:messageStyledText id="KpiOrgName" dataType="VARCHAR2" prompt="指标所属组织" viewName="BehavAddSubVO1" viewAttr="KpiOrgName" maximumLength="150" rendered="true"/>
+                  <oa:messageStyledText id="KpiAreaName" dataType="VARCHAR2" prompt="考核层面" viewName="BehavAddSubVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+                  <oa:messageStyledText id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="BehavAddSubVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+                  <oa:messageStyledText id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="BehavAddSubVO1" viewAttr="KpiDesc" maximumLength="500"/>
+                  <oa:messageStyledText id="KpiDataSourceName" dataType="VARCHAR2" prompt="数据来源" viewName="BehavAddSubVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

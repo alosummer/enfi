@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.KeyPIAM" controllerClass="cux.oracle.apps.per.review.webui.KPIConstraintCO" windowTitle="定义指标受约对象" title="定义指标受约对象">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="KPIConstraintVO1" width="100%" blockSize="50">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" viewName="KPIConstraintVO1" viewAttr="Rownum" prompt="序号" dataType="NUMBER"/>
+                  <oa:messageStyledText id="ConstraintId" dataType="NUMBER" prompt="序号" viewName="KPIConstraintVO1" viewAttr="ConstraintId" maximumLength="10" rendered="false"/>
+                  <oa:messageLovInput id="OrganizationName" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" viewName="KPIConstraintVO1" viewAttr="OrganizationName" prompt="组织">
+                     <lovMappings>
+                        <lovMap id="lovMap10" lovItem="OrganizationName" resultTo="OrganizationName" criteriaFrom="OrganizationName"/>
+                        <lovMap id="lovMap11" lovItem="OrganizationId" resultTo="ConstraintObj"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="ConstraintTypeDis" prompt="类型" viewName="KPIConstraintVO1" viewAttr="Meaning" readOnly="true" maximumLength="80"/>
+                  <oa:messageLovInput id="ConstraintJobDis" externalListOfValues="/cux/oracle/apps/per/lov/webui/KpiConstraintRN" queryable="true" prompt="受约对象" viewName="KPIConstraintVO1" viewAttr="EpmCjName" columns="60">
+                     <lovMappings>
+                        <lovMap id="lovMap5" lovItem="EpmCjCode" resultTo="ConstraintJob" criteriaFrom="ConstraintJob"/>
+                        <lovMap id="lovMap7" lovItem="ConstraintTypeDis" criteriaFrom="ConstraintTypeDis" useForValidation="yes" resultTo="ConstraintTypeDis"/>
+                        <lovMap id="lovMap8" lovItem="EpmCjName" resultTo="ConstraintJobDis" criteriaFrom="ConstraintJobDis"/>
+                        <lovMap id="lovMap9" lovItem="ConstraintType" resultTo="ConstraintType" criteriaFrom="ConstraintType"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageChoice id="Attribute1" viewName="KPIConstraintVO1" viewAttr="Attribute1" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceVO" pickListDispAttr="EpmDsName" pickListValAttr="EpmDsCode" prompt="数据来源"/>
+                  <oa:messageTextInput id="Attribute5" viewName="KPIConstraintVO1" viewAttr="Attribute5" prompt="取值范围" columns="30" maximumLength="4000"/>
+                  <oa:formValue id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="KPIConstraintVO1" viewAttr="KpiId"/>
+                  <oa:formValue id="ConstraintType" dataType="VARCHAR2" prompt="类型" viewName="KPIConstraintVO1" viewAttr="ConstraintType"/>
+                  <oa:formValue id="ConstraintJob" dataType="NUMBER" prompt="受约对象" viewName="KPIConstraintVO1" viewAttr="ConstraintJob" queryable="false" selectiveSearchCriteria="false"/>
+                  <oa:image id="Detail" prompt="维度取值" source="detailsicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="detail">
+                           <ui:parameters>
+                              <ui:parameter key="kpiId" value="${oa.KPIConstraintVO1.KpiId}"/>
+                              <ui:parameter key="constraintId" value="${oa.KPIConstraintVO1.ConstraintId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+                  <oa:image id="Delete" prompt="删除" source="deleteicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="constraintId" value="${oa.KPIConstraintVO1.ConstraintId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+                  <oa:formValue id="ConstraintObj" viewName="KPIConstraintVO1" viewAttr="ConstraintObj"/>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="tableActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                        <oa:spacer id="spacer" width="5"/>
+                        <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

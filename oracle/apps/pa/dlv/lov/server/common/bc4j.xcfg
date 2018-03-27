@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="DlvLovAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>ENFIDEV</JDBCName>
+         <jbo.project>CUXPA</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.pa.dlv.lov.server.DlvLovAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.pa.dlv.lov.server.DlvLovAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

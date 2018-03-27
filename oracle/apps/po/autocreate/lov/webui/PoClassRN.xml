@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.po.autocreate.lov.server.CuxAutocreateLovAM">
+   <ui:contents>
+      <oa:table name="PoClassRN" id="PoClassVO1">
+         <ui:contents>
+            <oa:formValue id="FlexValueId" dataType="NUMBER" prompt="代码" viewName="PoClassVO1" viewAttr="FlexValueId" queryable="true"/>
+            <oa:messageStyledText id="FlexValue" dataType="VARCHAR2" prompt="合同小类" viewName="PoClassVO1" viewAttr="FlexValue" maximumLength="150" queryable="true" selectiveSearchCriteria="false"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

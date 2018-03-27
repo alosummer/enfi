@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.bonus.awardsreport.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AwardsReportAM"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.AwardsReportAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="DeptAwardsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.DeptAwardsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptDetailsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.DeptDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptDistDetailsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.DeptDistDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OtherPersonDistVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.OtherPersonDistVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PersonAwardsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.PersonAwardsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PersonDistDetailsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.PersonDistDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectAwardsDetailsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.ProjectAwardsDetailsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectAwardsVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.ProjectAwardsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="QueryYearVO"
+      FullName="cux.oracle.apps.per.bonus.awardsreport.server.QueryYearVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

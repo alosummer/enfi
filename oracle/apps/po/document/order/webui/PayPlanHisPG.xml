@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayout" controllerClass="cux.oracle.apps.po.document.order.webui.PayPlanHisCO" amDefName="cux.oracle.apps.po.document.order.server.PayPlanAM" windowTitle="付款计划历史版本" title="付款计划历史版本">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="PayPlanHisTable" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="VersionId" dataType="NUMBER" prompt="版本" viewName="PayPlanHisVO1" viewAttr="VersionId"/>
+                  <oa:messageStyledText id="LineNum" dataType="NUMBER" prompt="行号" viewName="PayPlanHisVO1" viewAttr="LineNum"/>
+                  <oa:messageChoice id="PayType" dataType="VARCHAR2" prompt="类型" viewName="PayPlanHisVO1" viewAttr="PayType" pickListViewDef="cux.oracle.apps.po.document.order.poplist.server.PayTypeVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="true"/>
+                  <oa:messageStyledText id="Memo" dataType="VARCHAR2" prompt="付款节点描述" viewName="PayPlanHisVO1" viewAttr="Memo" maximumLength="1000"/>
+                  <oa:messageStyledText id="InitAmt" dataType="NUMBER" prompt="初始金额" viewName="PayPlanHisVO1" viewAttr="InitAmt" rendered="false"/>
+                  <oa:messageStyledText id="InitPayDate" dataType="DATE" prompt="初始付款日期" viewName="PayPlanHisVO1" viewAttr="InitPayDate" rendered="false"/>
+                  <oa:messageStyledText id="NewPayDate" dataType="DATE" prompt="计划付款日期" viewName="PayPlanHisVO1" viewAttr="NewPayDate"/>
+                  <oa:messageStyledText id="NewAmt" dataType="NUMBER" prompt="额度" viewName="PayPlanHisVO1" viewAttr="NewAmt"/>
+                  <oa:messageStyledText id="PayApplyNum" dataType="VARCHAR2" prompt="付款申请号" viewName="PayPlanHisVO1" viewAttr="PayApplyNum" maximumLength="1000"/>
+                  <oa:messageStyledText id="PayApplyDate" dataType="DATE" prompt="付款申请日期" viewName="PayPlanHisVO1" viewAttr="PayApplyDate"/>
+                  <oa:messageStyledText id="PayApplyAmt" dataType="NUMBER" prompt="付款申请金额" viewName="PayPlanHisVO1" viewAttr="PayApplyAmt"/>
+                  <oa:messageStyledText id="PayApplierName" dataType="VARCHAR2" prompt="付款申请人" viewName="PayPlanHisVO1" viewAttr="PayApplierName" maximumLength="500"/>
+                  <oa:messageStyledText id="PaidAmt" dataType="NUMBER" prompt="已付金额" viewName="PayPlanHisVO1" viewAttr="PaidAmt"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="ReturnToPayPlan" destination="" invokeFunc="CUXPOPAYPLAN"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

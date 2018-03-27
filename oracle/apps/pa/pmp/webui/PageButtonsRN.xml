@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:pageButtonBar version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/">
+   <ui:contents>
+      <oa:button id="submitd" text="提交审核" prompt="提交审核">
+         <ui:primaryClientAction>
+            <ui:fireAction event="SubmitD" id="fireAction1"/>
+         </ui:primaryClientAction>
+      </oa:button>
+      <oa:button id="submitc" text="提交审批" prompt="提交审批">
+         <ui:primaryClientAction>
+            <ui:fireAction event="SubmitC" id="fireAction2"/>
+         </ui:primaryClientAction>
+      </oa:button>
+      <oa:button id="back" text="返回" prompt="返回">
+         <ui:primaryClientAction>
+            <ui:fireAction event="Back" id="fireAction3"/>
+         </ui:primaryClientAction>
+      </oa:button>
+      <oa:button id="save" text="保存" prompt="保存">
+         <ui:primaryClientAction>
+            <ui:fireAction event="Save" id="fireAction4"/>
+         </ui:primaryClientAction>
+      </oa:button>
+   </ui:contents>
+</oa:pageButtonBar>

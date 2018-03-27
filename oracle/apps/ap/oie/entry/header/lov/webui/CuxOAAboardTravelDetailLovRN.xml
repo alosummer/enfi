@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.ap.oie.entry.header.lov.webui.CuxOAAboardTravelDetailLovRNCO">
+   <ui:contents>
+      <oa:table name="CuxOAAboardTravelDetailLovRN" id="CuxOAAboardTravelDetailLovVO1">
+         <ui:contents>
+            <oa:formValue id="EmpId" dataType="NUMBER" prompt="EmpId" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="EmpId"/>
+            <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="员工姓名" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="EmpName" maximumLength="9" queryable="true"/>
+            <oa:messageStyledText id="EmpNumber" dataType="VARCHAR2" prompt="工号" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="EmpNumber" maximumLength="6" queryable="true"/>
+            <oa:messageStyledText id="EmpDept" dataType="VARCHAR2" prompt="部门" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="EmpDept" maximumLength="15"/>
+            <oa:messageStyledText id="TravelType" dataType="VARCHAR2" prompt="出差类型" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="TravelType" maximumLength="18"/>
+            <oa:messageStyledText id="TravelCountry" dataType="VARCHAR2" prompt="出访国家" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="TravelCountry" maximumLength="9"/>
+            <oa:messageStyledText id="IsConference" dataType="VARCHAR2" prompt="是否会议类型" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="IsConference" maximumLength="3"/>
+            <oa:formValue id="OaAbroadTravelHeaderId" dataType="NUMBER" prompt="OaAbroadTravelHeaderId" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="OaAbroadTravelHeaderId"/>
+            <oa:formValue id="OaAbroadTravelLineId" dataType="NUMBER" prompt="OaAbroadTravelLineId" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="OaAbroadTravelLineId"/>
+            <oa:formValue id="RelatedId" dataType="VARCHAR2" prompt="RelatedId" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="RelatedId"/>
+            <oa:formValue id="RelatedAboardLineId" dataType="NUMBER" prompt="RelatedAboardLineId" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="RelatedAboardLineId"/>
+            <oa:formValue id="LineNun" viewName="CuxOAAboardTravelDetailLovVO1" viewAttr="LineNun"/>
+            <oa:formValue id="AboardFlag" viewAttr="AboardFlag" viewName="CuxOAAboardTravelDetailLovVO1"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="现场后勤保障规划" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpLogisticalCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ResultHdr">
+               <ui:contents>
+                  <oa:table id="PmpLogisticalVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageTextInput id="LogisticalContent" dataType="VARCHAR2" prompt="内容" viewName="PmpLogisticalVO1" viewAttr="LogisticalContent" maximumLength="300"/>
+                        <oa:messageTextInput id="LogisticalType" dataType="VARCHAR2" prompt="方式" viewName="PmpLogisticalVO1" viewAttr="LogisticalType" maximumLength="300"/>
+                        <oa:messageTextInput id="Uom" dataType="VARCHAR2" prompt="单位" viewName="PmpLogisticalVO1" viewAttr="Uom" maximumLength="90"/>
+                        <oa:messageTextInput id="Quantity" dataType="NUMBER" prompt="数量" viewName="PmpLogisticalVO1" viewAttr="Quantity"/>
+                        <oa:messageTextInput id="Unit" dataType="NUMBER" prompt="单价" viewName="PmpLogisticalVO1" viewAttr="Unit"/>
+                        <oa:messageTextInput id="Amount" dataType="NUMBER" prompt="总价" viewName="PmpLogisticalVO1" viewAttr="Amount"/>
+                        <oa:messageTextInput id="LogisticalDesc" dataType="VARCHAR2" prompt="说明" viewName="PmpLogisticalVO1" viewAttr="LogisticalDesc" maximumLength="3000"/>
+                        <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="Delete"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="Add" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Add"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

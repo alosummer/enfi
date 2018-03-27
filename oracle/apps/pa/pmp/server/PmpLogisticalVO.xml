@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpLogisticalVO"
+   SelectList="PmpLogisticalEO.PROJECT_ID, 
+       PmpLogisticalEO.VERSION_NUM, 
+       PmpLogisticalEO.LOGISTICAL_CONTENT, 
+       PmpLogisticalEO.LOGISTICAL_TYPE, 
+       PmpLogisticalEO.UOM, 
+       PmpLogisticalEO.QUANTITY, 
+       PmpLogisticalEO.UNIT, 
+       PmpLogisticalEO.AMOUNT, 
+       PmpLogisticalEO.LOGISTICAL_DESC, 
+       PmpLogisticalEO.ATTRIBUTE1, 
+       PmpLogisticalEO.ATTRIBUTE2, 
+       PmpLogisticalEO.ATTRIBUTE3, 
+       PmpLogisticalEO.ATTRIBUTE4, 
+       PmpLogisticalEO.ATTRIBUTE5, 
+       PmpLogisticalEO.ATTRIBUTE6, 
+       PmpLogisticalEO.ATTRIBUTE7, 
+       PmpLogisticalEO.ATTRIBUTE8, 
+       PmpLogisticalEO.ATTRIBUTE9, 
+       PmpLogisticalEO.CREATED_BY, 
+       PmpLogisticalEO.CREATION_DATE, 
+       PmpLogisticalEO.LAST_UPDATED_BY, 
+       PmpLogisticalEO.LAST_UPDATE_DATE, 
+       PmpLogisticalEO.LAST_UPDATE_LOGIN, 
+       PmpLogisticalEO.ROWID"
+   FromList="CUX.CUX_PA_PMP_LOGISTICAL_T PmpLogisticalEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.pa.pmp.server.PmpLogisticalVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpLogisticalVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PmpLogisticalEO"
+      Entity="cux.oracle.apps.pa.pmp.server.PmpLogisticalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNum"
+      EntityAttrName="VersionNum"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="VERSION_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LogisticalContent"
+      EntityAttrName="LogisticalContent"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LOGISTICAL_CONTENT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LogisticalType"
+      EntityAttrName="LogisticalType"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LOGISTICAL_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Uom"
+      EntityAttrName="Uom"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="UOM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Quantity"
+      EntityAttrName="Quantity"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Unit"
+      EntityAttrName="Unit"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="UNIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Amount"
+      EntityAttrName="Amount"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="AMOUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LogisticalDesc"
+      EntityAttrName="LogisticalDesc"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LOGISTICAL_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="PmpLogisticalEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

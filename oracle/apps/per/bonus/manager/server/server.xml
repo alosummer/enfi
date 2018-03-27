@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.bonus.manager.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.15" />
+   </DesignTime>
+   <Containee
+      Name="LineStatusVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.LineStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ManagerCheckAM"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ManagerCheckAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ManagerCheckBudgetVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ManagerCheckBudgetVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ManagerGrantAM"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ManagerGrantAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ManagerGrantVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ManagerGrantVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ManagerVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ManagerVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectManagerLovAM"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ProjectManagerLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ProjectManagerVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ProjectManagerVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectVO"
+      FullName="cux.oracle.apps.per.bonus.manager.server.ProjectVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

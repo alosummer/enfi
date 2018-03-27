@@ -1,0 +1,494 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="DeptBonusVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.bonus.searchlist.DeptBonusVORowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.searchlist.DeptBonusVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 
+distinct(cux_bonus_person_distribution.person_id) id,
+per_all_people_f.last_name name,
+cux_bonus_person_distribution.dep_name dep_name,
+nvl(JanSearch.amout,0) Jan,
+nvl(FebSearch.amout,0) Feb,
+nvl(MarSearch.amout,0) Mar,
+nvl(AprilSearch.amout,0) April,
+nvl(MaySearch.amout,0) May,
+nvl(JuneSearch.amout,0) June,
+nvl(JulySearch.amout,0) July,
+nvl(AugSearch.amout,0) Aug,
+nvl(SepSearch.amout,0) Sep,
+nvl(OctSearch.amout,0) Oct,
+nvl(NovSearch.amout,0) Nov,
+nvl(DecSearch.amout,0) Dec,
+nvl(YearSearch.amout,0) Year,
+
+nvl(JanSearch.amout,0) + nvl(FebSearch.amout,0) + nvl(MarSearch.amout,0)
++nvl(AprilSearch.amout,0)+nvl(MaySearch.amout,0)+nvl(JuneSearch.amout,0)
++nvl(JulySearch.amout,0)+ nvl(AugSearch.amout,0)+nvl(SepSearch.amout,0)
++nvl(OctSearch.amout,0)+nvl(NovSearch.amout,0)+nvl(DecSearch.amout,0)
++nvl(YearSearch.amout,0) as total
+
+from cux_bonus_person_distribution,per_all_people_f
+
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-01','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-01','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) JanSearch on JanSearch.person_id=per_all_people_f.person_id 
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-02','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-02','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) FebSearch on FebSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-03','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-03','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) MarSearch on MarSearch.person_id=per_all_people_f.person_id 
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-04','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-04','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) AprilSearch on AprilSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-05','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-05','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) MaySearch on MaySearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-06','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-06','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) JuneSearch on JuneSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-07','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-07','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) JulySearch on JulySearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-08','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-08','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) AugSearch on AugSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-09','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-09','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) SepSearch on SepSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-10','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-10','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) OctSearch on OctSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-11','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-11','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) NovSearch on NovSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id<>8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-12','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-12','yyyy-mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) DecSearch on DecSearch.person_id=per_all_people_f.person_id
+
+left join 
+(select 
+cux_bonus_person_distribution.person_id person_id,
+sum(cux_bonus_person_distribution.distribution_amount) amout
+from cux_bonus_person_distribution,per_all_people_f
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and 
+cux_bonus_person_distribution.type_id=8 and
+cux_bonus_person_distribution.distribution_status='已批准' and
+cux_bonus_person_distribution.distribution_date <= LAST_DAY(to_date(:1 || '-01','yyyy-mm')) and 
+cux_bonus_person_distribution.distribution_date>=ADD_MONTHS(LAST_DAY(to_date(:1 || '-12','yyyy-
+mm')) + 1, -1) 
+
+group by trunc(distribution_date,'mm'),
+
+cux_bonus_person_distribution.person_id
+) YearSearch on YearSearch.person_id=per_all_people_f.person_id
+
+where cux_bonus_person_distribution.person_id=per_all_people_f.person_id and cux_bonus_person_distribution.dep_name=:2
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="PersonDistributionId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PERSON_DISTRIBUTION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Id"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ID"
+      Expression="ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NAME"
+      Expression="NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DepName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEP_NAME"
+      Expression="DEP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jan"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="JAN"
+      Expression="JAN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Feb"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="FEB"
+      Expression="FEB"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Mar"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MAR"
+      Expression="MAR"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="April"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APRIL"
+      Expression="APRIL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="May"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MAY"
+      Expression="MAY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="June"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="JUNE"
+      Expression="JUNE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="July"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="JULY"
+      Expression="JULY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aug"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="AUG"
+      Expression="AUG"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sep"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SEP"
+      Expression="SEP"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Oct"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="OCT"
+      Expression="OCT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nov"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NOV"
+      Expression="NOV"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Dec"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DEC"
+      Expression="DEC"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Year"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="YEAR"
+      Expression="YEAR"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Total"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL"
+      Expression="TOTAL"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

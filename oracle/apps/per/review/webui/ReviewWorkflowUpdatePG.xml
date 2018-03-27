@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.ReviewWorkflowUpdateCO" amDefName="cux.oracle.apps.per.review.server.ReviewWorkflowAM" windowTitle="定义考核流程" title="定义考核流程">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:messageChoice id="EpmPeriodCode" allowBlankValue="false" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPeriodVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="周期" viewName="ReviewWorkflowVO1" viewAttr="EpmPeriodCode"/>
+                  <oa:messageChoice id="EpmPhaseClassCode" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPhaseVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="阶段" allowBlankValue="false" viewName="ReviewWorkflowVO1" viewAttr="EpmPhaseClassCode"/>
+                  <oa:messageChoice id="GroupName" allowBlankValue="false" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId" prompt="考群" dataType="NUMBER" viewName="ReviewWorkflowVO1" viewAttr="GroupId"/>
+                  <oa:messageLovInput id="OrgName" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" prompt="组织" required="yes">
+                     <lovMappings>
+                        <lovMap id="ToOrgNmae" lovItem="OrganizationName" resultTo="OrgName" criteriaFrom="OrgName"/>
+                        <lovMap id="ToOrgId" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageChoice id="IsAttended" allowBlankValue="false" pickListViewDef="cux.oracle.apps.per.poplist.server.YesNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="被评估人参与" viewName="ReviewWorkflowVO1" viewAttr="IsAttended"/>
+                  <oa:formValue id="OrgId" viewName="ReviewWorkflowVO1" viewAttr="OrgId" dataType="NUMBER"/>
+                  <oa:table id="ReviewWorkflowLevelVO1" width="100%" rendered="true">
+                     <ui:contents>
+                        <oa:messageStyledText id="EpmApproveLevel" viewName="ReviewWorkflowLevelVO1" viewAttr="EpmApproveLevel" prompt="考核流程LEVEL"/>
+                        <oa:messageChoice id="ApproveTypeName" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpApproveTypeVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" viewName="ReviewWorkflowLevelVO1" viewAttr="EpmApproveTypeCode" prompt="审核角色" allowBlankValue="false" defaultValue="FIXED">
+                           <ui:primaryClientAction>
+                              <ui:firePartialAction event="changeApproveType"/>
+                           </ui:primaryClientAction>
+                        </oa:messageChoice>
+                        <oa:messageLovInput id="ApprovePersonName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmpRN" unvalidated="true" prompt="人员" viewName="ReviewWorkflowLevelVO1" viewAttr="ApprovePersonName" dataType="VARCHAR2" readOnly="${oa.ReviewWorkflowLevelVO1.UpdatableFlag}">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="LastName" resultTo="ApprovePersonName" criteriaFrom="ApprovePersonName"/>
+                              <lovMap id="lovMap2" lovItem="PersonId" criteriaFrom="ApprovePersonId" resultTo="ApprovePersonId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="ApprovePersonId" dataType="NUMBER" viewName="ReviewWorkflowLevelVO1" viewAttr="EpmApprovePersonId"/>
+                        <oa:formValue id="EpmApproveId" viewName="ReviewWorkflowLevelVO1" viewAttr="EpmApproveId" dataType="NUMBER"/>
+                        <oa:image id="delChildLevel" prompt="删除" source="deleteicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delChildLevel">
+                                 <ui:parameters>
+                                    <ui:parameter key="EpmApproveId" value="${oa.ReviewWorkflowLevelVO1.EpmApproveId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:switcher id="DeleteSwitcher" viewName="ReviewWorkflowLevelVO1" viewAttr="EnableFlag" prompt="删除" rendered="false">
+                           <ui:case name="DeleteDisabled">
+                              <oa:image id="DeleteDisabled" source="deleteicon_disabled.gif"/>
+                           </ui:case>
+                           <ui:case name="DeleteEnabled">
+                              <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="delChildLevel">
+                                       <ui:parameters>
+                                          <ui:parameter key="EpmApproveId" value="${oa.ReviewWorkflowLevelVO1.EpmApproveId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                        </oa:switcher>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

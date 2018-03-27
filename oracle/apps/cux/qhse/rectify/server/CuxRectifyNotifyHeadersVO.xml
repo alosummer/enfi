@@ -1,0 +1,574 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxRectifyNotifyHeadersVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeadersVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeadersVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT cuxrectifynotifyheaderseo.header_id,
+       cuxrectifynotifyheaderseo.org_id,
+       cuxrectifynotifyheaderseo.doc_type,
+       pal.meaning doc_type_dis,
+       cuxrectifynotifyheaderseo.project_id,
+       ppa.segment1 project_number,
+       nvl(ppa.long_name,
+           ppa.name) project_name,
+       (SELECT ctv.code_description
+          FROM apps.pa_project_class_totals_v ctv
+         WHERE ctv.project_id = ppa.project_id
+           AND ctv.class_category = '项目所属部门') project_org_name,
+       cuxrectifynotifyheaderseo.man_dept_id,
+       hou.name man_dept_name,
+       cuxrectifynotifyheaderseo.ci_type_id,
+       pci.name ci_type_name,
+       cuxrectifynotifyheaderseo.task_id,
+       pt.task_name,
+       cuxrectifynotifyheaderseo.status,
+       pal1.meaning status_dis,
+       cuxrectifynotifyheaderseo.priority_level,
+       pal2.meaning priority_level_dis,
+       cuxrectifynotifyheaderseo.problem_category_id,
+       pcc.class_code problem_category_dis,
+       cuxrectifynotifyheaderseo.reason_id,
+       pcc1.class_code reason_dis,
+       cuxrectifynotifyheaderseo.work_level,
+       pal3.meaning work_level_dis,
+       cuxrectifynotifyheaderseo.sourec_type,
+       pal4.meaning source_type_dis,
+       cuxrectifynotifyheaderseo.price,
+       cuxrectifynotifyheaderseo.duty_person_id,
+       ppf.full_name || '(' || ppf.employee_number || ')' duty_person_name,
+       cuxrectifynotifyheaderseo.complete_date,
+       cuxrectifynotifyheaderseo.creation_date,
+       cuxrectifynotifyheaderseo.created_by,
+       ppf1.full_name || '(' || ppf1.employee_number || ')' create_person,
+       cuxrectifynotifyheaderseo.last_update_date,
+       cuxrectifynotifyheaderseo.last_updated_by,
+       cuxrectifynotifyheaderseo.last_update_login,
+       cuxrectifynotifyheaderseo.attribute_category,
+       cuxrectifynotifyheaderseo.attribute1,
+       cuxrectifynotifyheaderseo.attribute2,
+       cuxrectifynotifyheaderseo.attribute3,
+       cuxrectifynotifyheaderseo.attribute4,
+       cuxrectifynotifyheaderseo.attribute5,
+       decode(cuxrectifynotifyheaderseo.doc_type,
+              'PROJECT',
+              0,
+              1) AS project_readonly_flag,
+       decode(cuxrectifynotifyheaderseo.doc_type,
+              'PROJECT',
+              'yes',
+              'no') AS project_required_flag
+  FROM cux.cux_rectify_notify_headers cuxrectifynotifyheaderseo,
+       pa_projects_all ppa,
+       pa_lookups pal,
+       hr_all_organization_units hou,
+       pa_ci_types_v pci,
+       (SELECT ppe.proj_element_id AS task_id,
+               ppe.name            AS task_name,
+               ppe.project_id      AS project_id
+          FROM pa_proj_elements          ppe,
+               pa_proj_element_versions  ppev,
+               pa_proj_elem_ver_schedule ppevsch,
+               pa_task_types             ptt,
+               pa_projects_all           ppa,
+               per_all_people_f          papf,
+               pa_percent_completes      ppc,
+               pa_project_statuses       status,
+               pa_project_statuses       progress,
+               pa_lookups                priority,
+               pa_lookups                CLASS,
+               pa_progress_rollup        ppr
+         WHERE priority.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+           AND priority.lookup_code(+) = ppe.priority_code
+           AND class.lookup_type = 'PA_OBJECTS'
+           AND class.lookup_code = 'PA_TASKS'
+           AND ptt.task_type_id(+) = ppe.type_id
+           AND progress.status_type(+) = 'PROGRESS'
+           AND progress.project_status_code(+) = ppc.progress_status_code
+           AND status.status_type(+) = 'TASK'
+           AND status.project_status_code(+) = ppe.status_code
+           AND ppe.object_type = 'PA_TASKS'
+           AND ppe.project_id = ppa.project_id
+           AND ppev.proj_element_id = ppe.proj_element_id
+           AND ppev.parent_structure_version_id =
+               pa_project_structure_utils.get_latest_wp_version(ppe.project_id)
+           AND ppevsch.element_version_id(+) = ppev.element_version_id
+           AND ppr.project_id(+) = ppc.project_id
+           AND ppr.object_id(+) = ppc.object_id
+           AND ppr.object_type(+) = ppc.object_type
+           AND ppr.current_flag(+) = 'Y'
+           AND ppr.structure_type(+) = 'WORKPLAN'
+           AND ppr.structure_version_id(+) IS NULL
+           AND ppe.manager_person_id = papf.person_id(+)
+           AND trunc(SYSDATE) BETWEEN papf.effective_start_date(+) AND
+               papf.effective_end_date(+)
+           AND ppc.object_id(+) = ppe.proj_element_id
+           AND ppc.object_type(+) = 'PA_TASKS'
+           AND ppc.project_id(+) = ppe.project_id
+           AND ppc.current_flag(+) = 'Y'
+           AND ppc.current_flag(+) = 'Y'
+           AND ppc.published_flag(+) = 'Y'
+           AND ppc.structure_type(+) = 'WORKPLAN'
+           AND nvl(ppa.template_flag,
+                   'N') <> 'Y'
+           AND ppe.link_task_flag = 'N') pt,
+       pa_lookups pal1,
+       pa_lookups pal2,
+       pa_lookups pal3,
+       pa_lookups pal4,
+       pa_class_codes pcc,
+       pa_class_codes pcc1,
+       per_all_people_f ppf,
+       per_all_people_f ppf1,
+       fnd_user fu
+ WHERE ppa.project_id(+) = cuxrectifynotifyheaderseo.project_id
+   AND pci.ci_type_id = cuxrectifynotifyheaderseo.ci_type_id
+   AND pt.task_id(+) = cuxrectifynotifyheaderseo.task_id
+   AND hou.organization_id = cuxrectifynotifyheaderseo.man_dept_id
+   AND trunc(SYSDATE) BETWEEN nvl(hou.date_from,
+                                  SYSDATE) AND
+       nvl(hou.date_to,
+           SYSDATE)
+   AND pal.lookup_code = cuxrectifynotifyheaderseo.doc_type
+   AND pal.lookup_type = 'ISSUE_DOCUMENTS_TYPE'
+   AND pal1.lookup_code = cuxrectifynotifyheaderseo.status
+   AND pal1.lookup_type = 'ISSUE_CHANGE_STATUS'
+   AND pal2.lookup_code(+) = cuxrectifynotifyheaderseo.priority_level
+   AND pal2.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+   AND pal3.lookup_code = cuxrectifynotifyheaderseo.work_level
+   AND pal3.lookup_type = 'PA_CI_EFFORT_LEVELS'
+   AND pal4.lookup_code = cuxrectifynotifyheaderseo.sourec_type
+   AND pal4.lookup_type = 'PA_CI_SOURCE_TYPES'
+   AND pcc.class_code_id = cuxrectifynotifyheaderseo.problem_category_id
+   AND pcc.class_category = '项目问题'
+   AND pcc1.class_code_id(+) = cuxrectifynotifyheaderseo.reason_id
+   AND pcc1.class_category(+) = '问题原因'
+   AND ppf.person_id = cuxrectifynotifyheaderseo.duty_person_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf.effective_end_date,
+           SYSDATE)
+   AND ppf1.person_id = fu.employee_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf1.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf1.effective_end_date,
+           SYSDATE)
+   AND cuxrectifynotifyheaderseo.created_by = fu.user_id
+   AND trunc(SYSDATE) BETWEEN nvl(fu.start_date,
+                                  SYSDATE) AND
+       nvl(fu.end_date,
+           SYSDATE)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxRectifyNotifyHeadersEO"
+      Entity="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeadersEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="HeaderId"
+      IsNotNull="true"
+      EntityAttrName="HeaderId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      EntityAttrName="OrgId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocType"
+      EntityAttrName="DocType"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="DOC_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocTypeDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_TYPE_DIS"
+      Expression="DOC_TYPE_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectNumber"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUMBER"
+      Expression="PROJECT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NAME"
+      Expression="PROJECT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectOrgName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_ORG_NAME"
+      Expression="PROJECT_ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManDeptId"
+      EntityAttrName="ManDeptId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="MAN_DEPT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManDeptName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MAN_DEPT_NAME"
+      Expression="MAN_DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CiTypeId"
+      EntityAttrName="CiTypeId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="CI_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CiTypeName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CI_TYPE_NAME"
+      Expression="CI_TYPE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      EntityAttrName="TaskId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="TASK_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_DIS"
+      Expression="STATUS_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityLevel"
+      EntityAttrName="PriorityLevel"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="PRIORITY_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityLevelDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIORITY_LEVEL_DIS"
+      Expression="PRIORITY_LEVEL_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemCategoryId"
+      EntityAttrName="ProblemCategoryId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="PROBLEM_CATEGORY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemCategoryDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROBLEM_CATEGORY_DIS"
+      Expression="PROBLEM_CATEGORY_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReasonId"
+      EntityAttrName="ReasonId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="REASON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReasonDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REASON_DIS"
+      Expression="REASON_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkLevel"
+      EntityAttrName="WorkLevel"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="WORK_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkLevelDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORK_LEVEL_DIS"
+      Expression="WORK_LEVEL_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourecType"
+      EntityAttrName="SourecType"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="SOUREC_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourceTypeDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SOURCE_TYPE_DIS"
+      Expression="SOURCE_TYPE_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Price"
+      EntityAttrName="Price"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutyPersonId"
+      EntityAttrName="DutyPersonId"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="DUTY_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutyPersonName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DUTY_PERSON_NAME"
+      Expression="DUTY_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompleteDate"
+      EntityAttrName="CompleteDate"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="COMPLETE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatePerson"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CREATE_PERSON"
+      Expression="CREATE_PERSON"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxRectifyNotifyHeadersEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectReadonlyFlag"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_READONLY_FLAG"
+      Expression="PROJECT_READONLY_FLAG"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRequiredFlag"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_REQUIRED_FLAG"
+      Expression="PROJECT_REQUIRED_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

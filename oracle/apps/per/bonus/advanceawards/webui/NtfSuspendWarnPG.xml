@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="部门奖金提醒(暂停分配人员发放记录)" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.NtfSuspendWarnCO" amDefName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="SearchRN">
+               <ui:contents>
+                  <oa:messageChoice id="QueryPeriod" prompt="项目奖发放月份" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.PeriodVO" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" defaultValue="" allowBlankValue="false"/>
+                  <oa:messageLayout id="ButtonLayoutRN">
+                     <ui:contents>
+                        <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:separator id="separator"/>
+            <oa:advancedTable id="PersonDisTable" blockSize="200" width="100%" viewName="NtfSuspendWarnVO1">
+               <ui:contents>
+                  <oa:column id="BonusDepNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="奖金发放部门"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="BonusDepName" viewAttr="BonusDepName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DisMonthCol" totalValue="false" columnDataFormat="textFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader12" prompt="月份"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="DisMonth" viewAttr="DisMonth"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EmpNoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader15" prompt="工号"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpNo" viewAttr="EmpNo"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EmpNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader7" prompt="姓名"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpName" viewAttr="EmpName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PerStatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader81" prompt="人员类型"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PerStatus" viewAttr="PerStatus"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="AssgnStatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader71" prompt="人员分配状态"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="AssgnStatus" viewAttr="AssgnStatus"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="OrgNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader8" prompt="部门"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="OrgName" viewAttr="EmpOrgName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="BonusTypeNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader821" prompt="奖金类型"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="BonusTypeName" viewAttr="BonusTypeName"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DistAmountCol" totalValue="true">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader9" prompt="奖金(元)"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="DistAmount" viewAttr="DistributionAmount" dataType="NUMBER"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="ImportStatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader82" prompt="ERP导入状态"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="ImportStatus" viewAttr="ImportStatus"/>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:footer>
+                  <oa:tableFooter id="tableFooter2">
+                     <ui:total>
+                        <oa:totalRow id="totalRow2" readOnly="true"/>
+                     </ui:total>
+                  </oa:tableFooter>
+               </ui:footer>
+            </oa:advancedTable>
+            <oa:tip id="DeptPerDistTip" text="&lt;p style=&quot;color:red&quot;>在奖金发放当月员工存在暂停分配的发放记录，需要奖金管理人员人工判断该笔部门奖金是否已实际发放。若未发放，则需删除相应的工资分录，并通知奖金系统管理人员进行记录删除、回退奖金额度，同时通知部门部长。&lt;/p>" styleClass="OraDataText"/>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

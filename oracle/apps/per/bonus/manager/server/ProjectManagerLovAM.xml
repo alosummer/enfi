@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="ProjectManagerLovAM"
+   ComponentClass="cux.oracle.apps.per.bonus.manager.server.ProjectManagerLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.15" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ProjectManagerVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.manager.server.ProjectManagerVO" >
+   </ViewUsage>
+</AppModule>

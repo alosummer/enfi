@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TmplOrgCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="TmplOrgVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="TmplOrgVO1" viewAttr="Rownum"/>
+                  <oa:formValue id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="TmplOrgVO1" viewAttr="TmplId"/>
+                  <oa:formValue id="OrganizationId" dataType="NUMBER" prompt="OrganizationId" viewName="TmplOrgVO1" viewAttr="OrganizationId"/>
+                  <oa:messageLovInput id="OrganizationName" dataType="VARCHAR2" prompt="组织" viewName="TmplOrgVO1" viewAttr="OrganizationName" maximumLength="240" externalListOfValues="/cux/oracle/apps/per/lov/webui/OrganizationRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="OrganizationName" resultTo="OrganizationName" criteriaFrom="OrganizationName"/>
+                        <lovMap id="lovMap2" lovItem="OrganizationId" resultTo="OrganizationId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="tmplId" value="${oa.TmplOrgVO1.TmplId}"/>
+                              <ui:parameter key="organizationId" value="${oa.TmplOrgVO1.OrganizationId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region2">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:spacer id="item3" width="5"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

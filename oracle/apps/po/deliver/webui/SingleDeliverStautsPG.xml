@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="SingleDeliverStautsPG" amDefName="cux.oracle.apps.po.deliver.server.CuxDeliverAM" windowTitle="修改交付物状态" title="修改交付物状态" controllerClass="cux.oracle.apps.po.deliver.webui.SingleDeliverStautsPGCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="MCL" width="60%" columns="2" rows="1" promptWidth="1%">
+               <ui:contents>
+                  <oa:messageStyledText id="OrderSeq" viewName="CuxPoDeliStatusTVO2" viewAttr="OrderSeq" prompt="序号" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="DeliName" viewName="CuxPoDeliStatusTVO2" viewAttr="DeliName" prompt="名称" styleClass="OraDataText"/>
+                  <oa:messageLovInput id="StatusName" viewName="CuxPoDeliStatusTVO2" viewAttr="StatusName" prompt="当前状态" shortDesc="当前状态" required="yes" externalListOfValues="/cux/oracle/apps/po/deliver/lov/webui/CuxDeliverStatusLovRN">
+                     <lovMappings>
+                        <lovMap id="lovMap3" lovItem="Description" resultTo="StatusName" criteriaFrom="StatusName"/>
+                        <lovMap id="lovMap4" lovItem="LookupCode" resultTo="Status"/>
+                        <lovMap id="lovMap5" lovItem="Tag" criteriaFrom="UniqSeq" requiredForLOV="true"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="Remark" viewName="CuxPoDeliStatusTVO2" viewAttr="Remark" prompt="备注" shortDesc="备注"/>
+                  <oa:messageStyledText id="LastUpdateName" viewName="CuxPoDeliStatusTVO2" viewAttr="LastUpdateName" prompt="最后更新者" shortDesc="最后更新者" styleClass="OraDataText"/>
+                  <oa:messageLovInput id="OnDutyPersonName" viewName="CuxPoDeliStatusTVO2" viewAttr="OnDutyPersonName" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxEmpLovRN" prompt="负责人">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="EmployeeId" resultTo="OnDutyPerson"/>
+                        <lovMap id="lovMap2" lovItem="EmpFullName" resultTo="OnDutyPersonName" criteriaFrom="OnDutyPersonName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageStyledText id="LastUpdateDate" dataType="DATE" viewName="CuxPoDeliStatusTVO2" viewAttr="LastUpdateDate" prompt="最后更新日期" shortDesc="最后更新日期"/>
+                  <oa:messageLayout id="messageLayout1">
+                     <ui:contents>
+                        <oa:formValue id="OnDutyPerson" viewName="CuxPoDeliStatusTVO2" viewAttr="OnDutyPerson" dataType="NUMBER"/>
+                        <oa:formValue id="Status" viewName="CuxPoDeliStatusTVO2" viewAttr="Status"/>
+                        <oa:formValue id="UniqSeq" viewName="CuxPoDeliStatusTVO2" viewAttr="UniqSeq" dataType="NUMBER"/>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:header id="DDFRN" text="附加信息">
+               <ui:contents>
+                  <oa:flex id="DFF" flexFieldAppShortName="CUX" viewName="CuxPoDeliStatusTVO2" prompt="附加信息" flexName="CUX_PO_DELI_STATUS_DFF" displayContextField="false"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="SupEvl" text="供应商评价">
+               <ui:contents>
+                  <oa:messageComponentLayout id="region1">
+                     <ui:contents>
+                        <oa:messageChoice id="Attribute1" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute1" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="严格按照合同进度计划执行"/>
+                        <oa:messageChoice id="Attribute2" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute2" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="合同标的物非常完整、准确、及时的进行了移交"/>
+                        <oa:messageChoice id="Attribute3" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute3" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="合同约定的文件资料非常完整、准确、及时的进行了提交"/>
+                        <oa:messageChoice id="Attribute4" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute4" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="现场服务与管理水平高、组织得力、服务态度积极主动"/>
+                        <oa:messageChoice id="Attribute5" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute5" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="合同标的物非常好的达到了合同约定的使用效果"/>
+                        <oa:messageChoice id="Attribute6" viewName="CuxPoSupEvlTVO1" viewAttr="Attribute6" pickListViewDef="cux.oracle.apps.po.deliver.poplist.server.CuxPoEvlValueListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" prompt="售后服务响应积极、态度好、服务质量高、解决售后问题"/>
+                        <oa:messageStyledText id="LastUpdateName1" viewName="CuxPoSupEvlTVO1" viewAttr="LastUpdateName" prompt="评价人"/>
+                        <oa:messageStyledText id="LastUpdateDate1" viewName="CuxPoSupEvlTVO1" viewAttr="LastUpdateDate" prompt="评价日期" dataType="DATE"/>
+                        <oa:messageTextInput id="Remark1" viewName="CuxPoSupEvlTVO1" viewAttr="Remark" prompt="备注" shortDesc="备注"/>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:attachmentTable id="AttachTable" text="附件" viewName="CuxPoDeliStatusTVO2">
+               <oa:entityMappings>
+                  <oa:entityMap id="entityMap1" entityId="CUX_PO_DELI_STATUS_T">
+                     <oa:primaryKeys>
+                        <oa:primaryKey id="primaryKey1" viewAttr="DeliId"/>
+                     </oa:primaryKeys>
+                  </oa:entityMap>
+               </oa:entityMappings>
+            </oa:attachmentTable>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="CancelBTN" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="ApplyBTN" text="应用" prompt="应用"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

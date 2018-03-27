@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxDocinfoManageCreatePG" amDefName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageAM" windowTitle="文件归档创建" title="文件归档创建" controllerClass="cux.oracle.apps.cux.docinfo.webui.CuxDocinfoManageCreatePGCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="Header" text="文档归档信息">
+               <ui:contents>
+                  <oa:messageComponentLayout id="HeaderLayout" columns="1" rows="1" width="60%" promptWidth="1%">
+                     <ui:contents>
+                        <oa:messageTextInput id="DocNumber" viewName="CuxDocinfoManageTVO1" viewAttr="DocNumber" dataType="VARCHAR2" prompt="文档编号" rendered="false" readOnly="true"/>
+                        <oa:messageLovInput id="DocumentTypeName" viewName="CuxDocinfoManageTVO1" viewAttr="DocumentTypeName" dataType="VARCHAR2" prompt="文件类型" required="yes" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoDocTypeLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap44" lovItem="DocumentTypeCode" resultTo="DocTypeCode"/>
+                              <lovMap id="lovMap45" lovItem="DocumentTypeName" resultTo="DocumentTypeName" criteriaFrom="DocumentTypeName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="CountryName" viewName="CuxDocinfoManageTVO1" viewAttr="CountryName" prompt="国家" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxCountryLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap31" lovItem="TerritoryCode" resultTo="CountryCode"/>
+                              <lovMap id="lovMap32" lovItem="TerritoryShortName" resultTo="CountryName" criteriaFrom="CountryName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="AreaAlias" prompt="洲名" dataType="VARCHAR2" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxAreaAliasListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="AreaAlias" viewName="CuxDocinfoManageTVO1"/>
+                        <oa:messageStyledText id="ArchiveDate" viewName="CuxDocinfoManageTVO1" viewAttr="CreationDate" prompt="建立日期" dataType="DATE"/>
+                        <oa:messageTextInput id="ProjectName" viewName="CuxDocinfoManageTVO1" viewAttr="ProjectName" prompt="项目名称" dataType="VARCHAR2" required="yes"/>
+                        <oa:messageTextInput id="RelationCorpName" viewName="CuxDocinfoManageTVO1" viewAttr="RelationCorpName" prompt="对方公司名" dataType="VARCHAR2" required="yes"/>
+                        <oa:messageTextInput id="OtherCorpName" viewName="CuxDocinfoManageTVO1" viewAttr="OtherCorpName" prompt="其他公司名" dataType="VARCHAR2"/>
+                        <oa:messageLovInput id="LangName" viewName="CuxDocinfoManageTVO1" viewAttr="LangName" prompt="语言" dataType="VARCHAR2" required="yes" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoLangLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap46" lovItem="LangCode" resultTo="LangCode"/>
+                              <lovMap id="lovMap47" lovItem="LangName" resultTo="LangName" criteriaFrom="LangName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="IsSigned" prompt="是否双方签字" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocSignListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="IsSigned" viewName="CuxDocinfoManageTVO1" required="yes"/>
+                        <oa:messageLovInput id="DocCopyName" viewName="CuxDocinfoManageTVO1" viewAttr="DocCopyName" prompt="纸质/电子版" dataType="VARCHAR2" required="yes" externalListOfValues="/cux/oracle/apps/cux/docinfo/lov/webui/CuxDocinfoCopyLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap48" lovItem="DocCopyCode" resultTo="DocCopyType"/>
+                              <lovMap id="lovMap49" lovItem="DocCopyName" resultTo="DocCopyName" criteriaFrom="DocCopyName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageCheckBox id="IsArchive" prompt="是否归档" viewAttr="IsArchive" defaultValue="" checkedValue="Y" unCheckedValue="N" text="是否归档" viewName="CuxDocinfoManageTVO1"/>
+                        <oa:messageCheckBox id="IsEndActive" prompt="是否失效" viewAttr="IsEndActive" defaultValue="" checkedValue="Y" unCheckedValue="N" text="是否失效" viewName="CuxDocinfoManageTVO1"/>
+                        <oa:messageChoice id="IsEvlSheet" prompt="是否有评审表" pickListViewDef="cux.oracle.apps.cux.docinfo.poplist.server.CuxDocRevListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" viewAttr="IsEvlSheet"/>
+                        <oa:messageLovInput id="SubmitterPersonName" viewName="CuxDocinfoManageTVO1" viewAttr="SubmitterPersonName" prompt="递交人" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxEmpLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap33" lovItem="EmployeeId" resultTo="SubmitterId"/>
+                              <lovMap id="lovMap34" lovItem="EmpFullName" resultTo="SubmitterPersonName" criteriaFrom="SubmitterPersonName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="Remark" viewName="CuxDocinfoManageTVO1" viewAttr="Remark" prompt="说明" dataType="VARCHAR2"/>
+                        <oa:messageLayout id="messageLayout1">
+                           <ui:contents>
+                              <oa:formValue id="DocId" viewName="CuxDocinfoManageTVO1" viewAttr="DocId" dataType="NUMBER"/>
+                              <oa:formValue id="DocTypeCode" viewName="CuxDocinfoManageTVO1" viewAttr="DocTypeCode" dataType="VARCHAR2"/>
+                              <oa:formValue id="CountryCode" viewName="CuxDocinfoManageTVO1" viewAttr="CountryCode" dataType="VARCHAR2"/>
+                              <oa:formValue id="LangCode" viewName="CuxDocinfoManageTVO1" viewAttr="LangCode" dataType="VARCHAR2"/>
+                              <oa:formValue id="DocCopyType" viewName="CuxDocinfoManageTVO1" viewAttr="DocCopyType" dataType="VARCHAR2"/>
+                              <oa:formValue id="SubmitterId" viewName="CuxDocinfoManageTVO1" viewAttr="SubmitterId" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="SaveBTN" text="保存" prompt="保存"/>
+                  <oa:submitButton id="CancelBTN" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

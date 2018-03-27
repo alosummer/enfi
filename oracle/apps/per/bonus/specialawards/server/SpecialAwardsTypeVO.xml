@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="SpecialAwardsTypeVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsTypeVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT distinct SpecialAwardsTypeEO.TYPE_ID,
+       SpecialAwardsTypeEO.TYPE_NAME,
+        specialawardstypeeo.to_people_flag,
+       specialawardstypeeo.to_dep_flag
+  FROM CUX_BONUS_TYPE SpecialAwardsTypeEO
+ WHERE valid_flag = 'Y'
+   AND bonus_type IN ('预支奖', '产值奖')
+/*SELECT SpecialAwardsTypeEO.TYPE_ID,
+       SpecialAwardsTypeEO.TYPE_NAME,
+       SpecialAwardsTypeEO.TO_PEOPLE_FLAG,
+       SpecialAwardsTypeEO.To_Dep_Flag
+  FROM CUX_BONUS_TYPE SpecialAwardsTypeEO
+ WHERE valid_flag = 'Y'
+   AND bonus_type IN ('专项奖', '产值奖', '其它奖', '部门奖')
+ORDER BY ATTRIBUTE1*/
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="SpecialAwardsTypeEO"
+      Entity="cux.oracle.apps.per.bonus.specialawards.server.SpecialAwardsTypeEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="TypeId"
+      IsNotNull="true"
+      EntityAttrName="TypeId"
+      EntityUsage="SpecialAwardsTypeEO"
+      AliasName="TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TypeName"
+      EntityAttrName="TypeName"
+      EntityUsage="SpecialAwardsTypeEO"
+      AliasName="TYPE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ToPeopleFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TO_PEOPLE_FLAG"
+      Expression="TO_PEOPLE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ToDepFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TO_DEP_FLAG"
+      Expression="TO_DEP_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

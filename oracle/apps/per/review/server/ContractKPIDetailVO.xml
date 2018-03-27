@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ContractKPIDetailVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.ContractKPIDetailVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.ContractKPIDetailVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ContractEO.CONTRACT_ID, 
+       ContractEO.APPRAISAL_ID, 
+       ContractEO.TMPL_ID, 
+       ContractEO.TARGET_VALUE, 
+       ContractEO.MINIMUM_VALUE, 
+       ContractEO.RATING_METHOD, 
+       ContractEO.SHOW_SEQ, 
+       ContractEO.KPI_ID, 
+       ContractEO.KPI_AREA, 
+       ContractEO.KPI_NAME, 
+       ContractEO.KPI_DESC, 
+       ContractEO.KPI_CLASS, 
+       ContractEO.KPI_DATA_SOURCE, 
+       ContractEO.KPI_DATA_DIMENSION, 
+       ContractEO.KPI_SCORING_METHOD, 
+       ContractEO.ATTRIBUTE1, 
+       ContractEO.ATTRIBUTE2, 
+       ContractEO.ATTRIBUTE3, 
+       ContractEO.ATTRIBUTE4, 
+       ContractEO.ATTRIBUTE5, 
+       ContractEO.LAST_UPDATE_DATE, 
+       ContractEO.LAST_UPDATED_BY, 
+       ContractEO.LAST_UPDATE_LOGIN, 
+       ContractEO.CREATED_BY, 
+       ContractEO.CREATION_DATE, 
+       ContractEO.ACTUAL_VALUE, 
+       ContractEO.SCORE_VALUE,
+       ContractEO.SELF_EVAL_VALUE,
+       ContractEO.PARENT_CONTRACT_ID, 
+       ContractEO.WEIGHT
+, cux_jxkh_common_pkg.display_score_flag(ContractEO.APPRAISAL_ID,ContractEO.KPI_DATA_SOURCE) AS SHOW_SCORE_FLAG
+,decode(ContractEO.KPI_DATA_SOURCE,
+            '-1', 'UpdateDisabled', 'UpdateEnabled') AS UPDATE_IMAGE
+, decode(cux_jxkh_common_pkg.is_present_performer(ContractEO.APPRAISAL_ID), 'N', 'DeleteDisabled', 
+ 'Y', 'DeleteEnabled', 'DeleteDisabled') AS DELETE_IMAGE
+FROM CUX_CONTRACT_T ContractEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ContractEO"
+      Entity="cux.oracle.apps.per.review.server.ContractEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ContractId"
+      IsNotNull="true"
+      EntityAttrName="ContractId"
+      EntityUsage="ContractEO"
+      AliasName="CONTRACT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      EntityAttrName="AppraisalId"
+      EntityUsage="ContractEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      EntityAttrName="TmplId"
+      EntityUsage="ContractEO"
+      AliasName="TMPL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetValue"
+      EntityAttrName="TargetValue"
+      EntityUsage="ContractEO"
+      AliasName="TARGET_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MinimumValue"
+      EntityAttrName="MinimumValue"
+      EntityUsage="ContractEO"
+      AliasName="MINIMUM_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RatingMethod"
+      EntityAttrName="RatingMethod"
+      EntityUsage="ContractEO"
+      AliasName="RATING_METHOD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowSeq"
+      EntityAttrName="ShowSeq"
+      EntityUsage="ContractEO"
+      AliasName="SHOW_SEQ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      EntityAttrName="KpiId"
+      EntityUsage="ContractEO"
+      AliasName="KPI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiArea"
+      EntityAttrName="KpiArea"
+      EntityUsage="ContractEO"
+      AliasName="KPI_AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiName"
+      EntityAttrName="KpiName"
+      EntityUsage="ContractEO"
+      AliasName="KPI_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      EntityAttrName="KpiDesc"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      EntityAttrName="KpiClass"
+      EntityUsage="ContractEO"
+      AliasName="KPI_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSource"
+      EntityAttrName="KpiDataSource"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DATA_SOURCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataDimension"
+      EntityAttrName="KpiDataDimension"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DATA_DIMENSION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiScoringMethod"
+      EntityAttrName="KpiScoringMethod"
+      EntityUsage="ContractEO"
+      AliasName="KPI_SCORING_METHOD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ContractEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="ContractEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualValue"
+      EntityAttrName="ActualValue"
+      EntityUsage="ContractEO"
+      AliasName="ACTUAL_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScoreValue"
+      EntityAttrName="ScoreValue"
+      EntityUsage="ContractEO"
+      AliasName="SCORE_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelfEvalValue"
+      EntityAttrName="SelfEvalValue"
+      EntityUsage="ContractEO"
+      AliasName="SELF_EVAL_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ParentContractId"
+      EntityAttrName="ParentContractId"
+      EntityUsage="ContractEO"
+      AliasName="PARENT_CONTRACT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="ContractEO"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowScoreFlag"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SHOW_SCORE_FLAG"
+      Expression="SHOW_SCORE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UpdateImage"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UPDATE_IMAGE"
+      Expression="UPDATE_IMAGE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeleteImage"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DELETE_IMAGE"
+      Expression="DELETE_IMAGE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReadOnlyFlag"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      Passivate="true"
+      SQLType="BIT" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.pay.webui.AssignPayrollCO" windowTitle="指定导入工资单" title="指定导入工资单" amDefName="cux.oracle.apps.per.bonus.pay.server.PayAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="SaveButton" text="保存" prompt="保存" styleClass="OraDataText"/>
+                  <oa:submitButton id="BackButton" text="返回" prompt="返回" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:header id="SummaryTableHdr" text="人员工资单列表" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:advancedTable id="PayrollTable" blockSize="1000" viewName="PayrollVO1">
+                     <ui:contents>
+                        <oa:column id="PayrollIDCol" cellNoWrapFormat="true" width="100" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader174" prompt="工资单ID"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PayrollID" styleClass="OraDataText" viewAttr="PayrollId" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PayrollNameCol" rendered="true" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader175" prompt="工资单名称"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PayrollName" styleClass="OraDataText" viewAttr="PayrollName"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:singleSelection id="singleSelection1" viewAttr="SelectFlag"/>
+                     </ui:tableSelection>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

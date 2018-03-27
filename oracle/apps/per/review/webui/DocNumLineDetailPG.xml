@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.pa.docnum.server.GenDocNumAM" windowTitle="项目文档要号系统" title="查询要号详情" controllerClass="cux.oracle.apps.pa.docnum.webui.DocNumLineDetailCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="HeadRN" text="要号申请头信息">
+               <ui:contents>
+                  <oa:messageStyledText id="HeadId" dataType="NUMBER" prompt="批次" viewName="DocNumHeadDetailVO1" viewAttr="InternalId"/>
+                  <oa:messageStyledText id="ProjectNumber" dataType="VARCHAR2" prompt="项目号" viewName="DocNumHeadDetailVO1" viewAttr="ProjectNumber"/>
+                  <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="DocNumHeadDetailVO1" viewAttr="ProjectName"/>
+                  <oa:messageStyledText id="DlvrTypeName" viewName="DocNumHeadDetailVO1" prompt="交付物类型" viewAttr="Col1"/>
+                  <oa:messageStyledText id="Status" viewName="DocNumHeadDetailVO1" viewAttr="Status" prompt="状态"/>
+                  <oa:messageStyledText id="Description" viewName="DocNumHeadDetailVO1" viewAttr="Description" prompt="描述"/>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="MainRN" blockSize="50" width="100%" text="要号申请详细信息" serverUnvalidated="false" unvalidated="false">
+               <ui:contents>
+                  <oa:messageStyledText id="LineSeq" dataType="NUMBER" prompt="序号" viewName="DocNumLineDetailVO1" viewAttr="LineSeq" sortState="ascending" initSortSeq="first"/>
+                  <oa:messageStyledText id="DocNumber" viewName="DocNumLineDetailVO1" viewAttr="DocNumber" prompt="文档编号"/>
+                  <oa:messageStyledText id="OldDocNumber" viewName="DocNumLineDetailVO1" viewAttr="Col2" prompt="现有图号"/>
+                  <oa:messageStyledText id="Pbs" dataType="VARCHAR2" prompt="PBS" viewName="DocNumLineDetailVO1" viewAttr="Pbs" maximumLength="100" sortState="yes"/>
+                  <oa:messageStyledText id="Discipline" dataType="VARCHAR2" prompt="专业" viewName="DocNumLineDetailVO1" viewAttr="Discipline" maximumLength="10" sortState="yes"/>
+                  <oa:messageStyledText id="DocType" dataType="VARCHAR2" prompt="文档类型" viewName="DocNumLineDetailVO1" viewAttr="DocType" maximumLength="10" sortState="yes"/>
+                  <oa:messageStyledText id="DocName" dataType="VARCHAR2" prompt="文档名称" viewName="DocNumLineDetailVO1" viewAttr="DocName" maximumLength="240" sortState="yes"/>
+                  <oa:messageStyledText id="ChiefDesigner" dataType="VARCHAR2" prompt="主任设计师" viewName="DocNumLineDetailVO1" viewAttr="GlobalName" maximumLength="30"/>
+                  <oa:messageStyledText id="WBS" prompt="WBS" viewName="DocNumLineDetailVO1" viewAttr="WbsName"/>
+                  <oa:messageStyledText id="UseFlag" viewName="DocNumLineDetailVO1" viewAttr="UseFlag" prompt="使用标志"/>
+                  <oa:messageStyledText id="DlvrOwnerPeople" viewName="DocNumLineDetailVO1" viewAttr="DlvrOwnerPeople" prompt="责任人"/>
+                  <oa:messageStyledText id="LineDescription" viewName="DocNumLineDetailVO1" viewAttr="Description" sortState="yes" prompt="行描述"/>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="ButtonLayout">
+                     <ui:contents>
+                        <oa:exportButton id="ExportButton" exportAllRows="true" text="导出数据" viewName="DocNumLineDetailVO1"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+            <oa:pageButtonBar id="PageButtons">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" serverUnvalidated="true" unvalidated="true" warnAboutChanges="true" text="取消" prompt="取消"/>
+                  <oa:submitButton id="Delete" prompt="撤销申请" rendered="${oa.DocNumHeadDetailVO1.IsUnverified}" serverUnvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

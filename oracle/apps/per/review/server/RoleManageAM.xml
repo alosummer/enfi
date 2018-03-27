@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="RoleManageAM"
+   ComponentClass="cux.oracle.apps.per.review.server.RoleManageAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="RoleManageCreateVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.RoleManageCreateVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EmpApproveTypeVO1"
+      ViewObjectName="cux.oracle.apps.per.poplist.server.EmpApproveTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RoleManageVO1"
+      ViewObjectName="cux.oracle.apps.per.review.server.RoleManageVO" >
+   </ViewUsage>
+</AppModule>

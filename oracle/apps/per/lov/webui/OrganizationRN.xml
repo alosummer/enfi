@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_798" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.per.lov.server.PerLovAM">
+   <ui:contents>
+      <oa:table name="OrganizationRN" id="OrganizationVO1">
+         <ui:contents>
+            <oa:messageStyledText id="OrganizationId" dataType="NUMBER" prompt="组织标识" viewName="OrganizationVO1" viewAttr="OrganizationId" maximumLength="15" queryable="true"/>
+            <oa:messageStyledText id="OrganizationName" dataType="VARCHAR2" prompt="名称" viewName="OrganizationVO1" viewAttr="Name" maximumLength="240" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+   <ui:searchInstructions>
+      <oa:messageStyledText id="item2"/>
+   </ui:searchInstructions>
+</oa:listOfValues>

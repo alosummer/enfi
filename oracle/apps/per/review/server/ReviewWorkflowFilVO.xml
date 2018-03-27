@@ -1,0 +1,430 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ReviewWorkflowFilVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.ReviewWorkflowFilVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.ReviewWorkflowFilVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ROWNUM,
+       W.EPM_WORKFLOW_ID,
+       W.EPM_PERIOD_CODE,
+       W.EPM_PHASE_CLASS_CODE,
+       W.GROUP_ID,
+       W.ORG_ID,
+       LYN.MEANING AS IS_ATTENDED,
+       --L3.MEANING AS WORKFLOW_1,
+       DECODE(T.APPROVE_TYPE_1,'FIXED',L3.MEANING||':'||PX1.LAST_NAME,L3.MEANING) AS WORKFLOW_1,
+       T.APPROVE_TYPE_1,
+       --S.PERSON_1,
+       --L4.MEANING AS WORKFLOW_2,
+       DECODE(T.APPROVE_TYPE_2,'FIXED',L4.MEANING||':'||PX2.LAST_NAME,L4.MEANING) AS WORKFLOW_2,
+       T.APPROVE_TYPE_2,
+       --S.PERSON_2,
+       --L5.MEANING AS WORKFLOW_3,
+       DECODE(T.APPROVE_TYPE_3,'FIXED',L5.MEANING||':'||PX3.LAST_NAME,L5.MEANING) AS WORKFLOW_3,
+       T.APPROVE_TYPE_3,
+       --S.PERSON_3,
+       --L6.MEANING AS WORKFLOW_4,
+       DECODE(T.APPROVE_TYPE_4,'FIXED',L6.MEANING||':'||PX4.LAST_NAME,L6.MEANING) AS WORKFLOW_4,
+       T.APPROVE_TYPE_4,
+       --S.PERSON_4,
+       ORG.NAME AS ORG_NAME,
+       GRP.GROUP_NAME AS GROUP_NAME,
+       L1.MEANING AS PERIOD_NAME,
+       L2.MEANING AS PHASE_NAME
+FROM CUX_REVIEW_WORKFLOW_T W,
+(
+SELECT L.EPM_WORKFLOW_ID,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '1',
+                  EPM_APPROVE_TYPE_CODE,
+                  NULL)) APPROVE_TYPE_1,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '2',
+                  EPM_APPROVE_TYPE_CODE,
+                  NULL)) APPROVE_TYPE_2,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '3',
+                  EPM_APPROVE_TYPE_CODE,
+                  NULL)) APPROVE_TYPE_3,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '4',
+                  EPM_APPROVE_TYPE_CODE,
+                  NULL)) APPROVE_TYPE_4
+FROM CUX_REVIEW_WORKFLOW_LEVEL_T L
+GROUP BY L.EPM_WORKFLOW_ID
+) T,
+(
+SELECT L.EPM_WORKFLOW_ID,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '1',
+                  EPM_APPROVE_PERSON_ID,
+                  NULL)) PERSON_1,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '2',
+                  EPM_APPROVE_PERSON_ID,
+                  NULL)) PERSON_2,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '3',
+                  EPM_APPROVE_PERSON_ID,
+                  NULL)) PERSON_3,
+        MAX(DECODE(EPM_APPROVE_LEVEL,
+                  '4',
+                  EPM_APPROVE_PERSON_ID,
+                  NULL)) PERSON_4
+FROM CUX_REVIEW_WORKFLOW_LEVEL_T L
+GROUP BY L.EPM_WORKFLOW_ID
+) S,
+FND_LOOKUP_VALUES L1,
+FND_LOOKUP_VALUES L2,
+FND_LOOKUP_VALUES L3,
+FND_LOOKUP_VALUES L4,
+FND_LOOKUP_VALUES L5,
+FND_LOOKUP_VALUES L6,
+PER_PEOPLE_X PX1,
+PER_PEOPLE_X PX2,
+PER_PEOPLE_X PX3,
+PER_PEOPLE_X PX4,
+FND_LOOKUP_VALUES LYN,
+HR_ALL_ORGANIZATION_UNITS ORG,
+CUX_REVIEW_GROUP_T GRP
+WHERE W.EPM_WORKFLOW_ID = T.EPM_WORKFLOW_ID(+)
+AND W.EPM_WORKFLOW_ID = S.EPM_WORKFLOW_ID(+)
+AND W.EPM_PERIOD_CODE = L1.LOOKUP_CODE
+    AND L1.LOOKUP_TYPE = 'EPM_PERIOD'
+    AND L1.LANGUAGE = USERENV('LANG')
+    AND NVL(L1.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L1.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L1.ENABLED_FLAG = 'Y'
+AND W.EPM_PHASE_CLASS_CODE = L2.LOOKUP_CODE
+    AND L2.LOOKUP_TYPE = 'EPM_PHASE_CLASS'
+    AND L2.LANGUAGE = USERENV('LANG')
+    AND NVL(L2.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L2.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L2.ENABLED_FLAG = 'Y'
+AND T.APPROVE_TYPE_1 = L3.LOOKUP_CODE(+)
+    AND L3.LOOKUP_TYPE(+) = 'EPM_APPROVE_TYPE'
+    AND L3.LANGUAGE(+) = USERENV('LANG')
+    AND NVL(L3.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L3.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L3.ENABLED_FLAG(+) = 'Y'
+AND T.APPROVE_TYPE_2 = L4.LOOKUP_CODE(+)
+    AND L4.LOOKUP_TYPE(+) = 'EPM_APPROVE_TYPE'
+    AND L4.LANGUAGE(+) = USERENV('LANG')
+    AND NVL(L4.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L4.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L4.ENABLED_FLAG(+) = 'Y'
+AND T.APPROVE_TYPE_3 = L5.LOOKUP_CODE(+)
+    AND L5.LOOKUP_TYPE(+) = 'EPM_APPROVE_TYPE'
+    AND L5.LANGUAGE(+) = USERENV('LANG')
+    AND NVL(L5.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L5.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L5.ENABLED_FLAG(+) = 'Y'
+AND T.APPROVE_TYPE_4 = L6.LOOKUP_CODE(+)
+    AND L6.LOOKUP_TYPE(+) = 'EPM_APPROVE_TYPE'
+    AND L6.LANGUAGE(+) = USERENV('LANG')
+    AND NVL(L6.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(L6.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND L6.ENABLED_FLAG(+) = 'Y'
+AND S.PERSON_1 = PX1.PERSON_ID(+)
+AND S.PERSON_2 = PX2.PERSON_ID(+)
+AND S.PERSON_3 = PX3.PERSON_ID(+)
+AND S.PERSON_4 = PX4.PERSON_ID(+)
+AND W.IS_ATTENDED = LYN.LOOKUP_CODE
+    AND LYN.LOOKUP_TYPE = 'FLAG'
+    AND LYN.LANGUAGE = USERENV('LANG')
+    AND NVL(LYN.START_DATE_ACTIVE,SYSDATE) <= SYSDATE
+    AND NVL(LYN.END_DATE_ACTIVE,SYSDATE) >= SYSDATE
+    AND LYN.ENABLED_FLAG = 'Y'
+AND W.ORG_ID = ORG.ORGANIZATION_ID
+AND W.GROUP_ID = GRP.GROUP_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ReviewWorkflowEO"
+      Entity="cux.oracle.apps.per.review.server.ReviewWorkflowEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <EntityUsage
+      Name="ReviewWorkflowLevelEO"
+      Entity="cux.oracle.apps.per.review.server.ReviewWorkflowLevelEO"
+      SourceUsage="cux.oracle.apps.per.review.server.ReviewWorkflowFilVO.ReviewWorkflowEO"
+      Reference="true" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+         <AttrArray Name="_dstAttributes">
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowLevelEO.Attribute1" />
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowLevelEO.Attribute2" />
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowLevelEO.Attribute3" />
+         </AttrArray>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowEO.Attribute1" />
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowEO.Attribute2" />
+            <Item Value="cux.oracle.apps.per.review.server.ReviewWorkflowEO.Attribute3" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmWorkflowId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="EPM_WORKFLOW_ID"
+      Expression="EPM_WORKFLOW_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmPeriodCode"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_PERIOD_CODE"
+      Expression="EPM_PERIOD_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmPhaseClassCode"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_PHASE_CLASS_CODE"
+      Expression="EPM_PHASE_CLASS_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="GROUP_ID"
+      Expression="GROUP_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORG_ID"
+      Expression="ORG_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsAttended"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_ATTENDED"
+      Expression="IS_ATTENDED"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Workflow1"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORKFLOW_1"
+      Expression="WORKFLOW_1"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveType1"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_TYPE_1"
+      Expression="APPROVE_TYPE_1"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Workflow2"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORKFLOW_2"
+      Expression="WORKFLOW_2"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveType2"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_TYPE_2"
+      Expression="APPROVE_TYPE_2"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Workflow3"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORKFLOW_3"
+      Expression="WORKFLOW_3"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveType3"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_TYPE_3"
+      Expression="APPROVE_TYPE_3"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Workflow4"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WORKFLOW_4"
+      Expression="WORKFLOW_4"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveType4"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_TYPE_4"
+      Expression="APPROVE_TYPE_4"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupName"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="GROUP_NAME"
+      Expression="GROUP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_NAME"
+      Expression="PERIOD_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_NAME"
+      Expression="PHASE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

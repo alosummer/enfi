@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxQualityProjectResultPG" amDefName="cux.oracle.apps.cux.qhse.quality.server.CuxQualityAM" controllerClass="cux.oracle.apps.cux.qhse.quality.webui.CuxQualityProjectResultPGCO" windowTitle="质量安全生产目标管理计划主界面">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="ProjectQuery" mode="autoCustomizationCriteria" dispSimple="true">
+               <oa:simpleSearchPanel>
+                  <oa:header text="质量安全生产目标管理计划" id="region2">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN" width="60%" rows="1" columns="2" promptWidth="1%">
+                           <ui:contents>
+                              <oa:messageLovInput id="SearchProjectOrg" prompt="业务部门" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/OrgLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap3" lovItem="OrgName" resultTo="SearchProjectOrg" criteriaFrom="SearchProjectOrg"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchProjectNumber" prompt="项目编号" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/ProjectLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="ProjectNumber" resultTo="SearchProjectNumber" criteriaFrom="SearchProjectNumber"/>
+                                    <lovMap id="lovMap2" lovItem="ProjectName" resultTo="SearchProjectName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageStyledText id="SearchProjectName" prompt="项目名称"/>
+                              <oa:messageChoice id="SearchProjectType" prompt="项目类型" pickListViewDef="cux.oracle.apps.cux.qhse.quality.poplist.server.ProjectTypesListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning"/>
+                              <oa:messageChoice id="SearchProjectStatusName" prompt="状态" pickListViewDef="cux.oracle.apps.cux.qhse.quality.poplist.server.ProjectStatusListVO" pickListDispAttr="ProjectStatusName" pickListValAttr="ProjectStatusName"/>
+                              <oa:messageLovInput id="SearchProjectManagerName" prompt="项目经理" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxEmpLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap4" lovItem="EmpFullName" resultTo="SearchProjectManagerName" criteriaFrom="SearchProjectManagerName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchProjectCustomerName" prompt="客户名称" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxCustomerLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap5" lovItem="CustomerName" resultTo="SearchProjectCustomerName" criteriaFrom="SearchProjectCustomerName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="SearchProjectStartDate" prompt="起始日期" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchProjectEndDate" prompt="完成日期" dataType="DATE"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <ui:contents>
+                  <oa:table id="CuxProjectResultVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="ProjectCarryingOutOrgName" dataType="VARCHAR2" prompt="项目部门" viewName="CuxProjectResultVO1" viewAttr="ProjectCarryingOutOrgName" maximumLength="240"/>
+                        <oa:messageStyledText id="ProjectNumber" dataType="VARCHAR2" prompt="项目编号" viewName="CuxProjectResultVO1" viewAttr="ProjectNumber" maximumLength="25" destination="OA.jsp?page=/cux/oracle/apps/cux/qhse/quality/webui/CuxQualityWorkplanDetailPG&amp;retainAM=Y&amp;ProjectId={@ProjectId}"/>
+                        <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="CuxProjectResultVO1" viewAttr="ProjectName" maximumLength="30"/>
+                        <oa:messageStyledText id="ProjectType" dataType="VARCHAR2" prompt="项目类型" viewName="CuxProjectResultVO1" viewAttr="ProjectType" maximumLength="20"/>
+                        <oa:messageStyledText id="ProjectStatusName" dataType="VARCHAR2" prompt="状态" viewName="CuxProjectResultVO1" viewAttr="ProjectStatusName" maximumLength="80"/>
+                        <oa:messageStyledText id="ProjectManagerName" dataType="VARCHAR2" prompt="项目经理" viewName="CuxProjectResultVO1" viewAttr="ProjectManagerName" maximumLength="4000"/>
+                        <oa:messageStyledText id="ProjectCustomerName" dataType="VARCHAR2" prompt="客户" viewName="CuxProjectResultVO1" viewAttr="ProjectCustomerName" maximumLength="4000"/>
+                        <oa:messageStyledText id="ProjectStartDate" dataType="DATE" prompt="起始日期" viewName="CuxProjectResultVO1" viewAttr="ProjectStartDate"/>
+                        <oa:messageStyledText id="ProjectEndDate" dataType="DATE" prompt="完成日期" viewName="CuxProjectResultVO1" viewAttr="ProjectEndDate"/>
+                        <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="CuxProjectResultVO1" viewAttr="ProjectId"/>
+                        <oa:formValue id="ProjectNameNumber" dataType="VARCHAR2" prompt="ProjectNameNumber" viewName="CuxProjectResultVO1" viewAttr="ProjectNameNumber"/>
+                        <oa:formValue id="ProjectStatusCode" dataType="VARCHAR2" prompt="ProjectStatusCode" viewName="CuxProjectResultVO1" viewAttr="ProjectStatusCode"/>
+                        <oa:formValue id="ProjectSystemStatusCode" dataType="VARCHAR2" prompt="ProjectSystemStatusCode" viewName="CuxProjectResultVO1" viewAttr="ProjectSystemStatusCode"/>
+                        <oa:formValue id="ProjectManagerId" dataType="NUMBER" prompt="ProjectManagerId" viewName="CuxProjectResultVO1" viewAttr="ProjectManagerId"/>
+                        <oa:formValue id="ProjectCustomerId" dataType="NUMBER" prompt="ProjectCustomerId" viewName="CuxProjectResultVO1" viewAttr="ProjectCustomerId"/>
+                        <oa:formValue id="ProjectCarryingOutOrgId" dataType="NUMBER" prompt="ProjectCarryingOutOrgId" viewName="CuxProjectResultVO1" viewAttr="ProjectCarryingOutOrgId"/>
+                        <oa:formValue id="HeaderId" dataType="NUMBER" prompt="HeaderId" viewName="CuxProjectResultVO1" viewAttr="HeaderId"/>
+                        <oa:formValue id="Status" dataType="VARCHAR2" prompt="Status" viewName="CuxProjectResultVO1" viewAttr="Status"/>
+                        <oa:formValue id="PlanedFlag" dataType="VARCHAR2" prompt="PlanedFlag" viewName="CuxProjectResultVO1" viewAttr="PlanedFlag"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

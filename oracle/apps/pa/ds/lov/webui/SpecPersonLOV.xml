@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.pa.ds.lov.server.DsLovAM" scope="/">
+   <ui:contents>
+      <oa:table name="SpecPersonLOV" id="SpecPersonVO1">
+         <ui:contents>
+            <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="SpecPersonVO1" viewAttr="ProjectId"/>
+            <oa:formValue id="SpecialtyCode" dataType="VARCHAR2" prompt="SpecialtyCode" viewName="SpecPersonVO1" viewAttr="SpecialtyCode"/>
+            <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="SpecPersonVO1" viewAttr="PersonId"/>
+            <oa:messageStyledText id="PersonName" dataType="VARCHAR2" prompt="姓名" viewName="SpecPersonVO1" viewAttr="PersonName" maximumLength="4000" queryable="true"/>
+            <oa:formValue id="DeptId" viewName="SpecPersonVO1" viewAttr="DeptId"/>
+            <oa:formValue id="DeptName" viewName="SpecPersonVO1" viewAttr="DeptName"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

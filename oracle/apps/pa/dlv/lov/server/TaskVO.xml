@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="TaskVO"
+   OrderBy="task_number asc"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.pa.dlv.lov.server.TaskVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT b.proj_element_id task_id
+      ,cux_pa_util_pkg.get_concatenate_wbs_name(b.proj_element_id) task_name
+      ,b.project_id
+      ,b.element_number task_number
+      ,cux_pa_dlv_pkg.get_unassigned_weight(a.project_id,
+                                            p_task_id => b.proj_element_id) unassigned_weight
+FROM   pa_projects_all            a
+      ,pa_proj_elements           b
+      ,pa_proj_element_versions   c
+      ,pa_proj_elem_ver_schedule  d
+      ,pa_proj_elem_ver_structure stc
+      ,pa_task_types              ptt
+WHERE  a.project_id = b.project_id
+AND    b.project_id = c.project_id
+AND    b.proj_element_id = c.proj_element_id
+AND    b.object_type = 'PA_TASKS'
+AND    c.project_id = d.project_id(+)
+AND    c.element_version_id = d.element_version_id(+)
+AND    c.parent_structure_version_id = stc.element_version_id
+AND    stc.latest_eff_published_flag = 'Y'
+AND    b.type_id = ptt.task_type_id
+AND    ptt.task_type = '需提交交付物的任务'
+and    cux_pa_util_pkg.get_concatenate_wbs_name(b.proj_element_id) not like '施工阶段%'
+and    cux_pa_util_pkg.get_concatenate_wbs_name(b.proj_element_id) not like '采购阶段%'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="TaskId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASK_ID"
+      Expression="TASK_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ID"
+      Expression="PROJECT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskNumber"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NUMBER"
+      Expression="TASK_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnassignedWeight"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="UNASSIGNED_WEIGHT"
+      Expression="UNASSIGNED_WEIGHT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

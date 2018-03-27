@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="EmpChangeVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.EmpChangeVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.EmpChangeVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT EmpChangeEO.PERSON_ID, 
+       EmpChangeEO.ORG_ID, 
+       EmpChangeEO.GROUP_ID, 
+       EmpChangeEO.SUPERVISOR_ID, 
+       EmpChangeEO.ATTRIBUTE1,
+       crgt.group_name change_group,
+       houv.name change_org,
+       ppx.last_name supervisor_name,
+       TO_NUMBER(EmpChangeEO.attribute2) attribute2,
+       caplv.LAST_POSITION AS change_position,
+       pjv.name change_job,
+       empChangeEO.Attribute3
+FROM CUX_CHANGE_T EmpChangeEO,
+      cux_review_group_t crgt,
+      cux_per_people_v ppx,
+      hr_all_organization_units houv,
+      CUX_APPRAISAL_POSITION_LOV_V caplv,
+      per_jobs_v                   pjv
+where EmpChangeEO.Supervisor_Id = ppx.person_id(+) 
+  and EmpChangeEO.Group_Id = crgt.group_id(+)
+  and EmpChangeEO.Org_Id = houv.organization_id(+)
+  AND to_number(EmpChangeEO.Attribute2) = caplv.POSITION_DEFINITION_ID(+)
+  AND empChangeEO.Attribute3 = pjv.job_id(+)
+  and EmpChangeEO.person_id = :1
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="EmpChangeEO"
+      Entity="cux.oracle.apps.per.review.server.EmpChangeEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="PersonId"
+      IsNotNull="true"
+      EntityAttrName="PersonId"
+      EntityUsage="EmpChangeEO"
+      AliasName="PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      EntityAttrName="OrgId"
+      EntityUsage="EmpChangeEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      EntityAttrName="GroupId"
+      EntityUsage="EmpChangeEO"
+      AliasName="GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupervisorId"
+      EntityAttrName="SupervisorId"
+      EntityUsage="EmpChangeEO"
+      AliasName="SUPERVISOR_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="EmpChangeEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChangeGroup"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHANGE_GROUP"
+      Expression="CHANGE_GROUP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChangeOrg"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHANGE_ORG"
+      Expression="CHANGE_ORG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupervisorName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUPERVISOR_NAME"
+      Expression="SUPERVISOR_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE2"
+      Expression="ATTRIBUTE2"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChangePosition"
+      IsPersistent="false"
+      Precision="60"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHANGE_POSITION"
+      Expression="CHANGE_POSITION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="60" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChangeJob"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHANGE_JOB"
+      Expression="CHANGE_JOB"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="EmpChangeEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PositionId"
+      IsSelected="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="POSITION_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

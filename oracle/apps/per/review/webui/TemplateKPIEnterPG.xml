@@ -1,0 +1,55 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TemplateKPICO" windowTitle="维护模板指标" title="维护模板指标">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultDoubleColumn id="TmplRN" text="绩效合同模板">
+               <ui:contents>
+                  <oa:messageStyledText id="TmplName" prompt="模板名称:" viewName="TmplDetailVO1" viewAttr="TmplName"/>
+                  <oa:messageStyledText id="TmplGroup" prompt="适用考群:" columns="200" viewName="TmplDetailVO1" viewAttr="GroupName"/>
+                  <oa:formValue id="TemplateId" viewName="TmplDetailVO1" viewAttr="TmplId" dataType="NUMBER"/>
+                  <oa:separator id="item1"/>
+               </ui:contents>
+            </oa:defaultDoubleColumn>
+            <oa:table id="TemplateContentVO1" width="100%">
+               <ui:contents>
+                  <oa:messageChoice id="KpiArea" dataType="VARCHAR2" prompt="考核层面" viewName="TemplateKPIVO1" viewAttr="KpiArea" serverUnvalidated="true" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIAreaVO" pickListValAttr="EpmIlCode" pickListDispAttr="EpmIlName"/>
+                  <oa:messageTextInput id="KpiName" dataType="VARCHAR2" viewName="TemplateKPIVO1" viewAttr="KpiName" maximumLength="300" unvalidated="true" columns="25" selectiveSearchCriteria="true" prompt="考核指标"/>
+                  <oa:messageTextInput id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="TemplateKPIVO1" viewAttr="KpiDesc" maximumLength="1000" columns="30" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="Attribute5" dataType="VARCHAR2" prompt="备注" viewName="TemplateKPIVO1" viewAttr="Attribute5" maximumLength="150"/>
+                  <oa:messageTextInput id="Weight" dataType="VARCHAR2" prompt="权重(%)" viewName="TemplateKPIVO1" viewAttr="Weight" maximumLength="20" columns="4" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="TargetValue" dataType="NUMBER" prompt="目标值" viewName="TemplateKPIVO1" viewAttr="TargetValue" maximumLength="10" columns="4" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="MinimumValue" dataType="NUMBER" prompt="最小值" viewName="TemplateKPIVO1" viewAttr="MinimumValue" maximumLength="10" columns="4"/>
+                  <oa:messageChoice id="KpiScoringMethod" dataType="VARCHAR2" prompt="评分方法" viewName="TemplateKPIVO1" viewAttr="KpiScoringMethod" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIScoreMethodVO" pickListValAttr="EpmSmCode" pickListDispAttr="EpmSmName" serverUnvalidated="true"/>
+                  <oa:messageChoice id="KpiDataSource" dataType="VARCHAR2" prompt="数据来源" viewName="TemplateKPIVO1" viewAttr="KpiDataSource" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceVO" pickListValAttr="EpmDsCode" pickListDispAttr="EpmDsName" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="ContentId" dataType="NUMBER" prompt="ContentId" viewName="TemplateKPIVO1" viewAttr="ContentId" maximumLength="10" rendered="false" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="TmplId" dataType="NUMBER" prompt="TmplId" viewName="TemplateKPIVO1" viewAttr="TmplId" rendered="false" serverUnvalidated="true" maximumLength="10"/>
+                  <oa:messageTextInput id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="TemplateKPIVO1" viewAttr="KpiId" maximumLength="10" rendered="false" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="TemplateKPIVO1" viewAttr="KpiClass" maximumLength="150" rendered="false" serverUnvalidated="true"/>
+                  <oa:messageTextInput id="KpiDataDimension" dataType="VARCHAR2" prompt="KpiDataDimension" viewName="TemplateKPIVO1" viewAttr="KpiDataDimension" maximumLength="150" rendered="false" serverUnvalidated="true"/>
+                  <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="contentId" value="${oa.TemplateKPIVO1.ContentId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="TableActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                        <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

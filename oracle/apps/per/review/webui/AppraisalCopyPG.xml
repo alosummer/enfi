@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="选择绩效合同" title="选择绩效合同" amDefName="cux.oracle.apps.per.review.server.AppraisalAM" controllerClass="cux.oracle.apps.per.review.webui.AppraisalCopyCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="AppraisalCopyVO1" width="100%" controllerClass="cux.oracle.apps.per.review.webui.AppraisalCopyCO">
+               <ui:contents>
+                  <oa:messageStyledText id="AppraisalId" dataType="NUMBER" prompt="序号" viewName="AppraisalCopyVO1" viewAttr="AppraisalId" maximumLength="15"/>
+                  <oa:messageStyledText id="AppraisalYear" dataType="VARCHAR2" prompt="年度" viewName="AppraisalCopyVO1" viewAttr="AppraisalYear" maximumLength="20"/>
+                  <oa:messageStyledText id="PeriodTypeId" dataType="VARCHAR2" prompt="周期" viewName="AppraisalCopyVO1" viewAttr="PeriodTypeId" maximumLength="20"/>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="TblActionRN">
+                     <ui:contents>
+                        <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                        <oa:spacer id="item1" width="5"/>
+                        <oa:submitButton id="Return" text="返回" prompt="返回"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+               <ui:tableSelection>
+                  <oa:singleSelection id="singleSelection1" viewName="AppraisalCopyVO1" viewAttr="Selected"/>
+               </ui:tableSelection>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

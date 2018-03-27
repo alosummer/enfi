@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+
+<ViewLink
+   Name="TmplContentVL" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+   </DesignTime>
+   <ViewLinkDefEnd
+      Name="TemplateClassVO"
+      Cardinality="1"
+      Owner="cux.oracle.apps.per.review.server.TemplateClassVO"
+      Source="true" >
+      <AttrArray Name="Attributes">
+         <Item Value="cux.oracle.apps.per.review.server.TemplateClassVO.KpiClass" />
+         <Item Value="cux.oracle.apps.per.review.server.TemplateClassVO.TmplId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_finderName" Value="TemplateClassVO" />
+         <Attr Name="_accessor" Value="true" />
+         <Attr Name="_minCardinality" Value="1" />
+         <Attr Name="_isUpdateable" Value="true" />
+      </DesignTime>
+   </ViewLinkDefEnd>
+   <ViewLinkDefEnd
+      Name="TemplateContentVO"
+      Cardinality="-1"
+      Owner="cux.oracle.apps.per.review.server.TemplateContentVO" >
+      <AttrArray Name="Attributes">
+         <Item Value="cux.oracle.apps.per.review.server.TemplateContentVO.KpiClass" />
+         <Item Value="cux.oracle.apps.per.review.server.TemplateContentVO.TmplId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_finderName" Value="TemplateContentVO" />
+         <Attr Name="_isUpdateable" Value="true" />
+      </DesignTime>
+   </ViewLinkDefEnd>
+</ViewLink>

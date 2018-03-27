@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="BonusReportsAM"
+   ComponentClass="cux.oracle.apps.per.bonus.reports.server.BonusReportsAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="YearListVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.YearListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BonusDistributionVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.BonusDistributionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BonusActualDistributionVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.BonusActualDistributionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectManagementBonusVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.ProjectManagementBonusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MonthListVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.MonthListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptBonusDetailVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.DeptBonusDetailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.reports.server.ProjectVO" >
+   </ViewUsage>
+</AppModule>

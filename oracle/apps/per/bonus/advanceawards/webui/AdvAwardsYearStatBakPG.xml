@@ -1,0 +1,1133 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.AdvAwardsYearStatBakCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="SearchRN">
+               <ui:contents>
+                  <oa:messageChoice id="DistDept" prompt="发放部门" styleClass="OraDataText" pickListViewName="AdvAwardsDeptLovVO1" pickListDispAttr="DeptName" pickListValAttr="OrganizationId" allowBlankValue="false"/>
+                  <oa:messageTextInput id="QueryYear" prompt="查询年度" dataType="VARCHAR2" maximumLength="4"/>
+                  <oa:messageLayout id="ButtonLayoutRN">
+                     <ui:contents>
+                        <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                        <oa:exportButton id="exportBtn" text="导出" exportAllRows="true" viewName="AdvAwardsYearStatEptVO1" rendered="false"/>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:header id="SummaryTableHdr" text="部门奖金发放汇总" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:advancedTable id="SummaryTable" viewName="AdvAwardsYearStatVO1" blockSize="1000">
+                     <ui:contents>
+                        <oa:column id="RowSNCol" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17312" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNumberCol" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerNumber" styleClass="OraDataText" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNameCol" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader174" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerName" styleClass="OraDataText" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DepNametCol" rendered="true" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader175" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptName" styleClass="OraDataText" viewAttr="DeptName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerStatusCol" rendered="true" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1751" prompt="人员类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerStatus" styleClass="OraDataText" viewAttr="PerStatus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:columnGroup id="M01ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader172" prompt="一月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="M01BonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader176" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="M01Bonus" styleClass="OraDataText" viewAttr="M01Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="M01DeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader177" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJanDeptBonus" styleClass="OraDataText" viewAttr="M01DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJanReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader178" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJanReduction" viewAttr="M01ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJanDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader179" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJanDist" viewAttr="M01Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M02ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1721" prompt="二月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPFebMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1761" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPFebMonthBonus" styleClass="OraDataText" viewAttr="M02Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPFebDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1771" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPFebDeptBonus" styleClass="OraDataText" viewAttr="M02DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPFebReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1781" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPFebReduction" viewAttr="M02ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPFebDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1791" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPFebDist" viewAttr="M02Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M03ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1722" prompt="三月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPMarMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1762" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMarMonthBonus" styleClass="OraDataText" viewAttr="M03Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMarDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1772" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMarDeptBonus" styleClass="OraDataText" viewAttr="M03DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMarReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1782" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMarReduction" viewAttr="M03ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMarDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1792" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="M03Value" viewAttr="M03Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M04ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1723" prompt="四月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPAprMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1763" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAprMonthBonus" styleClass="OraDataText" viewAttr="M04Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAprDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1773" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAprDeptBonus2" styleClass="OraDataText" viewAttr="M04DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAprReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1783" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAprReduction" viewAttr="M04ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAprDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1793" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAprDist" viewAttr="M04Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M05ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1724" prompt="五月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPMayMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1764" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMayMonthBonus" styleClass="OraDataText" viewAttr="M05Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMayDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1774" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMayDeptBonus" styleClass="OraDataText" viewAttr="M05DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMayReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1784" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMayReduction" viewAttr="M05ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPMayDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1794" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPMayDist" viewAttr="M05Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M06ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1725" prompt="六月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPJunMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1765" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJunMonthBonus" styleClass="OraDataText" viewAttr="M06Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJunDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1775" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJunDeptBonus" styleClass="OraDataText" viewAttr="M06DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJunReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1785" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJunReduction" viewAttr="M06ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJunDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1795" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJunDist" viewAttr="M06Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M07ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1726" prompt="七月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPJulMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1766" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJulMonthBonus" styleClass="OraDataText" viewAttr="M07Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJulDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1776" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJulDeptBonus" styleClass="OraDataText" viewAttr="M07DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJulReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1786" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJulReduction" viewAttr="M07ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPJulDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1796" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPJulDist" viewAttr="M07Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M08ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1727" prompt="八月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPAugMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1767" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAugMonthBonus" styleClass="OraDataText" viewAttr="M08Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAugDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1777" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAugDeptBonus" styleClass="OraDataText" viewAttr="M08DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAugReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1787" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAugReduction" viewAttr="M08ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPAugDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1797" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPAugDist" viewAttr="M08Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M09ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1728" prompt="九月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPSepMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1768" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPSepMonthBonus" styleClass="OraDataText" viewAttr="M09Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPSepDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1778" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPSepDeptBonus" styleClass="OraDataText" viewAttr="M09DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPSepReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1788" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPSepReduction" viewAttr="M09ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPSepDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1798" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPSepDist" viewAttr="M09Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M10ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1729" prompt="十月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPOctMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1769" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPOctMonthBonus" styleClass="OraDataText" viewAttr="M10Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPOctDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1779" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPOctDeptBonus" styleClass="OraDataText" viewAttr="M10DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPOctReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1789" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPOctReduction" viewAttr="M10ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPOctDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1799" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPOctDist" viewAttr="M10Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M11ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17210" prompt="十一月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPNovMonthBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17610" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPNovMonthBonus" styleClass="OraDataText" viewAttr="M11Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPNovDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17710" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPNovDeptBonus" styleClass="OraDataText" viewAttr="M11DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPNovReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17810" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPNovReduction" viewAttr="M11ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPNovDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17910" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPNovDist" viewAttr="M11Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="M12ColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17211" prompt="十二月"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPDecMonthBonusCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17611" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPDecMonthBonus" styleClass="OraDataText" viewAttr="M12Bonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPDecDeptBonusCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17711" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPDecDeptBonus" styleClass="OraDataText" viewAttr="M12DeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPDecYearBonusCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader179122" prompt="年终奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPDecYearBonus" styleClass="OraDataText" viewAttr="YearBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPDecReductionCol" totalValue="false" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17811" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPDecReduction" viewAttr="M12ReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPDecDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17911" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPDecDist" viewAttr="M12Value" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:columnGroup id="DPTotalColGroup">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17212" prompt="合计"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="DPTotalMonthBonusCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17612" prompt="月度奖金"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPTotalMonthBonus" styleClass="OraDataText" viewAttr="TotalMonBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPTotalDeptBonusCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17712" prompt="部门嘉奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPTotalDeptBonus" styleClass="OraDataText" viewAttr="TotalDeptBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPTotalYearBonusCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1791221" prompt="年终奖"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPTotalYearBonus" styleClass="OraDataText" viewAttr="YearBonus"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPTotalReductionCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17812" prompt="扣罚"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPTotalReduction" viewAttr="TotalReducBonus" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DPTotalDistCol" totalValue="true" columnDataFormat="numberFormat">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader17912" prompt="实发"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DPTotalDist" viewAttr="YearValue" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:column id="PerNameCol1" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1741" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerName1" styleClass="OraDataText" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNumberCol1" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17313" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerNumber1" styleClass="OraDataText" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="RowSNCol1" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173121" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN1" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+                  <oa:advancedTable id="ExportTable" viewName="AdvAwardsYearStatEptVO1" blockSize="1000" rendered="false">
+                     <ui:contents>
+                        <oa:column id="RowSNCol2" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173122" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN2" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNumberCol2" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173123" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerNumber2" styleClass="OraDataText" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNameCol2" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1742" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerName2" styleClass="OraDataText" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DepNametCol1" rendered="true" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1752" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptName1" styleClass="OraDataText" viewAttr="DeptName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerStatusCol1" rendered="true" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17511" prompt="人员类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerStatus1" styleClass="OraDataText" viewAttr="PerStatus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="M01BonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17613" prompt="1月月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="M01Bonus1" styleClass="OraDataText" viewAttr="M01Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="M01DeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17713" prompt="1月部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJanDeptBonus1" styleClass="OraDataText" viewAttr="M01DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJanReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17813" prompt="1月扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJanReduction1" viewAttr="M01ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJanDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1791222" prompt="1月实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJanDist1" viewAttr="M01Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPFebMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17614" prompt="2月月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPFebMonthBonus1" styleClass="OraDataText" viewAttr="M02Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPFebDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17714" prompt="2月部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPFebDeptBonus1" styleClass="OraDataText" viewAttr="M02DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPFebReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17814" prompt="2月扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPFebReduction1" viewAttr="M02ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPFebDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1791223" prompt="2月实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPFebDist1" viewAttr="M02Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMarMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17621" prompt="3月月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMarMonthBonus1" styleClass="OraDataText" viewAttr="M03Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMarDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17721" prompt="3月部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMarDeptBonus1" styleClass="OraDataText" viewAttr="M03DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMarReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17821" prompt="3月扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMarReduction1" viewAttr="M03ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMarDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17921" prompt="3月实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="M03Value1" viewAttr="M03Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAprMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17631" prompt="4月月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAprMonthBonus1" styleClass="OraDataText" viewAttr="M04Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAprDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17731" prompt="4月部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAprDeptBonus21" styleClass="OraDataText" viewAttr="M04DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAprReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17831" prompt="4月扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAprReduction1" viewAttr="M04ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAprDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17931" prompt="4月实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAprDist1" viewAttr="M04Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMayMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17641" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMayMonthBonus1" styleClass="OraDataText" viewAttr="M05Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMayDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17741" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMayDeptBonus1" styleClass="OraDataText" viewAttr="M05DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMayReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17841" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMayReduction1" viewAttr="M05ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPMayDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17941" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPMayDist1" viewAttr="M05Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJunMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17651" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJunMonthBonus1" styleClass="OraDataText" viewAttr="M06Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJunDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17751" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJunDeptBonus1" styleClass="OraDataText" viewAttr="M06DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJunReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17851" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJunReduction1" viewAttr="M06ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJunDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17951" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJunDist1" viewAttr="M06Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJulMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17661" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJulMonthBonus1" styleClass="OraDataText" viewAttr="M07Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJulDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17761" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJulDeptBonus1" styleClass="OraDataText" viewAttr="M07DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJulReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17861" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJulReduction1" viewAttr="M07ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPJulDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17961" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPJulDist1" viewAttr="M07Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAugMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17671" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAugMonthBonus1" styleClass="OraDataText" viewAttr="M08Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAugDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17771" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAugDeptBonus1" styleClass="OraDataText" viewAttr="M08DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAugReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17871" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAugReduction1" viewAttr="M08ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPAugDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17971" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPAugDist1" viewAttr="M08Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPSepMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17681" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPSepMonthBonus1" styleClass="OraDataText" viewAttr="M09Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPSepDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17781" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPSepDeptBonus1" styleClass="OraDataText" viewAttr="M09DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPSepReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17881" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPSepReduction1" viewAttr="M09ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPSepDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17981" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPSepDist1" viewAttr="M09Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPOctMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17691" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPOctMonthBonus1" styleClass="OraDataText" viewAttr="M10Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPOctDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17791" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPOctDeptBonus1" styleClass="OraDataText" viewAttr="M10DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPOctReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17891" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPOctReduction1" viewAttr="M10ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPOctDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17991" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPOctDist1" viewAttr="M10Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPNovMonthBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader176101" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPNovMonthBonus1" styleClass="OraDataText" viewAttr="M11Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPNovDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader177101" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPNovDeptBonus1" styleClass="OraDataText" viewAttr="M11DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPNovReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader178101" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPNovReduction1" viewAttr="M11ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPNovDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader179101" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPNovDist1" viewAttr="M11Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecMonthBonusCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader176111" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecMonthBonus1" styleClass="OraDataText" viewAttr="M12Bonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecDeptBonusCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader177111" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecDeptBonus1" styleClass="OraDataText" viewAttr="M12DeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecYearBonusCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1791224" prompt="年终奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecYearBonus1" styleClass="OraDataText" viewAttr="YearBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecReductionCol1" totalValue="false" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader178111" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecReduction1" viewAttr="M12ReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader179111" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecDist1" viewAttr="M12Value" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPTotalMonthBonusCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader176121" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPTotalMonthBonus1" styleClass="OraDataText" viewAttr="TotalMonBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPTotalDeptBonusCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader177121" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPTotalDeptBonus1" styleClass="OraDataText" viewAttr="TotalDeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPTotalYearBonusCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17912211" prompt="年终奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPTotalYearBonus1" styleClass="OraDataText" viewAttr="YearBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPTotalReductionCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader178121" prompt="扣罚"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPTotalReduction1" viewAttr="TotalReducBonus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPTotalDistCol1" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17912212" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPTotalDist1" viewAttr="YearValue" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNameCol11" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17411" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerName11" styleClass="OraDataText" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PerNumberCol11" cellNoWrapFormat="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173131" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PerNumber11" styleClass="OraDataText" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="RowSNCol11" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1731211" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN11" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter11">
+                           <ui:total>
+                              <oa:totalRow id="totalRow11" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

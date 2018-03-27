@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目总工时及费用估算" title="" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpManHourCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr" text="项目总工时及费用估算">
+               <ui:contents>
+                  <oa:table id="PmpManHourVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SortSeq" dataType="NUMBER" prompt="序号" viewName="PmpManHourVO1" viewAttr="SortSeq"/>
+                        <oa:messageStyledText id="MainCategory" dataType="VARCHAR2" prompt="大类" viewName="PmpManHourVO1" viewAttr="MainCategory" maximumLength="300"/>
+                        <oa:messageStyledText id="SubCategory" dataType="VARCHAR2" prompt="小类" viewName="PmpManHourVO1" viewAttr="SubCategory" maximumLength="300"/>
+                        <oa:messageStyledText id="ManHour" dataType="NUMBER" prompt="工时数(h)" viewName="PmpManHourVO1" viewAttr="ManHour"/>
+                        <oa:messageStyledText id="EstimateExpense" dataType="NUMBER" prompt="预计内部交易费用" viewName="PmpManHourVO1" viewAttr="EstimateExpense"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

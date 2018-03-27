@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目进度管理" title="" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpProgressCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr" text="项目进度管理">
+               <ui:contents>
+                  <oa:table id="PmpProgressVO1" width="100%" blockSize="20">
+                     <ui:contents>
+                        <oa:messageStyledText id="WbsNumber" dataType="VARCHAR2" prompt="编号" viewName="PmpProgressVO1" viewAttr="WbsNumber" maximumLength="240"/>
+                        <oa:messageStyledText id="TaskName" dataType="VARCHAR2" prompt="名称" viewName="PmpProgressVO1" viewAttr="TaskName" maximumLength="240"/>
+                        <oa:messageStyledText id="ScheduledStartDate" dataType="DATE" prompt="预定起始时间" viewName="PmpProgressVO1" viewAttr="ScheduledStartDate"/>
+                        <oa:messageStyledText id="ScheduledFinishDate" dataType="DATE" prompt="预定结束时间" viewName="PmpProgressVO1" viewAttr="ScheduledFinishDate"/>
+                        <oa:messageTextInput id="Attribute15" dataType="VARCHAR2" prompt="备注" viewName="PmpProgressVO1" viewAttr="Attribute15" maximumLength="150"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

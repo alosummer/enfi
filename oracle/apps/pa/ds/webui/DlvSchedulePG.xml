@@ -1,0 +1,296 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <!--*[Enter Javadoc like developer documentation, delete this line once you fill the included template.] [Put a one line description of the region here.] [Put a brief description of the usage of the region here.] @param [Parameter_name] [Put parameter use here.] @param [Parameter_name] [Put parameter use here.] @see [Put any additional links apart from controller class and BC4J objects directly referenced by this region]-->
+      <oa:pageLayout id="region1" windowTitle="设计进度计划表" amDefName="cux.oracle.apps.pa.ds.server.DlvScheduleAM" title="设计进度计划表" controllerClass="cux.oracle.apps.pa.ds.webui.DlvScheduleCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="save" text="保存" prompt="保存">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="save"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:submitButton id="submitVerify" text="提交室主任审核" prompt="提交室主任审核">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="submitVerify"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:submitButton id="submitApprove" text="提交设计经理审批" prompt="提交设计经理审批">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="submitApprove"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:submitButton id="back" text="返回" prompt="返回" rendered="false">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="Back"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:rawText id="rawText"/>
+            <oa:tableLayout id="HeaderRN" hAlign="center" width="100%">
+               <ui:contents>
+                  <oa:rowLayout id="region2" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="region3" width="30%">
+                           <ui:contents>
+                              <oa:messageComponentLayout id="region5" columns="2" rows="1">
+                                 <ui:contents>
+                                    <oa:messageLayout id="messageLayout2">
+                                       <ui:contents>
+                                          <oa:messageComponentLayout id="region6">
+                                             <ui:contents>
+                                                <oa:messageLovInput id="projectNum" prompt="项目编号" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/ProjectLOV" viewName="DsPVO1" viewAttr="ProjectNum">
+                                                   <lovMappings>
+                                                      <lovMap id="lovMap1" lovItem="ProjectId" resultTo="projectId"/>
+                                                      <lovMap id="lovMap2" lovItem="Segment1" resultTo="projectNum" criteriaFrom="projectNum"/>
+                                                      <lovMap id="lovMap3" lovItem="ProjectName" resultTo="projectName"/>
+                                                      <lovMap id="lovMap4" lovItem="CodeDescription" resultTo="projectDept"/>
+                                                   </lovMappings>
+                                                </oa:messageLovInput>
+                                                <oa:messageLovInput id="projectName" prompt="项目名称" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/ProjectLOV" viewName="DsPVO1" viewAttr="ProjectName">
+                                                   <lovMappings>
+                                                      <lovMap id="lovMap5" lovItem="ProjectId" resultTo="projectId"/>
+                                                      <lovMap id="lovMap6" lovItem="Segment1" resultTo="projectNum"/>
+                                                      <lovMap id="lovMap7" lovItem="ProjectName" resultTo="projectName" criteriaFrom="projectName"/>
+                                                      <lovMap id="lovMap8" lovItem="CodeDescription" resultTo="projectDept"/>
+                                                   </lovMappings>
+                                                </oa:messageLovInput>
+                                                <oa:messageLovInput id="taskNum" prompt="子项号" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/TaskLOV" viewName="DsPVO1" viewAttr="TaskNum">
+                                                   <lovMappings>
+                                                      <lovMap id="lovMap9" lovItem="ProjectId" criteriaFrom="projectId"/>
+                                                      <lovMap id="lovMap10" lovItem="TaskId" resultTo="taskId"/>
+                                                      <lovMap id="lovMap11" lovItem="TaskNumber" resultTo="taskNum" criteriaFrom="taskNum"/>
+                                                      <lovMap id="lovMap12" lovItem="TaskName" resultTo="taskName"/>
+                                                      <lovMap id="lovMap17" lovItem="ScheduledStartDate" resultTo="ScheduledStartDate"/>
+                                                      <lovMap id="lovMap18" lovItem="ScheduledFinishDate" resultTo="ScheduledFinishDate"/>
+                                                   </lovMappings>
+                                                </oa:messageLovInput>
+                                                <oa:messageStyledText id="ScheduledStartDate" prompt="子项预定起始日期" dataType="DATE" viewName="DsPVO1" viewAttr="ScheduledStartDate"/>
+                                                <oa:messageLayout id="messageLayout1">
+                                                   <ui:contents>
+                                                      <oa:button id="OK" text="确定" prompt="确定">
+                                                         <ui:primaryClientAction>
+                                                            <ui:fireAction event="ok"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
+                                                      <oa:submitButton id="copyFromTemplate" text="选择模板" prompt="选择模板">
+                                                         <ui:primaryClientAction>
+                                                            <ui:fireAction event="copyFromTemplate"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:submitButton>
+                                                   </ui:contents>
+                                                </oa:messageLayout>
+                                             </ui:contents>
+                                          </oa:messageComponentLayout>
+                                       </ui:contents>
+                                    </oa:messageLayout>
+                                    <oa:messageLayout id="messageLayout3">
+                                       <ui:contents>
+                                          <oa:messageComponentLayout id="region7">
+                                             <ui:contents>
+                                                <oa:messageStyledText id="Space" prompt=""/>
+                                                <oa:messageStyledText id="projectDept" prompt="项目所属部门" viewName="DsPVO1" viewAttr="ProjectDept"/>
+                                                <oa:messageStyledText id="taskName" prompt="子项名称" viewName="DsPVO1" viewAttr="TaskName"/>
+                                                <oa:messageStyledText id="ScheduledFinishDate" prompt="子项预定完成日期" dataType="DATE" viewName="DsPVO1" viewAttr="ScheduledFinishDate"/>
+                                                <oa:messageLayout id="messageLayout4"/>
+                                             </ui:contents>
+                                          </oa:messageComponentLayout>
+                                       </ui:contents>
+                                    </oa:messageLayout>
+                                 </ui:contents>
+                              </oa:messageComponentLayout>
+                              <oa:formValue id="projectId" dataType="NUMBER" viewName="DsPVO1" viewAttr="ProjectId"/>
+                              <oa:formValue id="taskId" dataType="NUMBER" viewName="DsPVO1" viewAttr="TaskId"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region4" width="70%">
+                           <ui:contents>
+                              <oa:table id="DlvScheduleSpecVO1" width="50%">
+                                 <ui:contents>
+                                    <oa:formValue id="ReleaseSpecialty" dataType="VARCHAR2" prompt="" viewName="DlvScheduleSpecVO1" viewAttr="ReleaseSpecialty"/>
+                                    <oa:messageLovInput id="ReleaseSpecialtyName" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/SpecialityLOV" prompt="发出专业" viewName="DlvScheduleSpecVO1" viewAttr="ReleaseSpecialtyName" readOnly="${oa.DlvScheduleSpecVO1.UpdateAllewed}">
+                                       <lovMappings>
+                                          <lovMap id="lovMap21" lovItem="Meaning" resultTo="ReleaseSpecialtyName" criteriaFrom="ReleaseSpecialtyName"/>
+                                          <lovMap id="lovMap22" lovItem="LookupCode" resultTo="ReleaseSpecialty"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageLovInput id="SpecialtyManagerName" dataType="VARCHAR2" prompt="专业负责人" viewName="DlvScheduleSpecVO1" viewAttr="SpecialtyManagerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/SpecPersonLOV" readOnly="${oa.DlvScheduleSpecVO1.UpdateAllewed}">
+                                       <lovMappings>
+                                          <lovMap id="lovMap13" lovItem="ProjectId" criteriaFrom="projectId"/>
+                                          <lovMap id="lovMap14" lovItem="SpecialtyCode" criteriaFrom="ReleaseSpecialty" resultTo="ReleaseSpecialty"/>
+                                          <lovMap id="lovMap15" lovItem="PersonId" resultTo="SpecialtyManager"/>
+                                          <lovMap id="lovMap16" lovItem="PersonName" resultTo="SpecialtyManagerName" criteriaFrom="SpecialtyManagerName"/>
+                                          <lovMap id="lovMap19" lovItem="DeptName" resultTo="SpecManagerDeptName"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:formValue id="SpecialtyManager" dataType="NUMBER" viewName="DlvScheduleSpecVO1" viewAttr="SpecialtyManager"/>
+                                    <oa:messageStyledText id="SpecManagerDeptName" viewName="DlvScheduleSpecVO1" viewAttr="DeptName" prompt="专业负责人所在部门"/>
+                                 </ui:contents>
+                                 <ui:tableActions>
+                                    <oa:flowLayout id="region8">
+                                       <ui:contents>
+                                          <oa:button id="updateSpec" text="更新" prompt="更新">
+                                             <ui:primaryClientAction>
+                                                <ui:firePartialAction event="updateSpec"/>
+                                             </ui:primaryClientAction>
+                                          </oa:button>
+                                          <oa:button id="addSpec" text="新增" prompt="新增">
+                                             <ui:primaryClientAction>
+                                                <ui:firePartialAction event="addSpec"/>
+                                             </ui:primaryClientAction>
+                                          </oa:button>
+                                          <oa:button id="deleteSpec" text="删除" prompt="删除">
+                                             <ui:primaryClientAction>
+                                                <ui:firePartialAction event="deleteSpec"/>
+                                             </ui:primaryClientAction>
+                                          </oa:button>
+                                       </ui:contents>
+                                    </oa:flowLayout>
+                                 </ui:tableActions>
+                                 <ui:tableSelection>
+                                    <oa:multipleSelection id="multipleSelection1" viewName="DlvScheduleSpecVO1" viewAttr="SelectedFlag"/>
+                                 </ui:tableSelection>
+                              </oa:table>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:header id="ResultRN">
+               <ui:contents>
+                  <oa:advancedTable id="DlvSchedule" viewName="DlvScheduleVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="column1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="审批状态"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ApproveStatusName" dataType="VARCHAR2" prompt="" viewAttr="ApproveStatusName" maximumLength="4000"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column2">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader14" prompt="节点类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="NodeType" dataType="VARCHAR2" prompt="" viewAttr="NodeType" pickListViewName="DsNodeTypeVO1" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column3">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="子项"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TaskName" dataType="VARCHAR2" prompt="子项" viewAttr="TaskName" maximumLength="4000"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column4">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader16" prompt="设计节点"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="DesignNode" dataType="VARCHAR2" prompt="" viewAttr="DesignNode" maximumLength="300" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column5">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17" prompt="可交付物名称"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DocName" dataType="VARCHAR2" prompt="" viewAttr="DocName" maximumLength="300"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column6">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader18" prompt="计划完成日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="ScheduleCompletionDate" dataType="DATE" prompt="" viewAttr="ScheduleCompletionDate" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column7">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader19" prompt="实际提出日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ActualReleaseDate" dataType="DATE" prompt="" viewAttr="ActualReleaseDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column8">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader20" prompt="实际完成日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ActualCompletionDate" dataType="DATE" prompt="" viewAttr="ActualCompletionDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column9">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader21" prompt="动态完成日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DynamicCompletionDate" dataType="DATE" prompt="" viewAttr="DynamicCompletionDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column11">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader23" prompt="发出专业"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="releaseSpecialty1" dataType="VARCHAR2" prompt="接收专业" viewAttr="ReleaseSpecialty" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column12">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader24" prompt="接收专业"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="AcceptSpecialty" dataType="VARCHAR2" prompt="接收专业" viewAttr="AcceptSpecialty" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column13">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader13" prompt="情况说明"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="ScheduleDesc" dataType="VARCHAR2" prompt="" viewAttr="ScheduleDesc" maximumLength="3000" readOnly="${oa.DlvScheduleVO1.UpdateAllewed}"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection2" viewAttr="SelectedFlag"/>
+                     </ui:tableSelection>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region9">
+                           <ui:contents>
+                              <oa:submitButton id="UpdateSchedule" text="更新" prompt="更新">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="UpdateSchedule"/>
+                                 </ui:primaryClientAction>
+                              </oa:submitButton>
+                              <oa:submitButton id="DeleteSchedule" text="删除" prompt="删除">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="DeleteSchedule"/>
+                                 </ui:primaryClientAction>
+                              </oa:submitButton>
+                              <oa:submitButton id="AddSchedule" text="添加一行" prompt="添加一行">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="AddSchedule"/>
+                                 </ui:primaryClientAction>
+                              </oa:submitButton>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

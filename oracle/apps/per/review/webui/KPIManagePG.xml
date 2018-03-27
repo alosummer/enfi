@@ -1,0 +1,166 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" windowTitle="指标库管理" title="指标库管理" controllerClass="cux.oracle.apps.per.review.webui.KPIManageCO" amDefName="cux.oracle.apps.per.review.server.KeyPIAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="MainRN" mode="autoCustomizationCriteria">
+               <ui:contents>
+                  <oa:table id="KeyPIVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="Rownum" viewName="KeyPIVO1" viewAttr="Rownum" prompt="序号"/>
+                        <oa:messageStyledText id="KpiId" dataType="NUMBER" prompt="序号" viewName="KeyPIVO1" viewAttr="KpiId" maximumLength="5" rendered="false"/>
+                        <oa:messageChoice id="KpiClass" dataType="VARCHAR2" prompt="指标分类" viewName="KeyPIVO1" viewAttr="KpiClass" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIClassVO" pickListDispAttr="EpmIcName" pickListValAttr="EpmIcCode" required="yes" allowBlankValue="true" sortState="yes" initSortSeq="none" readOnly="${oa.KeyPIVO1.Updatable}">
+                           <ui:primaryClientAction>
+                              <ui:firePartialAction event="refreshLov" unvalidated="true">
+                                 <ui:parameters>
+                                    <ui:parameter key="kpiClass" value="${oa.KeyPIVO1.KpiClass}"/>
+                                 </ui:parameters>
+                              </ui:firePartialAction>
+                           </ui:primaryClientAction>
+                        </oa:messageChoice>
+                        <oa:messageChoice id="KpiArea" pickListViewDef="cux.oracle.apps.per.poplist.server.KPILevelVO" pickListValAttr="EpmIlCode" pickListDispAttr="EpmIlName" viewName="KeyPIVO1" viewAttr="KpiArea" required="no" allowBlankValue="false" prompt="考核层面" pickListViewName="KPILevelVO1" serverUnvalidated="true" selectiveSearchCriteria="true" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="KpiName" dataType="VARCHAR2" prompt="指标名称" viewName="KeyPIVO1" viewAttr="KpiName" maximumLength="200" required="uiOnly" sortState="yes" initSortSeq="none" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="KeyPIVO1" viewAttr="KpiDesc" maximumLength="500" required="uiOnly" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageChoice id="KpiScoringMethod" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIScoreMethodVO" pickListValAttr="EpmSmCode" pickListDispAttr="EpmSmName" viewName="KeyPIVO1" viewAttr="KpiScoringMethod" prompt="评分方法" required="yes" allowBlankValue="false" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageChoice id="KpiDataSource" dataType="VARCHAR2" prompt="数据来源" viewName="KeyPIVO1" viewAttr="KpiDataSource" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceSMVO" pickListDispAttr="EpmDsName" pickListValAttr="EpmDsCode" required="yes" allowBlankValue="false" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageLovInput id="org_name" viewName="KeyPIVO1" viewAttr="OrganizationName" prompt="公司" externalListOfValues="/cux/oracle/apps/per/lov/webui/OrganizationRN" selectiveSearchCriteria="true" readOnly="${oa.KeyPIVO1.Updatable}">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="OrganizationId" resultTo="Attribute5"/>
+                              <lovMap id="lovMap2" lovItem="OrganizationName" resultTo="org_name" criteriaFrom="org_name"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="Attribute1" viewName="KeyPIVO1" viewAttr="Attribute1" prompt="指标目标值范围" dataType="VARCHAR2" maximumLength="150" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="Attribute2" viewName="KeyPIVO1" viewAttr="Attribute2" prompt="指标下限值范围" dataType="VARCHAR2" maximumLength="150" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="Attribute3" viewName="KeyPIVO1" viewAttr="Attribute3" prompt="指标目标值默认值" dataType="VARCHAR2" rendered="false" maximumLength="150" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="Attribute4" viewName="KeyPIVO1" viewAttr="Attribute4" prompt="指标下限值默认值" dataType="VARCHAR2" rendered="false" maximumLength="150" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:formValue id="Attribute5" viewName="KeyPIVO1" viewAttr="Attribute5"/>
+                        <oa:messageTextInput id="StartDate" viewName="KeyPIVO1" viewAttr="StartDate" dataType="DATE" prompt="有效起始时间" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageTextInput id="EndDate" dataType="DATE" viewName="KeyPIVO1" viewAttr="EndDate" prompt="有效终止时间" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:messageChoice id="KpiDataDimension" dataType="VARCHAR2" prompt="数据维度" viewName="KeyPIVO1" viewAttr="KpiDataDimension" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataDimensionVO" pickListValAttr="EpmDdCode" pickListDispAttr="EpmDdName" required="no" allowBlankValue="false" rendered="false" readOnly="${oa.KeyPIVO1.Updatable}"/>
+                        <oa:rowLayout id="region1" prompt="维度">
+                           <ui:contents>
+                              <oa:cellFormat id="region2">
+                                 <ui:contents>
+                                    <oa:image id="Dimension" source="detailsicon_enabled.gif" prompt="维度" rendered="${oa.KeyPIVO1.Renderable}">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="dimension" id="fireAction1">
+                                             <ui:parameters>
+                                                <ui:parameter key="kpiId" value="${oa.KeyPIVO1.KpiId}"/>
+                                                <ui:parameter key="kpiName" value="${oa.KeyPIVO1.KpiName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region7" prompt="计算逻辑">
+                           <ui:contents>
+                              <oa:cellFormat id="region3">
+                                 <ui:contents>
+                                    <oa:image id="Logic" source="detailsicon_enabled.gif" prompt="计算逻辑" rendered="${oa.KeyPIVO1.Renderable}">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="logic" id="fireAction3">
+                                             <ui:parameters>
+                                                <ui:parameter key="kpiId" value="${oa.KeyPIVO1.KpiId}"/>
+                                                <ui:parameter key="kpiName" value="${oa.KeyPIVO1.KpiName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region71" prompt="报表">
+                           <ui:contents>
+                              <oa:cellFormat id="region4">
+                                 <ui:contents>
+                                    <oa:image id="Report" source="detailsicon_enabled.gif" prompt="报表" rendered="${oa.KeyPIVO1.Renderable}">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="report" id="fireAction2">
+                                             <ui:parameters>
+                                                <ui:parameter key="kpiId" value="${oa.KeyPIVO1.KpiId}"/>
+                                                <ui:parameter key="kpiName" value="${oa.KeyPIVO1.KpiName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region72" prompt="约束对象">
+                           <ui:contents>
+                              <oa:cellFormat id="region5">
+                                 <ui:contents>
+                                    <oa:image id="Detail" source="detailsicon_enabled.gif" prompt="约束对象" rendered="true">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="updateConstraint" id="fireAction4">
+                                             <ui:parameters>
+                                                <ui:parameter key="kpiId" value="${oa.KeyPIVO1.KpiId}"/>
+                                                <ui:parameter key="kpiName" value="${oa.KeyPIVO1.KpiName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region73" prompt="删除">
+                           <ui:contents>
+                              <oa:cellFormat id="region6">
+                                 <ui:contents>
+                                    <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除" rendered="${oa.KeyPIVO1.Renderable}">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="deleteKPI" id="fireAction5">
+                                             <ui:parameters>
+                                                <ui:parameter key="kpiId" value="${oa.KeyPIVO1.KpiId}"/>
+                                                <ui:parameter key="kpiName" value="${oa.KeyPIVO1.KpiName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+                              <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="指标查询" id="KPISimpleSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageChoice id="SearchClass" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIClassVO" pickListValAttr="EpmIcCode" pickListDispAttr="EpmIcName" prompt="指标分类"/>
+                              <oa:messageTextInput id="SearchKPIName" prompt="指标名称"/>
+                              <oa:messageChoice id="SearchDataSource" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIDataSourceSMVO" pickListValAttr="EpmDsCode" pickListDispAttr="EpmDsName" prompt="数据来源"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="classMap" criteriaItem="SearchClass" resultsItem="KpiClass"/>
+                  <oa:queryCriteriaMap id="kpiNameMap" criteriaItem="SearchKPIName" resultsItem="KpiName"/>
+                  <oa:queryCriteriaMap id="dataSourceMap" criteriaItem="SearchDataSource" resultsItem="KpiDataSource"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

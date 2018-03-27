@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" windowTitle="绩效管理_员工自助" title="绩效管理_员工自助" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM" controllerClass="cux.oracle.apps.per.aprprocess.webui.EmpSelfMainCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryAprRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageTextInput id="SearchYearFrom" prompt="起始年份"/>
+                        <oa:messageTextInput id="SearchYearTo" prompt="截至年份"/>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:separator id="separator"/>
+                  <oa:table id="AprEmpSelfListVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="AppraisalId" dataType="NUMBER" prompt="序号" viewName="AprEmpSelfListVO1" viewAttr="AppraisalId"/>
+                        <oa:messageStyledText id="AppraisalYear" dataType="VARCHAR2" prompt="年度" viewName="AprEmpSelfListVO1" viewAttr="AppraisalYear" maximumLength="20" sortState="yes" initSortSeq="first"/>
+                        <oa:messageStyledText id="EmpGroup" dataType="VARCHAR2" prompt="考群" viewName="AprEmpSelfListVO1" viewAttr="EmpGroup" maximumLength="20" sortState="yes" initSortSeq="none"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="部门" viewName="AprEmpSelfListVO1" viewAttr="DeptName" maximumLength="240" sortState="yes" initSortSeq="third"/>
+                        <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="姓名" viewName="AprEmpSelfListVO1" viewAttr="EmpName" maximumLength="240" sortState="yes"/>
+                        <oa:messageStyledText id="EmployeeNumber" viewName="AprEmpSelfListVO1" viewAttr="EmployeeNumber" prompt="工号" sortState="yes"/>
+                        <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="阶段" viewName="AprEmpSelfListVO1" viewAttr="PhaseName" maximumLength="80" sortState="yes"/>
+                        <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="状态" viewName="AprEmpSelfListVO1" viewAttr="StatusName" maximumLength="80" sortState="yes"/>
+                        <oa:messageStyledText id="LastUpdateDate" dataType="DATE" prompt="最后处理时间" viewName="AprEmpSelfListVO1" viewAttr="LastUpdateDate" sortState="yes"/>
+                        <oa:messageStyledText id="CurrentPerformer" viewName="AprEmpSelfListVO1" viewAttr="CurrentPerformer" prompt="当前处理人"/>
+                        <oa:image id="Detail" source="detailsicon_enabled.gif" prompt="明细">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="appraisalid" value="${oa.AprEmpSelfListVO1.AppraisalId}"/>
+                                    <ui:parameter key="phaseid" value="${oa.AprEmpSelfListVO1.PhaseId}"/>
+                                    <ui:parameter key="statusid" value="${oa.AprEmpSelfListVO1.StatusId}"/>
+                                    <ui:parameter key="ispromisee" value="${oa.AprEmpSelfListVO1.IsPromisee}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

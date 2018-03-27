@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.bonus.lov.server.EmployeeAM" advancedSearchAllowed="false" scope="/" controllerClass="cux.oracle.apps.per.bonus.lov.webui.EmpLovCO">
+   <ui:contents>
+      <oa:table name="EmpLovRN" id="EmpLovTable">
+         <ui:contents>
+            <oa:messageStyledText id="EmployeeNumber" dataType="VARCHAR2" prompt="员工编号" viewName="EmpLovVO1" viewAttr="EmployeeNumber" maximumLength="30" queryable="true"/>
+            <oa:messageStyledText id="LastName" dataType="VARCHAR2" prompt="员工姓名" viewName="EmpLovVO1" viewAttr="LastName" maximumLength="150" queryable="true"/>
+            <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="部门" viewName="EmpLovVO1" viewAttr="OrgName" maximumLength="240" queryable="true"/>
+            <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="EmpLovVO1" viewAttr="PersonId"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

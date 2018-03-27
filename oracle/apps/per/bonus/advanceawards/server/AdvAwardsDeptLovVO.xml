@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AdvAwardsDeptLovVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsDeptLovVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="person_id"
+      Kind="where"
+      Type="java.lang.Integer" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT DISTINCT cbd.name dept_name,
+                cbd.organization_id
+  FROM (SELECT to_char(hu.organization_id) AS organization_id
+          FROM per_all_people_f          pf,
+               per_all_assignments_f     paf,
+               hr_all_organization_units hu,
+               apps.per_jobs             pj,
+               apps.per_grades_vl        pg
+         WHERE pf.person_id = paf.person_id
+           AND paf.job_id = pj.job_id
+           AND paf.GRADE_ID = pg.GRADE_ID
+           AND pg.name IN ('企业负责人正职',
+                           '企业负责人副职',
+                           '企业负责人其他',
+                           '中层管理人员正职') 
+           AND paf.organization_id = hu.organization_id
+           AND paf.assignment_status_type_id = '1'
+              /*AND HU.ATTRIBUTE9 IS NOT NULL
+              AND HU.Attribute9 = to_char(HU.Organization_Id)*/
+           AND SYSDATE BETWEEN paf.effective_start_date AND
+               paf.effective_end_date
+           AND SYSDATE BETWEEN pf.effective_start_date AND
+               pf.effective_end_date
+           AND pf.person_id = :person_id
+        -- and not exists ( select 1 from dual where PF.PERSON_ID= 1157 and PAF.ORGANIZATION_ID = 2976)
+        UNION ALL
+        SELECT DISTINCT to_char(cba.organization_id) AS organization_id
+          FROM apps.cux_bonus_admin  cba,
+               apps.per_all_people_f papf
+         WHERE papf.employee_number = cba.employee_number
+           AND SYSDATE BETWEEN papf.effective_start_date AND
+               papf.effective_end_date
+           AND papf.person_id = :person_id) t
+ INNER JOIN cux_bonus_dept_v cbd
+    ON t.organization_id = to_char(cbd.organization_id)
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="DeptName"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEPT_NAME"
+      Expression="DEPT_NAME"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORGANIZATION_ID"
+      Expression="ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

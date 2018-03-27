@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="PerLovAM"
+   ComponentClass="cux.oracle.apps.per.lov.server.PerLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="PerOrganizationVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerOrganizationVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerJobVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerJobVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ContractVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.ContractVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerEmpVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerEmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ValuesetVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.ValuesetVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="OrganizationVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.OrganizationVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="WfStatusVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.WfStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="KPIConJobVO1"
+      ViewObjectName="cux.oracle.apps.per.poplist.server.KPIConJobVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="KPIObjectClassVO1"
+      ViewObjectName="cux.oracle.apps.per.poplist.server.KPIObjectClassVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="KpiConJobLovVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.KpiConJobLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ValueSetDynVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.ValueSetDynVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerKPITmpVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerKPITmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerKPIVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerKPIVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerKPITmp1VO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PerKPITmp1VO" >
+   </ViewUsage>
+</AppModule>

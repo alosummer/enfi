@@ -1,0 +1,851 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AdvAwardsYearStatVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.advanceawards.server.AdvAwardsYearStatVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT PERSON.EMPLOYEE_NUMBER,PERSON.LAST_NAME,PERSON.DEPT_NAME,
+       BONUS.per_status,
+       BONUS.M01_BONUS,BONUS.M02_BONUS,BONUS.M03_BONUS,BONUS.M04_BONUS,BONUS.M05_BONUS,BONUS.M06_BONUS,BONUS.M07_BONUS,BONUS.M08_BONUS,BONUS.M09_BONUS,BONUS.M10_BONUS,BONUS.M11_BONUS,BONUS.M12_BONUS,
+       BONUS.M01_DEPT_BONUS,BONUS.M02_DEPT_BONUS,BONUS.M03_DEPT_BONUS,BONUS.M04_DEPT_BONUS,BONUS.M05_DEPT_BONUS,BONUS.M06_DEPT_BONUS,BONUS.M07_DEPT_BONUS,BONUS.M08_DEPT_BONUS,BONUS.M09_DEPT_BONUS,BONUS.M10_DEPT_BONUS,BONUS.M11_DEPT_BONUS,BONUS.M12_DEPT_BONUS,
+       BONUS.M01_REDUC_BONUS,BONUS.M02_REDUC_BONUS,BONUS.M03_REDUC_BONUS,BONUS.M04_REDUC_BONUS,BONUS.M05_REDUC_BONUS,BONUS.M06_REDUC_BONUS,BONUS.M07_REDUC_BONUS,BONUS.M08_REDUC_BONUS,BONUS.M09_REDUC_BONUS,BONUS.M10_REDUC_BONUS,BONUS.M11_REDUC_BONUS,BONUS.M12_REDUC_BONUS,
+       BONUS.M01_VALUE,BONUS.M02_VALUE,BONUS.M03_VALUE,BONUS.M04_VALUE,BONUS.M05_VALUE,BONUS.M06_VALUE,BONUS.M07_VALUE,BONUS.M08_VALUE,BONUS.M09_VALUE,BONUS.M10_VALUE,BONUS.M11_VALUE,BONUS.M12_VALUE,
+       BONUS.TOTAL_MON_BONUS,BONUS.TOTAL_DEPT_BONUS,BONUS.TOTAL_REDUC_BONUS,
+       YEAR_BONUS,YEAR_VALUE,
+       ROW_NUMBER() OVER( ORDER BY PERSON.SORTFLAG,BONUS.per_status,PERSON.DEPT_NAME,PERSON.LAST_NAME  ) as ROW_SEQ
+  FROM( select DIS.PERSON_ID,
+               apps.hr_person_type_usage_info.get_user_person_type(sysdate,DIS.PERSON_ID) AS per_status,
+               SUM(DIS.M01_BONUS) AS M01_BONUS,
+               SUM(DIS.M02_BONUS) AS M02_BONUS,
+               SUM(DIS.M03_BONUS) AS M03_BONUS,
+               SUM(DIS.M04_BONUS) AS M04_BONUS,
+               SUM(DIS.M05_BONUS) AS M05_BONUS,
+               SUM(DIS.M06_BONUS) AS M06_BONUS,
+               SUM(DIS.M07_BONUS) AS M07_BONUS,
+               SUM(DIS.M08_BONUS) AS M08_BONUS,
+               SUM(DIS.M09_BONUS) AS M09_BONUS,
+               SUM(DIS.M10_BONUS) AS M10_BONUS,
+               SUM(DIS.M11_BONUS) AS M11_BONUS,
+               SUM(DIS.M12_BONUS) AS M12_BONUS,
+               SUM(DIS.M01_DEPT_BONUS) AS M01_DEPT_BONUS,
+               SUM(DIS.M02_DEPT_BONUS) AS M02_DEPT_BONUS,
+               SUM(DIS.M03_DEPT_BONUS) AS M03_DEPT_BONUS,
+               SUM(DIS.M04_DEPT_BONUS) AS M04_DEPT_BONUS,
+               SUM(DIS.M05_DEPT_BONUS) AS M05_DEPT_BONUS,
+               SUM(DIS.M06_DEPT_BONUS) AS M06_DEPT_BONUS,
+               SUM(DIS.M07_DEPT_BONUS) AS M07_DEPT_BONUS,
+               SUM(DIS.M08_DEPT_BONUS) AS M08_DEPT_BONUS,
+               SUM(DIS.M09_DEPT_BONUS) AS M09_DEPT_BONUS,
+               SUM(DIS.M10_DEPT_BONUS) AS M10_DEPT_BONUS,
+               SUM(DIS.M11_DEPT_BONUS) AS M11_DEPT_BONUS,
+               SUM(DIS.M12_DEPT_BONUS) AS M12_DEPT_BONUS,
+               SUM(DIS.M01_REDUC_BONUS) AS M01_REDUC_BONUS,
+               SUM(DIS.M02_REDUC_BONUS) AS M02_REDUC_BONUS,
+               SUM(DIS.M03_REDUC_BONUS) AS M03_REDUC_BONUS,
+               SUM(DIS.M04_REDUC_BONUS) AS M04_REDUC_BONUS,
+               SUM(DIS.M05_REDUC_BONUS) AS M05_REDUC_BONUS,
+               SUM(DIS.M06_REDUC_BONUS) AS M06_REDUC_BONUS,
+               SUM(DIS.M07_REDUC_BONUS) AS M07_REDUC_BONUS,
+               SUM(DIS.M08_REDUC_BONUS) AS M08_REDUC_BONUS,
+               SUM(DIS.M09_REDUC_BONUS) AS M09_REDUC_BONUS,
+               SUM(DIS.M10_REDUC_BONUS) AS M10_REDUC_BONUS,
+               SUM(DIS.M11_REDUC_BONUS) AS M11_REDUC_BONUS,
+               SUM(DIS.M12_REDUC_BONUS) AS M12_REDUC_BONUS,
+               ( SUM(DIS.M01_BONUS) + SUM(DIS.M01_DEPT_BONUS) - SUM(DIS.M01_REDUC_BONUS) )  AS M01_VALUE,
+               ( SUM(DIS.M02_BONUS) + SUM(DIS.M02_DEPT_BONUS) - SUM(DIS.M02_REDUC_BONUS) )  AS M02_VALUE,
+               ( SUM(DIS.M03_BONUS) + SUM(DIS.M03_DEPT_BONUS) - SUM(DIS.M03_REDUC_BONUS) )  AS M03_VALUE,
+               ( SUM(DIS.M04_BONUS) + SUM(DIS.M04_DEPT_BONUS) - SUM(DIS.M04_REDUC_BONUS) )  AS M04_VALUE,
+               ( SUM(DIS.M05_BONUS) + SUM(DIS.M05_DEPT_BONUS) - SUM(DIS.M05_REDUC_BONUS) )  AS M05_VALUE,
+               ( SUM(DIS.M06_BONUS) + SUM(DIS.M06_DEPT_BONUS) - SUM(DIS.M06_REDUC_BONUS) )  AS M06_VALUE,
+               ( SUM(DIS.M07_BONUS) + SUM(DIS.M07_DEPT_BONUS) - SUM(DIS.M07_REDUC_BONUS) )  AS M07_VALUE,
+               ( SUM(DIS.M08_BONUS) + SUM(DIS.M08_DEPT_BONUS) - SUM(DIS.M08_REDUC_BONUS) )  AS M08_VALUE,
+               ( SUM(DIS.M09_BONUS) + SUM(DIS.M09_DEPT_BONUS) - SUM(DIS.M09_REDUC_BONUS) )  AS M09_VALUE,
+               ( SUM(DIS.M10_BONUS) + SUM(DIS.M10_DEPT_BONUS) - SUM(DIS.M10_REDUC_BONUS) )  AS M10_VALUE,
+               ( SUM(DIS.M11_BONUS) + SUM(DIS.M11_DEPT_BONUS) - SUM(DIS.M11_REDUC_BONUS) )  AS M11_VALUE,
+               SUM(YEAR_BONUS) AS YEAR_BONUS,
+               ( SUM(DIS.M12_BONUS) + SUM(DIS.M12_DEPT_BONUS) + SUM(YEAR_BONUS) - SUM(DIS.M12_REDUC_BONUS) )  AS M12_VALUE,
+               SUM(DIS.TOTAL_MON_BONUS) AS TOTAL_MON_BONUS,
+               SUM(DIS.TOTAL_DEPT_BONUS) AS TOTAL_DEPT_BONUS,
+               SUM(DIS.TOTAL_REDUC_BONUS) AS TOTAL_REDUC_BONUS,
+               SUM(DIS.ACT_VALUE) AS YEAR_VALUE
+          from (SELECT CBP.PERSON_ID,       
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '01' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M01_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '02' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M02_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '03' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M03_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '04' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M04_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '05' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M05_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '06' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M06_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '07' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M07_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '08' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M08_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '09' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M09_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '10' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M10_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '11' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M11_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '12' AND CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M12_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '01' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M01_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '02' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M02_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '03' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M03_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '04' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M04_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '05' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M05_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '06' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M06_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '07' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M07_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '08' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M08_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '09' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M09_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '10' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M10_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '11' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M11_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '12' AND CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M12_DEPT_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '01' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M01_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '02' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M02_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '03' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M03_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '04' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M04_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '05' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M05_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '06' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M06_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '07' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M07_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '08' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M08_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '09' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M09_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '10' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M10_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '11' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M11_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '12' AND CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS M12_REDUC_BONUS,
+                       CASE WHEN TO_CHAR(DISTRIBUTION_DATE,'MM') = '12' AND CBT.TYPE_NAME = '年终奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS YEAR_BONUS,
+                       CASE WHEN CBT.TYPE_NAME = '部门扣奖' THEN 0 - CBP.DISTRIBUTION_AMOUNT ELSE CBP.DISTRIBUTION_AMOUNT END AS ACT_VALUE,
+                       CASE WHEN CBT.TYPE_NAME = '月度奖金' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS TOTAL_MON_BONUS,
+                       CASE WHEN CBT.TYPE_NAME = '部门嘉奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS TOTAL_DEPT_BONUS,
+                       CASE WHEN CBT.TYPE_NAME = '部门扣奖' THEN CBP.DISTRIBUTION_AMOUNT ELSE 0 END AS TOTAL_REDUC_BONUS
+                  FROM APPS.CUX_BONUS_PERSON_DISTRIBUTION CBP 
+                     LEFT OUTER JOIN CUX_BONUS_TYPE CBT ON CBP.TYPE_ID = CBT.TYPE_ID     
+                 WHERE TO_CHAR(CBP.DISTRIBUTION_DATE,'YYYY') = :1
+                   AND CBP.ORGANIZATION_ID = :2
+                   AND CBP.DISTRIBUTION_STATUS = '已批准'
+                   AND CBP.IMPORT_STATUS <> '已退回'
+                   AND (CBT.ATTRIBUTE2 is null or CBT.ATTRIBUTE2 = 'N')
+               ) DIS 
+        GROUP BY DIS.PERSON_ID
+      ) BONUS
+        INNER JOIN ( SELECT DISTINCT CBO.PERSON_ID, CBO.EMPLOYEE_NUMBER, CBO.LAST_NAME ,CBO.DEPT_NAME, 1 AS SORTFLAG
+                        FROM APPS.CUX_BONUS_OFFLINE_LIST CBO
+                      UNION
+                        SELECT PAP.PERSON_ID, PAP.EMPLOYEE_NUMBER, PAP.LAST_NAME,ASSGN.DEPT_NAME, 0 AS SORTFLAG
+                          FROM HR.PER_ALL_PEOPLE_F PAP
+                          LEFT OUTER JOIN( SELECT PAF.PERSON_ID,HOUV.NAME AS DEPT_NAME
+                                             FROM APPS.PER_ASSIGNMENTS_F PAF
+                                             LEFT OUTER JOIN APPS.HR_ORGANIZATION_UNITS_V HOUV ON PAF.ORGANIZATION_ID = HOUV.ORGANIZATION_ID 
+                                            WHERE PAF.PRIMARY_FLAG = 'Y'
+                                              AND PAF.ASSIGNMENT_STATUS_TYPE_ID = 1
+                                              AND SYSDATE BETWEEN PAF.EFFECTIVE_START_DATE AND NVL(PAF.EFFECTIVE_END_DATE, SYSDATE + 1)
+                                          ) ASSGN ON PAP.PERSON_ID = ASSGN.PERSON_ID
+                         WHERE PAP.ROWID IN (SELECT MIN(ROWID) AS MINROW
+                                           FROM HR.PER_ALL_PEOPLE_F
+                                          GROUP BY PERSON_ID)
+                  ) PERSON ON BONUS.PERSON_ID = PERSON.PERSON_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="EmployeeNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPLOYEE_NUMBER"
+      Expression="EMPLOYEE_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_NAME"
+      Expression="LAST_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeptName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEPT_NAME"
+      Expression="DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PerStatus"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PER_STATUS"
+      Expression="PER_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M01Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M01_BONUS"
+      Expression="M01_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M02Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M02_BONUS"
+      Expression="M02_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M03Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M03_BONUS"
+      Expression="M03_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M04Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M04_BONUS"
+      Expression="M04_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M05Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M05_BONUS"
+      Expression="M05_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M06Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M06_BONUS"
+      Expression="M06_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M07Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M07_BONUS"
+      Expression="M07_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M08Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M08_BONUS"
+      Expression="M08_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M09Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M09_BONUS"
+      Expression="M09_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M10Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M10_BONUS"
+      Expression="M10_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M11Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M11_BONUS"
+      Expression="M11_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M12Bonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M12_BONUS"
+      Expression="M12_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M01DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M01_DEPT_BONUS"
+      Expression="M01_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M02DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M02_DEPT_BONUS"
+      Expression="M02_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M03DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M03_DEPT_BONUS"
+      Expression="M03_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M04DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M04_DEPT_BONUS"
+      Expression="M04_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M05DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M05_DEPT_BONUS"
+      Expression="M05_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M06DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M06_DEPT_BONUS"
+      Expression="M06_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M07DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M07_DEPT_BONUS"
+      Expression="M07_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M08DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M08_DEPT_BONUS"
+      Expression="M08_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M09DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M09_DEPT_BONUS"
+      Expression="M09_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M10DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M10_DEPT_BONUS"
+      Expression="M10_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M11DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M11_DEPT_BONUS"
+      Expression="M11_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M12DeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M12_DEPT_BONUS"
+      Expression="M12_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M01ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M01_REDUC_BONUS"
+      Expression="M01_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M02ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M02_REDUC_BONUS"
+      Expression="M02_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M03ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M03_REDUC_BONUS"
+      Expression="M03_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M04ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M04_REDUC_BONUS"
+      Expression="M04_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M05ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M05_REDUC_BONUS"
+      Expression="M05_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M06ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M06_REDUC_BONUS"
+      Expression="M06_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M07ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M07_REDUC_BONUS"
+      Expression="M07_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M08ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M08_REDUC_BONUS"
+      Expression="M08_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M09ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M09_REDUC_BONUS"
+      Expression="M09_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M10ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M10_REDUC_BONUS"
+      Expression="M10_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M11ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M11_REDUC_BONUS"
+      Expression="M11_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M12ReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M12_REDUC_BONUS"
+      Expression="M12_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M01Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M01_VALUE"
+      Expression="M01_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M02Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M02_VALUE"
+      Expression="M02_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M03Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M03_VALUE"
+      Expression="M03_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M04Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M04_VALUE"
+      Expression="M04_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M05Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M05_VALUE"
+      Expression="M05_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M06Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M06_VALUE"
+      Expression="M06_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M07Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M07_VALUE"
+      Expression="M07_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M08Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M08_VALUE"
+      Expression="M08_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M09Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M09_VALUE"
+      Expression="M09_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M10Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M10_VALUE"
+      Expression="M10_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M11Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M11_VALUE"
+      Expression="M11_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="M12Value"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="M12_VALUE"
+      Expression="M12_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalMonBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_MON_BONUS"
+      Expression="TOTAL_MON_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalDeptBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_DEPT_BONUS"
+      Expression="TOTAL_DEPT_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalReducBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_REDUC_BONUS"
+      Expression="TOTAL_REDUC_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="YearBonus"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="YEAR_BONUS"
+      Expression="YEAR_BONUS"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="YearValue"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="YEAR_VALUE"
+      Expression="YEAR_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowSeq"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROW_SEQ"
+      Expression="ROW_SEQ"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

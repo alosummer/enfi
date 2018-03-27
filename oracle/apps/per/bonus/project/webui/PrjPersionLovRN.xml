@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjPersionLovCO">
+   <ui:contents>
+      <oa:table id="PrjPersionListTable" name="PrjPersionLovRN">
+         <ui:contents>
+            <oa:messageStyledText id="EmpNo" viewName="PrjPersonLovVO1" viewAttr="EmpNo" prompt="工号" queryable="true"/>
+            <oa:messageStyledText id="EmpName" prompt="姓名" viewName="PrjPersonLovVO1" viewAttr="EmpName" queryable="true"/>
+            <oa:messageStyledText id="OrgName" viewName="PrjPersonLovVO1" viewAttr="OrgName" prompt="组织" queryable="true"/>
+            <oa:formValue id="PersonId" viewName="PrjPersonLovVO1" viewAttr="PersonId" dataType="NUMBER"/>
+            <oa:formValue id="OrgId" viewName="PrjPersonLovVO1" viewAttr="OrgId" dataType="NUMBER"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

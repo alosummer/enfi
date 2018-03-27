@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="项目文档要号系统" title="查询要号申请" amDefName="cux.oracle.apps.pa.docnum.server.GenDocNumAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="QueryRN" mode="autoCustomizationCriteria">
+               <ui:contents>
+                  <oa:table id="ResultsTable" width="100%" controllerClass="cux.oracle.apps.pa.docnum.webui.DocNumHeadResultCO" text="要号申请">
+                     <ui:contents>
+                        <oa:messageStyledText id="InternalId" dataType="NUMBER" prompt="批次号" viewName="DocNumHeadSumVO1" viewAttr="InternalId" sortState="yes" initSortSeq="third"/>
+                        <oa:messageStyledText id="ProjectNumber" dataType="VARCHAR2" prompt="项目号" viewName="DocNumHeadSumVO1" viewAttr="ProjectNumber" maximumLength="25" sortState="yes" initSortSeq="first" destination="OA.jsp?page=/cux/oracle/apps/pa/docnum/webui/DocNumLineDetailPG&amp;headId={@InternalId}&amp;retainAM=Y&amp;addBreadCrumb=Y"/>
+                        <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="DocNumHeadSumVO1" viewAttr="ProjectName" maximumLength="30" destination="OA.jsp?page=/cux/oracle/apps/pa/docnum/webui/DocNumLineDetailPG&amp;headId={@InternalId}&amp;retainAM=Y&amp;addBreadCrumb=Y"/>
+                        <oa:messageStyledText id="IsBatch" dataType="VARCHAR2" prompt="是否批量申请" viewName="DocNumHeadSumVO1" viewAttr="IsBatch" maximumLength="1" sortState="yes" initSortSeq="second"/>
+                        <oa:messageStyledText id="DlvrTypeName" viewName="DocNumHeadSumVO1" viewAttr="Col1" prompt="交付物类型" maximumLength="20"/>
+                        <oa:messageStyledText id="Status" dataType="VARCHAR2" prompt="申请状态" viewName="DocNumHeadSumVO1" viewAttr="Status" maximumLength="20"/>
+                        <oa:messageStyledText id="DocName" viewName="DocNumHeadSumVO1" viewAttr="DocName" prompt="文档名称"/>
+                        <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="描述" viewName="DocNumHeadSumVO1" viewAttr="Description" maximumLength="240"/>
+                        <oa:messageStyledText id="CreatedByPeople" dataType="VARCHAR2" prompt="申请人" viewName="DocNumHeadSumVO1" viewAttr="CreatedByPeople"/>
+                        <oa:messageStyledText id="CreationDateTrunc" dataType="DATE" prompt="申请时间" viewName="DocNumHeadSumVO1" viewAttr="CreationDateTrunc"/>
+                        <oa:messageStyledText id="ApprovalByPeople" prompt="审核人" viewName="DocNumHeadSumVO1" viewAttr="ApprovalByPeople"/>
+                        <oa:image id="DetailImage" prompt="详情" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail">
+                                 <ui:parameters>
+                                    <ui:parameter key="headId" value="${oa.DocNumHeadSumVO1.InternalId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="ButtonLayout">
+                           <ui:contents>
+                              <oa:submitButton id="CreateHeadBatch" text="批量要号" prompt="批量要号"/>
+                              <oa:submitButton id="CreateHeadSporadic" text="零星要号" prompt="零星要号"/>
+                              <oa:submitButton id="BlankOutDocNum" prompt="作废图号"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header id="SimpleSearchHdr" text="查询">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="CustomSimpleSearch">
+                           <ui:contents>
+                              <oa:messageLovInput id="SearchProjectNumber" selectiveSearchCriteria="false" prompt="项目号" externalListOfValues="/cux/oracle/apps/pa/lov/webui/ProjectsListRN" unvalidated="true">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="ProjectNumber" resultTo="SearchProjectNumber" criteriaFrom="SearchProjectNumber"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchProjectName" selectiveSearchCriteria="false" prompt="项目名称" maximumLength="80" columns="40" externalListOfValues="/cux/oracle/apps/pa/lov/webui/ProjectsListRN" unvalidated="true">
+                                 <lovMappings>
+                                    <lovMap id="lovMap2" lovItem="ProjectName" resultTo="SearchProjectName" criteriaFrom="SearchProjectName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchIsBatch" pickListViewDef="cux.oracle.apps.pa.poplist.server.IsBatchVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="是否批量申请" selectiveSearchCriteria="false" allowBlankValue="true"/>
+                              <oa:messageChoice id="SearchStatus" selectiveSearchCriteria="false" pickListViewDef="cux.oracle.apps.pa.poplist.server.DocNumHeadStatusVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="状态" allowBlankValue="true"/>
+                              <oa:messageTextInput id="SearchDocName" prompt="文档名称" maximumLength="240" selectiveSearchCriteria="false"/>
+                              <oa:messageLovInput id="SearchCreatedBy" externalListOfValues="/cux/oracle/apps/pa/lov/webui/AllPeopleListRN" prompt="申请人" unvalidated="true" selectiveSearchCriteria="false">
+                                 <lovMappings>
+                                    <lovMap id="lovMap3" lovItem="GlobalName" resultTo="SearchCreatedBy" criteriaFrom="SearchCreatedBy"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="StartDate" dataType="DATE" prompt="申请起始时间"/>
+                              <oa:messageTextInput id="EndDate" dataType="DATE" prompt="申请截止时间"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="ProjectNumberMap" criteriaItem="SearchProjectNumber" resultsItem="ProjectNumber"/>
+                  <oa:queryCriteriaMap id="ProjectNameMap" criteriaItem="SearchProjectName" resultsItem="ProjectName"/>
+                  <oa:queryCriteriaMap id="StatusMap" criteriaItem="SearchStatus" resultsItem="Status"/>
+                  <oa:queryCriteriaMap id="IsBatchMap" criteriaItem="SearchIsBatch" resultsItem="IsBatch"/>
+                  <oa:queryCriteriaMap id="DocNameMap" criteriaItem="SearchDocName" resultsItem="DocName"/>
+                  <oa:queryCriteriaMap id="CreatedByMap" criteriaItem="SearchCreatedBy" resultsItem="CreatedByPeople"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <ui:contents>
+      <oa:table name="CuxDeliverStatusLovRN" id="CuxDeliverStatusLovVO1">
+         <ui:contents>
+            <oa:formValue id="LookupCode" dataType="VARCHAR2" prompt="LookupCode" viewName="CuxDeliverStatusLovVO1" viewAttr="LookupCode"/>
+            <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="状态" viewName="CuxDeliverStatusLovVO1" viewAttr="Description" maximumLength="240" queryable="true"/>
+            <oa:formValue id="Tag" dataType="VARCHAR2" prompt="Tag" viewName="CuxDeliverStatusLovVO1" viewAttr="Tag"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

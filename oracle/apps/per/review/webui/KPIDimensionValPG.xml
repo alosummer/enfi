@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="layoutRN" amDefName="cux.oracle.apps.per.review.server.KeyPIAM" controllerClass="cux.oracle.apps.per.review.webui.KPIDimensionValCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="KpiCtrValueVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="KpiCtrValueVO1" viewAttr="Rownum"/>
+                  <oa:messageStyledText id="DimensionName" dataType="VARCHAR2" prompt="维度" viewName="KpiCtrValueVO1" viewAttr="DimensionName" maximumLength="150"/>
+                  <oa:messageLovInput id="DimensionValue" dataType="VARCHAR2" prompt="维度取值" viewName="KpiCtrValueVO1" viewAttr="DimensionValue" maximumLength="250" externalListOfValues="/cux/oracle/apps/per/lov/webui/ValueSetDynRN" columns="100">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="ValueCol" resultTo="DimensionValue" criteriaFrom="DimensionValue"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="ValueId" dataType="NUMBER" prompt="ValueId" viewName="KpiCtrValueVO1" viewAttr="ValueId"/>
+                  <oa:formValue id="ConstraintId" dataType="NUMBER" prompt="ConstraintId" viewName="KpiCtrValueVO1" viewAttr="ConstraintId"/>
+                  <oa:formValue id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="KpiCtrValueVO1" viewAttr="KpiId"/>
+                  <oa:formValue id="DimensionId" dataType="NUMBER" prompt="DimensionId" viewName="KpiCtrValueVO1" viewAttr="DimensionId"/>
+                  <oa:formValue id="ValuesetName" dataType="VARCHAR2" prompt="ValuesetName" viewName="KpiCtrValueVO1" viewAttr="ValuesetName"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                  <oa:spacer id="item2" width="5"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

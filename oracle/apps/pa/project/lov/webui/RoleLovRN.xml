@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!-- dbdrv: exec java oracle/jrad/tools/xml/importer XMLImporter.class java &phase=dat+24 checkfile(120.1.12010000.3=120.3)(115.4=120.0):~PROD:~PATH:~FILE &fullpath_~PROD_~PATH_~FILE -username &un_apps -password &pw_apps -dbconnection &jdbc_db_addr  -userId "1" -rootPackage /oracle/apps/~PROD  -rootdir &fullpath_~PROD_mds_directory  -->
+<oa:listOfValues amDefName="cux.oracle.apps.pa.project.lov.server.LovAM" controllerClass="cux.oracle.apps.pa.project.lov.webui.RolesCO" title="Role" xmlns="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user" file-version="$Header: RoleLovRN.xml 120.3 2011/08/17 08:25:21 nisinha ship $" version="10.1.3_" xml:lang="en-US" scope="/">
+   <ui:contents>
+      <oa:table name="PA_ROLE_LOV" id="PA_ROLE_LOV_lovTable" akRegionCode="PA_ROLE_LOV" regionName="Role" standalone="true" shortDesc="This table lists the results of your search for project roles from which you can select one value.">
+         <ui:contents>
+            <oa:messageStyledText queryable="true" vAlign="TOP" columns="25" prompt="职责名称" rows="1" viewName="RolesVO" viewAttr="Meaning" maximumLength="80" shortDesc="职责名称" id="RoleName" promptTranslationExpansion="100%" user:akAttributeCode="PA_ROLE_NAME" user:akAttributeApplicationId="275"/>
+            <oa:messageStyledText queryable="true" vAlign="TOP" columns="25" prompt="可计划职责" rows="1" viewName="RolesVO" viewAttr="SchedulableMeaning" maximumLength="4000" shortDesc="可计划职责" id="SchedulableRole" promptTranslationExpansion="100%" user:akAttributeCode="PA_SCHEDULABLE_ROLE" user:akAttributeApplicationId="275"/>
+            <oa:messageStyledText queryable="true" vAlign="TOP" columns="25" prompt="摘要" rows="1" viewName="RolesVO" viewAttr="Description" maximumLength="2000" shortDesc="摘要" id="Description" promptTranslationExpansion="100%" user:akAttributeCode="PA_DESCRIPTION" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Minimum Job Level" dataType="NUMBER" viewName="RolesVO" viewAttr="DefaultMinJobLevel" shortDesc="Min Job Level" id="MinJobLevel" promptTranslationExpansion="100%" user:akAttributeCode="PA_MIN_JOB_LEVEL" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Maximum Job Level" dataType="NUMBER" viewName="RolesVO" viewAttr="DefaultMaxJobLevel" shortDesc="Max Job Level" id="MaxJobLevel" promptTranslationExpansion="100%" user:akAttributeCode="PA_MAX_JOB_LEVEL" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Start Date" dataType="DATE" viewName="RolesVO" viewAttr="StartDateActive" shortDesc="Start Date" id="StartDate" promptTranslationExpansion="100%" user:akAttributeCode="PA_START_DATE" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="End Date" dataType="DATE" viewName="RolesVO" viewAttr="EndDateActive" shortDesc="End Date" id="EndDate" promptTranslationExpansion="100%" user:akAttributeCode="PA_END_DATE" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Project Role Id" dataType="NUMBER" viewName="RolesVO" viewAttr="ProjectRoleId" shortDesc="Project Role Id" id="Project___Role___Id" promptTranslationExpansion="100%" user:akAttributeCode="PA_ROLE_ID" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Project Role Type" viewName="RolesVO" viewAttr="ProjectRoleType" shortDesc="Project Role Type" id="Project___RoleType" promptTranslationExpansion="100%" user:akAttributeCode="PA_ROLE_TYPE" user:akAttributeApplicationId="275"/>
+            <oa:formValue prompt="Schedulable Flag" viewName="RolesVO" viewAttr="SchedulableFlag" shortDesc="Schedulable Flag" id="SchedulableRolesFlag" promptTranslationExpansion="100%"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

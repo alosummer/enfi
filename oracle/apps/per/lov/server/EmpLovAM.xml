@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="EmpLovAM"
+   ComponentClass="oracle.apps.fnd.framework.server.OAApplicationModuleImpl" >
+   <DesignTime>
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="EmpNameVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.EmpNameVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="HROrganizationVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.HROrganizationVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PositionLovVO1"
+      ViewObjectName="cux.oracle.apps.per.lov.server.PositionLovVO" >
+   </ViewUsage>
+</AppModule>

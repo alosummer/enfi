@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.pa.dlv.lov.server.DlvLovAM">
+   <ui:contents>
+      <oa:table name="PersonLOV" id="PersonVO1">
+         <ui:contents>
+            <oa:formValue id="ProjectId" viewName="PersonVO1" viewAttr="ProjectId"/>
+            <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="PersonVO1" viewAttr="PersonId"/>
+            <oa:messageStyledText id="EmployeeNumber" dataType="VARCHAR2" prompt="工号" viewName="PersonVO1" viewAttr="EmployeeNumber" maximumLength="30" queryable="true"/>
+            <oa:messageStyledText id="LastName" dataType="VARCHAR2" prompt="姓名" viewName="PersonVO1" viewAttr="LastName" maximumLength="150" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

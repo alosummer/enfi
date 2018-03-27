@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PrjNtfSuspendWarnVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.project.server.PrjNtfSuspendWarnVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="smonth"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="iorgid"
+      Kind="where"
+      Type="java.lang.Integer" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT PPA.NAME AS PRJ_NAME,
+       PPA.SEGMENT1 AS PRJ_NUM,
+       HOUV.NAME AS CARRYING_OUT_ORG_NAME,
+       CBP.EMP_NO,
+       CBP.EMP_NAME,
+       CBP.ORG_NAME AS EMP_ORG_NAME,
+       CBP.DISTRIBUTION_AMOUNT,
+       TO_CHAR(CBP.APPROVED_DATE, 'YYYY-MM-DD') AS APPROVED_DATE,
+       CBP.IMPORT_STATUS,
+       CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBP.PERSON_ID,
+                                                CBP.ORG_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                CBP.APPROVED_DATE) ASSGN_STATUS
+  FROM APPS.CUX_BONUS_PRJ_DISTRIBUTION CBP,
+       PA.PA_PROJECTS_ALL              PPA,
+       HR_ALL_ORGANIZATION_UNITS       HOUV
+ WHERE CBP.PROJECT_ID = PPA.PROJECT_ID
+   AND PPA.CARRYING_OUT_ORGANIZATION_ID = HOUV.ORGANIZATION_ID
+   AND CBP.APPROVED_STATUS = '已审批'
+   AND CBP.PROJECT_DISTRIBUTION_ID >= 10000
+   AND CBP.PERSON_ID > 0
+   AND TRUNC(CBP.APPROVED_DATE) BETWEEN TO_DATE(:smonth,'yyyy-mm') AND LAST_DAY(TO_DATE(:smonth,'yyyy-mm'))
+   AND CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBP.PERSON_ID,
+                                                CBP.ORG_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                CBP.APPROVED_DATE) <> 's'
+   AND CUX_HR_BONUS_PRJ.GET_COMP_ID_BYORGANIZATION(CBP.ORG_ID) = :iorgid
+UNION ALL
+SELECT PPA.NAME AS PRJ_NAME,
+       PPA.SEGMENT1 AS PRJ_NUM,
+       HOUV.NAME AS CARRYING_OUT_ORG_NAME,
+       CBPD.EMP_NO,
+       CBPD.EMP_NAME,
+       CBPD.ORG_NAME AS EMP_ORG_NAME,
+       CBPD.DIST_AMOUNT AS DISTRIBUTION_AMOUNT,
+       TO_CHAR(CBPD.APPROVED_DATE, 'YYYY-MM-DD') AS APPROVED_DATE,
+       CBPD.IMPORT_STATUS,
+       CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBPD.PERSON_ID,
+                                                CBPD.ORG_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                CBPD.APPROVED_DATE) ASSGN_STATUS
+  FROM CUX.CUX_BONUS_PRJ_DEPT_DIST    CBPD,
+       CUX.CUX_BONUS_PRJ_DISTRIBUTION CBP,
+       PA.PA_PROJECTS_ALL             PPA,
+       HR_ALL_ORGANIZATION_UNITS      HOUV
+ WHERE CBPD.PROJECT_DISTRIBUTION_ID = CBP.PROJECT_DISTRIBUTION_ID
+   AND CBP.PROJECT_ID = PPA.PROJECT_ID
+   AND PPA.CARRYING_OUT_ORGANIZATION_ID = HOUV.ORGANIZATION_ID
+   AND CBPD.APPROVED_STATUS = '已提交'
+   AND TRUNC(CBP.APPROVED_DATE) BETWEEN TO_DATE(:smonth,'yyyy-mm') AND LAST_DAY(TO_DATE(:smonth,'yyyy-mm'))
+   AND CUX_HR_BONUS_PRJ.GET_PERSON_ASSGN_STATUS(CBPD.PERSON_ID,
+                                                CBPD.ORG_ID,
+                                                TO_DATE(:smonth,'yyyy-mm'),
+                                                LAST_DAY(TO_DATE(:smonth,'yyyy-mm')),
+                                                CBPD.APPROVED_DATE) <> 's'
+   AND CUX_HR_BONUS_PRJ.GET_COMP_ID_BYORGANIZATION(CBPD.ORG_ID) = :iorgid
+ORDER BY PRJ_NUM,EMP_NO
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="PrjName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRJ_NAME"
+      Expression="PRJ_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrjNum"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRJ_NUM"
+      Expression="PRJ_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarryingOutOrgName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CARRYING_OUT_ORG_NAME"
+      Expression="CARRYING_OUT_ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpNo"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NO"
+      Expression="EMP_NO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpOrgName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_ORG_NAME"
+      Expression="EMP_ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTION_AMOUNT"
+      Expression="DISTRIBUTION_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApprovedDate"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVED_DATE"
+      Expression="APPROVED_DATE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ImportStatus"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IMPORT_STATUS"
+      Expression="IMPORT_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AssgnStatus"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ASSGN_STATUS"
+      Expression="ASSGN_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

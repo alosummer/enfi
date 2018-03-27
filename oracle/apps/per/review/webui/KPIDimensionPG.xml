@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="layoutRN" windowTitle="维度定义" title="维度定义" controllerClass="cux.oracle.apps.per.review.webui.KPIDimensionCO" amDefName="cux.oracle.apps.per.review.server.KeyPIAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="KPIDimensionVO1" width="100%" blockSize="50">
+               <ui:contents>
+                  <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="KPIDimensionVO1" viewAttr="Rownum"/>
+                  <oa:formValue id="DimensionId" dataType="NUMBER" prompt="DimensionId" viewName="KPIDimensionVO1" viewAttr="DimensionId"/>
+                  <oa:formValue id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="KPIDimensionVO1" viewAttr="KpiId"/>
+                  <oa:messageTextInput id="DimensionName" dataType="VARCHAR2" prompt="维度" viewName="KPIDimensionVO1" viewAttr="DimensionName" maximumLength="150"/>
+                  <oa:messageLovInput id="ValuesetName" dataType="VARCHAR2" prompt="值集" viewName="KPIDimensionVO1" viewAttr="ValuesetName" maximumLength="150" externalListOfValues="/cux/oracle/apps/per/lov/webui/ValuesetRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="FlexValueSetName" resultTo="ValuesetName" criteriaFrom="ValuesetName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete">
+                           <ui:parameters>
+                              <ui:parameter key="dimensionId" value="${oa.KPIDimensionVO1.DimensionId}"/>
+                              <ui:parameter key="dimensionName" value="${oa.KPIDimensionVO1.DimensionName}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region2">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                  <oa:spacer id="item2" width="5"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.review.server.WorkflowUpdateAM">
+   <ui:contents>
+      <oa:table name="ApproverLovRN" id="ApproverLovTable">
+         <ui:contents>
+            <oa:messageStyledText id="LastName" viewName="ApproverLovVO1" viewAttr="LastName" queryable="true"/>
+            <oa:messageStyledText id="EmployeeNumber" viewName="ApproverLovVO1" viewAttr="EmployeeNumber" queryable="true"/>
+            <oa:messageStyledText id="OrganizationName" viewName="ApproverLovVO1" viewAttr="OrganizationName"/>
+            <oa:formValue id="PersonId" viewName="ApproverLovVO1" viewAttr="PersonId"/>
+            <oa:formValue id="OrganizationId" viewName="ApproverLovVO1" viewAttr="OrganizationId"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

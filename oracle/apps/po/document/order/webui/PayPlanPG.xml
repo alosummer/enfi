@@ -1,0 +1,209 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.po.document.order.server.PayPlanAM" windowTitle="付款计划" title="付款计划" controllerClass="cux.oracle.apps.po.document.order.webui.PayPlanCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="region2" columns="2" rows="1" promptWidth="1%" width="50%">
+               <ui:contents>
+                  <oa:messageStyledText id="PoNum" prompt="合同号：" shortDesc="合同号" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PoDesc" prompt="合同说明：" shortDesc="合同说明" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PoTotal" dataType="NUMBER" prompt="合同总金额(不含税)：" shortDesc="合同总金额(不含税)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PoTaxTotal" dataType="NUMBER" prompt="合同总税额：" shortDesc="合同总税额" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PoSum" dataType="NUMBER" prompt="合同总金额(含税)：" shortDesc="合同总金额(含税)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PlannedAmt" dataType="NUMBER" prompt="已分配金额：" shortDesc="已分配金额" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="UnplannedAmt" dataType="NUMBER" prompt="未分配金额：" shortDesc="未分配金额" styleClass="OraDataText"/>
+                  <oa:messageLayout id="messageLayout1"/>
+                  <oa:messageStyledText id="PaidTotal" viewName="PayPlanHeaderDisVO1" viewAttr="PaidTotal" dataType="NUMBER" styleClass="OraDataText" prompt="累计已支付金额：" shortDesc="累计已支付金额"/>
+                  <oa:messageStyledText id="PaidPercent" viewName="PayPlanHeaderDisVO1" viewAttr="PaidPercent" dataType="NUMBER" styleClass="OraDataText" prompt="累计已支付比例：" shortDesc="累计已支付比例"/>
+                  <oa:messageStyledText id="UnpaidRemainTotal" viewName="PayPlanHeaderDisVO1" viewAttr="UnpaidRemainTotal" dataType="NUMBER" styleClass="OraDataText" prompt="合同余量：" shortDesc="合同余量"/>
+                  <oa:messageStyledText id="InvTotal" viewName="PayPlanHeaderDisVO1" viewAttr="InvTotal" dataType="NUMBER" styleClass="OraDataText" prompt="已收发票总金额：" shortDesc="已收发票总金额"/>
+                  <oa:messageStyledText id="InvPercent" viewName="PayPlanHeaderDisVO1" viewAttr="InvPercent" dataType="NUMBER" styleClass="OraDataText" prompt="已收发票比例：" shortDesc="已收发票比例"/>
+                  <oa:messageStyledText id="UninvRemainTotal" viewName="PayPlanHeaderDisVO1" viewAttr="UninvRemainTotal" dataType="NUMBER" styleClass="OraDataText" prompt="发票余量：" shortDesc="发票余量"/>
+                  <oa:messageStyledText id="ConfirmTotal" viewName="PayPlanHeaderDisVO1" viewAttr="ConfirmTotal" dataType="NUMBER" styleClass="OraDataText" prompt="合同已完成金额：" shortDesc="合同已完成金额"/>
+                  <oa:messageStyledText id="ConfirmUnpaidTotal" viewName="PayPlanHeaderDisVO1" viewAttr="ConfirmUnpaidTotal" dataType="NUMBER" styleClass="OraDataText" prompt="合同应付金额：" shortDesc="合同应付金额"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:advancedTable id="MainRN" text="" shortDesc="付款计划" width="100%" userCustomizable="true" viewName="PayPlanVO1">
+               <ui:contents>
+                  <oa:column id="VersionIdCol" columnDataFormat="numberFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader3" prompt="版本" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="VersionId" dataType="NUMBER" viewAttr="VersionId" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="LineNumCol" columnDataFormat="numberFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader2" sortState="yes" initSortSeq="first" prompt="行号" shortDesc="行号" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="LineNum" readOnly="true" dataType="NUMBER" viewAttr="LineNum" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PayTypeCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader4" prompt="类型" required="yes" sortState="yes" initSortSeq="second"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="PayType" viewAttr="PayType" pickListViewDef="cux.oracle.apps.po.document.order.poplist.server.PayTypeVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:formValue id="LineId" viewAttr="LineId" dataType="NUMBER"/>
+                  <oa:formValue id="PoHeaderId" dataType="NUMBER" viewAttr="PoHeaderId"/>
+                  <oa:column id="MemoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader9" prompt="付款节点描述" shortDesc="付款节点描述"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Memo" maximumLength="1000" viewAttr="Memo" styleClass="OraFieldText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="InitPayDateCol" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader6" prompt="初始付款日期" required="no" rendered="false"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="InitPayDate" dataType="DATE" viewAttr="InitPayDate" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="InitAmtRateCol" columnDataFormat="numberFormat" totalValue="true" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader161" prompt="比例" shortDesc="比例" rendered="false"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="InitAmtRate" dataType="NUMBER" maximumLength="6" viewAttr="Attribute3" columns="6"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="InitAmtCol" columnDataFormat="numberFormat" totalValue="true" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader5" prompt="初始金额" shortDesc="初始金额" required="no" rendered="false"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="InitAmt" dataType="NUMBER" viewAttr="InitAmt" maximumLength="15" required="no" columns="10"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="NewPayDateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader8" prompt="计划付款日期" shortDesc="计划付款日期" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="NewPayDate" dataType="DATE" viewAttr="NewPayDate" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="NewAmtRateCol" columnDataFormat="numberFormat" totalValue="true">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader16" prompt="支付比例" shortDesc="支付比例"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="NewAmtRate" dataType="NUMBER" maximumLength="6" viewAttr="Attribute4" columns="6"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="NewAmtCol" columnDataFormat="numberFormat" totalValue="true">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader7" prompt="额度" shortDesc="额度" required="no"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="NewAmt" dataType="NUMBER" viewAttr="NewAmt" maximumLength="15" required="no" columns="10"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="CondiCompleteCol" columnDataFormat="iconButtonFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader111" prompt="节点已达成" shortDesc="节点已达成"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="CondiComplete" viewAttr="Attribute5" styleClass="OraDataText" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="CondiCompleteDateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader21" prompt="达成节点日期" shortDesc="达成节点日期"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="CondiCompleteDate" viewAttr="Attribute6" styleClass="OraDataText" dataType="DATE"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PayApplyNumCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="付款申请号" shortDesc="付款申请号"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PayApplyNum" viewAttr="PayApplyNum" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PayApplyAmtCol" columnDataFormat="textFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader10" prompt="付款申请金额" shortDesc="付款申请金额"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PayApplyAmt" dataType="VARCHAR2" viewAttr="Attribute1" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PayApplyDateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader14" prompt="付款日期" shortDesc="付款日期"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PayApplyDate" viewAttr="Attribute2" dataType="VARCHAR2"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PayApplierNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader12" prompt="付款申请人" shortDesc="付款申请人"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PayApplierName" viewAttr="PayApplierName" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="PaidAmtCol" totalValue="true" columnDataFormat="numberFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader15" prompt="已付金额" shortDesc="已付金额"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PaidAmt" viewAttr="PaidAmt" dataType="NUMBER"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DeleteCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader13" prompt="删除" shortDesc="删除"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:image id="Delete" source="deleteicon_enabled.gif" shortDesc="删除">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delete">
+                                 <ui:parameters>
+                                    <ui:parameter key="LineId" value="${oa.PayPlanVO1.LineId}"/>
+                                    <ui:parameter key="LineNum" value="${oa.PayPlanVO1.LineNum}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="region1"/>
+               </ui:tableActions>
+               <ui:footer>
+                  <oa:tableFooter id="tableFooter1">
+                     <ui:contents>
+                        <oa:addTableRow id="addTableRow1" text="创建行" shortDesc="创建行" autoInsertion="false"/>
+                        <oa:submitButton id="AddNewVersion" text="创建版本" prompt="创建版本" shortDesc="创建版本" warnAboutChanges="false" rendered="false"/>
+                        <oa:button id="ViewHistory" serverUnvalidated="true" disabled="false" text="历史版本" prompt="历史版本" warnAboutChanges="false" destination="OA.jsp?OAFunc=CUXPOPAYPLANHIS&amp;PoHeaderId={@PoHeaderId}&amp;retainAM=Y&amp;addBreadCrumb=Y" rendered="false"/>
+                        <oa:submitButton id="Apply" text="保存" prompt="保存" shortDesc="保存"/>
+                        <oa:submitButton id="CalculateBTN" text="计算" prompt="计算" shortDesc="计算"/>
+                        <oa:submitButton id="Cancel" text="取消" prompt="取消" shortDesc="取消" serverUnvalidated="true" unvalidated="true"/>
+                     </ui:contents>
+                     <ui:total>
+                        <oa:totalRow id="totalRow1" text="" readOnly="true"/>
+                     </ui:total>
+                  </oa:tableFooter>
+               </ui:footer>
+            </oa:advancedTable>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,344 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ContractClassVO"
+   OrderBy="ATTRIBUTE10"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.ContractClassVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.ContractClassVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ContractClassEO.CLASS_ID, 
+       ContractClassEO.APPRAISAL_ID, 
+       ContractClassEO.TMPL_ID, 
+       ContractClassEO.KPI_CLASS, 
+       ContractClassEO.KPI_CLASS_MEANING, 
+       /*decode(ContractClassEO.ATTRIBUTE1
+             ,'STANDARD',
+              ContractClassEO.KPI_CLASS_MEANING || '(百分比,'||decode(ContractClassEO.attribute2,'SUBTRACT',' 减分','ADD',' 加分',ContractClassEO.attribute2)||')',
+              ContractClassEO.KPI_CLASS_MEANING || '(最大值,'||decode(ContractClassEO.attribute2,'SUBTRACT',' 减分','ADD',' 加分',ContractClassEO.attribute2)||')')
+       */
+       decode(ContractClassEO.KPI_CLASS_MEANING,'行为规范',ContractClassEO.KPI_CLASS_MEANING||'(扣分项)',ContractClassEO.KPI_CLASS_MEANING) as KPI_DESC,
+       ContractClassEO.KPI_CLASS_TAG, 
+       ContractClassEO.WEIGHT, 
+       CONTRACTCLASSEO.KPI_CLASS_MEANING || '得分: ' ||        
+       CASE
+         WHEN (CONTRACTCLASSEO.ATTRIBUTE1 = 'STANDARD' 
+         AND CONTRACTCLASSEO.ATTRIBUTE2 = 'ADD') 
+         THEN
+          round(CUX_JXKH_COMMON_PKG.SUM_KPI(CONTRACTCLASSEO.APPRAISAL_ID,
+                                      CONTRACTCLASSEO.KPI_CLASS),2)
+         ELSE
+          DECODE(SIGN(CUX_JXKH_COMMON_PKG.SUM_KPI_ADD(CONTRACTCLASSEO.APPRAISAL_ID,
+                                          CONTRACTCLASSEO.KPI_CLASS) -
+          to_number(NVL(CONTRACTCLASSEO.WEIGHT,
+              0))),1,to_number(NVL(CONTRACTCLASSEO.WEIGHT,
+              0)),CUX_JXKH_COMMON_PKG.SUM_KPI_ADD(CONTRACTCLASSEO.APPRAISAL_ID,
+                                          CONTRACTCLASSEO.KPI_CLASS))
+       END AS VALID_VALUE,
+       CASE
+         WHEN (CONTRACTCLASSEO.ATTRIBUTE1 = 'STANDARD' 
+         AND CONTRACTCLASSEO.ATTRIBUTE2 = 'ADD') 
+         THEN
+          round(CUX_JXKH_COMMON_PKG.SUM_KPI(CONTRACTCLASSEO.APPRAISAL_ID,
+                                      CONTRACTCLASSEO.KPI_CLASS),2)
+         ELSE
+          DECODE(SIGN(CUX_JXKH_COMMON_PKG.SUM_KPI_ADD(CONTRACTCLASSEO.APPRAISAL_ID,
+                                          CONTRACTCLASSEO.KPI_CLASS) -
+          to_number(NVL(CONTRACTCLASSEO.WEIGHT,
+              0))),1,to_number(NVL(CONTRACTCLASSEO.WEIGHT,
+              0)),CUX_JXKH_COMMON_PKG.SUM_KPI_ADD(CONTRACTCLASSEO.APPRAISAL_ID,
+                                          CONTRACTCLASSEO.KPI_CLASS))
+       END AS VALID_SCORE_VALUE, 
+       ContractClassEO.Valid_Value AS KPI_VALUE,
+       ContractClassEO.ATTRIBUTE1, 
+       ContractClassEO.ATTRIBUTE2, 
+       ContractClassEO.ATTRIBUTE3, 
+       ContractClassEO.ATTRIBUTE4, 
+       ContractClassEO.ATTRIBUTE5, 
+       ContractClassEO.ATTRIBUTE6, 
+       ContractClassEO.ATTRIBUTE7, 
+       ContractClassEO.ATTRIBUTE8, 
+       ContractClassEO.ATTRIBUTE9, 
+       ContractClassEO.ATTRIBUTE10,
+       ContractClassEO.LAST_UPDATE_DATE, 
+       ContractClassEO.LAST_UPDATED_BY, 
+       ContractClassEO.LAST_UPDATE_LOGIN, 
+       ContractClassEO.CREATED_BY, 
+       ContractClassEO.CREATION_DATE,
+       decode(cux_jxkh_common_pkg.get_rest_performers(ContractClassEO.APPRAISAL_ID), 0, 'UpdateDisabled1', 
+       decode(cux_jxkh_common_pkg.get_appraisal_phase(ContractClassEO.APPRAISAL_ID)
+        , 'REVIEW', 'UpdateEnabled1'
+        , decode(cux_jxkh_common_pkg.get_kpi_update_flag(ContractClassEO.APPRAISAL_ID, ContractClassEO.KPI_CLASS),
+            'Y','UpdateEnabled1', 'UpdateDisabled1') ) )AS UPDATE_IMAGE
+FROM CUX_CONTRACT_CLASS_T ContractClassEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ContractClassEO"
+      Entity="cux.oracle.apps.per.review.server.ContractClassEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ClassId"
+      IsNotNull="true"
+      EntityAttrName="ClassId"
+      EntityUsage="ContractClassEO"
+      AliasName="CLASS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      EntityAttrName="AppraisalId"
+      EntityUsage="ContractClassEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      EntityAttrName="TmplId"
+      EntityUsage="ContractClassEO"
+      AliasName="TMPL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      EntityAttrName="KpiClass"
+      EntityUsage="ContractClassEO"
+      AliasName="KPI_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClassMeaning"
+      EntityAttrName="KpiClassMeaning"
+      EntityUsage="ContractClassEO"
+      AliasName="KPI_CLASS_MEANING" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      IsPersistent="false"
+      Precision="205"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_DESC"
+      Expression="KPI_DESC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="205" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClassTag"
+      EntityAttrName="KpiClassTag"
+      EntityUsage="ContractClassEO"
+      AliasName="KPI_CLASS_TAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="ContractClassEO"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ValidValue"
+      EntityAttrName="ValidValue"
+      EntityUsage="ContractClassEO"
+      AliasName="VALID_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ValidScoreValue"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VALID_SCORE_VALUE"
+      Expression="VALID_SCORE_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiValue"
+      IsPersistent="false"
+      Precision="50"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="KPI_VALUE"
+      Expression="KPI_VALUE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="ContractClassEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="ContractClassEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="ContractClassEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="ContractClassEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ContractClassEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE6"
+      Expression="ATTRIBUTE6"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE7"
+      Expression="ATTRIBUTE7"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE8"
+      Expression="ATTRIBUTE8"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE9"
+      Expression="ATTRIBUTE9"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ATTRIBUTE10"
+      Expression="ATTRIBUTE10"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="ContractClassEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="ContractClassEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="ContractClassEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ContractClassEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="ContractClassEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UpdateImage"
+      IsPersistent="false"
+      Precision="14"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UPDATE_IMAGE"
+      Expression="UPDATE_IMAGE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="14" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowFlag"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="&#39;N&#39;"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReadOnlyFlag"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      Passivate="true"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="ContractContentVO"
+      ViewLink="cux.oracle.apps.per.review.server.ContractClassContentVL"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+</ViewObject>

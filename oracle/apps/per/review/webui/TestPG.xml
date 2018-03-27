@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="MainRegion" windowTitle="测试页面" amDefName="cux.oracle.apps.per.review.server.PerReviewAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="SearchHeaderRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageTextInput id="SearchNameItem" maximumLength="100" prompt="考群名称"/>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="SearchButton" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:separator id="item1"/>
+                  <oa:table id="PerReviewGroupVO1" shortDesc="查询结果" blockSize="15" width="100%" controllerClass="cux.oracle.apps.per.review.webui.webui.TestPGCO">
+                     <ui:contents>
+                        <oa:messageTextInput id="GroupId" dataType="NUMBER" prompt="考群ID" viewName="PerReviewGroupVO1" viewAttr="GroupId" maximumLength="10"/>
+                        <oa:messageTextInput id="OrgId" dataType="NUMBER" prompt="组织" viewName="PerReviewGroupVO1" viewAttr="OrgId"/>
+                        <oa:messageTextInput id="GroupName" dataType="VARCHAR2" prompt="考群名称" viewName="PerReviewGroupVO1" viewAttr="GroupName" maximumLength="200"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+         <ui:pageStatus>
+            <oa:flowLayout id="region1"/>
+         </ui:pageStatus>
+      </oa:pageLayout>
+   </content>
+</page>

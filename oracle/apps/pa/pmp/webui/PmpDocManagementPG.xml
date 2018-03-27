@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" windowTitle="项目文档管理" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpDocManagementCO" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr">
+               <ui:contents>
+                  <oa:table id="PmpDocManagementVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="DocType" dataType="VARCHAR2" viewName="PmpDocManagementVO1" viewAttr="DocType" maximumLength="300"/>
+                        <oa:messageTextInput id="Requirment" dataType="VARCHAR2" prompt="业主或合同要求" viewName="PmpDocManagementVO1" viewAttr="Requirment" maximumLength="3000"/>
+                        <oa:messageStyledText id="DesignConsultation" dataType="VARCHAR2" prompt="设计咨询类项目" viewName="PmpDocManagementVO1" viewAttr="DesignConsultation" maximumLength="3000"/>
+                        <oa:messageStyledText id="EquipmentSupply" dataType="VARCHAR2" prompt="设备供货类项目" viewName="PmpDocManagementVO1" viewAttr="EquipmentSupply" maximumLength="3000"/>
+                        <oa:messageStyledText id="Contracted" dataType="VARCHAR2" prompt="承包类项目" viewName="PmpDocManagementVO1" viewAttr="Contracted" maximumLength="3000"/>
+                        <oa:messageStyledText id="Other" dataType="VARCHAR2" prompt="管理及其他类项目" viewName="PmpDocManagementVO1" viewAttr="Other" maximumLength="3000"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

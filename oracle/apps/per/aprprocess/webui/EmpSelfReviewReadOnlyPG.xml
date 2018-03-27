@@ -1,0 +1,291 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayouRN" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM" windowTitle="绩效合同" title="绩效合同" controllerClass="cux.oracle.apps.per.aprprocess.webui.EmpSelfReviewReadOnlyCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:flowLayout id="ContractInfoRN">
+               <ui:contents>
+                  <oa:tableLayout id="region11" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:rowLayout id="region2">
+                           <ui:contents>
+                              <oa:cellFormat id="region3">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ManagerName" dataType="VARCHAR2" prompt="发约人:" viewName="AprEmpSelfDetailVO1" viewAttr="ManagerName" maximumLength="240" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region4">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="阶段:" viewName="AprEmpSelfDetailVO1" viewAttr="PhaseName" maximumLength="80" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region5">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="SignDate" dataType="VARCHAR2" prompt="签署日期:" viewName="AprEmpSelfDetailVO1" viewAttr="SignDate" maximumLength="80" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region21">
+                           <ui:contents>
+                              <oa:cellFormat id="region31">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="受约人:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpName" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region41">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="DeptName" dataType="VARCHAR2" prompt="受约人部门:" viewName="AprEmpSelfDetailVO1" viewAttr="DeptName" maximumLength="240" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region51"/>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region211">
+                           <ui:contents>
+                              <oa:cellFormat id="region311">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpGroup" dataType="VARCHAR2" prompt="所属考群:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpGroup" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region411">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EmpPosition" dataType="VARCHAR2" prompt="受约人职务:" viewName="AprEmpSelfDetailVO1" viewAttr="EmpPosition" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region511"/>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region2111">
+                           <ui:contents>
+                              <oa:cellFormat id="region3111">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="SelfMark" dataType="NUMBER" prompt="自评总得分:" viewName="AprEmpSelfDetailVO1" viewAttr="OriMark" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region4111">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="FinalMark" dataType="NUMBER" prompt="总体得分:" viewName="AprEmpSelfDetailVO1" viewAttr="FinalMark" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region5111">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="FinalLevel" dataType="VARCHAR2" prompt="最终等级:" viewName="AprEmpSelfDetailVO1" viewAttr="FinalLevel" maximumLength="700" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                  </oa:tableLayout>
+                  <oa:formValue id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="AprEmpSelfDetailVO1" viewAttr="AppraisalId"/>
+               </ui:contents>
+            </oa:flowLayout>
+            <oa:header id="regionSourceManual" text="手工评分指标">
+               <ui:contents>
+                  <oa:advancedTable id="AprSourceManualVO2" blockSize="200" width="100%" viewName="AprSourceManualVO1">
+                     <ui:contents>
+                        <oa:column id="KpiClass3Col1" width="65">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader151" prompt="指标类型" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="KpiClass31" viewAttr="KpiClass" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIClassVO" pickListViewName="KPIClassVO1" pickListDispAttr="EpmIcName" pickListValAttr="EpmIcCode" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiName3Col1" width="150">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211113" prompt="考核指标" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiName31" viewAttr="KpiName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiArea3Col1" width="65">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7111" prompt="考核层面" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="KpiArea31" viewAttr="KpiArea" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIAreaVO" pickListViewName="KPIAreaVO1" pickListDispAttr="EpmIlName" pickListValAttr="EpmIlCode" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiDesc3Col1" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211114" prompt="描述" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiDesc31" viewAttr="KpiDesc"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiAttribute53Col1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211115" prompt="备注" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiAttribute531" viewAttr="Attribute5"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="Weight3Col1" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111121" prompt="权重%" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="Weight31" viewAttr="Weight" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="TargetValue3Col1" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111122" prompt="目标值" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TargetValue31" viewAttr="TargetValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="MinimumValue3Col1" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111123" prompt="下限值" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="MinimumValue31" viewAttr="MinimumValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="SelfEvalValueCol" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111124" prompt="自评分" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="SelfEvalValue1" viewAttr="SelfEvalValue" dataType="NUMBER" maximumLength="5" required="no"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ScoreValueCol1" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111111" prompt="得分" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ScoreValue31" viewAttr="ScoreValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter21"/>
+                     </ui:footer>
+                     <ui:tableActions>
+                        <oa:flowLayout id="tableActionRN1"/>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="regionSourceSys" text="系统来源指标">
+               <ui:contents>
+                  <oa:advancedTable id="AprSourceSystemVO2" blockSize="200" width="100%" viewName="AprSourceSystemVO1">
+                     <ui:contents>
+                        <oa:column id="KpiClass3Col" width="65">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="指标类型" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="KpiClass3" viewAttr="KpiClass" readOnly="true" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIClassVO" pickListViewName="KPIClassVO1" pickListDispAttr="EpmIcName" pickListValAttr="EpmIcCode"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiName3Col" width="150">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71" prompt="考核指标" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiName3" viewAttr="KpiName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiArea3Col" width="65">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader711" prompt="考核层面" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="KpiArea3" viewAttr="KpiArea" pickListViewDef="cux.oracle.apps.per.poplist.server.KPIAreaVO" pickListViewName="KPIAreaVO1" pickListDispAttr="EpmIlName" pickListValAttr="EpmIlCode" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiDesc3Col" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712" prompt="描述" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiDesc3" viewAttr="KpiDesc"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="KpiAttribute53Col">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7121" prompt="备注" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="KpiAttribute53" viewAttr="Attribute5"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="Weight3Col" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211112" prompt="权重%" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="Weight3" viewAttr="Weight" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="TargetValue3Col" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211" prompt="目标值" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TargetValue3" viewAttr="TargetValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="MinimumValue3Col" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader712111" prompt="下限值" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="MinimumValue3" viewAttr="MinimumValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ActualValue3Col" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7121111" prompt="实际值" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ActualValue3" viewAttr="ActualValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ScoreValueCol" width="50">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader71211111" prompt="得分" sortState="yes"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ScoreValue3" viewAttr="ScoreValue" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter2"/>
+                     </ui:footer>
+                     <ui:tableActions>
+                        <oa:flowLayout id="tableActionRN"/>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="AprAttendVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="AppSeq" dataType="NUMBER" prompt="审批顺序" viewName="AprAttendVO1" viewAttr="AppSeq"/>
+                  <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="审批人" viewName="AprAttendVO1" viewAttr="LastName" maximumLength="150"/>
+                  <oa:messageStyledText id="OpinionDate" dataType="DATETIME" prompt="审批日期" viewName="AprAttendVO1" viewAttr="OpinionDate"/>
+                  <oa:messageStyledText id="OpinionResult" dataType="VARCHAR2" prompt="审批状态" viewName="AprAttendVO1" viewAttr="OpinionResult" maximumLength="500"/>
+                  <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="评语" viewName="AprAttendVO1" viewAttr="Description" maximumLength="500"/>
+               </ui:contents>
+            </oa:table>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="返回" prompt="返回" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

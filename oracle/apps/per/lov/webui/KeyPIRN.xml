@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.lov.server.PerLovAM" scope="/" controllerClass="cux.oracle.apps.per.lov.webui.KeyPICO">
+   <ui:contents>
+      <oa:table name="KeyPIRN" id="KeyPIVO1">
+         <ui:contents>
+            <oa:messageStyledText id="KpiId" dataType="NUMBER" prompt="KpiId" viewName="PerKPIVO1" viewAttr="KpiId" rendered="false"/>
+            <oa:messageStyledText id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="PerKPIVO1" viewAttr="KpiClass" rendered="false"/>
+            <oa:messageStyledText id="KpiAreaName" dataType="VARCHAR2" prompt="考核层面" viewName="PerKPIVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="true"/>
+            <oa:messageStyledText id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="PerKPIVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+            <oa:messageStyledText id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="PerKPIVO1" viewAttr="KpiDesc" maximumLength="500"/>
+            <oa:messageStyledText id="KpiScoringMethodName" dataType="VARCHAR2" prompt="评分方法" viewName="PerKPIVO1" viewAttr="KpiScoringMethodName" maximumLength="80"/>
+            <oa:messageStyledText id="KpiDataSourceName" dataType="VARCHAR2" prompt="数据来源" viewName="PerKPIVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+            <oa:messageStyledText id="KpiArea" rendered="false" viewName="PerKPIVO1" viewAttr="KpiArea"/>
+            <oa:messageStyledText id="KpiScoringMethod" viewName="PerKPIVO1" viewAttr="KpiScoringMethod" rendered="false"/>
+            <oa:messageStyledText id="KpiDataSource" viewName="PerKPIVO1" viewAttr="KpiDataSource" rendered="false"/>
+            <oa:messageStyledText id="ConstraintDesc" viewName="PerKPIVO1" viewAttr="ConstraintDesc" prompt="取值范围"/>
+            <oa:messageStyledText id="Attribute1" viewName="PerKPIVO1" viewAttr="Attribute1" prompt="指标目标值范围"/>
+            <oa:messageStyledText id="Attribute2" viewName="PerKPIVO1" viewAttr="Attribute2" prompt="指标下限值范围"/>
+            <oa:messageStyledText id="Attribute3" viewName="PerKPIVO1" viewAttr="Attribute3" prompt="指标目标值默认值"/>
+            <oa:messageStyledText id="Attribute4" viewName="PerKPIVO1" viewAttr="Attribute4" prompt="指标下限值默认值"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+   <ui:searchInstructions>
+      <oa:messageStyledText id="KpiSearchTip" tipMessageName="CUX_ORG_LOV_TIP" tipMessageAppShortName="CUX" styleClass="OraInstructionText"/>
+   </ui:searchInstructions>
+</oa:listOfValues>

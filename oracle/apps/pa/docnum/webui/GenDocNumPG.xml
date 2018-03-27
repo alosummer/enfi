@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" windowTitle="文档给号" amDefName="cux.oracle.apps.pa.docnum.server.DocNumReqAM" controllerClass="cux.oracle.apps.pa.docnum.webui.GenDocNumCO" title="文档给号申请">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:button id="reset" text="清除" prompt="清除">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="reset"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="apply" text="申请并返回" prompt="申请并返回">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="Apply"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:rowLayout id="region2" width="100%">
+               <ui:contents>
+                  <oa:cellFormat id="region3" width="20%"/>
+                  <oa:cellFormat id="region4" width="40%">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="region6">
+                           <ui:contents>
+                              <oa:messageLovInput id="projectNum" prompt="项目号" required="yes" externalListOfValues="/cux/oracle/apps/pa/docnum/lov/webui/ProjectLOV" viewName="GenDocNumPVO1" viewAttr="projectNum">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="ProjectNum" resultTo="projectNum" criteriaFrom="projectNum"/>
+                                    <lovMap id="lovMap2" lovItem="ProjectId" resultTo="projectId"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="Desc" rows="3" viewName="GenDocNumPVO1" viewAttr="Desc" prompt="描述" columns="26"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                        <oa:formValue id="projectId" viewName="GenDocNumPVO1" viewAttr="ProjectId"/>
+                     </ui:contents>
+                  </oa:cellFormat>
+                  <oa:cellFormat id="region5" width="30%"/>
+               </ui:contents>
+            </oa:rowLayout>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

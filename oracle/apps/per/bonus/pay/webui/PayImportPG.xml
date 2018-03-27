@@ -1,0 +1,258 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.pay.server.PayAM" windowTitle="奖金记录导入页面" title="奖金记录导入" controllerClass="cux.oracle.apps.per.bonus.pay.webui.PayImportCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="PersonDisRN" text="员工奖金审批">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageChoice id="Payperiod" prompt="月份" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.PeriodVO" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" defaultValue="" allowBlankValue="false"/>
+                        <oa:messageChoice id="DisOrg" prompt="发放部门" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.DisOrgVO" pickListDispAttr="DistributiondepName" pickListValAttr="OrganizationId"/>
+                        <oa:messageChoice id="ExtEmpOrg" prompt="员工部门" pickListViewDef="cux.oracle.apps.per.bonus.pay.server.ExternalEmpOrgVO" pickListDispAttr="EmpOrgname" pickListValAttr="EmpOrgid" rendered="true"/>
+                        <oa:messageLovInput id="Employee" prompt="员工编号" externalListOfValues="/cux/oracle/apps/per/bonus/lov/webui/EmpLovRN" unvalidated="true">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="EmployeeNumber" resultTo="Employee" criteriaFrom="Employee"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="Status" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.StatusVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" prompt="导入状态"/>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:separator id="separator"/>
+                  <oa:advancedTable id="PersonDisTable" blockSize="200" width="100%" viewName="PersonDisVo1">
+                     <ui:contents>
+                        <oa:column id="DistributiondepNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="发放部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistributiondepName" viewAttr="DistributiondepName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeNumberCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeNumber" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="LastNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader8" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="LastName" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DepNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader9" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DepName" viewAttr="DepName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="TypeNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="奖金类别"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TypeName" viewAttr="TypeName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="PayRollNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader111" prompt="工资单"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:rawText id="PayRollName" viewAttr="PayrollName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistributionAmountCol" totalValue="true" columnDataFormat="numberFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader12" prompt="奖金（元）"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistributionAmount" viewAttr="DistributionAmount"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ImportStatusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader13" prompt="导入状态" sortState="no"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ImportStatus" viewAttr="ImportStatus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="LogDescCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader14" prompt="消息"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="LogDesc" viewAttr="LogDesc"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:formValue id="IsStatus" viewAttr="IsStatus"/>
+                        <oa:column id="SetPayRollCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader152" prompt="指定工资单"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:switcher regionName="Toolbox Orders Update Switch" viewAttr="UpdateImage" id="UpdateSwitcher1" use="/oracle/apps/fnd/attributesets/Buttons/Update" rendered="true">
+                                 <ui:case name="PayrollUpdateEnabled">
+                                    <oa:image source="detailsicon_enabled.gif" destination="" shortDesc="Select to update information." id="PayrollUpdateEnabled" imageHeight="24" imageWidth="24">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="updatePayroll" id="fireAction11">
+                                             <ui:parameters>
+                                                <ui:parameter key="dist_id" value="${oa.PersonDisVo1.PersonDistributionId}"/>
+                                                <ui:parameter key="emp_name" value="${oa.PersonDisVo1.LastName}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:case>
+                                 <ui:case name="PayrollUpdateDisabled">
+                                    <oa:image source="" shortDesc="Update functionality disabled" id="PayrollUpdateDisabled" imageHeight="24" imageWidth="24"/>
+                                 </ui:case>
+                              </oa:switcher>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection1" viewAttr="SelectFlag"/>
+                     </ui:tableSelection>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter2">
+                           <ui:total>
+                              <oa:totalRow id="totalRow2" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                     <ui:tableActions>
+                        <oa:flowLayout id="tableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="Approve" text="提交" prompt="提交"/>
+                              <oa:spacer id="item1" width="5"/>
+                              <oa:submitButton id="Reject" text="退回" prompt="退回"/>
+                              <oa:spacer id="item11" width="5"/>
+                              <oa:exportButton id="Export" exportAllRows="true" text="导出"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+                  <oa:separator id="separator1"/>
+                  <oa:messageTextInput id="Note" maximumLength="150" prompt="备注" columns="80" rows="3"/>
+               </ui:contents>
+            </oa:header>
+            <oa:tip id="DistTips" text="&lt;p style=&quot;color:red&quot;>1.导入状态为“已退回”、“已完成”、“错误”的数据不能再进行提交和退回操作；&lt;br>2.导入状态为“线外”、“无工资单”的数据可进行退回操作&lt;/p>" styleClass="OraDataText"/>
+            <oa:header id="DeptPerDistRN" text="计奖部门奖金查询（已提交的奖金记录）">
+               <ui:contents>
+                  <oa:messageComponentLayout id="QueryRN">
+                     <ui:contents>
+                        <oa:messageChoice id="Period" pickListViewDef="cux.oracle.apps.per.bonus.poplist.server.PeriodVO" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" prompt="月份" allowBlankValue="false"/>
+                        <oa:messageChoice id="DeptDisOrg" prompt="发放部门" pickListViewDef="cux.oracle.apps.per.bonus.pay.server.InternalDisOrgVO" pickListDispAttr="DistributiondepName" pickListValAttr="OrganizationId" allowBlankValue="true"/>
+                        <oa:messageChoice id="IntEmpOrg" prompt="员工部门" pickListViewDef="cux.oracle.apps.per.bonus.pay.server.InternalEmpOrgVO" pickListDispAttr="EmpOrgname" pickListValAttr="EmpOrgid" rendered="true"/>
+                        <oa:messageLayout id="ButtonRN">
+                           <ui:contents>
+                              <oa:submitButton id="DeptQuery" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:advancedTable id="OtherPersonDisTable" viewName="OtherPersonDisVO1" width="100%" blockSize="100">
+                     <ui:contents>
+                        <oa:column id="OtherDisDeptCol" width="30%">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader151" prompt="发放部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherDisDept" viewAttr="Distributiondepname"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherPersonNumCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherPersonNum" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherPersonNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherPersonName" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherPersonDeptCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="所在部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherPersonDept" viewAttr="DepName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherMonthBonusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherMonthBonus" viewAttr="MonthBonus" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherDeptBonusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader51" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherDeptBonus" viewAttr="DeptBonus" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherYearBonusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader52" prompt="年终奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherYearBonus" viewAttr="YearBonus" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="OtherDistTotalCol" totalValue="true" columnDataFormat="textFormat">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader6" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="OtherDistTotal" viewAttr="DistTotal"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region1">
+                           <ui:contents>
+                              <oa:exportButton id="DeptExportBtn" exportAllRows="true" viewName="OtherPersonDisVO1" text="导出"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

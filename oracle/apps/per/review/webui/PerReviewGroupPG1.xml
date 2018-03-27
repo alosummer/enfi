@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="MainRN" amDefName="cux.oracle.apps.per.review.server.PerReviewAM" windowTitle="考群维护" title="考群查询及维护">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="GroupSearchRN" mode="none" controllerClass="cux.oracle.apps.per.review.webui.PerReviewGroupCO">
+               <ui:contents>
+                  <oa:table id="PerReviewGroupVO1" width="100%" text="定义考群">
+                     <ui:contents>
+                        <oa:messageStyledText id="Rownum" viewName="PerReviewGroupVO1" viewAttr="Rownum" prompt="序号"/>
+                        <oa:messageStyledText id="GroupId" dataType="NUMBER" prompt="序号" viewName="PerReviewGroupVO1" viewAttr="GroupId" maximumLength="10" rendered="false"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="公司" viewName="PerReviewGroupVO1" viewAttr="OrgName" maximumLength="240"/>
+                        <oa:messageStyledText id="GroupName" dataType="VARCHAR2" prompt="考群名称" viewName="PerReviewGroupVO1" viewAttr="GroupName" maximumLength="200"/>
+                        <oa:messageStyledText id="EpmMeaning" dataType="VARCHAR2" prompt="评级模式" viewName="PerReviewGroupVO1" viewAttr="EpmMeaning" maximumLength="80"/>
+                        <oa:formValue id="OrgId" dataType="NUMBER" prompt="OrgId" viewName="PerReviewGroupVO1" viewAttr="OrgId"/>
+                        <oa:image id="Range" prompt="范围" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateGrpRange">
+                                 <ui:parameters>
+                                    <ui:parameter key="groupId" value="${oa.PerReviewGroupVO1.GroupId}"/>
+                                    <ui:parameter key="groupName" value="${oa.PerReviewGroupVO1.GroupName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Update" prompt="更新" source="updateicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateReviewGrp">
+                                 <ui:parameters>
+                                    <ui:parameter key="groupId" value="${oa.PerReviewGroupVO1.GroupId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Del" source="deleteicon_enabled.gif" prompt="删除">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delReviewGrp">
+                                 <ui:parameters>
+                                    <ui:parameter key="groupId" value="${oa.PerReviewGroupVO1.GroupId}"/>
+                                    <ui:parameter key="groupName" value="${oa.PerReviewGroupVO1.GroupName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="ButtonLayout">
+                           <ui:contents>
+                              <oa:submitButton id="CreateReviewGroup" text="创建考群" prompt="创建考群"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="查询考群" id="ReviewGrpSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageTextInput id="SearchGroupName" prompt="考群"/>
+                              <oa:messageChoice id="SearchOrgName" pickListViewDef="cux.oracle.apps.per.poplist.server.PerLegalEntitiesVO" pickListDispAttr="OrgName" pickListValAttr="OrgId" dataType="NUMBER" prompt="公司" selectiveSearchCriteria="false"/>
+                              <oa:messageLovInput id="SearchJobName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerJobRN" unvalidated="false" selectiveSearchCriteria="false" prompt="职务名称" dataType="VARCHAR2" queryable="true">
+                                 <lovMappings>
+                                    <lovMap id="lovMap2" lovItem="JobId" resultTo="SearchJobId"/>
+                                    <lovMap id="lovMap3" lovItem="JobName" resultTo="SearchJobName" criteriaFrom="SearchJobName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="SearchJobId" prompt="职务标识" readOnly="true" dataType="NUMBER"/>
+                           </ui:contents>
+                           <ui:footer>
+                              <oa:flowLayout id="QueryRN">
+                                 <ui:contents>
+                                    <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                                    <oa:resetButton id="Clear" text="清除"/>
+                                 </ui:contents>
+                              </oa:flowLayout>
+                           </ui:footer>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

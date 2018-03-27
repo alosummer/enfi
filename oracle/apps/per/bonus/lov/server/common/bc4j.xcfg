@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="EmployeeAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>DBPTCH</JDBCName>
+         <jbo.project>per_review1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.bonus.lov.server.EmployeeAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.bonus.lov.server.EmployeeAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

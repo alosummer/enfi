@@ -1,0 +1,186 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxQualityPlanControlDetailEditPG" amDefName="cux.oracle.apps.cux.qhse.quality.server.CuxQualityAM" windowTitle="详细目标计划" controllerClass="cux.oracle.apps.cux.qhse.quality.webui.CuxQualityPlanControlDetailEditPGCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:advancedTable id="CuxQualityMagDetailVO1AD" width="100%" viewName="CuxQualityMagDetailVO1">
+               <ui:contents>
+                  <oa:column id="column1" width="5%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader1" prompt="目标类型" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="TargetClassCode" dataType="VARCHAR2" prompt="目标类型" viewAttr="TargetClassCode" pickListViewDef="cux.oracle.apps.cux.qhse.quality.poplist.server.CuxTargetClassListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes"/>
+                        <oa:formValue id="CreationDate" dataType="DATE" prompt="CreationDate" viewAttr="CreationDate"/>
+                        <oa:formValue id="CreatedBy" dataType="NUMBER" prompt="CreatedBy" viewAttr="CreatedBy"/>
+                        <oa:formValue id="LastUpdateDate" dataType="DATE" prompt="LastUpdateDate" viewAttr="LastUpdateDate"/>
+                        <oa:formValue id="LastUpdatedBy" dataType="NUMBER" prompt="LastUpdatedBy" viewAttr="LastUpdatedBy"/>
+                        <oa:formValue id="LastUpdateLogin" dataType="NUMBER" prompt="LastUpdateLogin" viewAttr="LastUpdateLogin"/>
+                        <oa:formValue id="AttributeCategory" dataType="VARCHAR2" prompt="AttributeCategory" viewAttr="AttributeCategory"/>
+                        <oa:formValue id="Attribute1" dataType="VARCHAR2" prompt="Attribute1" viewAttr="Attribute1"/>
+                        <oa:formValue id="Attribute2" dataType="VARCHAR2" prompt="Attribute2" viewAttr="Attribute2"/>
+                        <oa:formValue id="Attribute3" dataType="VARCHAR2" prompt="Attribute3" viewAttr="Attribute3"/>
+                        <oa:formValue id="Attribute4" dataType="VARCHAR2" prompt="Attribute4" viewAttr="Attribute4"/>
+                        <oa:formValue id="Attribute5" dataType="VARCHAR2" prompt="Attribute5" viewAttr="Attribute5"/>
+                        <oa:formValue id="DutePerson" dataType="NUMBER" prompt="DutePerson" viewAttr="DutePerson"/>
+                        <oa:formValue id="DetailId" dataType="NUMBER" prompt="DetailId" viewAttr="DetailId"/>
+                        <oa:formValue id="TaskId" dataType="NUMBER" prompt="TaskId" viewAttr="TaskId"/>
+                        <oa:formValue id="IsDeliverableDis" dataType="VARCHAR2" prompt="IsDeliverableDis" viewAttr="IsDeliverableDis"/>
+                        <oa:formValue id="PlanControlCode" dataType="VARCHAR2" prompt="PlanControlCode" viewAttr="PlanControlCode"/>
+                        <oa:formValue id="TargetClassName" dataType="VARCHAR2" prompt="TargetClassName" viewAttr="TargetClassName"/>
+                        <oa:formValue id="DetailNumber" dataType="NUMBER" prompt="DetailNumber" viewAttr="DetailNumber"/>
+                        <oa:formValue id="PlanControlDesc1" prompt="" viewAttr="PlanControlDesc"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column2" width="7%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader2" prompt="目标计划控制项" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageLovInput id="PlanControlName" dataType="VARCHAR2" prompt="目标计划控制项" viewAttr="PlanControlName" maximumLength="80" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxQuaPlanControlLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="LookupCode" resultTo="PlanControlCode"/>
+                              <lovMap id="lovMap2" lovItem="Meaning" resultTo="PlanControlName" criteriaFrom="PlanControlName"/>
+                              <lovMap id="lovMap3" lovItem="Description" resultTo="PlanControlDesc1"/>
+                              <lovMap id="lovMap6" lovItem="PredefinedFlag" criteriaFrom="TargetClassCode" requiredForLOV="true"/>
+                              <lovMap id="lovMap7" lovItem="Attribute2" resultTo="IsDeliverables"/>
+                              <lovMap id="lovMap8" lovItem="Attribute3" resultTo="TargetValue"/>
+                              <lovMap id="lovMap9" lovItem="Attribute2" resultTo="IsDeliverables1"/>
+                              <lovMap id="lovMap10" lovItem="Attribute3" resultTo="TargetValue1"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column3" width="18%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader3" prompt="目标计划控制项说明"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="PlanControlDesc" dataType="VARCHAR2" prompt="" viewAttr="PlanControlDesc" maximumLength="240"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column4" width="5%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader4" prompt="是否交付物" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="IsDeliverables" dataType="VARCHAR2" prompt="" viewAttr="IsDeliverables" required="yes" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" readOnly="true"/>
+                        <oa:formValue id="IsDeliverables1" dataType="VARCHAR2" prompt="" viewAttr="IsDeliverables"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column5" width="7%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader5" prompt="目标控制值" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="TargetValue" dataType="VARCHAR2" prompt="目标控制值" viewAttr="TargetValue" maximumLength="4000" required="yes" readOnly="true"/>
+                        <oa:formValue id="TargetValue1" dataType="VARCHAR2" prompt="目标控制值" viewAttr="TargetValue"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column6" width="8%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader6" prompt="计划日期" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="PlanDate" dataType="DATE" prompt="计划日期" viewAttr="PlanDate" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column7" width="8%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader7" prompt="核准日期"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="ApproveDate" dataType="DATE" prompt="核准日期" viewAttr="ApproveDate" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column8" width="8%" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader8" prompt="负责人" required="yes"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageLovInput id="DutePersonName" dataType="VARCHAR2" prompt="负责人" viewAttr="DutePersonName" externalListOfValues="/cux/oracle/apps/cux/qhse/quality/lov/webui/CuxEmpLovRN" required="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap4" lovItem="EmpFullName" resultTo="DutePersonName" criteriaFrom="DutePersonName"/>
+                              <lovMap id="lovMap5" lovItem="EmployeeId" resultTo="DutePerson"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column81" width="8%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader81" prompt="交付物附件"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:attachmentImage id="attachment" prompt="交付物附件">
+                           <oa:entityMappings>
+                              <oa:entityMap id="entityMap1" entityId="cux_quality_mag_detail">
+                                 <oa:primaryKeys>
+                                    <oa:primaryKey id="primaryKey1" viewAttr="DetailId"/>
+                                 </oa:primaryKeys>
+                              </oa:entityMap>
+                           </oa:entityMappings>
+                        </oa:attachmentImage>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column9" width="14%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader9" prompt="检查结果"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Result" dataType="VARCHAR2" prompt="检查结果" viewAttr="Result" maximumLength="4000"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column10" width="5%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader10" prompt="确认"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="IsConfirm" dataType="VARCHAR2" text="确认" prompt="确认" viewAttr="IsConfirm" defaultValue="N" checkedValue="Y" unCheckedValue="N"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column11" width="14%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="备注说明"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Remark" dataType="VARCHAR2" prompt="备注说明" viewAttr="Remark" maximumLength="4000"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="column12" width="5%">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader12" prompt="删除"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:image id="DeleteBTN" prompt="删除" source="deleteicon_enabled.gif" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentLineRow" unvalidated="true" id="fireAction1"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:tableActions>
+                  <oa:flowLayout id="region3">
+                     <ui:contents>
+                        <oa:button id="AddOneRowBTN" text="新增一行" prompt="新增一行">
+                           <ui:primaryClientAction>
+                              <ui:firePartialAction event="CreateLineRow" id="firePartialAction1"/>
+                           </ui:primaryClientAction>
+                        </oa:button>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:advancedTable>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="CancelBTN" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="SaveBTN" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

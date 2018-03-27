@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxProBudgetVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxProBudgetVORowImpl"
+   ComponentClass="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxProBudgetVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT bgt_big_name,
+       bgt_big_value,
+       bgt_big_used_amt,
+       CASE
+         WHEN bgt_big_value <> 0 THEN
+          round(bgt_big_used_amt / bgt_big_value,
+                2) * 100
+         ELSE
+          NULL
+       END AS bgt_big_used_percent,
+       bgt_big_value - bgt_big_used_amt AS bgt_big_avl_amt,
+       apply_amount AS apply_amount,
+       CASE
+         WHEN bgt_big_used_amt + apply_amount > bgt_big_value THEN
+          bgt_big_used_amt + apply_amount - bgt_big_value
+         ELSE
+          NULL
+       END AS bgt_big_mt_amount,
+       CASE
+         WHEN bgt_big_used_amt + apply_amount > bgt_big_value
+              AND bgt_big_value <> 0 THEN
+          round((bgt_big_used_amt + apply_amount - bgt_big_value) /
+                bgt_big_value,
+                2) * 100
+         ELSE
+          NULL
+       END AS bgt_big_mt_amount_percent,
+       pro_budget_amt,
+       pro_used_amt,
+       CASE
+         WHEN pro_budget_amt <> 0 THEN
+          round(pro_used_amt / pro_budget_amt,
+                2) * 100
+         ELSE
+          NULL
+       END AS pro_used_percent,
+       pro_budget_amt - pro_used_amt AS pro_avl_amt,
+       CASE
+         WHEN pro_used_amt + apply_amount > pro_budget_amt THEN
+          pro_used_amt + apply_amount - pro_budget_amt
+         ELSE
+          NULL
+       END AS pro_mt_amount,
+       CASE
+         WHEN pro_used_amt + apply_amount > pro_budget_amt
+              AND pro_budget_amt <> 0 THEN
+          round((pro_used_amt + apply_amount - pro_budget_amt) /
+                pro_budget_amt,
+                2) * 100
+         ELSE
+          NULL
+       END AS pro_mt_amount_percent
+  FROM (SELECT caeb.bgt_big_name,
+               caeb.bgt_big_value,
+               caeb.bgt_big_used_amt,
+               caeb.apply_amount,
+               caeb.total_budget_amt      AS pro_budget_amt,
+               caeb.total_budget_used_amt AS pro_used_amt
+          FROM cux_ap_exp_budget_info caeb
+         WHERE caeb.budget_type = 'PRO'
+           AND caeb.report_header_id = :1)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="BgtBigName"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BGT_BIG_NAME"
+      Expression="BGT_BIG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigValue"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_VALUE"
+      Expression="BGT_BIG_VALUE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigUsedAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_USED_AMT"
+      Expression="BGT_BIG_USED_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigUsedPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_USED_PERCENT"
+      Expression="BGT_BIG_USED_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigAvlAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_AVL_AMT"
+      Expression="BGT_BIG_AVL_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApplyAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="APPLY_AMOUNT"
+      Expression="APPLY_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigMtAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_MT_AMOUNT"
+      Expression="BGT_BIG_MT_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BgtBigMtAmountPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BGT_BIG_MT_AMOUNT_PERCENT"
+      Expression="BGT_BIG_MT_AMOUNT_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProBudgetAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_BUDGET_AMT"
+      Expression="PRO_BUDGET_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProUsedAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_USED_AMT"
+      Expression="PRO_USED_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProUsedPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_USED_PERCENT"
+      Expression="PRO_USED_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProAvlAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_AVL_AMT"
+      Expression="PRO_AVL_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProMtAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_MT_AMOUNT"
+      Expression="PRO_MT_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProMtAmountPercent"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRO_MT_AMOUNT_PERCENT"
+      Expression="PRO_MT_AMOUNT_PERCENT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

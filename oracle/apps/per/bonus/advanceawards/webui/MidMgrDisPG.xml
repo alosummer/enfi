@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.MidMgrDisCO" windowTitle="人员奖金发放页面" title="人员奖金发放" amDefName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="SearchRN" rendered="true" width="100%">
+               <ui:contents>
+                  <oa:messageChoice id="DistDate" prompt="月份" pickListViewName="AdvanceAwardsDateVO1" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" allowBlankValue="false" styleClass="OraDataText">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="search" id="fireAction1"/>
+                     </ui:primaryClientAction>
+                  </oa:messageChoice>
+                  <oa:messageTextInput id="CurrentDept" readOnly="true" prompt="当前部门" tipType="shortTip" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="BalanceAmount" prompt="截止当月累计余额（元）" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="今年1月份到当前上一个月的预支奖余额累计" tipMessageName="今年1月份到当前上一个月的部门预支奖余额累计" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="MonthAmount" prompt="本月预支额度（元）" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="本月本部门所有专项奖的合计" tipMessageName="本月本部门所有专项奖的合计" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="AvailAmount" prompt="可发放总额度（元）" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="即累计余额+本月额度" tipMessageName="即累计余额+本月额度" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="DeptPersonAmount" prompt="本部门员工数" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="纳入本部门发放的员工总数" tipMessageName="纳入本部门发放的员工总数" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="DistPersonAmount" prompt="已发放员工数" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="本月已发放奖金的部门员工数" tipMessageName="本月已发放奖金的部门员工数" styleClass="OraDataText"/>
+                  <oa:messageTextInput id="DistAmount" prompt="已发放总额（元）" readOnly="true" translatableDefaultValue="0" tipType="shortTip" tipMessageAppShortName="本月已发放总额，不包括状态为已退回的" tipMessageName="本月已发放总额，不包括状态为已退回的" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:header id="DeptPerDistRN" text="部门员工发放" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:messageChoice id="BonusType" prompt="奖金类型" pickListViewName="AdvanceAwardsTypeVO1" pickListDispAttr="TypeName" pickListValAttr="TypeName" allowBlankValue="false" styleClass="OraDataText">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="search" id="fireAction2"/>
+                     </ui:primaryClientAction>
+                  </oa:messageChoice>
+                  <oa:messageTextInput id="DeptPersonTotal" prompt="本次部门人员发放合计（元）" readOnly="true" rows="1" styleClass="OraDataText" rendered="false"/>
+                  <oa:tip id="DeptPerDistTip" text="&lt;p style=&quot;color:red&quot;>1.状态：预保存（保存但未提交），已批准（已提交）&lt;br>2.如果删除某员工的奖金发放，将其奖金金额改为0即可&lt;/p>" styleClass="OraDataText"/>
+                  <oa:advancedTable id="DeptPersonTable" blockSize="1000" width="100%" viewName="AdvAwardsDeptPersonVO1">
+                     <ui:contents>
+                        <oa:column id="RowSNCol" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17312" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonNumberCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPersonNumber" viewAttr="EmployeeNumber" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPersonName" viewAttr="LastName" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonDeptCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPersonDept" viewAttr="DepName" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonAwardsCol" totalValue="true" columnDataFormat="numberFormat" cellNoWrapFormat="false">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="DeptPersonAwards" viewAttr="DistributionAmount" styleClass="OraDataText" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonNoteCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="备注"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="DeptPersonNote" viewAttr="Note" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPersonStatusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader6" prompt="状态"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPersonStatus" viewAttr="DistributionStatus" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter3">
+                           <ui:total>
+                              <oa:totalRow id="totalRow3" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:tip id="DistTips" text="&lt;p style=&quot;color:red&quot;>1.提交后数据将不能再修改。&lt;/p>" styleClass="OraDataText"/>
+            <oa:pageButtonBar id="PageButtonRN" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="SaveButton" text="保存" prompt="保存" rendered="true" styleClass="OraDataText"/>
+                  <oa:submitButton id="SubmitButton" text="提交" prompt="提交" styleClass="OraDataText"/>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

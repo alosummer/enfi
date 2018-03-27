@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxQualityWorkplanDetailPG" amDefName="cux.oracle.apps.cux.qhse.quality.server.CuxQualityAM" controllerClass="cux.oracle.apps.cux.qhse.quality.webui.CuxQualityWorkplanDetailPGCO" windowTitle="项目计划">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="CuxProjectWorkplanResultVO1" width="100%" text="项目计划">
+               <ui:contents>
+                  <oa:messageStyledText id="ElementNumber" dataType="VARCHAR2" prompt="大纲编号" viewName="CuxProjectWorkplanResultVO1" viewAttr="ElementNumber" maximumLength="100" destination="OA.jsp?page=/cux/oracle/apps/cux/qhse/quality/webui/CuxQualityPlanControlDetailViewPG&amp;retainAM=Y&amp;TaskID={@ProjElementId}&amp;ProjectId={@ProjectId}"/>
+                  <oa:messageStyledText id="PhaseName" dataType="VARCHAR2" prompt="项目阶段" viewName="CuxProjectWorkplanResultVO1" viewAttr="PhaseName" maximumLength="80"/>
+                  <oa:messageStyledText id="TaskName" dataType="VARCHAR2" prompt="任务" viewName="CuxProjectWorkplanResultVO1" viewAttr="TaskName" maximumLength="240"/>
+                  <oa:messageStyledText id="ScheduledStartDate" dataType="DATE" prompt="预定起始日期" viewName="CuxProjectWorkplanResultVO1" viewAttr="ScheduledStartDate"/>
+                  <oa:messageStyledText id="ScheduledFinishDate" dataType="DATE" prompt="预定结束日期" viewName="CuxProjectWorkplanResultVO1" viewAttr="ScheduledFinishDate"/>
+                  <oa:messageStyledText id="Status" dataType="VARCHAR2" prompt="状态" viewName="CuxProjectWorkplanResultVO1" viewAttr="Status" maximumLength="240"/>
+                  <oa:messageStyledText id="IsPlaned" dataType="VARCHAR2" prompt="是否计划" viewName="CuxProjectWorkplanResultVO1" viewAttr="IsPlaned" maximumLength="240"/>
+                  <oa:image id="UPDATE_ENABLE" source="updateicon_enabled.gif" prompt="计划详细资料">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="UpdatePlanControl">
+                           <ui:parameters>
+                              <ui:parameter key="TaskID" value="${oa.CuxProjectWorkplanResultVO1.ProjElementId}"/>
+                              <ui:parameter key="ProjectId" value="${oa.CuxProjectWorkplanResultVO1.ProjectId}"/>
+                              <ui:parameter key="CompleteFlag" value="N"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+                  <oa:image id="COMPLETE_ENABLE" source="updateicon_enabled.gif" prompt="计划检查">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="UpdatePlanControl" id="fireAction1">
+                           <ui:parameters>
+                              <ui:parameter key="TaskID" value="${oa.CuxProjectWorkplanResultVO1.ProjElementId}"/>
+                              <ui:parameter key="ProjectId" value="${oa.CuxProjectWorkplanResultVO1.ProjectId}"/>
+                              <ui:parameter key="CompleteFlag" value="Y"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+                  <oa:formValue id="ElementVersionId" dataType="NUMBER" prompt="ElementVersionId" viewName="CuxProjectWorkplanResultVO1" viewAttr="ElementVersionId"/>
+                  <oa:formValue id="ProjElementId" dataType="NUMBER" prompt="ProjElementId" viewName="CuxProjectWorkplanResultVO1" viewAttr="ProjElementId"/>
+                  <oa:formValue id="ParentStructureVersionId" dataType="NUMBER" prompt="ParentStructureVersionId" viewName="CuxProjectWorkplanResultVO1" viewAttr="ParentStructureVersionId"/>
+                  <oa:formValue id="TaskType" dataType="VARCHAR2" prompt="TaskType" viewName="CuxProjectWorkplanResultVO1" viewAttr="TaskType"/>
+                  <oa:formValue id="Description" dataType="VARCHAR2" prompt="Description" viewName="CuxProjectWorkplanResultVO1" viewAttr="Description"/>
+                  <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="CuxProjectWorkplanResultVO1" viewAttr="ProjectId"/>
+                  <oa:formValue id="ProjectStatusName" dataType="VARCHAR2" prompt="ProjectStatusName" viewName="CuxProjectWorkplanResultVO1" viewAttr="ProjectStatusName"/>
+                  <oa:formValue id="StatusIconActiveInd" dataType="VARCHAR2" prompt="StatusIconActiveInd" viewName="CuxProjectWorkplanResultVO1" viewAttr="StatusIconActiveInd"/>
+                  <oa:formValue id="ProjectSystemStatusCode" dataType="VARCHAR2" prompt="ProjectSystemStatusCode" viewName="CuxProjectWorkplanResultVO1" viewAttr="ProjectSystemStatusCode"/>
+               </ui:contents>
+            </oa:table>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="CancelBTN" text="返回" prompt="返回" serverUnvalidated="true" unvalidated="true"/>
+                  <oa:submitButton id="SubmitBTN" text="提交" prompt="提交"/>
+                  <oa:submitButton id="CompleteBTN" text="完成检验" prompt="完成检验"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

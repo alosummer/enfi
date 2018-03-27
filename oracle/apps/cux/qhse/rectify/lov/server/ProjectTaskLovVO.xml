@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ProjectTaskLovVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.lov.server.ProjectTaskLovVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.lov.server.ProjectTaskLovVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ppe.proj_element_id AS task_id,
+       ppe.name            AS task_name,
+       ppe.project_id      AS project_id
+  FROM pa_proj_elements          ppe,
+       pa_proj_element_versions  ppev,
+       pa_proj_elem_ver_schedule ppevsch,
+       pa_task_types             ptt,
+       pa_projects_all           ppa,
+       per_all_people_f          papf,
+       pa_percent_completes      ppc,
+       pa_project_statuses       status,
+       pa_project_statuses       progress,
+       pa_lookups                priority,
+       pa_lookups                CLASS,
+       pa_progress_rollup        ppr
+ WHERE priority.lookup_type(+) = 'PA_TASK_PRIORITY_CODE'
+   AND priority.lookup_code(+) = ppe.priority_code
+   AND class.lookup_type = 'PA_OBJECTS'
+   AND class.lookup_code = 'PA_TASKS'
+   AND ptt.task_type_id(+) = ppe.type_id
+   AND progress.status_type(+) = 'PROGRESS'
+   AND progress.project_status_code(+) = ppc.progress_status_code
+   AND status.status_type(+) = 'TASK'
+   AND status.project_status_code(+) = ppe.status_code
+   AND ppe.object_type = 'PA_TASKS'
+   AND ppe.project_id = ppa.project_id
+   AND ppev.proj_element_id = ppe.proj_element_id
+   AND ppev.parent_structure_version_id =
+       pa_project_structure_utils.get_latest_wp_version(ppe.project_id)
+   AND ppevsch.element_version_id(+) = ppev.element_version_id
+   AND ppr.project_id(+) = ppc.project_id
+   AND ppr.object_id(+) = ppc.object_id
+   AND ppr.object_type(+) = ppc.object_type
+   AND ppr.current_flag(+) = 'Y'
+   AND ppr.structure_type(+) = 'WORKPLAN'
+   AND ppr.structure_version_id(+) IS NULL
+   AND ppe.manager_person_id = papf.person_id(+)
+   AND trunc(SYSDATE) BETWEEN papf.effective_start_date(+) AND
+       papf.effective_end_date(+)
+   AND ppc.object_id(+) = ppe.proj_element_id
+   AND ppc.object_type(+) = 'PA_TASKS'
+   AND ppc.project_id(+) = ppe.project_id
+   AND ppc.current_flag(+) = 'Y'
+   AND ppc.current_flag(+) = 'Y'
+   AND ppc.published_flag(+) = 'Y'
+   AND ppc.structure_type(+) = 'WORKPLAN'
+   AND nvl(ppa.template_flag,
+           'N') <> 'Y'
+   AND ppe.link_task_flag = 'N'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="TaskId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASK_ID"
+      Expression="TASK_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROJECT_ID"
+      Expression="PROJECT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

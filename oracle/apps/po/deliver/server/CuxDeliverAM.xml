@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="CuxDeliverAM"
+   ComponentClass="cux.oracle.apps.po.deliver.server.CuxDeliverAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="CuxPoDeliStatusTVO1"
+      ViewObjectName="cux.oracle.apps.po.deliver.server.CuxPoDeliStatusTVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxPoDeliStatusTVO2"
+      ViewObjectName="cux.oracle.apps.po.deliver.server.CuxPoDeliStatusTVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxPoDeliDisVO1"
+      ViewObjectName="cux.oracle.apps.po.deliver.server.CuxPoDeliDisVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxDeliverStatusLovVO1"
+      ViewObjectName="cux.oracle.apps.po.deliver.lov.server.CuxDeliverStatusLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxPoSupEvlTVO1"
+      ViewObjectName="cux.oracle.apps.po.deliver.server.CuxPoSupEvlTVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CuxPoSupEvlConfVO1"
+      ViewObjectName="cux.oracle.apps.po.deliver.server.CuxPoSupEvlConfVO" >
+   </ViewUsage>
+</AppModule>

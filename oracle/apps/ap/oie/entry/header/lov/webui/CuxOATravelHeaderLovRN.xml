@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxLovAM">
+   <ui:contents>
+      <oa:table name="CuxOATravelHeaderLovRN" id="CuxOATravelHeaderLovVO1">
+         <ui:contents>
+            <oa:formValue id="OaTravelHeaderId" dataType="NUMBER" prompt="OaTravelHeaderId" viewName="CuxOATravelHeaderLovVO1" viewAttr="OaTravelHeaderId"/>
+            <oa:messageStyledText id="OaTravelHeaderName" dataType="VARCHAR2" prompt="申请名称" viewName="CuxOATravelHeaderLovVO1" viewAttr="OaTravelHeaderName" maximumLength="19" queryable="true"/>
+            <oa:messageStyledText id="OaTravelHeaderNum" viewName="CuxOATravelHeaderLovVO1" viewAttr="WfNum" prompt="申请编号"/>
+            <oa:messageStyledText id="OaTravelProjectNum" viewName="CuxOATravelHeaderLovVO1" viewAttr="ProjectNum" prompt="项目编号"/>
+            <oa:messageStyledText id="OaTravelCCSY" viewName="CuxOATravelHeaderLovVO1" viewAttr="Ccsy" prompt="出差事由"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

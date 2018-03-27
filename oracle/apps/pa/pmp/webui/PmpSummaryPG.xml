@@ -1,0 +1,129 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <!--*[Enter Javadoc like developer documentation, delete this line once you fill the included template.] [Put a one line description of the region here.] [Put a brief description of the usage of the region here.] @param [Parameter_name] [Put parameter use here.] @param [Parameter_name] [Put parameter use here.] @see [Put any additional links apart from controller class and BC4J objects directly referenced by this region]-->
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目概览" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpSummaryCO" warnAboutChanges="false">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ProjectInformationHdr" text="基本信息">
+               <ui:contents>
+                  <oa:tableLayout id="region7" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:rowLayout id="region2">
+                           <ui:contents>
+                              <oa:cellFormat id="region4" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ProjectClass" dataType="VARCHAR2" prompt="项目类型" viewName="PmpSummaryVO1" viewAttr="ProjectClass" maximumLength="4000"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region5" width="50%">
+                                 <ui:contents>
+                                    <oa:spacer id="spacer"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region8">
+                           <ui:contents>
+                              <oa:cellFormat id="region10" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ContractAmount" dataType="VARCHAR2" prompt="合同额" viewName="PmpSummaryVO1" viewAttr="ContractAmount" maximumLength="4000"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region12" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="AwardDate" dataType="DATE" prompt="合同签订日期" viewName="PmpSummaryVO1" viewAttr="AwardDate"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region13">
+                           <ui:contents>
+                              <oa:cellFormat id="region16" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ProjectStartDate" dataType="DATE" prompt="项目启动日期" viewName="PmpSummaryVO1" viewAttr="ProjectStartDate"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region17" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ScheduleCompletionDate" dataType="DATE" prompt="项目计划完成日期" viewName="PmpSummaryVO1" viewAttr="ScheduleCompletionDate"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region14">
+                           <ui:contents>
+                              <oa:cellFormat id="region18" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ProjectScale" dataType="VARCHAR2" prompt="建设规模" viewName="PmpSummaryVO1" viewAttr="ProjectScale" maximumLength="4000"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region19" width="50%">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TotalProjectInvestment" dataType="NUMBER" prompt="工程总投资" viewName="PmpSummaryVO1" viewAttr="TotalProjectInvestment"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                        <oa:rowLayout id="region15">
+                           <ui:contents>
+                              <oa:cellFormat id="region20" width="100%" columnSpan="2">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Cooperators" dataType="VARCHAR2" prompt="其他合作单位" viewName="PmpSummaryVO1" viewAttr="Cooperators" maximumLength="4000" rows="4" columns="200"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                  </oa:tableLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ProjectDescriptionHdr" text="项目描述">
+               <ui:contents>
+                  <oa:messageTextInput id="ProjectDesc" dataType="VARCHAR2" viewName="PmpSummaryVO1" viewAttr="ProjectDesc" maximumLength="4000" rows="5" columns="212"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ProjectRangeHdr" text="项目范围管理">
+               <ui:contents>
+                  <oa:messageTextInput id="ProjectRange" dataType="VARCHAR2" prompt="" viewName="PmpSummaryVO1" viewAttr="ProjectRange" maximumLength="4000" rows="5" columns="212"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="TrackHdr">
+               <ui:contents>
+                  <oa:table id="PmpStatusVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="VersionNum" dataType="NUMBER" prompt="版本号" viewName="PmpStatusVO1" viewAttr="VersionNum"/>
+                        <oa:messageStyledText id="VerifyStatusName" dataType="VARCHAR2" prompt="审核状态" viewName="PmpStatusVO1" viewAttr="VerifyStatusName" maximumLength="80"/>
+                        <oa:messageStyledText id="ApproveStatusName" dataType="VARCHAR2" prompt="审批状态" viewName="PmpStatusVO1" viewAttr="ApproveStatusName" maximumLength="80"/>
+                     </ui:contents>
+                  </oa:table>
+                  <oa:separator id="separator"/>
+                  <oa:table id="AMEActionHistoryVO1" text="审核情况" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum" dataType="NUMBER" prompt="序号" viewName="AMEActionHistoryVO1" viewAttr="SeqNum"/>
+                        <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="审核人" viewName="AMEActionHistoryVO1" viewAttr="EmpName" maximumLength="100"/>
+                        <oa:messageStyledText id="Action" dataType="VARCHAR2" prompt="操作" viewName="AMEActionHistoryVO1" viewAttr="Action" maximumLength="4000"/>
+                        <oa:messageStyledText id="Note" dataType="VARCHAR2" prompt="审核意见" viewName="AMEActionHistoryVO1" viewAttr="Note" maximumLength="2000"/>
+                        <oa:messageStyledText id="ActionDate" dataType="DATE" prompt="审核时间" viewName="AMEActionHistoryVO1" viewAttr="ActionDate"/>
+                     </ui:contents>
+                  </oa:table>
+                  <oa:separator id="separator1"/>
+                  <oa:table id="AMEActionHistoryVO2" text="审批情况" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum1" dataType="NUMBER" prompt="序号" viewName="AMEActionHistoryVO2" viewAttr="SeqNum"/>
+                        <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="审批人" viewName="AMEActionHistoryVO2" viewAttr="EmpName" maximumLength="100"/>
+                        <oa:messageStyledText id="Action1" dataType="VARCHAR2" prompt="操作" viewName="AMEActionHistoryVO2" viewAttr="Action" maximumLength="4000"/>
+                        <oa:messageStyledText id="Note1" dataType="VARCHAR2" prompt="审批意见" viewName="AMEActionHistoryVO2" viewAttr="Note" maximumLength="2000"/>
+                        <oa:messageStyledText id="ActionDate1" dataType="DATE" prompt="审批时间" viewName="AMEActionHistoryVO2" viewAttr="ActionDate"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

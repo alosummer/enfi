@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpCoordinationVO"
+   SelectList="PmpCoordinationEO.PROJECT_ID, 
+       PmpCoordinationEO.VERSION_NUM, 
+       PmpCoordinationEO.SORT_SEQ, 
+       PmpCoordinationEO.COORDINATION_RANGE, 
+       PmpCoordinationEO.COORDINATION_OBJECT, 
+       PmpCoordinationEO.COORDINATION_REFERENCE, 
+       PmpCoordinationEO.COORDINATION_PRINCIPLE, 
+       PmpCoordinationEO.ATTRIBUTE1, 
+       PmpCoordinationEO.ATTRIBUTE2, 
+       PmpCoordinationEO.ATTRIBUTE3, 
+       PmpCoordinationEO.ATTRIBUTE4, 
+       PmpCoordinationEO.ATTRIBUTE5, 
+       PmpCoordinationEO.ATTRIBUTE6, 
+       PmpCoordinationEO.ATTRIBUTE7, 
+       PmpCoordinationEO.ATTRIBUTE8, 
+       PmpCoordinationEO.ATTRIBUTE9, 
+       PmpCoordinationEO.CREATED_BY, 
+       PmpCoordinationEO.CREATION_DATE, 
+       PmpCoordinationEO.LAST_UPDATED_BY, 
+       PmpCoordinationEO.LAST_UPDATE_DATE, 
+       PmpCoordinationEO.LAST_UPDATE_LOGIN, 
+       PmpCoordinationEO.ROWID"
+   FromList="CUX.CUX_PA_PMP_COORDINATION_T PmpCoordinationEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.pa.pmp.server.PmpCoordinationVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpCoordinationVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PmpCoordinationEO"
+      Entity="cux.oracle.apps.pa.pmp.server.PmpCoordinationEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNum"
+      EntityAttrName="VersionNum"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="VERSION_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SortSeq"
+      EntityAttrName="SortSeq"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="SORT_SEQ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CoordinationRange"
+      EntityAttrName="CoordinationRange"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="COORDINATION_RANGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CoordinationObject"
+      EntityAttrName="CoordinationObject"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="COORDINATION_OBJECT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CoordinationReference"
+      EntityAttrName="CoordinationReference"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="COORDINATION_REFERENCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CoordinationPrinciple"
+      EntityAttrName="CoordinationPrinciple"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="COORDINATION_PRINCIPLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="PmpCoordinationEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="DlvScheduleAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>ENFISIT</JDBCName>
+         <jbo.project>CUXPA</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.pa.ds.server.DlvScheduleAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.pa.ds.server.DlvScheduleAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="ENFISIT">
+      <ENTRY name="JDBC_PORT" value="1521"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="10.10.6.46"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="Enfisit"/>
+      <ENTRY name="SID" value="SIT"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}05D893636DE711EFD8EAD1CBC2CBA6B6FD]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>

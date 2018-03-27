@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.pa.dlv.lov.server.DlvLovAM">
+   <ui:contents>
+      <oa:table name="DocTypeLOV" id="DocTypeVO1">
+         <ui:contents>
+            <oa:formValue id="LookupCode" dataType="VARCHAR2" prompt="LookupCode" viewName="DocTypeVO1" viewAttr="LookupCode"/>
+            <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="文档类型" viewName="DocTypeVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!-- dbdrv: exec java oracle/jrad/tools/xml/importer XMLImporter.class java &phase=dat+24 checkfile(115.1=120.0):~PROD:~PATH:~FILE &fullpath:~PROD:~PATH:~FILE -username &un_apps -password &pw_apps -dbconnection &jdbc_db_addr  -userId "1" -rootPackage /oracle/apps/~PROD  -rootdir &fullpath:~PROD:mds:directory  -->
+<oa:rowLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header: ControlsPoplistRN.xml 120.7 2006/08/16 17:14:18 pchintal noship $" scope="/" use="/oracle/apps/fnd/attributesets/Buttons/Go" controllerClass="cux.oracle.apps.po.document.common.webui.CuxControlsPoplistCO">
+   <ui:contents>
+      <oa:rowLayout id="ControlsPoplistRowRN" comment="Document actions poplist region">
+         <ui:contents>
+            <oa:messageChoice id="ActionsPoplist" pickListViewName="PoControlActionsVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Actions" allowBlankValue="false" comment="Document Actions Poplist" shortDesc="Actions Poplist"/>
+            <oa:spacer id="GoButtonSpacer" width="5"/>
+            <oa:submitButton id="GoButton" text="Go" use="/oracle/apps/fnd/attributesets/Buttons/Go">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="doAction" id="fireAction1"/>
+               </ui:primaryClientAction>
+            </oa:submitButton>
+            <oa:spacer id="GoButtonSpacer2" width="5"/>
+            <oa:button id="GoPayPlan" text="付款计划" prompt="付款计划" shortDesc="付款计划">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="PayPlan">
+                     <ui:parameters>
+                        <ui:parameter key="PoNum" value="${oa.PoHeaderMergeVO.Segment1}"/>
+                        <ui:parameter key="PoHeaderId" value="${oa.PoHeaderMergeVO.PoHeaderId}"/>
+                        <ui:parameter key="Description" value="${oa.PoHeaderMergeVO.Comments}"/>
+                        <ui:parameter key="Total" value="${oa.PoHeaderMergeVO.DocumentTotal}"/>
+                        <ui:parameter key="PoStatus" value="${oa.PoHeaderMergeVO.AuthorizationStatus}"/>
+                     </ui:parameters>
+                  </ui:fireAction>
+               </ui:primaryClientAction>
+            </oa:button>
+            <oa:button id="GoTradition" text="交付物" prompt="交付物" shortDesc="交付物">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="Tradition" id="fireAction2">
+                     <ui:parameters>
+                        <ui:parameter key="PoHeaderId" value="${oa.PoHeaderMergeVO.PoHeaderId}"/>
+                        <ui:parameter key="PoDesc" value="${oa.PoHeaderMergeVO.Comments}"/>
+                        <ui:parameter key="PoDoc" value="${oa.PoHeadersSummaryVO.DocTypeName}"/>
+                        <ui:parameter key="PoNum" value="${oa.PoHeaderMergeVO.Segment1}"/>
+                     </ui:parameters>
+                  </ui:fireAction>
+               </ui:primaryClientAction>
+            </oa:button>
+            <oa:button id="GoMileStone" text="里程碑" prompt="里程碑" shortDesc="里程碑" rendered="false">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="MileStone">
+                     <ui:parameters>
+                        <ui:parameter key="PoNum" value="${oa.PoHeaderMergeVO.Segment1}"/>
+                        <ui:parameter key="PoHeaderId" value="${oa.PoHeaderMergeVO.PoHeaderId}"/>
+                        <ui:parameter key="PoDesc" value="${oa.PoHeaderMergeVO.Comments}"/>
+                        <ui:parameter key="PoVendor" value="${oa.PoHeaderMergeVO.Supplier}"/>
+                        <ui:parameter key="PoStatus" value="${oa.PoHeaderMergeVO.AuthorizationStatus}"/>
+                     </ui:parameters>
+                  </ui:fireAction>
+               </ui:primaryClientAction>
+            </oa:button>
+            <oa:button id="GoSetItem" text="设置审批选项" prompt="设置审批选项" shortDesc="设置审批选项" rendered="false">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="SetItem" id="fireAction21">
+                     <ui:parameters>
+                        <ui:parameter key="PoHeaderId" value="${oa.PoHeaderMergeVO.PoHeaderId}"/>
+                        <ui:parameter key="PoDesc" value="${oa.PoHeaderMergeVO.Comments}"/>
+                        <ui:parameter key="PoDoc" value="${oa.PoHeadersSummaryVO.DocTypeName}"/>
+                        <ui:parameter key="PoNum" value="${oa.PoHeaderMergeVO.Segment1}"/>
+                     </ui:parameters>
+                  </ui:fireAction>
+               </ui:primaryClientAction>
+            </oa:button>
+         </ui:contents>
+      </oa:rowLayout>
+   </ui:contents>
+</oa:rowLayout>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxWebExpParamtersVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.ap.oie.entry.header.server.CuxWebExpParamtersVORowImpl"
+   ComponentClass="cux.oracle.apps.ap.oie.entry.header.server.CuxWebExpParamtersVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT aerp.category_code,
+       aerp.pa_expenditure_type,
+       aerp.parameter_id
+  FROM ap_expense_report_params_all aerp
+ WHERE aerp.expense_report_id = :1
+   AND aerp.prompt = :2
+   AND aerp.org_id = fnd_global.org_id
+   AND aerp.parameter_id IN
+       (SELECT ap_expense_report_params_all.parameter_id
+          FROM pa_projects_all               ppa,
+               pa_segment_value_lookup_sets,
+               pa_segment_value_lookups,
+               ap_expense_report_params_all
+         WHERE 1 = 1
+           AND ppa.attribute10 =
+               pa_segment_value_lookup_sets.segment_value_lookup_set_id
+           AND pa_segment_value_lookup_sets.segment_value_lookup_set_id =
+               pa_segment_value_lookups.segment_value_lookup_set_id
+           AND ap_expense_report_params_all.pa_expenditure_type =
+               pa_segment_value_lookups.segment_value_lookup
+           AND ppa.segment1 = :3)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="CategoryCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CATEGORY_CODE"
+      Expression="CATEGORY_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PaExpenditureType"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PA_EXPENDITURE_TYPE"
+      Expression="PA_EXPENDITURE_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ParameterId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PARAMETER_ID"
+      Expression="PARAMETER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

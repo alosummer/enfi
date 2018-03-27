@@ -1,0 +1,138 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.source.server.HrSourceAM" windowTitle="人才库" controllerClass="cux.oracle.apps.pa.source.webui.HrSourceCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="QueryCriteria" width="60" rows="1" columns="3">
+                     <ui:contents>
+                        <oa:messageLayout id="messageLayout1">
+                           <ui:contents>
+                              <oa:messageComponentLayout id="region2">
+                                 <ui:contents>
+                                    <oa:messageChoice id="gw" prompt="项目管理序列岗位名称" viewName="HrSourceSearchPVO1" viewAttr="gw" pickListViewName="HrSourceGWVO1" pickListDispAttr="Meaning" pickListValAttr="Meaning" rendered="false"/>
+                                    <oa:messageChoice id="zj" prompt="项目管理序列职级" viewName="HrSourceSearchPVO1" viewAttr="zj" pickListDispAttr="Meaning" pickListValAttr="Meaning" pickListViewName="HrSourceZJVO1" rendered="false"/>
+                                    <oa:messageChoice id="Job" pickListViewName="PerJobVO1" pickListValAttr="JobId" pickListDispAttr="Name" prompt="职级" viewName="HrSourceSearchPVO1" viewAttr="JobId" rendered="false"/>
+                                    <oa:messageChoice id="dept" pickListViewName="DeptVO1" pickListValAttr="OrgId" pickListDispAttr="OrgName" prompt="部门" viewName="HrSourceSearchPVO1" viewAttr="DeptId"/>
+                                    <oa:messageLayout id="messageLayout4">
+                                       <ui:contents>
+                                          <oa:button id="Search" text="查询" prompt="查询">
+                                             <ui:primaryClientAction>
+                                                <ui:firePartialAction event="search"/>
+                                             </ui:primaryClientAction>
+                                          </oa:button>
+                                       </ui:contents>
+                                    </oa:messageLayout>
+                                 </ui:contents>
+                              </oa:messageComponentLayout>
+                           </ui:contents>
+                        </oa:messageLayout>
+                        <oa:messageLayout id="messageLayout2">
+                           <ui:contents>
+                              <oa:messageComponentLayout id="region3">
+                                 <ui:contents>
+                                    <oa:messageLovInput id="empName" externalListOfValues="/cux/oracle/apps/pa/source/lov/webui/PersonLovRN" prompt="姓名">
+                                       <lovMappings>
+                                          <lovMap id="lovMap1" lovItem="PersonId" resultTo="personId"/>
+                                          <lovMap id="lovMap3" criteriaFrom="empName" lovItem="LastName" resultTo="empName"/>
+                                          <lovMap id="lovMap4" lovItem="EmployeeNumber" resultTo="empNum"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageTextInput id="dateFrom" dataType="DATE" prompt="入库日期范围" viewName="HrSourceSearchPVO1" viewAttr="DateFrom"/>
+                                 </ui:contents>
+                              </oa:messageComponentLayout>
+                           </ui:contents>
+                        </oa:messageLayout>
+                        <oa:messageLayout id="messageLayout3">
+                           <ui:contents>
+                              <oa:messageComponentLayout id="region4">
+                                 <ui:contents>
+                                    <oa:messageLovInput id="empNum" externalListOfValues="/cux/oracle/apps/pa/source/lov/webui/PersonLovRN" prompt="财务编号">
+                                       <lovMappings>
+                                          <lovMap id="lovMap2" lovItem="PersonId" resultTo="personId"/>
+                                          <lovMap id="lovMap5" lovItem="EmployeeNumber" resultTo="empNum" criteriaFrom="empNum"/>
+                                          <lovMap id="lovMap6" lovItem="LastName" resultTo="empName"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageTextInput id="dateTo" dataType="DATE" prompt="至" viewName="HrSourceSearchPVO1" viewAttr="DateTo"/>
+                                 </ui:contents>
+                              </oa:messageComponentLayout>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:formValue id="personId" viewName="HrSourceSearchPVO1" viewAttr="PersonId"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ResultRN">
+               <ui:contents>
+                  <oa:table id="HrSourceVO1">
+                     <ui:contents>
+                        <oa:messageStyledText id="PersonName" dataType="VARCHAR2" prompt="姓名" viewName="HrSourceVO1" viewAttr="PersonName" maximumLength="4000" destination="OA.jsp?page=/cux/oracle/apps/pa/source/webui/EmployeeProjectListPG&amp;personId={@PersonId}&amp;retainAM=Y" rendered="false"/>
+                        <oa:messageStyledText id="PersonNum" dataType="VARCHAR2" prompt="财务编号" viewName="HrSourceVO1" viewAttr="PersonNum" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="DeptName" dataType="VARCHAR2" prompt="部门" viewName="HrSourceVO1" viewAttr="DeptName" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="DateOfBirth" dataType="DATE" prompt="出生日期" viewName="HrSourceVO1" viewAttr="DateOfBirth" rendered="false"/>
+                        <oa:messageStyledText id="Education" dataType="VARCHAR2" prompt="学历" viewName="HrSourceVO1" viewAttr="Education" maximumLength="150" rendered="false"/>
+                        <oa:messageStyledText id="College" dataType="VARCHAR2" prompt="毕业院校" viewName="HrSourceVO1" viewAttr="College" maximumLength="150" rendered="false"/>
+                        <oa:messageStyledText id="GraduationDate" dataType="VARCHAR2" prompt="毕业时间" viewName="HrSourceVO1" viewAttr="GraduationDate" maximumLength="150" rendered="false"/>
+                        <oa:messageStyledText id="FirstWorkingTime" dataType="VARCHAR2" prompt="首次参加工作日期" viewName="HrSourceVO1" viewAttr="FirstWorkingTime" maximumLength="150" rendered="false"/>
+                        <oa:messageStyledText id="WorkExperience" dataType="NUMBER" prompt="工作年限" viewName="HrSourceVO1" viewAttr="WorkExperience" rendered="false"/>
+                        <oa:messageStyledText id="Speciality" dataType="VARCHAR2" prompt="专业" viewName="HrSourceVO1" viewAttr="Speciality" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="Zc" dataType="VARCHAR2" prompt="职称" viewName="HrSourceVO1" viewAttr="Zc" maximumLength="150" rendered="false"/>
+                        <oa:messageStyledText id="Prrq" dataType="DATE" prompt="聘任日期" viewName="HrSourceVO1" viewAttr="Prrq" rendered="false"/>
+                        <oa:messageStyledText id="JobName" dataType="VARCHAR2" prompt="职级" viewName="HrSourceVO1" viewAttr="JobName" maximumLength="700" rendered="false"/>
+                        <oa:messageStyledText id="PositionName" dataType="VARCHAR2" prompt="职务" viewName="HrSourceVO1" viewAttr="PositionName" maximumLength="240" rendered="false"/>
+                        <oa:messageStyledText id="EvaluateJobLevel" dataType="VARCHAR2" prompt="评定职级" viewName="HrSourceVO1" viewAttr="EvaluateJobLevel" maximumLength="300" rendered="false"/>
+                        <oa:messageStyledText id="Zyfzr" dataType="VARCHAR2" prompt="可担任专业负责人" viewName="HrSourceVO1" viewAttr="Zyfzr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Ztr" dataType="VARCHAR2" prompt="可担任制图人" viewName="HrSourceVO1" viewAttr="Ztr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Sjr" dataType="VARCHAR2" prompt="可担任设计人" viewName="HrSourceVO1" viewAttr="Sjr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Jhr" dataType="VARCHAR2" prompt="可担任校核人" viewName="HrSourceVO1" viewAttr="Jhr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Shr" dataType="VARCHAR2" prompt="可担任审核人" viewName="HrSourceVO1" viewAttr="Shr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Sdr" dataType="VARCHAR2" prompt="可担任 审定人" viewName="HrSourceVO1" viewAttr="Sdr" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Ylgdzz" dataType="VARCHAR2" prompt="压力管道资质" viewName="HrSourceVO1" viewAttr="Ylgdzz" maximumLength="1" rendered="false"/>
+                        <oa:messageStyledText id="Zcly" dataType="VARCHAR2" prompt="专长领域" viewName="HrSourceVO1" viewAttr="Zcly" maximumLength="3000" rendered="false"/>
+                        <oa:messageStyledText id="HrsourceDate" dataType="DATE" prompt="入库时间" viewName="HrSourceVO1" viewAttr="HrsourceDate" rendered="false"/>
+                        <oa:messageStyledText id="CurrentYearGrade" dataType="VARCHAR2" prompt="本年考核等级" viewName="HrSourceVO1" viewAttr="CurrentYearGrade" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="LastYearGrade" dataType="VARCHAR2" prompt="去年考核等级" viewName="HrSourceVO1" viewAttr="LastYearGrade" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="YearBeforeLastGrade" dataType="VARCHAR2" prompt="前年考核等级" viewName="HrSourceVO1" viewAttr="YearBeforeLastGrade" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="Zg" dataType="VARCHAR2" prompt="资格认证" viewName="HrSourceVO1" viewAttr="Zg" maximumLength="4000" rendered="false"/>
+                        <oa:messageStyledText id="XmglGw" dataType="VARCHAR2" prompt="项目管理序列岗位名称" viewName="HrSourceVO1" viewAttr="XmglGw" maximumLength="300" rendered="false"/>
+                        <oa:messageStyledText id="XmglZj" dataType="VARCHAR2" prompt="项目管理序列职级" viewName="HrSourceVO1" viewAttr="XmglZj" maximumLength="300" rendered="false"/>
+                        <oa:messageStyledText id="ZzQz" dataType="VARCHAR2" prompt="专职/兼职" viewName="HrSourceVO1" viewAttr="ZzQz" maximumLength="300" rendered="false"/>
+                        <oa:image id="Detail" prompt="历史变动情况" source="detailsicon_enabled.gif" rendered="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="Detail" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="personId" value="${oa.current.PersonId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="Delete">
+                                 <ui:parameters>
+                                    <ui:parameter key="HrSourceId" value="${oa.current.HrsourceId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region5">
+                           <ui:contents>
+                              <oa:exportButton id="export" exportAllRows="true" text="导出" viewName="HrSourceVO1"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

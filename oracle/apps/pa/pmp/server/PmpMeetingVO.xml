@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpMeetingVO"
+   SelectList="PmpMeetingEO.PROJECT_ID, 
+       PmpMeetingEO.VERSION_NUM, 
+       PmpMeetingEO.SORT_SEQ, 
+       PmpMeetingEO.MEETING_NAME, 
+       PmpMeetingEO.SCHEDULE_DATE, 
+       PmpMeetingEO.MEETING_OWNER, 
+       PmpMeetingEO.PARTICIPANT, 
+       PmpMeetingEO.CREATED_BY, 
+       PmpMeetingEO.CREATION_DATE, 
+       PmpMeetingEO.LAST_UPDATED_BY, 
+       PmpMeetingEO.LAST_UPDATE_DATE, 
+       PmpMeetingEO.LAST_UPDATE_LOGIN, 
+       PmpMeetingEO.ROWID"
+   FromList="CUX.CUX_PA_PMP_MEETING_T PmpMeetingEO"
+   OrderBy="SORT_SEQ"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.pa.pmp.server.PmpMeetingVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpMeetingVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PmpMeetingEO"
+      Entity="cux.oracle.apps.pa.pmp.server.PmpMeetingEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+         <Attr Name="_queryOrderBy" Value="SORT_SEQ" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="PmpMeetingEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionNum"
+      EntityAttrName="VersionNum"
+      EntityUsage="PmpMeetingEO"
+      AliasName="VERSION_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SortSeq"
+      EntityAttrName="SortSeq"
+      EntityUsage="PmpMeetingEO"
+      AliasName="SORT_SEQ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MeetingName"
+      EntityAttrName="MeetingName"
+      EntityUsage="PmpMeetingEO"
+      AliasName="MEETING_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduleDate"
+      EntityAttrName="ScheduleDate"
+      EntityUsage="PmpMeetingEO"
+      AliasName="SCHEDULE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MeetingOwner"
+      EntityAttrName="MeetingOwner"
+      EntityUsage="PmpMeetingEO"
+      AliasName="MEETING_OWNER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Participant"
+      EntityAttrName="Participant"
+      EntityUsage="PmpMeetingEO"
+      AliasName="PARTICIPANT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="PmpMeetingEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="PmpMeetingEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="PmpMeetingEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="PmpMeetingEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="PmpMeetingEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="PmpMeetingEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" windowTitle="质量目标" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpQhseQualityCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr" text="公司质量目标">
+               <ui:contents>
+                  <oa:advancedTable id="PmpQhseQuality" width="100%" viewName="PmpQhseQualityLineVO1">
+                     <ui:contents>
+                        <oa:column id="column1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="标准"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="QhseStandard" dataType="VARCHAR2" prompt="" viewAttr="QhseStandard" maximumLength="300"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:columnGroup id="columnGroup1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="目标内容"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:column id="column2">
+                                 <ui:columnHeader/>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TargetContent1" dataType="VARCHAR2" prompt="" viewAttr="TargetContent1" maximumLength="300"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="column3">
+                                 <ui:columnHeader/>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TargetContent2" dataType="VARCHAR2" prompt="" viewAttr="TargetContent2" maximumLength="300"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:columnGroup>
+                        <oa:column id="column4">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="目标值"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TargetValue" dataType="VARCHAR2" prompt="TargetValue" viewAttr="TargetValue" maximumLength="900"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="PmpQhseQualityContract" text="合同质量目标">
+               <ui:contents>
+                  <oa:messageTextInput id="ContractAspect" dataType="VARCHAR2" prompt="" viewName="PmpQhseQualityHeaerVO1" viewAttr="ContractAspect" maximumLength="3000" rows="3" columns="212"/>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="PmpQhseQualityProject" text="项目质量目标">
+               <ui:contents>
+                  <oa:messageTextInput id="ProjectAspect" dataType="VARCHAR2" prompt="" viewName="PmpQhseQualityHeaerVO1" viewAttr="ProjectAspect" maximumLength="3000" rows="3" columns="212"/>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

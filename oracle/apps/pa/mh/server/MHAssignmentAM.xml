@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="MHAssignmentAM"
+   ComponentClass="cux.oracle.apps.pa.mh.server.MHAssignmentAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ProjectRoleVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.ProjectRoleVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MhAssignHeaderVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.MhAssignHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MhAssignLinesVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.MhAssignLinesVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MhCategoryVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.MhCategoryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MhSummaryVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.MhSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TaskVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.TaskVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MhAssignedSummaryVO1"
+      ViewObjectName="cux.oracle.apps.pa.mh.server.MhAssignedSummaryVO" >
+   </ViewUsage>
+</AppModule>

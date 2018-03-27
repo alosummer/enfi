@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxDocinfoManageTVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageTVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageTVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT cuxdocinfomanageteo.archive_date,
+       cuxdocinfomanageteo.attribute1,
+       cuxdocinfomanageteo.attribute2,
+       cuxdocinfomanageteo.attribute3,
+       cuxdocinfomanageteo.attribute4,
+       cuxdocinfomanageteo.attribute5,
+       cuxdocinfomanageteo.attribute_category,
+       cuxdocinfomanageteo.created_by,
+       cuxdocinfomanageteo.creation_date,
+       cuxdocinfomanageteo.doc_copy_type,
+       cuxdocinfomanageteo.doc_id,
+       cuxdocinfomanageteo.doc_number,
+       cuxdocinfomanageteo.doc_type_code,
+       cuxdocinfomanageteo.is_signed,
+       cuxdocinfomanageteo.lang_code,
+       cuxdocinfomanageteo.last_updated_by,
+       cuxdocinfomanageteo.last_update_date,
+       cuxdocinfomanageteo.last_update_login,
+       cuxdocinfomanageteo.project_name,
+       cuxdocinfomanageteo.relation_corp_name,
+       cuxdocinfomanageteo.submitter_id,
+       cuxdocinfomanageteo.country_code,
+       cuxdocinfomanageteo.remark,
+       ppf.full_name || '(' || ppf.employee_number || ')' submitter_person_name,
+       ftv.territory_short_name AS country_name,
+       document_type.document_type_name,
+       doc_copy_code.doc_copy_name,
+       lang_code.lang_name,
+       cuxdocinfomanageteo.end_active_date,
+       decode(cuxdocinfomanageteo.end_active_date,
+              '',
+              'N',
+              'Y') is_end_active,
+       decode(cuxdocinfomanageteo.archive_date,
+              '',
+              'N',
+              'Y') is_archive,
+       area_alias,
+       other_corp_name,
+       is_evl_sheet
+  FROM cux_docinfo_manage_t cuxdocinfomanageteo,
+       per_people_f ppf,
+       fnd_territories_vl ftv,
+       (SELECT flv.meaning     document_type_code,
+               flv.description document_type_name
+          FROM fnd_lookup_values_vl flv
+         WHERE flv.lookup_type = 'DOCUMENT_TYPE_CODE'
+           AND flv.enabled_flag = 'Y'
+           AND SYSDATE BETWEEN nvl(flv.start_date_active,
+                                   SYSDATE - 1) AND
+               nvl(flv.end_date_active,
+                   SYSDATE + 1)) document_type,
+       (SELECT flv.lookup_code lang_code,
+               flv.meaning     lang_name
+          FROM fnd_lookup_values_vl flv
+         WHERE flv.lookup_type = 'CUX_LANG'
+           AND flv.enabled_flag = 'Y'
+           AND SYSDATE BETWEEN nvl(flv.start_date_active,
+                                   SYSDATE - 1) AND
+               nvl(flv.end_date_active,
+                   SYSDATE + 1)) lang_code,
+       (SELECT flv.lookup_code doc_copy_code,
+               flv.meaning     doc_copy_name
+          FROM fnd_lookup_values_vl flv
+         WHERE flv.lookup_type = 'CUX_DOCUMENT_VERSION'
+           AND flv.enabled_flag = 'Y'
+           AND SYSDATE BETWEEN nvl(flv.start_date_active,
+                                   SYSDATE - 1) AND
+               nvl(flv.end_date_active,
+                   SYSDATE + 1)) doc_copy_code
+ WHERE cuxdocinfomanageteo.submitter_id = ppf.person_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf.effective_end_date,
+           SYSDATE)
+   AND cuxdocinfomanageteo.country_code = ftv.territory_code
+   AND cuxdocinfomanageteo.doc_type_code = document_type.document_type_code
+   AND cuxdocinfomanageteo.doc_copy_type = doc_copy_code.doc_copy_code
+   AND cuxdocinfomanageteo.lang_code = lang_code.lang_code
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxDocinfoManageTEO"
+      Entity="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageTEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ArchiveDate"
+      EntityAttrName="ArchiveDate"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ARCHIVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocCopyType"
+      EntityAttrName="DocCopyType"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="DOC_COPY_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocId"
+      IsNotNull="true"
+      EntityAttrName="DocId"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="DOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocNumber"
+      EntityAttrName="DocNumber"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="DOC_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocTypeCode"
+      IsNotNull="true"
+      EntityAttrName="DocTypeCode"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="DOC_TYPE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsSigned"
+      EntityAttrName="IsSigned"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="IS_SIGNED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LangCode"
+      EntityAttrName="LangCode"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="LANG_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectName"
+      EntityAttrName="ProjectName"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="PROJECT_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RelationCorpName"
+      EntityAttrName="RelationCorpName"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="RELATION_CORP_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SubmitterId"
+      EntityAttrName="SubmitterId"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="SUBMITTER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CountryCode"
+      EntityAttrName="CountryCode"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="COUNTRY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Remark"
+      EntityAttrName="Remark"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="REMARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SubmitterPersonName"
+      IsPersistent="false"
+      Precision="272"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUBMITTER_PERSON_NAME"
+      Expression="SUBMITTER_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="272" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CountryName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="COUNTRY_NAME"
+      Expression="COUNTRY_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentTypeName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOCUMENT_TYPE_NAME"
+      Expression="DOCUMENT_TYPE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocCopyName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_COPY_NAME"
+      Expression="DOC_COPY_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LangName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LANG_NAME"
+      Expression="LANG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndActiveDate"
+      EntityAttrName="EndActiveDate"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="END_ACTIVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsEndActive"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_END_ACTIVE"
+      Expression="IS_END_ACTIVE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsArchive"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_ARCHIVE"
+      Expression="IS_ARCHIVE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AreaAlias"
+      EntityAttrName="AreaAlias"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="AREA_ALIAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OtherCorpName"
+      EntityAttrName="OtherCorpName"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="OTHER_CORP_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsEvlSheet"
+      EntityAttrName="IsEvlSheet"
+      EntityUsage="CuxDocinfoManageTEO"
+      AliasName="IS_EVL_SHEET" >
+   </ViewAttribute>
+</ViewObject>

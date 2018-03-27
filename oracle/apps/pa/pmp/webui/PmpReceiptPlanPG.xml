@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目收费计划" title="" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpReceiptPlanCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr" text="项目收费计划">
+               <ui:contents>
+                  <oa:table id="PmpReceiptPlanVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="KNumberDisp" dataType="VARCHAR2" prompt="合同编号" viewName="PmpReceiptPlanVO1" viewAttr="KNumberDisp" maximumLength="240"/>
+                        <oa:messageStyledText id="LineNumber" dataType="NUMBER" prompt="行号" viewName="PmpReceiptPlanVO1" viewAttr="LineNumber"/>
+                        <oa:messageStyledText id="PlanReceiptType" dataType="VARCHAR2" prompt="收款计划类型" viewName="PmpReceiptPlanVO1" viewAttr="PlanReceiptType" maximumLength="500"/>
+                        <oa:messageStyledText id="Poportion" dataType="NUMBER" prompt="比例(%)" viewName="PmpReceiptPlanVO1" viewAttr="Poportion"/>
+                        <oa:messageStyledText id="PlanReceipt" dataType="NUMBER" prompt="计划金额" viewName="PmpReceiptPlanVO1" viewAttr="PlanReceipt"/>
+                        <oa:messageStyledText id="PlanReceiptDate" dataType="DATE" prompt="计划收款日期" viewName="PmpReceiptPlanVO1" viewAttr="PlanReceiptDate"/>
+                        <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="计划行说明" viewName="PmpReceiptPlanVO1" viewAttr="Description" maximumLength="2400"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

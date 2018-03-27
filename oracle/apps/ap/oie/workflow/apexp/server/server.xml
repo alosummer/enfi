@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.ap.oie.workflow.apexp.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxApExpCheckDisplayVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpCheckDisplayVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpInAccomSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInAccomSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpInOtherFeeSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInOtherFeeSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpInTotalSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTotalSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpInTrafficSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTrafficSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpInTravelSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpInTravelSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpNtfAM"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpNtfAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOutTravelEmpLineSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelEmpLineSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOutTravelFeeLineSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelFeeLineSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOutTravelHeaderSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelHeaderSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOutTravelOtherFeeLineSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelOtherFeeLineSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxApExpOutTravelTotalSubVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxApExpOutTravelTotalSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDeptBudgetVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxDeptBudgetVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxNotifCashLinesVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxNotifCashLinesVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxNtfMessageNameVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxNtfMessageNameVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxProBudgetVO"
+      FullName="cux.oracle.apps.ap.oie.workflow.apexp.server.CuxProBudgetVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

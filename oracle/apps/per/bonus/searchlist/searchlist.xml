@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="searchlist"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.bonus.searchlist" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="DeptBonusVO"
+      FullName="cux.oracle.apps.per.bonus.searchlist.DeptBonusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeptOV"
+      FullName="cux.oracle.apps.per.bonus.searchlist.DeptOV"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MonthAndDeptAM"
+      FullName="cux.oracle.apps.per.bonus.searchlist.MonthAndDeptAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="MonthVO"
+      FullName="cux.oracle.apps.per.bonus.searchlist.MonthVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="searchVO"
+      FullName="cux.oracle.apps.per.bonus.searchlist.searchVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="YearVO"
+      FullName="cux.oracle.apps.per.bonus.searchlist.YearVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.po.autocreate.lov.server.CuxAutocreateLovAM">
+   <ui:contents>
+      <oa:table name="PoHeaderRN" id="PoHeaderVO1">
+         <ui:contents>
+            <oa:messageStyledText id="Segment1" dataType="VARCHAR2" prompt="订单编号" viewName="PoHeaderVO1" viewAttr="Segment1" maximumLength="20" queryable="true" selectiveSearchCriteria="false"/>
+            <oa:messageStyledText id="PoName" dataType="VARCHAR2" prompt="订单名称" viewName="PoHeaderVO1" viewAttr="PoName" maximumLength="150" queryable="true" selectiveSearchCriteria="false"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

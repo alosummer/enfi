@@ -1,0 +1,246 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CUXOieAbroadDetailEntryPG" controllerClass="oracle.apps.ap.oie.entry.webui.EntryFlowPageCO" amDefName="oracle.apps.ap.oie.server.WebExpensesAM" windowTitle="国外出差详细填报">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pbb" extends="/oracle/apps/ap/oie/webui/OIEBUTTONS"/>
+            <oa:header id="OAAboardHeaderRN" text="国外差旅报销" controllerClass="cux.oracle.apps.ap.oie.entry.header.webui.OAAboardHeaderRNCO">
+               <ui:contents>
+                  <oa:tip id="tips1" text="1、OA中的出差申请必须是审批通过的才能选到"/>
+                  <oa:tip id="tips2" text="2、带*号的为必填项"/>
+                  <oa:tip id="tips3" text="3、所有数据的校验在点击保存时才会生成，进入下一步前请保存"/>
+                  <oa:tableLayout id="OAAboardRN" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:rowLayout id="RowLayout" width="100%">
+                           <ui:contents>
+                              <oa:cellFormat id="cell1">
+                                 <ui:contents>
+                                    <oa:messageLovInput id="OaAbroadTravelHeaderName" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOAAboardTravelApyLovRN" viewName="CuxApExpRelatedAboardInfoVO1" viewAttr="OaAbroadTravelHeaderName" prompt="请关联OA中的出国申请" required="yes">
+                                       <lovMappings>
+                                          <lovMap id="lovMap1" lovItem="OaAbroadTravelHeaderName" resultTo="OaAbroadTravelHeaderName" criteriaFrom="OaAbroadTravelHeaderName"/>
+                                          <lovMap id="lovMap2" lovItem="OaAbroadTravelHeaderId" resultTo="OaOutseaTravelProcessId"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:formValue id="OaOutseaTravelProcessId" viewName="CuxApExpRelatedAboardInfoVO1" viewAttr="OaOutseaTravelProcessId"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="cell2">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="AbourdStartDate" viewName="CuxApExpRelatedAboardInfoVO1" viewAttr="AbourdStartDate" dataType="DATE" prompt="实际出发日期（以出境时间戳为准）" serverUnvalidated="true" required="yes">
+                                       <ui:primaryClientAction>
+                                          <ui:firePartialAction event="UpdateDaysNumber" unvalidated="true"/>
+                                       </ui:primaryClientAction>
+                                    </oa:messageTextInput>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="cell3">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="AbourdEndDate" viewName="CuxApExpRelatedAboardInfoVO1" viewAttr="AbourdEndDate" dataType="DATE" prompt="实际返回日期（以入境时间戳为准）" serverUnvalidated="true" required="yes">
+                                       <ui:primaryClientAction>
+                                          <ui:firePartialAction event="UpdateDaysNumber" unvalidated="true"/>
+                                       </ui:primaryClientAction>
+                                    </oa:messageTextInput>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="cell4">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="TravelDaysNumber" viewName="CuxApExpRelatedAboardInfoVO1" viewAttr="TravelDaysNumber" dataType="NUMBER" prompt="实际出差天数"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                  </oa:tableLayout>
+                  <oa:advancedTable id="CuxApExpRelatedAboardLineVO1" viewName="CuxApExpRelatedAboardLineVO1" text="出国申请行" width="100%">
+                     <ui:contents>
+                        <oa:column id="column1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="出差人工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpNumber" viewAttr="EmpNumber" prompt="出差人工号"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column11">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="出差人"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpName" viewAttr="EmpName" prompt="出差人"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column16">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader16" prompt="所在部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmpDept" viewAttr="EmpDept" prompt="所在部门"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column15">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="出差类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TravelType" viewAttr="TravelType" prompt="出差类型"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column14">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader14" prompt="出访国家"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TravelCountry" viewAttr="TravelCountry" prompt="出访国家"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column13">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader13" prompt="是否会议类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="IsConference" viewAttr="IsConference" prompt="是否会议类型"/>
+                              <oa:formValue id="OaTravelLineId" viewAttr="OaTravelLineId"/>
+                              <oa:formValue id="OaTravelHeaderId" viewAttr="OaTravelHeaderId"/>
+                              <oa:formValue id="RelationshipId" viewAttr="RelationshipId"/>
+                              <oa:formValue id="EmpId" viewAttr="EmpId"/>
+                              <oa:formValue id="RelatedOaLineId" viewAttr="RelatedOaLineId"/>
+                              <oa:formValue id="LineNum1" dataType="NUMBER" prompt="LineNum" viewAttr="LineNum"/>
+                              <oa:formValue id="AboardFlag" prompt="AboardFlag" viewAttr="AboardFlag"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column19">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader19" prompt="删除"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="DeleteBTN" source="deleteicon_enabled.gif" serverUnvalidated="true">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="DeleteRelatedOALine" unvalidated="true" id="fireAction1">
+                                       <ui:parameters>
+                                          <ui:parameter key="EmpId" value="${oa.CuxApExpRelatedAboardLineVO1.EmpId}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region1">
+                           <ui:contents>
+                              <oa:lovActionButton id="lovActionButton1" prompt="选择报销员工" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOAAboardTravelDetailLovRN">
+                                 <lovActionMappings>
+                                    <lovActionMap id="lovActionMap1" lovItem="EmpId" resultTo="EmpId"/>
+                                    <lovActionMap id="lovActionMap2" lovItem="EmpDept" resultTo="EmpDept"/>
+                                    <lovActionMap id="lovActionMap3" lovItem="EmpName" resultTo="EmpName"/>
+                                    <lovActionMap id="lovActionMap4" lovItem="EmpNumber" resultTo="EmpNumber"/>
+                                    <lovActionMap id="lovActionMap5" lovItem="IsConference" resultTo="IsConference"/>
+                                    <lovActionMap id="lovActionMap6" lovItem="OaAbroadTravelHeaderId" resultTo="OaTravelHeaderId"/>
+                                    <lovActionMap id="lovActionMap7" lovItem="OaAbroadTravelLineId" resultTo="OaTravelLineId"/>
+                                    <lovActionMap id="lovActionMap8" lovItem="RelatedAboardLineId" resultTo="RelatedOaLineId"/>
+                                    <lovActionMap id="lovActionMap9" lovItem="RelatedId" resultTo="RelationshipId"/>
+                                    <lovActionMap id="lovActionMap10" lovItem="TravelCountry" resultTo="TravelCountry"/>
+                                    <lovActionMap id="lovActionMap11" lovItem="TravelType" resultTo="TravelType"/>
+                                    <lovActionMap id="lovActionMap12" lovItem="LineNun" resultTo="LineNum1"/>
+                                    <lovActionMap id="lovActionMap13" lovItem="AboardFlag" resultTo="AboardFlag"/>
+                                 </lovActionMappings>
+                              </oa:lovActionButton>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+                  <oa:table id="CuxApExpRelAboardFeeLineVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpNumber1" dataType="VARCHAR2" prompt="员工编号" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="EmpNumber" maximumLength="31"/>
+                        <oa:messageStyledText id="EmpName1" dataType="VARCHAR2" prompt="员工姓名" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="EmpName" maximumLength="31"/>
+                        <oa:messageStyledText id="FeeType" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="FeeType" maximumLength="31"/>
+                        <oa:messageStyledText id="PlanPerAmount" dataType="NUMBER" prompt="计划金额单价" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="PlanPerAmount"/>
+                        <oa:messageStyledText id="PlanDays" dataType="NUMBER" prompt="计划出差天数" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="PlanDays"/>
+                        <oa:messageStyledText id="CurrencyCode" dataType="VARCHAR2" prompt="币种" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="CurrencyCode" maximumLength="3"/>
+                        <oa:messageStyledText id="FeeSource" dataType="VARCHAR2" prompt="费用来源" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="FeeSource" maximumLength="6"/>
+                        <oa:messageStyledText id="FeeSourceRemark" dataType="VARCHAR2" prompt="费用来源详细说明" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="FeeSourceRemark" maximumLength="30"/>
+                        <oa:messageStyledText id="Rate" dataType="NUMBER" prompt="汇率" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="Rate"/>
+                        <oa:messageTextInput id="RealTravelDays" dataType="NUMBER" prompt="实际出差天数" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="RealTravelDays" readOnly="${oa.CuxApExpRelAboardFeeLineVO1.RealPerDaysReadonly}" required="yes"/>
+                        <oa:messageTextInput id="RealPerAmount" dataType="NUMBER" prompt="实际金额单价" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="RealPerAmount" readOnly="${oa.CuxApExpRelAboardFeeLineVO1.RealPerAmountReadonly}"/>
+                        <oa:messageStyledText id="RealTotalAmount" viewAttr="RealTotalAmount" viewName="CuxApExpRelAboardFeeLineVO1" prompt="实际总金额"/>
+                        <oa:messageStyledText id="RealTotalAmountBeq" viewAttr="RealTotalAmountBeq" viewName="CuxApExpRelAboardFeeLineVO1" prompt="实际总金额(人民币)"/>
+                        <oa:messageTextInput id="Remark" dataType="VARCHAR2" prompt="超标说明" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="Remark" maximumLength="4000"/>
+                        <oa:formValue id="RelatedAboardFeeLineId" dataType="NUMBER" prompt="RelatedAboardFeeLineId" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="RelatedAboardFeeLineId"/>
+                        <oa:formValue id="RelationshipId1" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="RelationshipId"/>
+                        <oa:formValue id="OaAbroadTravelHeaderId" dataType="NUMBER" prompt="OaAbroadTravelHeaderId" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="OaAbroadTravelHeaderId"/>
+                        <oa:formValue id="OaAbroadTravelFeeLineId" dataType="NUMBER" prompt="OaAbroadTravelFeeLineId" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="OaAbroadTravelFeeLineId"/>
+                        <oa:formValue id="LineNum" dataType="NUMBER" prompt="LineNum" viewName="CuxApExpRelAboardFeeLineVO1" viewAttr="LineNum"/>
+                     </ui:contents>
+                  </oa:table>
+                  <oa:table id="CuxApExpRelAboardOtherFeeVO1" width="100%" text="订退票费及市内交通费" blockSize="5">
+                     <ui:contents>
+                        <oa:messageStyledText id="LineNumber3" dataType="NUMBER" prompt="行" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="LineNumber" rendered="false"/>
+                        <oa:messageLovInput id="EmployeeNumber3" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="EmployeeNumber" required="yes" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxOAAboardTravelEmpLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap14" lovItem="EmpId" resultTo="EmpId4"/>
+                              <lovMap id="lovMap15" lovItem="EmpNumber" resultTo="EmployeeNumber3" criteriaFrom="EmployeeNumber3"/>
+                              <lovMap id="lovMap16" lovItem="EmpName" resultTo="EmpName41"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="EmpName4" dataType="VARCHAR2" prompt="出差人" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="EmpName" maximumLength="240"/>
+                        <oa:messageChoice id="FeeType3" dataType="VARCHAR2" prompt="费用类型" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="FeeType" pickListViewDef="cux.oracle.apps.ap.oie.entry.header.poplist.server.CuxApExpAboardOtherFeeTypeListVO" pickListDispAttr="Description" pickListValAttr="FlexValue"/>
+                        <oa:messageLovInput id="CurrencyCode1" dataType="VARCHAR2" prompt="币种" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="CurrencyCode" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxCurrencyCodeLovRN">
+                           <lovMappings>
+                              <lovMap id="lovMap17" lovItem="CurrencyCode" resultTo="CurrencyCode1" criteriaFrom="CurrencyCode1"/>
+                              <lovMap id="lovMap18" lovItem="Rate" resultTo="Rate11"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageStyledText id="Rate1" dataType="NUMBER" prompt="汇率" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="Rate"/>
+                        <oa:messageTextInput id="FeeDate" dataType="DATE" prompt="费用发生日期" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="FeeDate" required="yes"/>
+                        <oa:messageTextInput id="FeeAmount" dataType="NUMBER" prompt="费用金额" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="FeeAmount"/>
+                        <oa:messageTextInput id="Remark2" dataType="VARCHAR2" prompt="费用说明" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="Remark" maximumLength="4000"/>
+                        <oa:formValue id="EmpId4" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="EmpName41" prompt="出差人" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="EmpName"/>
+                        <oa:formValue id="Rate11" dataType="NUMBER" prompt="汇率" viewName="CuxApExpRelAboardOtherFeeVO1" viewAttr="Rate"/>
+                        <oa:image id="DeleteBTN1" source="deleteicon_enabled.gif" prompt="删除" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteCurrentRow" unvalidated="true" id="fireAction2"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region41115">
+                           <ui:contents>
+                              <oa:submitButton id="OtherTableAddOneRow" text="增加另一行" prompt="增加另一行"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+                  <oa:table id="CuxApExpRelAboardTotalFeeVO1" width="100%" text="报销费用汇总(人民币)">
+                     <ui:contents>
+                        <oa:messageStyledText id="EmpNumber2" dataType="VARCHAR2" prompt="出差人工号" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="EmpNumber" maximumLength="6"/>
+                        <oa:messageStyledText id="EmpName2" dataType="VARCHAR2" prompt="出差人姓名" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="EmpName" maximumLength="9"/>
+                        <oa:formValue id="EmpId1" dataType="NUMBER" prompt="EmpId" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="EmpId"/>
+                        <oa:formValue id="LineNumber" dataType="NUMBER" prompt="LineNumber" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="LineNumber"/>
+                        <oa:formValue id="RelationshipId2" dataType="NUMBER" prompt="RelationshipId" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="RelationshipId"/>
+                        <oa:messageStyledText id="AboardFeePlane" dataType="NUMBER" prompt="国外差旅-机票" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeePlane" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeAccom" dataType="NUMBER" prompt="国外差旅-住宿费" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeAccom" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeFood" dataType="NUMBER" prompt="国外差旅-伙食费" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeFood" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeOtherFee" dataType="NUMBER" prompt="国外差旅-公杂费" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeOtherFee" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeBuzhu" dataType="NUMBER" prompt="国外差旅-现场服务补助" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeBuzhu" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeOther" dataType="NUMBER" prompt="国外差旅-其他费用" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeOther" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeTicket" dataType="NUMBER" prompt="国外差旅-订退票费" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeTicket" totalValue="true"/>
+                        <oa:messageStyledText id="AboardFeeInJing" dataType="NUMBER" prompt="国外差旅-市内交通费" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="AboardFeeInJing" totalValue="true"/>
+                        <oa:messageStyledText id="EmpAboardTotal" dataType="NUMBER" prompt="合计" viewName="CuxApExpRelAboardTotalFeeVO1" viewAttr="EmpAboardTotal" totalValue="true"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+         <ui:productBranding>
+            <oa:image id="productBranding" source="/OA_MEDIA/OIEENTRYBRAND.gif" shortDesc="Internet Expenses"/>
+         </ui:productBranding>
+         <ui:location>
+            <oa:train id="OIETrain" extends="/oracle/apps/ap/oie/entry/webui/EntryTrainRN"/>
+         </ui:location>
+      </oa:pageLayout>
+   </content>
+</page>

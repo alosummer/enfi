@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="PmpLovAM"
+   ComponentClass="cux.oracle.apps.pa.pmp.lov.server.PmpLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ProjectLovVO1"
+      ViewObjectName="cux.oracle.apps.pa.pmp.lov.server.ProjectLovVO" >
+   </ViewUsage>
+</AppModule>

@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjDeptDistDetailCO" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM" windowTitle="部门项目管理奖分配页面" title="部门项目管理奖分配">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="PrjInfoRN">
+               <ui:contents>
+                  <oa:messageStyledText id="PrjNum" prompt="项目编号" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item1"/>
+                  <oa:messageStyledText id="PrjName" prompt="项目名称" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item21"/>
+                  <oa:messageStyledText id="PrjOrgName" prompt="分配部门" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item2"/>
+                  <oa:messageStyledText id="PrjApprovedDate" prompt="审批日期" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item3"/>
+                  <oa:messageStyledText id="PrjDistributionAmount" prompt="可发放金额(元)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item4"/>
+                  <oa:messageStyledText id="PrjDistAmount" prompt="已发放总额(元)" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="item22"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+            <oa:advancedTable id="PrjDistributionTable" viewName="DeptDistributionVO1" width="100%" blockSize="200">
+               <ui:contents>
+                  <oa:formValue id="PerDistId" dataType="NUMBER" viewAttr="PerDistId"/>
+                  <oa:formValue id="PersonId" dataType="NUMBER" viewAttr="PersonId"/>
+                  <oa:column id="EmpNoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader10" prompt="工号"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageLovInput id="EmpNo" viewAttr="EmpNo" externalListOfValues="/cux/oracle/apps/per/bonus/project/webui/DepDistPersonLovRN" styleClass="OraDataText" required="yes" prompt="工号">
+                           <lovMappings>
+                              <lovMap id="lovMapPersonId" lovItem="PersonId" resultTo="PersonId"/>
+                              <lovMap id="lovMapEmpNo" lovItem="EmpNo" resultTo="EmpNo" criteriaFrom="EmpNo"/>
+                              <lovMap id="lovMapEmpName" lovItem="EmpName" resultTo="EmpName"/>
+                              <lovMap id="lovMapOrgId" lovItem="OrgId" resultTo="OrgId"/>
+                              <lovMap id="lovMapOrgName" lovItem="OrgName" resultTo="OrgName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EmpNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader11" prompt="姓名"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageLovInput id="EmpName" viewAttr="EmpName" externalListOfValues="/cux/oracle/apps/per/bonus/project/webui/DepDistPersonLovRN" styleClass="OraDataText" required="yes" prompt="姓名">
+                           <lovMappings>
+                              <lovMap id="lovMapPersonId1" lovItem="PersonId" resultTo="PersonId"/>
+                              <lovMap id="lovMapEmpNo1" lovItem="EmpNo" resultTo="EmpNo"/>
+                              <lovMap id="lovMapEmpName1" lovItem="EmpName" resultTo="EmpName" criteriaFrom="EmpName"/>
+                              <lovMap id="lovMapOrgId1" lovItem="OrgId" resultTo="OrgId"/>
+                              <lovMap id="lovMapOrgName1" lovItem="OrgName" resultTo="OrgName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:formValue id="OrgId" dataType="NUMBER" viewAttr="OrgId"/>
+                  <oa:column id="OrgNameCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader12" prompt="组织"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageLovInput id="OrgName" viewAttr="OrgName" externalListOfValues="/cux/oracle/apps/per/bonus/project/webui/DepDistPersonLovRN" styleClass="OraDataText" required="yes" prompt="组织">
+                           <lovMappings>
+                              <lovMap id="lovMapPersonId2" lovItem="PersonId" resultTo="PersonId"/>
+                              <lovMap id="lovMapEmpNo2" lovItem="EmpNo" resultTo="EmpNo"/>
+                              <lovMap id="lovMapEmpName2" lovItem="EmpName" resultTo="EmpName"/>
+                              <lovMap id="lovMapOrgId2" lovItem="OrgId" resultTo="OrgId"/>
+                              <lovMap id="lovMapOrgName2" lovItem="OrgName" resultTo="OrgName" criteriaFrom="OrgName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DistAmountCol" columnDataFormat="numberFormat">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader13" prompt="发放金额(元)"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="DistAmount" viewAttr="DistAmount" dataType="NUMBER" styleClass="OraDataText" required="yes" prompt="发放金额"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="ApprovedStatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader15" prompt="提交状态"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="ApprovedStatus" viewAttr="ApprovedStatus" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="ImportStatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="sortableHeader151" prompt="ERP导入状态"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="ImportStatus" viewAttr="ImportStatus" styleClass="OraDataText"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DisDeleteCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="OtherPerDeleteHeader" prompt="删除"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:switcher id="OtherDelete" viewAttr="OtherDelete" styleClass="OraDataText">
+                           <ui:case name="DelEnabled">
+                              <oa:image id="DelEnabled" source="deleteicon_enabled.gif" styleClass="OraDataText" serverUnvalidated="true">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="DisDelete" id="fireAction2" unvalidated="true">
+                                       <ui:parameters>
+                                          <ui:parameter key="DelPerDistId" value="${oa.DeptDistributionVO1.PerDistId}"/>
+                                          <ui:parameter key="DelPersonId" value="${oa.DeptDistributionVO1.PersonId}"/>
+                                          <ui:parameter key="DelOrgId" value="${oa.DeptDistributionVO1.OrgId}"/>
+                                          <ui:parameter key="DelDistAmount" value="${oa.DeptDistributionVO1.DistAmount}"/>
+                                       </ui:parameters>
+                                    </ui:fireAction>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                           <ui:case name="DelDisabled">
+                              <oa:image id="DelDisabled" source="deleteicon_disabled.gif" styleClass="OraDataText"/>
+                           </ui:case>
+                        </oa:switcher>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:footer>
+                  <oa:tableFooter id="tableFooter1">
+                     <ui:total>
+                        <oa:totalRow id="totalRow1"/>
+                     </ui:total>
+                     <ui:contents>
+                        <oa:addTableRow id="addTableRow1" autoInsertion="false"/>
+                     </ui:contents>
+                  </oa:tableFooter>
+               </ui:footer>
+            </oa:advancedTable>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="SaveButton" text="保存" prompt="保存" rendered="true" styleClass="OraDataText"/>
+                  <oa:submitButton id="SubmitButton" text="提交" prompt="提交" styleClass="OraDataText"/>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回" styleClass="OraDataText" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

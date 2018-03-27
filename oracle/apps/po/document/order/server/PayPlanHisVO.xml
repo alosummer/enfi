@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PayPlanHisVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.po.document.order.server.PayPlanHisVORowImpl"
+   ComponentClass="cux.oracle.apps.po.document.order.server.PayPlanHisVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT PayPlanHisEO.LINE_ID, 
+       PayPlanHisEO.LINE_NUM, 
+       PayPlanHisEO.PO_HEADER_ID, 
+       PayPlanHisEO.VERSION_ID, 
+       PayPlanHisEO.PAY_TYPE, 
+       PayPlanHisEO.INIT_AMT, 
+       PayPlanHisEO.INIT_PAY_DATE, 
+       PayPlanHisEO.NEW_AMT, 
+       PayPlanHisEO.NEW_PAY_DATE, 
+       PayPlanHisEO.MEMO, 
+       PayPlanHisEO.PAY_APPLY_AMT, 
+       PayPlanHisEO.PAY_APPLY_NUM, 
+       PayPlanHisEO.PAY_APPLIER_NAME, 
+       PayPlanHisEO.CREATED_BY, 
+       PayPlanHisEO.CREATION_DATE, 
+       PayPlanHisEO.LAST_UPDATED_BY, 
+       PayPlanHisEO.LAST_UPDATE_DATE, 
+       PayPlanHisEO.LAST_UPDATE_LOGIN, 
+       PayPlanHisEO.ROWID,
+       PAYPLANHISEO.PAY_APPLY_DATE,
+       PAYPLANHISEO.PAID_AMT,
+       PAYPLANHISEO.ATTRIBUTE_CATEGORY,
+       PAYPLANHISEO.ATTRIBUTE1,
+       PAYPLANHISEO.ATTRIBUTE2,
+       PAYPLANHISEO.ATTRIBUTE3,
+       PAYPLANHISEO.ATTRIBUTE4, 
+       PAYPLANHISEO.ATTRIBUTE5,
+       PAYPLANHISEO.ATTRIBUTE6, 
+       PAYPLANHISEO.ATTRIBUTE7,
+       PAYPLANHISEO.ATTRIBUTE8, 
+       PAYPLANHISEO.ATTRIBUTE9,
+       PAYPLANHISEO.ATTRIBUTE10                                    
+FROM CUX.CUX_PO_PAY_PLAN_HIS_T PayPlanHisEO
+ORDER BY PayPlanHisEO.VERSION_ID,PayPlanHisEO.LINE_NUM
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxPoPayPlanHisTEO"
+      Entity="cux.oracle.apps.po.document.order.server.CuxPoPayPlanHisTEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="LineId"
+      EntityAttrName="LineId"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="LINE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNum"
+      EntityAttrName="LineNum"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="LINE_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoHeaderId"
+      EntityAttrName="PoHeaderId"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VersionId"
+      EntityAttrName="VersionId"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="VERSION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PayType"
+      EntityAttrName="PayType"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAY_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InitAmt"
+      EntityAttrName="InitAmt"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="INIT_AMT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InitPayDate"
+      EntityAttrName="InitPayDate"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="INIT_PAY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NewAmt"
+      EntityAttrName="NewAmt"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="NEW_AMT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NewPayDate"
+      EntityAttrName="NewPayDate"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="NEW_PAY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Memo"
+      EntityAttrName="Memo"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="MEMO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PayApplyAmt"
+      EntityAttrName="PayApplyAmt"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAY_APPLY_AMT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PayApplyNum"
+      EntityAttrName="PayApplyNum"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAY_APPLY_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PayApplierName"
+      EntityAttrName="PayApplierName"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAY_APPLIER_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rowid1"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.RowID"
+      ColumnType="ROWID"
+      Expression="ROWID"
+      SQLType="ROWID" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PayApplyDate"
+      EntityAttrName="PayApplyDate"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAY_APPLY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PaidAmt"
+      EntityAttrName="PaidAmt"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="PAID_AMT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10"
+      EntityAttrName="Attribute10"
+      EntityUsage="CuxPoPayPlanHisTEO"
+      AliasName="ATTRIBUTE10" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.TmplManageAM" controllerClass="cux.oracle.apps.per.review.webui.TemplateManageCO" windowTitle="绩效模板定义" title="绩效模板定义">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="QueryTemplateRN">
+               <ui:contents>
+                  <oa:messageComponentLayout id="SearchRN">
+                     <ui:contents>
+                        <oa:messageTextInput id="SearchTmplName" prompt="模板名称"/>
+                        <oa:messageChoice id="SearchTmplGroup" prompt="适用考群" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId"/>
+                        <oa:messageLovInput id="SearchTmplOrg" dataType="VARCHAR2" prompt="适用组织" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" queryable="true">
+                           <lovMappings>
+                              <lovMap id="ToOrgName" lovItem="OrganizationName" resultTo="SearchTmplOrg" criteriaFrom="SearchTmplOrg"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageChoice id="SearchTmplJob" prompt="适用职务" pickListViewDef="cux.oracle.apps.per.poplist.server.PerJobVO" pickListDispAttr="JobName" pickListValAttr="JobId" queryable="true"/>
+                        <oa:messageLovInput id="SearchTmpEmp" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" prompt="适用员工">
+                           <lovMappings>
+                              <lovMap id="lovMap1" lovItem="EmployeeName" resultTo="SearchTmpEmp" criteriaFrom="SearchTmpEmp"/>
+                              <lovMap id="lovMap2" lovItem="PersonId" resultTo="SearchPersonId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLayout id="ButtonLayoutRN">
+                           <ui:contents>
+                              <oa:submitButton id="Search" text="查询" prompt="查询"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:formValue id="SearchPersonId"/>
+                  <oa:separator id="separator"/>
+                  <oa:table id="TemplateVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="Rownum" viewName="TemplateVO1" viewAttr="Rownum" prompt="序号"/>
+                        <oa:messageStyledText id="TmplId" dataType="NUMBER" prompt="序号" viewName="TemplateVO1" viewAttr="TmplId" maximumLength="10" rendered="false"/>
+                        <oa:messageTextInput id="TmplName" dataType="VARCHAR2" prompt="模板名称" viewName="TemplateVO1" viewAttr="TmplName" maximumLength="240"/>
+                        <oa:messageChoice id="GroupId" dataType="NUMBER" prompt="适用考群" viewName="TemplateVO1" viewAttr="GroupId" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId"/>
+                        <oa:messageChoice id="OrganizationId" dataType="NUMBER" prompt="适用组织" viewName="TemplateVO1" viewAttr="OrganizationId" pickListViewDef="cux.oracle.apps.per.poplist.server.PerOrgVO" pickListDispAttr="OrganizationName" pickListValAttr="OrganizationId" rendered="false"/>
+                        <oa:messageChoice id="JobId" dataType="NUMBER" prompt="适用职务" viewName="TemplateVO1" viewAttr="JobId" pickListViewDef="cux.oracle.apps.per.poplist.server.PerJobVO" pickListDispAttr="JobName" pickListValAttr="JobId" allowBlankValue="true" rendered="false"/>
+                        <oa:image id="OrgDetail" source="detailsicon_enabled.gif" prompt="适用组织">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="orgDetail" id="fireAction1">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateVO1.TmplId}"/>
+                                    <ui:parameter key="tmplName" value="${oa.TemplateVO1.TmplName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="JobDetail" source="detailsicon_enabled.gif" prompt="适用职务">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="jobDetail" id="fireAction2">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateVO1.TmplId}"/>
+                                    <ui:parameter key="tmplName" value="${oa.TemplateVO1.TmplName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="EmpDetail" source="detailsicon_enabled.gif" prompt="适用人员">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="empDetail" id="fireAction3">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateVO1.TmplId}"/>
+                                    <ui:parameter key="tmplName" value="${oa.TemplateVO1.TmplName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Detail" source="detailsicon_enabled.gif" prompt="明细">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateContent" id="fireAction4">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateVO1.TmplId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="deleteTmpl" id="fireAction5">
+                                 <ui:parameters>
+                                    <ui:parameter key="tmplId" value="${oa.TemplateVO1.TmplId}"/>
+                                    <ui:parameter key="tmplName" value="${oa.TemplateVO1.TmplName}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TblActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="Copy" text="复制" prompt="复制"/>
+                              <oa:spacer id="item1" width="5"/>
+                              <oa:submitButton id="Apply" text="保存" prompt="保存"/>
+                              <oa:spacer id="item2" width="5"/>
+                              <oa:submitButton id="Cancel" text="取消" prompt="取消"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                     <ui:tableSelection>
+                        <oa:singleSelection id="singleSelection1" viewName="TemplateVO1" viewAttr="Selected"/>
+                     </ui:tableSelection>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

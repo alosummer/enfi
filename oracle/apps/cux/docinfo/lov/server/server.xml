@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.cux.docinfo.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxCountryLovVO"
+      FullName="cux.oracle.apps.cux.docinfo.lov.server.CuxCountryLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoCopyLovVO"
+      FullName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoCopyLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoDocTypeLovVO"
+      FullName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoDocTypeLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoLangLovVO"
+      FullName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoLangLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoLovAM"
+      FullName="cux.oracle.apps.cux.docinfo.lov.server.CuxDocinfoLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+</JboPackage>

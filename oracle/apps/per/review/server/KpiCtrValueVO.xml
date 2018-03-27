@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KpiCtrValueVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.KpiCtrValueVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.KpiCtrValueVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ROWNUM,
+       KpiCtrValueEO.VALUE_ID, 
+       KpiCtrValueEO.CONSTRAINT_ID, 
+       KpiCtrValueEO.KPI_ID, 
+       KpiCtrValueEO.DIMENSION_ID, 
+       KpiCtrValueEO.DIMENSION_VALUE, 
+       KpiCtrValueEO.ATTRIBUTE1, 
+       KpiCtrValueEO.ATTRIBUTE2, 
+       KpiCtrValueEO.ATTRIBUTE3, 
+       KpiCtrValueEO.ATTRIBUTE4, 
+       KpiCtrValueEO.ATTRIBUTE5, 
+       KpiCtrValueEO.LAST_UPDATE_DATE, 
+       KpiCtrValueEO.LAST_UPDATED_BY, 
+       KpiCtrValueEO.LAST_UPDATE_LOGIN, 
+       KpiCtrValueEO.CREATED_BY, 
+       KpiCtrValueEO.CREATION_DATE,
+       kdt.dimension_name,
+       kdt.valueset_name
+  FROM CUX_KPI_CTR_VALUE_T KpiCtrValueEO
+     , CUX_KPI_DIMENSION_T kdt
+ WHERE KpiCtrValueEO.DIMENSION_ID = kdt.dimension_id
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="KpiCtrValueEO"
+      Entity="cux.oracle.apps.per.review.server.KpiCtrValueEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ValueId"
+      IsNotNull="true"
+      EntityAttrName="ValueId"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="VALUE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintId"
+      EntityAttrName="ConstraintId"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="CONSTRAINT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      EntityAttrName="KpiId"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="KPI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DimensionId"
+      EntityAttrName="DimensionId"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="DIMENSION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DimensionValue"
+      EntityAttrName="DimensionValue"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="DIMENSION_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="KpiCtrValueEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DimensionName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DIMENSION_NAME"
+      Expression="DIMENSION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ValuesetName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VALUESET_NAME"
+      Expression="VALUESET_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

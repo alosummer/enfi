@@ -1,0 +1,243 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="QhseRectifySearchPG" controllerClass="cux.oracle.apps.cux.qhse.rectify.webui.QhseRectifySearchPGCO" amDefName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyAM" windowTitle="问题查询界面">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="QueryRN" mode="autoCustomizationCriteria" dispSimple="true">
+               <oa:simpleSearchPanel>
+                  <oa:header text="项目查询条件" id="ProjectSearch">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN" rows="1" columns="2" promptWidth="1%" width="60%">
+                           <ui:contents>
+                              <oa:messageChoice id="SearchDocType" prompt="单据类型" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.IssueDocTypeListVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                              <oa:messageLovInput id="SearchProjectNum" prompt="项目编号" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/ProjectLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="ProjectNumber" resultTo="SearchProjectNum" criteriaFrom="SearchProjectNum"/>
+                                    <lovMap id="lovMap3" lovItem="ProjectId" resultTo="SearchProjectId"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchCiType" prompt="控制项" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.PaCiTypeListVO" pickListDispAttr="CiName" pickListValAttr="CiTypeId"/>
+                              <oa:messageChoice id="SearchWorkLevel" prompt="工作级别" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.WorkLevelListVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                              <oa:messageChoice id="SearchSourceType" prompt="来源类型" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.SourceTypeListVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                              <oa:messageChoice id="SearchProblemCategory" prompt="问题分类" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVO" pickListDispAttr="ClassCode" pickListValAttr="ClassCodeId"/>
+                              <oa:messageLovInput id="SearchDutePerson" prompt="责任人" externalListOfValues="/cux/oracle/apps/cux/qhse/rectify/lov/webui/EmployeeLovRN">
+                                 <lovMappings>
+                                    <lovMap id="lovMap2" lovItem="FullName" resultTo="SearchDutePerson" criteriaFrom="SearchDutePerson"/>
+                                    <lovMap id="lovMap4" lovItem="ProjectId" criteriaFrom="SearchProjectId" requiredForLOV="true"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="SearchCreationDateStart" prompt="创建日期从" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchCreationDateEnd" prompt="创建日期至" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchCompleteDateStart" prompt="完成日期从" dataType="DATE"/>
+                              <oa:messageTextInput id="SearchCompleteDateEnd" prompt="完成日期至" dataType="DATE"/>
+                              <oa:messageChoice id="SearchShowDetail" prompt="显示问题描述" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning"/>
+                              <oa:messageTextInput id="SearchDetailCategory" prompt="问题描述分类"/>
+                              <oa:messageLayout id="messageLayout1">
+                                 <ui:contents>
+                                    <oa:formValue id="SearchProjectId" dataType="NUMBER" prompt="项目编号"/>
+                                 </ui:contents>
+                              </oa:messageLayout>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <ui:contents>
+                  <oa:advancedTable id="HeaderTable" text="问题查询结果" viewName="CuxRectifyNotifyHeaderResultVO1" detailViewAttr="ShowDetail" childViewAttrName="HeaderId" viewLinkName="HeaderResultTOLineVL1" width="100%">
+                     <ui:contents>
+                        <oa:column id="column1">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="HeaderId" viewAttr="HeaderId" destination="OA.jsp?page=/cux/oracle/apps/cux/qhse/rectify/webui/QhseRectifyDetailPG&amp;retainAM=Y&amp;HeaderId={@HeaderId}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column3">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="项目组织"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectOrgName" viewAttr="ProjectOrgName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column4">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="项目编号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectNumber" viewAttr="ProjectNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column5">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="项目名称"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectName" viewAttr="ProjectName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column6">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader6" prompt="责任人"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DutyPersonName" viewAttr="DutyPersonName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column7">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader7" prompt="问题分类"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProblemCategoryDis" viewAttr="ProblemCategoryDis"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column8">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader8" prompt="状态"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="StatusDis" viewAttr="StatusDis"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column9">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader9" prompt="工作级别"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="WorkLevelDis" viewAttr="WorkLevelDis"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column10">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader10" prompt="来源类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="SourceTypeDis" viewAttr="SourceTypeDis"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column11">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader11" prompt="整改日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="CompleteDate" viewAttr="CompleteDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column28">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader28" prompt="更新"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:switcher id="SubmitSwitch" viewAttr="SubmitSwitch">
+                                 <ui:case name="SUBMIT_ENABLE">
+                                    <oa:image id="SUBMIT_ENABLE" source="updateicon_enabled.gif">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="Submit">
+                                             <ui:parameters>
+                                                <ui:parameter key="SubmitHeaderId" value="${oa.CuxRectifyNotifyHeaderResultVO1.HeaderId}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:case>
+                                 <ui:case name="SUBMIT_DISABLE">
+                                    <oa:image id="SUBMIT_DISABLE" source="updateicon_disabled.gif"/>
+                                 </ui:case>
+                              </oa:switcher>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:detail>
+                        <oa:header id="LineTableRN">
+                           <ui:contents>
+                              <oa:advancedTable id="LineTable" viewName="CuxRectifyNotifyLinesResultVO1" viewLinkName="HeaderResultTOLineVL1" width="100%" alternateText="未找到数据">
+                                 <ui:contents>
+                                    <oa:column id="column2">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader2" prompt="问题名称"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="ProblemName" viewAttr="ProblemName"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column21">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader21" prompt="问题描述"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="ProblemDesc" viewAttr="ProblemDesc"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column22">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader22" prompt="问题责任人"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="ProDutyPersonName" viewAttr="ProDutyPersonName"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column23">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader23" prompt="问题分类"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageChoice id="ProblemCategory1" dataType="VARCHAR2" prompt="问题分类" viewAttr="ProblemCategory" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.ProblemCategoryListVO" pickListValAttr="ClassCodeId" pickListDispAttr="ClassCode" readOnly="true"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column24">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader24" prompt="问题状态"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="StatusName" viewAttr="StatusName"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column25">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader25" prompt="问题完成日期"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="ProblemCompleteDate" viewAttr="CompleteDate"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column26">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader26" prompt="受检日期"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="CheckDate" viewAttr="CheckDate"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                    <oa:column id="column27">
+                                       <ui:columnHeader>
+                                          <oa:sortableHeader id="sortableHeader27" prompt="检查范围"/>
+                                       </ui:columnHeader>
+                                       <ui:contents>
+                                          <oa:messageStyledText id="CheckRange" viewAttr="CheckRange"/>
+                                       </ui:contents>
+                                    </oa:column>
+                                 </ui:contents>
+                              </oa:advancedTable>
+                           </ui:contents>
+                        </oa:header>
+                     </ui:detail>
+                     <ui:tableActions>
+                        <oa:flowLayout id="HeaderTableAction">
+                           <ui:contents>
+                              <oa:submitButton id="CreateRectifyBTN" text="新建问题" prompt="新建问题"/>
+                              <oa:submitButton id="ExportBTN" text="excel导出" prompt="excel导出"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

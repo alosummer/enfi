@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="ProjectAM"
+   ComponentClass="cux.oracle.apps.per.bonus.project.server.ProjectAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ProjectListVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.ProjectListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjBonusLotVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjBonusLotVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjBonusDisVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjBonusDisVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjDistributionVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjDistributionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjPersonLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjPersonLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjDisExportVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjDisExportVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptDisStatusVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.DeptDisStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptPrjListVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.DeptPrjListVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptDistributionVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.DeptDistributionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjWorkFlowDisVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjWorkFlowDisVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjDispatchVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjDispatchVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DeptPersonLovVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.DeptPersonLovVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjNtfOrgDisVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjNtfOrgDisVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjNtfGroupOrgVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjNtfGroupOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrjNtfSuspendWarnVO1"
+      ViewObjectName="cux.oracle.apps.per.bonus.project.server.PrjNtfSuspendWarnVO" >
+   </ViewUsage>
+   <ViewLinkUsage
+      Name="PrjBonusLotToDisVL1"
+      ViewLinkObjectName="cux.oracle.apps.per.bonus.project.server.PrjBonusLotToDisVL"
+      SrcViewUsageName="cux.oracle.apps.per.bonus.project.server.ProjectAM.PrjBonusLotVO1"
+      DstViewUsageName="cux.oracle.apps.per.bonus.project.server.ProjectAM.PrjBonusDisVO1" >
+      <DesignTime>
+         <Attr Name="_isCodegen" Value="true" />
+         <Attr Name="_version" Value="10.1.3.41.57" />
+      </DesignTime>
+   </ViewLinkUsage>
+</AppModule>

@@ -1,0 +1,973 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PmpProgressVO"
+   OrderBy="DISPLAY_SEQUENCE asc"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.pmp.server.PmpProgressVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.pmp.server.PmpProgressVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ppa.project_id
+      ,ppa.segment1                 project_num
+      ,ppev.wbs_number
+      ,PaProjElementsEO.name                     task_name
+      ,ppevsc.scheduled_start_date
+      ,ppevsc.scheduled_finish_date
+      ,ppev.element_version_id      task_version_id
+      ,ppev.proj_element_id         task_id
+      ,PaProjElementsEO.attribute15
+      ,PaProjElementsEO.proj_element_id
+      ,ppev.DISPLAY_SEQUENCE
+FROM   pa_proj_elements           PaProjElementsEO
+      ,pa_projects_all            ppa
+      ,pa_proj_element_versions   ppev
+      ,pa_proj_elem_ver_structure ppevs
+      ,pa_proj_elem_ver_schedule  ppevsc
+WHERE  ppa.project_id = PaProjElementsEO.project_id
+AND    ppev.parent_structure_version_id = ppevs.element_version_id
+AND    ppevs.latest_eff_published_flag = 'Y'
+AND    ppev.proj_element_id = PaProjElementsEO.proj_element_id
+AND    ppevsc.element_version_id = ppev.element_version_id
+AND    PaProjElementsEO.PHASE_VERSION_ID is not null
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PaProjElementsEO"
+      Entity="cux.oracle.apps.pa.pmp.server.PaProjElementsEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ProjectId"
+      IsNotNull="true"
+      EntityAttrName="ProjectId"
+      EntityUsage="PaProjElementsEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectNum"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUM"
+      Expression="PROJECT_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ObjectType"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="OBJECT_TYPE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ElementNumber"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ELEMENT_NUMBER"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="NAME"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="CREATION_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="CREATED_BY"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="LAST_UPDATE_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="LAST_UPDATED_BY"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      IsPersistent="false"
+      Precision="2000"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="DESCRIPTION"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusCode"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="STATUS_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfStatusCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WF_STATUS_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PmSourceCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PM_SOURCE_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PmSourceReference"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PM_SOURCE_REFERENCE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ClosedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="CLOSED_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="LOCATION_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagerPersonId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="MANAGER_PERSON_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarryingOutOrganizationId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="CARRYING_OUT_ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TypeCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="TYPE_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PRIORITY_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IncProjProgressFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="INC_PROJ_PROGRESS_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordVersionNumber"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="RECORD_VERSION_NUMBER"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="LAST_UPDATE_LOGIN"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequestId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="REQUEST_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProgramApplicationId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="PROGRAM_APPLICATION_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProgramId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="PROGRAM_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProgramUpdateDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="PROGRAM_UPDATE_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE_CATEGORY"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE1"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE2"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE3"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE4"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE5"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE6"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE7"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE8"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE9"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE10"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute11_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE11"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute12_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE12"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute13_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE13"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute14_1_1"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ATTRIBUTE14"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WbsNumber"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WBS_NUMBER"
+      Expression="WBS_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LinkTaskFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="LINK_TASK_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BaselineStartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="BASELINE_START_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BaselineFinishDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="BASELINE_FINISH_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProgressOutdatedFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PROGRESS_OUTDATED_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WqItemCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WQ_ITEM_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WqUomCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WQ_UOM_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WqActualEntryCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WQ_ACTUAL_ENTRY_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskProgressEntryPageId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="TASK_PROGRESS_ENTRY_PAGE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ParentStructureId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="PARENT_STRUCTURE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BaselineDuration"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="BASELINE_DURATION"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseCode"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PHASE_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseVersionId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="PHASE_VERSION_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TypeId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="TYPE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProgressWeight"
+      IsPersistent="false"
+      Precision="17"
+      Scale="2"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="PROGRESS_WEIGHT"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BasePercentCompDerivCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="BASE_PERCENT_COMP_DERIV_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FunctionCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="FUNCTION_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EnableWfFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="ENABLE_WF_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfItemType"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WF_ITEM_TYPE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfProcess"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="WF_PROCESS"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WfStartLeadDays"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="WF_START_LEAD_DAYS"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourceObjectId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="SOURCE_OBJECT_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SourceObjectType"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="SOURCE_OBJECT_TYPE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskStatus"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="TASK_STATUS"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskApproverId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="TASK_APPROVER_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkTypeId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="WORK_TYPE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ChargeableFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="CHARGEABLE_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BillableFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="BILLABLE_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReceiveProjectInvoiceFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="RECEIVE_PROJECT_INVOICE_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="START_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="$none$"
+      AliasName="COMPLETION_DATE"
+      SQLType="DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ServiceTypeCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="SERVICE_TYPE_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GenEtcSourceCode"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="GEN_ETC_SOURCE_CODE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AddressId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="ADDRESS_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SovUom"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="SOV_UOM"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Currency"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="CURRENCY"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Retainage"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="RETAINAGE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpreadCurveId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="SPREAD_CURVE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SovAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="SOV_AMOUNT"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvHardLimit"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="INV_HARD_LIMIT"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RevHardLimit"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="REV_HARD_LIMIT"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustOrderNumber"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="CUST_ORDER_NUMBER"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContractNumber"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="CONTRACT_NUMBER"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContractType"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="CONTRACT_TYPE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SovTermId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="SOV_TERM_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PaSovLineEtcmethod"
+      IsPersistent="false"
+      Precision="50"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="PA_SOV_LINE_ETCMETHOD"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MultiselectAct"
+      IsPersistent="false"
+      Precision="5"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="MULTISELECT_ACT"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContractLineId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="CONTRACT_LINE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduledStartDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SCHEDULED_START_DATE"
+      Expression="SCHEDULED_START_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduledFinishDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SCHEDULED_FINISH_DATE"
+      Expression="SCHEDULED_FINISH_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskVersionId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASK_VERSION_ID"
+      Expression="TASK_VERSION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TASK_ID"
+      Expression="TASK_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute15"
+      EntityAttrName="Attribute15"
+      EntityUsage="PaProjElementsEO"
+      AliasName="ATTRIBUTE15" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjElementId"
+      IsNotNull="true"
+      EntityAttrName="ProjElementId"
+      EntityUsage="PaProjElementsEO"
+      AliasName="PROJ_ELEMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisplaySequence"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISPLAY_SEQUENCE"
+      Expression="DISPLAY_SEQUENCE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

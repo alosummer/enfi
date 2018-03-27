@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxLovAM">
+   <ui:contents>
+      <oa:table name="CuxOAAboardTravelApyLovRN" id="CuxOAAboardTravelApyLovVO1">
+         <ui:contents>
+            <oa:formValue id="OaAbroadTravelHeaderId" dataType="NUMBER" prompt="OaAbroadTravelHeaderId" viewName="CuxOAAboardTravelApyLovVO1" viewAttr="OaAbroadTravelHeaderId"/>
+            <oa:messageStyledText id="OaAbroadTravelHeaderName" dataType="VARCHAR2" prompt="出国申请名称" viewName="CuxOAAboardTravelApyLovVO1" viewAttr="OaAbroadTravelHeaderName" maximumLength="19" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

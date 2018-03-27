@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="AprTaskVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.aprprocess.server.AprTaskVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ContractEO.CONTRACT_ID, 
+       ContractEO.APPRAISAL_ID, 
+       ContractEO.WEIGHT, 
+       ContractEO.TARGET_VALUE, 
+       ContractEO.MINIMUM_VALUE, 
+       ContractEO.ACTUAL_VALUE, 
+       ContractEO.SCORE_VALUE, 
+       ContractEO.SELF_EVAL_VALUE,  
+       ContractEO.KPI_AREA,
+       '工作任务' AS KPI_AREA_DESC, 
+       ContractEO.KPI_NAME, 
+       ContractEO.KPI_DESC, 
+       ContractEO.KPI_CLASS, 
+       ContractEO.KPI_DATA_SOURCE, 
+       '手工' AS DATA_SOURCE_DESC,
+       ContractEO.ATTRIBUTE5
+FROM CUX_CONTRACT_T ContractEO
+WHERE ContractEO.Kpi_Class = 'TASK'
+  AND ContractEO.Appraisal_Id = :1
+ORDER BY ContractEO.CONTRACT_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ContractEO"
+      Entity="cux.oracle.apps.per.aprprocess.server.ContractEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ContractId"
+      EntityAttrName="ContractId"
+      EntityUsage="ContractEO"
+      AliasName="CONTRACT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      EntityAttrName="AppraisalId"
+      EntityUsage="ContractEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="ContractEO"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetValue"
+      EntityAttrName="TargetValue"
+      EntityUsage="ContractEO"
+      AliasName="TARGET_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MinimumValue"
+      EntityAttrName="MinimumValue"
+      EntityUsage="ContractEO"
+      AliasName="MINIMUM_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualValue"
+      EntityAttrName="ActualValue"
+      EntityUsage="ContractEO"
+      AliasName="ACTUAL_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScoreValue"
+      EntityAttrName="ScoreValue"
+      EntityUsage="ContractEO"
+      AliasName="SCORE_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelfEvalValue"
+      EntityAttrName="SelfEvalValue"
+      EntityUsage="ContractEO"
+      AliasName="SELF_EVAL_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiArea"
+      EntityAttrName="KpiArea"
+      EntityUsage="ContractEO"
+      AliasName="KPI_AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiAreaDesc"
+      IsPersistent="false"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="KPI_AREA_DESC"
+      Expression="KPI_AREA_DESC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiName"
+      EntityAttrName="KpiName"
+      EntityUsage="ContractEO"
+      AliasName="KPI_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      EntityAttrName="KpiDesc"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      EntityAttrName="KpiClass"
+      EntityUsage="ContractEO"
+      AliasName="KPI_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSource"
+      EntityAttrName="KpiDataSource"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DATA_SOURCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DataSourceDesc"
+      IsPersistent="false"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="DATA_SOURCE_DESC"
+      Expression="DATA_SOURCE_DESC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

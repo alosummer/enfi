@@ -1,0 +1,131 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:stackLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.cux.qhse.quality.server.CuxQualityAM" prompt="预订起始日期" controllerClass="cux.oracle.apps.cux.qhse.quality.webui.CuxQualityWorkflowRNCO">
+   <ui:contents>
+      <oa:advancedTable id="CuxProjectWorkplanForWFVO1" viewName="CuxProjectWorkplanForWFVO1" width="100%" blockSize="15" text="项目计划" viewLinkName="WorkplanToDetail1" childViewAttrName="ProjElementId" detailViewAttr="ShowDetail">
+         <ui:contents>
+            <oa:column id="column1">
+               <ui:columnHeader>
+                  <oa:sortableHeader id="sortableHeader1" prompt="大纲编号"/>
+               </ui:columnHeader>
+               <ui:contents>
+                  <oa:messageStyledText id="ElementNumber" viewAttr="ElementNumber"/>
+               </ui:contents>
+            </oa:column>
+            <oa:column id="column11">
+               <ui:columnHeader>
+                  <oa:sortableHeader id="sortableHeader11" prompt="项目阶段"/>
+               </ui:columnHeader>
+               <ui:contents>
+                  <oa:messageStyledText id="PhaseName" viewAttr="PhaseName"/>
+               </ui:contents>
+            </oa:column>
+            <oa:column id="column12">
+               <ui:columnHeader>
+                  <oa:sortableHeader id="sortableHeader12" prompt="任务"/>
+               </ui:columnHeader>
+               <ui:contents>
+                  <oa:messageStyledText id="TaskName" viewAttr="TaskName"/>
+               </ui:contents>
+            </oa:column>
+            <oa:column id="column13">
+               <ui:columnHeader>
+                  <oa:sortableHeader id="sortableHeader13" prompt="预定起始日期"/>
+               </ui:columnHeader>
+               <ui:contents>
+                  <oa:messageStyledText id="ScheduledStartDate" viewAttr="ScheduledStartDate" dataType="DATE"/>
+               </ui:contents>
+            </oa:column>
+            <oa:column id="column14">
+               <ui:columnHeader>
+                  <oa:sortableHeader id="sortableHeader14" prompt="预定结束日期"/>
+               </ui:columnHeader>
+               <ui:contents>
+                  <oa:messageStyledText id="ScheduledFinishDate" viewAttr="ScheduledFinishDate" dataType="DATE"/>
+               </ui:contents>
+            </oa:column>
+         </ui:contents>
+         <ui:detail>
+            <oa:header id="DetailHeaderRN">
+               <ui:contents>
+                  <oa:advancedTable id="DetailRN" viewName="CuxQualityMagDetailForWFVO1" viewLinkName="WorkplanToDetail1" alternateText="未找到数据" width="100%" text="详细目标计划">
+                     <ui:contents>
+                        <oa:column id="column15">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader15" prompt="目标类型"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="TargetClassCode" dataType="VARCHAR2" prompt="目标类型" viewAttr="TargetClassCode" pickListViewDef="cux.oracle.apps.cux.qhse.quality.poplist.server.CuxTargetClassListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column151">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader151" prompt="目标计划控制项"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PlanControlName" dataType="VARCHAR2" prompt="" viewAttr="PlanControlName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1511">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1511" prompt="目标计划控制项说明"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PlanControlDesc" dataType="VARCHAR2" prompt="" viewAttr="PlanControlDesc"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1512">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1512" prompt="是否交付物"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="IsDeliverables" dataType="VARCHAR2" prompt="" viewAttr="IsDeliverables" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" readOnly="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1513">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1513" prompt="目标控制值"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="TargetValue" dataType="VARCHAR2" prompt="" viewAttr="TargetValue"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1514">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1514" prompt="计划日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="PlanDate" dataType="DATE" prompt="" viewAttr="PlanDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1515">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1515" prompt="核准日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ApproveDate" dataType="DATE" prompt="" viewAttr="ApproveDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1516" rendered="false">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1516" prompt="负责人"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DutePersonName" dataType="VARCHAR2" prompt="" viewAttr="DutePersonName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1517">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1517" prompt="备注说明"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="Remark" dataType="VARCHAR2" prompt="" viewAttr="Remark"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:detail>
+      </oa:advancedTable>
+   </ui:contents>
+</oa:stackLayout>

@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.PerReviewAM" windowTitle="定义考群范围" title="定义考群范围" controllerClass="cux.oracle.apps.per.review.webui.CreateGroupRangeCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="groupDetailRN" text="考群信息">
+               <ui:contents>
+                  <oa:formValue id="GrpId" viewName="PerReviewGrpVO1" viewAttr="GroupId" dataType="NUMBER"/>
+                  <oa:messageStyledText id="GrpName" prompt="当前考群" viewName="PerReviewGrpVO1" viewAttr="GroupName"/>
+               </ui:contents>
+            </oa:header>
+            <oa:table id="PerGroupRangeVO1" width="100%" blockSize="100">
+               <ui:contents>
+                  <oa:messageStyledText id="RangeId" dataType="NUMBER" prompt="序号" viewName="PerGrpRangeVO1" viewAttr="RangeId" maximumLength="10"/>
+                  <oa:messageStyledText id="GroupName" dataType="VARCHAR2" prompt="考群" viewName="PerGrpRangeVO1" viewAttr="Attribute1" maximumLength="200" rendered="false"/>
+                  <oa:messageChoice id="JobName" dataType="VARCHAR2" prompt="职务" viewName="PerGrpRangeVO1" viewAttr="JobId" selectiveSearchCriteria="false" queryable="false" pickListViewDef="cux.oracle.apps.per.poplist.server.PerJobVO" pickListDispAttr="JobName" pickListValAttr="JobId" required="yes" pickListViewName=""/>
+                  <oa:formValue id="GroupId" dataType="NUMBER" prompt="GroupId" viewName="PerGrpRangeVO1" viewAttr="GroupId"/>
+                  <oa:formValue id="JobId" dataType="NUMBER" prompt="" viewName="PerGrpRangeVO1" viewAttr="JobId"/>
+                  <oa:image id="del" prompt="删除" source="deleteicon_enabled.gif">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="delete" id="fireAction1">
+                           <ui:parameters>
+                              <ui:parameter key="rangeId" value="${oa.PerGrpRangeVO1.RangeId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:image>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Return" text="返回" prompt="返回" hAlign="end" unvalidated="true" serverUnvalidated="true"/>
+                  <oa:spacer id="spacer" width="5"/>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用" hAlign="end"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.ap.oie.entry.header.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxCurrencyLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxCurrencyLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxLovAM"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CuxOAAboardTravelApyLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOAAboardTravelApyLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOAAboardTravelDetailLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOAAboardTravelDetailLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOAAboardTravelEmpLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOAAboardTravelEmpLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOAAboardTravelFeeLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOAAboardTravelFeeLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOATravelDetailLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOATravelDetailLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOATravelerEmpLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOATravelerEmpLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxOATravelHeaderLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxOATravelHeaderLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxSiteLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxSiteLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxSupplierLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxSupplierLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxSupplierSiteLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxSupplierSiteLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxVehicleCategoryLovVO"
+      FullName="cux.oracle.apps.ap.oie.entry.header.lov.server.CuxVehicleCategoryLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目管理重要活动" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpActionCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="MeetingHdr" text="项目主要会议一览表">
+               <ui:contents>
+                  <oa:table id="PmpMeetingVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SortSeq" dataType="NUMBER" prompt="序号" viewName="PmpMeetingVO1" viewAttr="SortSeq"/>
+                        <oa:messageTextInput id="MeetingName" dataType="VARCHAR2" prompt="会议名称" viewName="PmpMeetingVO1" viewAttr="MeetingName" maximumLength="900"/>
+                        <oa:messageTextInput id="ScheduleDate" dataType="DATE" prompt="计划时间" viewName="PmpMeetingVO1" viewAttr="ScheduleDate"/>
+                        <oa:messageTextInput id="MeetingOwner" dataType="VARCHAR2" prompt="会议组织者" viewName="PmpMeetingVO1" viewAttr="MeetingOwner" maximumLength="900"/>
+                        <oa:messageTextInput id="Participant" dataType="VARCHAR2" prompt="主要参加单位或人员" viewName="PmpMeetingVO1" viewAttr="Participant" maximumLength="900"/>
+                        <oa:image id="DeleteMeeting" prompt="删除" source="deleteicon_enabled.gif" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteMeeting"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region3">
+                           <ui:contents>
+                              <oa:button id="AddMeeting" text="新增" prompt="新增" warnAboutChanges="true">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddMeeting"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ReportHdr" text="项目主要报告一览表">
+               <ui:contents>
+                  <oa:table id="PmpReportVO1" width="100%" blockSize="11">
+                     <ui:contents>
+                        <oa:messageTextInput id="CategoryName" dataType="VARCHAR2" prompt="类别" viewName="PmpReportVO1" viewAttr="CategoryName" maximumLength="300"/>
+                        <oa:messageTextInput id="ReportName" dataType="VARCHAR2" prompt="报告名称" viewName="PmpReportVO1" viewAttr="ReportName" maximumLength="900"/>
+                        <oa:messageTextInput id="ReportDate" dataType="DATE" prompt="报告时间" viewName="PmpReportVO1" viewAttr="ReportDate"/>
+                        <oa:messageTextInput id="ReportOwner" dataType="VARCHAR2" prompt="报告负责人" viewName="PmpReportVO1" viewAttr="ReportOwner" maximumLength="900"/>
+                        <oa:messageTextInput id="Participant1" dataType="VARCHAR2" prompt="主要报送单位或个人" viewName="PmpReportVO1" viewAttr="Participant" maximumLength="900"/>
+                        <oa:image id="DeleteReport" prompt="删除" source="deleteicon_enabled.gif" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteReport"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region4">
+                           <ui:contents>
+                              <oa:button id="AddReport" text="新增" prompt="新增" warnAboutChanges="true">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddReport"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

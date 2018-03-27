@@ -1,0 +1,298 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.pa.dlv.server.DeliverAM" controllerClass="cux.oracle.apps.pa.dlv.webui.DeliverCO" windowTitle="设计交付物编制" title="设计交付物编制">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:button id="Save" prompt="保存">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="Save"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="Submit" text="提交" prompt="提交">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="Submit"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:rawText id="rawText"/>
+            <oa:header id="QueryRN">
+               <ui:contents>
+                  <oa:tableLayout id="region16" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:rowLayout id="region17" width="100%">
+                           <ui:contents>
+                              <oa:cellFormat id="region18" width="30%">
+                                 <ui:contents>
+                                    <oa:messageComponentLayout id="region20" columns="2" rows="4">
+                                       <ui:contents>
+                                          <oa:messageLovInput id="QProjectName" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/ProjectLOV" prompt="项目名称" queryable="true" required="yes">
+                                             <lovMappings>
+                                                <lovMap id="lovMap2" criteriaFrom="QProjectName" resultTo="QProjectName" lovItem="ProjectName"/>
+                                                <lovMap id="lovMap3" lovItem="ProjectId" resultTo="QProjectId"/>
+                                             </lovMappings>
+                                          </oa:messageLovInput>
+                                          <oa:messageLovInput id="QTaskName" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/TaskLOV" queryable="true" prompt="关联WBS任务号" required="yes">
+                                             <lovMappings>
+                                                <lovMap id="lovMap6" criteriaFrom="QTaskName" resultTo="QTaskName" lovItem="TaskName"/>
+                                                <lovMap id="lovMap7" lovItem="TaskId" resultTo="QTaskId"/>
+                                                <lovMap id="lovMap8" criteriaFrom="QProjectId" lovItem="ProjectId"/>
+                                                <lovMap id="lovMap30" lovItem="UnassignedWeight" resultTo="UnassignedWeight"/>
+                                             </lovMappings>
+                                          </oa:messageLovInput>
+                                          <oa:messageLovInput id="QDocTypeName" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DocTypeLOV" prompt="文档类型" queryable="true">
+                                             <lovMappings>
+                                                <lovMap id="lovMap4" criteriaFrom="QDocTypeName" resultTo="QDocTypeName" lovItem="Meaning"/>
+                                                <lovMap id="lovMap5" resultTo="QDocTypeId" lovItem="LookupCode"/>
+                                             </lovMappings>
+                                          </oa:messageLovInput>
+                                          <oa:messageLayout id="messageLayout1">
+                                             <ui:contents>
+                                                <oa:button id="Search" text="查找" prompt="查找">
+                                                   <ui:primaryClientAction>
+                                                      <ui:firePartialAction event="Search" id="firePartialAction3"/>
+                                                   </ui:primaryClientAction>
+                                                </oa:button>
+                                             </ui:contents>
+                                          </oa:messageLayout>
+                                          <oa:messageStyledText id="Space3"/>
+                                          <oa:messageStyledText id="Space2"/>
+                                          <oa:messageStyledText id="UnassignedWeight" prompt="甲1张数总额" dataType="NUMBER" viewName="SearchPVO1" viewAttr="TotalWeight"/>
+                                          <oa:messageStyledText id="Space1"/>
+                                       </ui:contents>
+                                    </oa:messageComponentLayout>
+                                    <oa:formValue id="QProjectId"/>
+                                    <oa:formValue id="QTaskId"/>
+                                    <oa:formValue id="QDocTypeId"/>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                              <oa:cellFormat id="region19" width="70%">
+                                 <ui:contents>
+                                    <oa:tableLayout id="region22" width="100%">
+                                       <ui:contents>
+                                          <oa:rowLayout id="region23">
+                                             <ui:contents>
+                                                <oa:cellFormat id="region25">
+                                                   <ui:contents>
+                                                      <oa:table id="DlvCfgVO1">
+                                                         <ui:contents>
+                                                            <oa:formValue id="Designer1" dataType="NUMBER" prompt="Designer" viewName="DlvCfgVO1" viewAttr="Designer"/>
+                                                            <oa:messageLovInput id="DesignerName1" dataType="VARCHAR2" prompt="设计人" viewName="DlvCfgVO1" viewAttr="DesignerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV">
+                                                               <lovMappings>
+                                                                  <lovMap id="lovMap43" lovItem="PersonId" resultTo="Designer1"/>
+                                                                  <lovMap id="lovMap50" lovItem="LastName" resultTo="DesignerName1" criteriaFrom="DesignerName1"/>
+                                                                  <lovMap id="lovMap51" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                                                               </lovMappings>
+                                                            </oa:messageLovInput>
+                                                            <oa:formValue id="Checker1" dataType="NUMBER" prompt="Checker" viewName="DlvCfgVO1" viewAttr="Checker"/>
+                                                            <oa:messageLovInput id="CheckerName1" dataType="VARCHAR2" prompt="校核人" viewName="DlvCfgVO1" viewAttr="CheckerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV">
+                                                               <lovMappings>
+                                                                  <lovMap id="lovMap44" lovItem="PersonId" resultTo="Checker1"/>
+                                                                  <lovMap id="lovMap49" lovItem="LastName" resultTo="CheckerName1" criteriaFrom="CheckerName1"/>
+                                                                  <lovMap id="lovMap511" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                                                               </lovMappings>
+                                                            </oa:messageLovInput>
+                                                            <oa:formValue id="Verifier1" dataType="NUMBER" prompt="Verifier" viewName="DlvCfgVO1" viewAttr="Verifier"/>
+                                                            <oa:messageLovInput id="VerifierName1" dataType="VARCHAR2" prompt="审核人" viewName="DlvCfgVO1" viewAttr="VerifierName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV">
+                                                               <lovMappings>
+                                                                  <lovMap id="lovMap45" lovItem="PersonId" resultTo="Verifier1"/>
+                                                                  <lovMap id="lovMap48" lovItem="LastName" resultTo="VerifierName1" criteriaFrom="VerifierName1"/>
+                                                                  <lovMap id="lovMap512" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                                                               </lovMappings>
+                                                            </oa:messageLovInput>
+                                                            <oa:formValue id="Authorizer1" dataType="NUMBER" prompt="Authorizer" viewName="DlvCfgVO1" viewAttr="Authorizer"/>
+                                                            <oa:messageLovInput id="AuthorizerName1" dataType="VARCHAR2" prompt="审定人" viewName="DlvCfgVO1" viewAttr="AuthorizerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV">
+                                                               <lovMappings>
+                                                                  <lovMap id="lovMap46" lovItem="PersonId" resultTo="Authorizer1"/>
+                                                                  <lovMap id="lovMap47" lovItem="LastName" resultTo="AuthorizerName1" criteriaFrom="AuthorizerName1"/>
+                                                                  <lovMap id="lovMap513" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                                                               </lovMappings>
+                                                            </oa:messageLovInput>
+                                                         </ui:contents>
+                                                         <ui:tableActions>
+                                                            <oa:flowLayout id="region21">
+                                                               <ui:contents>
+                                                                  <oa:button id="AddCfgBtn" text="添加" prompt="添加">
+                                                                     <ui:primaryClientAction>
+                                                                        <ui:firePartialAction event="AddCfg"/>
+                                                                     </ui:primaryClientAction>
+                                                                  </oa:button>
+                                                               </ui:contents>
+                                                            </oa:flowLayout>
+                                                         </ui:tableActions>
+                                                      </oa:table>
+                                                   </ui:contents>
+                                                </oa:cellFormat>
+                                             </ui:contents>
+                                          </oa:rowLayout>
+                                          <oa:rowLayout id="region24">
+                                             <ui:contents>
+                                                <oa:cellFormat id="region26" hAlign="center">
+                                                   <ui:contents>
+                                                      <oa:button id="Assign" text="确定分配" prompt="确定分配">
+                                                         <ui:primaryClientAction>
+                                                            <ui:firePartialAction event="Assign"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
+                                                   </ui:contents>
+                                                </oa:cellFormat>
+                                             </ui:contents>
+                                          </oa:rowLayout>
+                                       </ui:contents>
+                                    </oa:tableLayout>
+                                 </ui:contents>
+                              </oa:cellFormat>
+                           </ui:contents>
+                        </oa:rowLayout>
+                     </ui:contents>
+                  </oa:tableLayout>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="ResultRN">
+               <ui:contents>
+                  <oa:table id="DelierableVO1" width="100%">
+                     <ui:contents>
+                        <oa:formValue id="CuxDlvId" dataType="NUMBER" prompt="CuxDlvId" viewName="DelierableVO1" viewAttr="CuxDlvId"/>
+                        <oa:formValue id="DeliverableId" dataType="NUMBER" prompt="DeliverableId" viewName="DelierableVO1" viewAttr="DeliverableId"/>
+                        <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="DelierableVO1" viewAttr="ProjectId"/>
+                        <oa:formValue id="Status" dataType="VARCHAR2" prompt="Status" viewName="DelierableVO1" viewAttr="Status"/>
+                        <oa:messageLovInput id="StatusName" dataType="VARCHAR2" prompt="审批状态" viewName="DelierableVO1" viewAttr="StatusName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/StatusLOV" readOnly="true" required="uiOnly" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap9" criteriaFrom="StatusName" resultTo="StatusName" lovItem="StatusName"/>
+                              <lovMap id="lovMap10" resultTo="Status" lovItem="StatusCode"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="DocType" dataType="VARCHAR2" prompt="DocType" viewName="DelierableVO1" viewAttr="DocType"/>
+                        <oa:messageLovInput id="DocTypeName" dataType="VARCHAR2" prompt="文档类型" viewName="DelierableVO1" viewAttr="DocTypeName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DocTypeLOV" required="uiOnly" readOnly="${oa.current.UpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap11" criteriaFrom="DocTypeName" resultTo="DocTypeName" lovItem="Meaning"/>
+                              <lovMap id="lovMap12" resultTo="DocType" lovItem="LookupCode"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="TaskId" dataType="NUMBER" prompt="TaskId" viewName="DelierableVO1" viewAttr="TaskId"/>
+                        <oa:messageLovInput id="TaskName" dataType="VARCHAR2" prompt="WBS任务号" viewName="DelierableVO1" viewAttr="TaskName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/TaskLOV" required="uiOnly" readOnly="${oa.current.UpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap13" criteriaFrom="TaskName" resultTo="TaskName" lovItem="TaskName"/>
+                              <lovMap id="lovMap14" resultTo="TaskId" lovItem="TaskId"/>
+                              <lovMap id="lovMap29" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="DocName" dataType="VARCHAR2" prompt="可交付物名称" viewName="DelierableVO1" viewAttr="DocName" maximumLength="300" required="uiOnly" readOnly="${oa.current.AUpdateAllowed}" sortState="yes"/>
+                        <oa:messageTextInput id="DesignNode" viewName="DelierableVO1" viewAttr="DesignNode" prompt="设计节点" readOnly="true" sortState="yes" maximumLength="300"/>
+                        <oa:messageTextInput id="DocNum" dataType="VARCHAR2" prompt="文档编号" viewName="DelierableVO1" viewAttr="DocNum" maximumLength="30" readOnly="true" sortState="yes"/>
+                        <oa:formValue id="Designer" dataType="NUMBER" prompt="Designer" viewName="DelierableVO1" viewAttr="Designer"/>
+                        <oa:messageLovInput id="DesignerName" dataType="VARCHAR2" prompt="设计人" viewName="DelierableVO1" viewAttr="DesignerName" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV" required="uiOnly" readOnly="${oa.current.BUpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap15" criteriaFrom="DesignerName" resultTo="DesignerName" lovItem="LastName"/>
+                              <lovMap id="lovMap16" resultTo="Designer" lovItem="PersonId"/>
+                              <lovMap id="lovMap514" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="Checker" dataType="NUMBER" prompt="Checker" viewName="DelierableVO1" viewAttr="Checker"/>
+                        <oa:messageLovInput id="CheckerName" dataType="VARCHAR2" prompt="校核人" viewName="DelierableVO1" viewAttr="CheckerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV" required="uiOnly" readOnly="${oa.current.BUpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap17" criteriaFrom="CheckerName" resultTo="CheckerName" lovItem="LastName"/>
+                              <lovMap id="lovMap18" lovItem="PersonId" resultTo="Checker"/>
+                              <lovMap id="lovMap515" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="Verifier" dataType="NUMBER" prompt="Verifier" viewName="DelierableVO1" viewAttr="Verifier"/>
+                        <oa:messageLovInput id="VerifierName" dataType="VARCHAR2" prompt="审核人" viewName="DelierableVO1" viewAttr="VerifierName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV" required="uiOnly" readOnly="${oa.current.BUpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap19" lovItem="LastName" resultTo="VerifierName" criteriaFrom="VerifierName"/>
+                              <lovMap id="lovMap20" lovItem="PersonId" resultTo="Verifier"/>
+                              <lovMap id="lovMap516" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="Authorizer" dataType="NUMBER" prompt="Authorizer" viewName="DelierableVO1" viewAttr="Authorizer"/>
+                        <oa:messageLovInput id="AuthorizerName" dataType="VARCHAR2" prompt="审定人" viewName="DelierableVO1" viewAttr="AuthorizerName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/PersonLOV" required="no" readOnly="${oa.current.BUpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap21" criteriaFrom="AuthorizerName" resultTo="AuthorizerName" lovItem="LastName"/>
+                              <lovMap id="lovMap22" resultTo="Authorizer" lovItem="PersonId"/>
+                              <lovMap id="lovMap517" lovItem="ProjectId" criteriaFrom="QProjectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="Weights" dataType="NUMBER" prompt="权重(甲1张数)" viewName="DelierableVO1" viewAttr="Weights" required="uiOnly" readOnly="${oa.current.BUpdateAllowed}" sortState="yes"/>
+                        <oa:messageTextInput id="ScheduleCompletedDate" dataType="DATE" prompt="计划完成日期" viewName="DelierableVO1" viewAttr="ScheduleCompletedDate" required="uiOnly" readOnly="${oa.current.UpdateAllowed}" sortState="yes"/>
+                        <oa:messageTextInput id="ActualCountersignDate" viewName="DelierableVO1" viewAttr="ActualCountersignDate" prompt="实际会签时间" readOnly="true" sortState="yes" dataType="DATE"/>
+                        <oa:messageTextInput id="ActualReleaseDate" viewName="DelierableVO1" viewAttr="ActualReleaseDate" prompt="实际提出时间" readOnly="true" sortState="yes" dataType="DATE"/>
+                        <oa:messageTextInput id="ActualCompletedDate" dataType="DATE" prompt="实际完成日期" viewName="DelierableVO1" viewAttr="ActualCompletedDate" readOnly="true" sortState="yes"/>
+                        <oa:formValue id="ReleaseDept" dataType="NUMBER" prompt="ReleaseDept" viewName="DelierableVO1" viewAttr="ReleaseDept"/>
+                        <oa:messageLovInput id="ReleaseDeptName" dataType="VARCHAR2" prompt="发出部门" viewName="DelierableVO1" viewAttr="ReleaseDeptName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DeptLOV" required="uiOnly" readOnly="${oa.current.UpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap23" criteriaFrom="ReleaseDeptName" resultTo="ReleaseDeptName" lovItem="OrgName"/>
+                              <lovMap id="lovMap24" resultTo="ReleaseDept" lovItem="OrganizationId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="ReleaseSpecialty" dataType="VARCHAR2" prompt="ReleaseSpecialty" viewName="DelierableVO1" viewAttr="ReleaseSpecialty"/>
+                        <oa:messageLovInput id="ReleaseSpecialtyName" dataType="VARCHAR2" prompt="发出专业" viewName="DelierableVO1" viewAttr="ReleaseSpecialtyName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/SpecialityLOV" required="uiOnly" readOnly="${oa.current.UpdateAllowed}" sortState="yes">
+                           <lovMappings>
+                              <lovMap id="lovMap25" lovItem="SpecialityName" resultTo="ReleaseSpecialtyName" criteriaFrom="ReleaseSpecialtyName"/>
+                              <lovMap id="lovMap26" lovItem="SpecialityCode" resultTo="ReleaseSpecialty"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="HqdName" viewName="DelierableVO1" viewAttr="HqdName" prompt="会签点" disabled="${oa.current.HqjtEnabled}" readOnly="${oa.current.UpdateAllowed}" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DsHqdLOV" sortState="yes" maximumLength="300">
+                           <lovMappings>
+                              <lovMap id="lovMap31" lovItem="ScheduleId" resultTo="Hqd"/>
+                              <lovMap id="lovMap32" lovItem="ProjectId" criteriaFrom="ProjectId"/>
+                              <lovMap id="lovMap33" lovItem="TaskId" criteriaFrom="TaskId"/>
+                              <lovMap id="lovMap34" lovItem="DesignNode" resultTo="HqdName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="JtdName" viewName="DelierableVO1" viewAttr="JtdName" prompt="交图点" disabled="${oa.current.HqjtEnabled}" readOnly="${oa.current.UpdateAllowed}" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DsJtdLOV" sortState="yes" maximumLength="300">
+                           <lovMappings>
+                              <lovMap id="lovMap35" lovItem="ScheduleId" resultTo="Jtd"/>
+                              <lovMap id="lovMap36" lovItem="ProjectId" criteriaFrom="ProjectId"/>
+                              <lovMap id="lovMap37" lovItem="TaskId" criteriaFrom="TaskId"/>
+                              <lovMap id="lovMap38" lovItem="DesignNode" resultTo="JtdName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="WjhzdName" viewName="DelierableVO1" viewAttr="WjhzdName" prompt="文件汇总点" disabled="${oa.current.WjhzEnabled}" readOnly="${oa.current.UpdateAllowed}" externalListOfValues="/cux/oracle/apps/pa/dlv/lov/webui/DsWjhzdLOV" sortState="yes" maximumLength="300">
+                           <lovMappings>
+                              <lovMap id="lovMap39" lovItem="ScheduleId" resultTo="Wjhzd"/>
+                              <lovMap id="lovMap40" lovItem="ProjectId" criteriaFrom="ProjectId"/>
+                              <lovMap id="lovMap41" lovItem="TaskId" criteriaFrom="TaskId"/>
+                              <lovMap id="lovMap42" lovItem="DesignNode" resultTo="WjhzdName"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageTextInput id="AcceptSpecialtyName" dataType="VARCHAR2" prompt="接收专业" viewName="DelierableVO1" viewAttr="AcceptSpecialty" maximumLength="4000" required="no" readOnly="${oa.current.UpdateAllowed}" sortState="yes" tipType="shortTip" tipMessageName="CUX-PM-M001" tipMessageAppShortName="CUX"/>
+                        <oa:formValue id="Hqd" viewName="DelierableVO1" viewAttr="Hqd"/>
+                        <oa:formValue id="Jtd" viewName="DelierableVO1" viewAttr="Jtd"/>
+                        <oa:formValue id="Wjhzd" viewName="DelierableVO1" viewAttr="Wjhzd"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region13">
+                           <ui:contents>
+                              <oa:button id="Update" text="更新" prompt="更新" disabled="false">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Update" id="firePartialAction1"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                              <oa:button id="Delete" prompt="删除" disabled="false">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Delete" id="firePartialAction2"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                              <oa:button id="Copy" prompt="复制">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Copy"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection1" viewName="DelierableVO1" viewAttr="Checked"/>
+                     </ui:tableSelection>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

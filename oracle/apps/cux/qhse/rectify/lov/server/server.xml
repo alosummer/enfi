@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.cux.qhse.rectify.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxRectifyLovAM"
+      FullName="cux.oracle.apps.cux.qhse.rectify.lov.server.CuxRectifyLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="EmployeeLovVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.lov.server.EmployeeLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OrgLovVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.lov.server.OrgLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectLovVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.lov.server.ProjectLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProjectTaskLovVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.lov.server.ProjectTaskLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

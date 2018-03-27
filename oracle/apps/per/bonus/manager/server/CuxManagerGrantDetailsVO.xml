@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxManagerGrantDetailsVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.bonus.manager.server.CuxManagerGrantDetailsVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT K.*
+  FROM (SELECT PPA.SEGMENT1 PROJECT_NUMBER,
+               PPA.NAME PROJECT_NAME,
+               CUX_HR_BONUS.GET_PROJECT_MANAGER_NAME(PPA.PROJECT_ID) MANAGER,
+               CUX_ASSGN_BONUS_PKG.GET_PROJECT_DISTRIBUTED(PPA.PROJECT_ID) DISTRIBUTED_AMT, --已发金额
+               CUX_HR_BONUS.GET_PROJECT_BUDGET(PPA.PROJECT_ID) -
+               CUX_HR_BONUS.GET_PROJECT_DISTRIBUTED(PPA.PROJECT_ID) AS DISTRIBUTABLE_AMT, --可发金额
+               T.DISTRIBUTION_AMOUNT, --本次下方金额
+               T.DISTRIBUTION_DATE, --本次下方日期
+               T.DEP_NAME,
+               T.LOT_ID
+          FROM CUX_BONUS_PERSON_DISTRIBUTION T, PA_PROJECTS_ALL PPA
+         WHERE T.PROJECT_ID = PPA.PROJECT_ID
+         ORDER BY PPA.SEGMENT1) K
+UNION ALL
+SELECT '总计' PROJECT_NUMBER,
+       NULL PROJECT_NAME,
+       NULL MANAGER,
+       NULL DISTRIBUTED_AMT, --已发金额
+       NULL DISTRIBUTABLE_AMT, --可发金额
+       SUM(T.DISTRIBUTION_AMOUNT) DISTRIBUTION_AMOUNT, --本次下方金额
+       NULL DISTRIBUTION_DATE, --本次下方日期
+       NULL DEP_NAME,
+       T.LOT_ID
+  FROM CUX_BONUS_PERSON_DISTRIBUTION T, PA_PROJECTS_ALL PPA
+ WHERE T.PROJECT_ID = PPA.PROJECT_ID
+ GROUP BY LOT_ID
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ProjectNumber"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NUMBER"
+      Expression="PROJECT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_NAME"
+      Expression="PROJECT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Manager"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MANAGER"
+      Expression="MANAGER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributedAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTED_AMT"
+      Expression="DISTRIBUTED_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributableAmt"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTABLE_AMT"
+      Expression="DISTRIBUTABLE_AMT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DISTRIBUTION_AMOUNT"
+      Expression="DISTRIBUTION_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DISTRIBUTION_DATE"
+      Expression="DISTRIBUTION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DepName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEP_NAME"
+      Expression="DEP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOT_ID"
+      Expression="LOT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,55 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.searchlist.MonthAndDeptAM" windowTitle="员工奖金汇总查询" title="员工奖金汇总查询" controllerClass="cux.oracle.apps.per.bonus.searchlist.webui.StaffBonusSumCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="searchHD">
+               <ui:contents>
+                  <oa:messageComponentLayout id="MC">
+                     <ui:contents>
+                        <oa:messageChoice id="yearMC" prompt="年份" pickListViewName="YearVO1" pickListDispAttr="Periodyear" pickListValAttr="Periodyear" required="yes"/>
+                        <oa:messageChoice id="deptMC" prompt="员工所在部门" required="no" pickListDispAttr="DepName" pickListValAttr="DepName" pickListViewName="DeptOV1"/>
+                        <oa:messageLayout id="buttonLayout">
+                           <ui:contents>
+                              <oa:submitButton id="searchBN" text="搜索" prompt="搜索" hAlign="center"/>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:stackLayout id="QSumlayout">
+                     <ui:contents>
+                        <oa:staticStyledText id="ResultsHelp" text="员工奖金汇总查询" prompt="员工奖金汇总查询"/>
+                        <oa:tip id="Description" text="点击“导出”按钮导出到Excel。单位：元"/>
+                        <oa:exportButton id="Exportbt1" exportAllRows="true" text="导出Excel" viewName="DeptBonusVO1"/>
+                        <oa:table id="ResultTable" width="100%" blockSize="50">
+                           <ui:contents>
+                              <oa:messageStyledText id="Id" dataType="NUMBER" prompt="工号" viewName="DeptBonusVO1" viewAttr="Id"/>
+                              <oa:messageStyledText id="item1" dataType="VARCHAR2" prompt="姓名" viewName="DeptBonusVO1" viewAttr="Name" maximumLength="150"/>
+                              <oa:messageStyledText id="DepName" dataType="VARCHAR2" prompt="所在部门" viewName="DeptBonusVO1" viewAttr="DepName" maximumLength="150"/>
+                              <oa:messageStyledText id="Jan" dataType="NUMBER" prompt="1月" viewName="DeptBonusVO1" viewAttr="Jan"/>
+                              <oa:messageStyledText id="Feb" dataType="NUMBER" prompt="2月" viewName="DeptBonusVO1" viewAttr="Feb"/>
+                              <oa:messageStyledText id="Mar" dataType="NUMBER" prompt="3月" viewName="DeptBonusVO1" viewAttr="Mar"/>
+                              <oa:messageStyledText id="April" dataType="NUMBER" prompt="4月" viewName="DeptBonusVO1" viewAttr="April"/>
+                              <oa:messageStyledText id="May" dataType="NUMBER" prompt="5月" viewName="DeptBonusVO1" viewAttr="May"/>
+                              <oa:messageStyledText id="June" dataType="NUMBER" prompt="6月" viewName="DeptBonusVO1" viewAttr="June"/>
+                              <oa:messageStyledText id="July" dataType="NUMBER" prompt="7月" viewName="DeptBonusVO1" viewAttr="July"/>
+                              <oa:messageStyledText id="Aug" dataType="NUMBER" prompt="8月" viewName="DeptBonusVO1" viewAttr="Aug"/>
+                              <oa:messageStyledText id="Sep" dataType="NUMBER" prompt="9月" viewName="DeptBonusVO1" viewAttr="Sep"/>
+                              <oa:messageStyledText id="Oct" dataType="NUMBER" prompt="10月" viewName="DeptBonusVO1" viewAttr="Oct"/>
+                              <oa:messageStyledText id="Nov" dataType="NUMBER" prompt="11月" viewName="DeptBonusVO1" viewAttr="Nov"/>
+                              <oa:messageStyledText id="Dec" dataType="NUMBER" prompt="12月" viewName="DeptBonusVO1" viewAttr="Dec"/>
+                              <oa:messageStyledText id="Year" dataType="NUMBER" prompt="年终奖金" viewName="DeptBonusVO1" viewAttr="Year"/>
+                              <oa:messageStyledText id="Total" dataType="NUMBER" prompt="总金额" viewName="DeptBonusVO1" viewAttr="Total"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:stackLayout>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

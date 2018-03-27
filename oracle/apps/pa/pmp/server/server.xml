@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.pa.pmp.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="AMEActionHistoryVO"
+      FullName="cux.oracle.apps.pa.pmp.server.AMEActionHistoryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PaProjElementsEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PaProjElementsEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpAM"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="PmpAttatchmentVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpAttatchmentVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpBudgetDetailVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpBudgetDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpContactEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpContactFirstVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactFirstVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpContactSecondVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactSecondVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpContactSiteEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactSiteEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpContactSiteFirstVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactSiteFirstVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpContactSiteSecondVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpContactSiteSecondVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpCoordinationEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpCoordinationEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpCoordinationVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpCoordinationVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpDocManagementEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpDocManagementEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpDocManagementVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpDocManagementVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpLogisticalEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpLogisticalEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpLogisticalVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpLogisticalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpManHourVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpManHourVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpMeetingEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpMeetingEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpMeetingVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpMeetingVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpProgressVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpProgressVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpProjectInfoVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpProjectInfoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpQhseHeaderEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseHeaderEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpQhseHseHeaderVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseHseHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpQhseHseLineVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseHseLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpQhseLineEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseLineEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpQhseQualityHeaerVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseQualityHeaerVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpQhseQualityLineVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpQhseQualityLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpReceiptPlanVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpReceiptPlanVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpReportEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpReportEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpReportVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpReportVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpRiskEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpRiskEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpRiskVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpRiskVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpRoleVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpRoleVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpStatusVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpSummaryEO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpSummaryEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="PmpSummaryVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpSummaryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PmpVO"
+      FullName="cux.oracle.apps.pa.pmp.server.PmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

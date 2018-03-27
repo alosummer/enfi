@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.aprprocess.server.AprAM" controllerClass="cux.oracle.apps.per.aprprocess.webui.BehaviourLovCO">
+   <ui:contents>
+      <oa:table id="BehaviourLovVO1" name="BehaviourLovRN">
+         <ui:contents>
+            <oa:messageStyledText id="KpiId" dataType="NUMBER" prompt="指标ID" viewName="BehaviourVO1" viewAttr="KpiId" maximumLength="10" rendered="true"/>
+            <oa:messageStyledText id="KpiOrgName" dataType="VARCHAR2" prompt="指标所属组织" viewName="BehaviourVO1" viewAttr="KpiOrgName" maximumLength="150" rendered="true"/>
+            <oa:messageStyledText id="KpiClass" dataType="VARCHAR2" prompt="KpiClass" viewName="BehaviourVO1" viewAttr="KpiClass" maximumLength="150" rendered="false"/>
+            <oa:messageStyledText id="KpiAreaName" dataType="VARCHAR2" prompt="考核层面" viewName="BehaviourVO1" viewAttr="KpiAreaName" maximumLength="80" queryable="false"/>
+            <oa:messageStyledText id="KpiName" dataType="VARCHAR2" prompt="考核指标" viewName="BehaviourVO1" viewAttr="KpiName" maximumLength="200" queryable="true"/>
+            <oa:messageStyledText id="KpiDesc" dataType="VARCHAR2" prompt="描述" viewName="BehaviourVO1" viewAttr="KpiDesc" maximumLength="500"/>
+            <oa:messageStyledText id="KpiDataSourceName" dataType="VARCHAR2" prompt="数据来源" viewName="BehaviourVO1" viewAttr="KpiDataSourceName" maximumLength="240"/>
+            <oa:messageStyledText id="KpiArea" dataType="VARCHAR2" prompt="KpiArea" viewName="BehaviourVO1" viewAttr="KpiArea" maximumLength="200" rendered="false"/>
+            <oa:messageStyledText id="KpiDataSource" dataType="VARCHAR2" prompt="KpiDataSource" viewName="BehaviourVO1" viewAttr="KpiDataSource" maximumLength="150" rendered="false"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

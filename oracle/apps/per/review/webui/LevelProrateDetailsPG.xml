@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" controllerClass="cux.oracle.apps.per.review.webui.LevelProrateDetailsCO" amDefName="cux.oracle.apps.per.review.server.LevelProrateAM" windowTitle="评分管理详细内容" title="评分管理详细内容">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="MainRN">
+               <ui:contents>
+                  <oa:table id="LevelProrateDetailsVO1" width="100%" blockSize="200">
+                     <ui:contents>
+                        <oa:messageStyledText id="RowNum" dataType="NUMBER" viewName="LevelProrateDetailsVO1" viewAttr="Rownum" prompt="序号"/>
+                        <oa:formValue id="AppraisalId" dataType="NUMBER" viewName="LevelProrateDetailsVO1" viewAttr="AppraisalId" prompt="ID"/>
+                        <oa:messageStyledText id="EmpName" viewName="LevelProrateDetailsVO1" viewAttr="EmpName" prompt="被评估人"/>
+                        <oa:messageStyledText id="OrgName" viewName="LevelProrateDetailsVO1" viewAttr="OrgName" prompt="组织"/>
+                        <oa:messageStyledText id="GroupName" viewName="LevelProrateDetailsVO1" viewAttr="GroupName" prompt="考群"/>
+                        <oa:messageStyledText id="AppraisalYear" viewName="LevelProrateDetailsVO1" viewAttr="AppraisalYear" prompt="年度"/>
+                        <oa:messageChoice id="PhaseName" viewName="LevelProrateDetailsVO1" viewAttr="PhaseId" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPhaseVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="阶段" readOnly="true"/>
+                        <oa:messageStyledText id="PeriodName" viewName="LevelProrateDetailsVO1" viewAttr="PeriodName" prompt="周期"/>
+                        <oa:messageChoice id="Status" viewName="LevelProrateDetailsVO1" viewAttr="StatusId" prompt="状态" pickListViewDef="cux.oracle.apps.per.poplist.server.EpmWfStatus" pickListDispAttr="EpmPhaseName" pickListValAttr="EpmPhaseCode" readOnly="true"/>
+                        <oa:messageStyledText id="FinalMark" viewName="LevelProrateDetailsVO1" viewAttr="FinalMark" prompt="得分"/>
+                        <oa:messageStyledText id="OriLevel" viewName="LevelProrateDetailsVO1" viewAttr="OriLevel" prompt="建议等级"/>
+                        <oa:messageChoice id="FinalLevel" viewName="LevelProrateDetailsVO1" viewAttr="FinalLevel" prompt="最终等级" pickListViewDef="cux.oracle.apps.per.poplist.server.GradeAEVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                        <oa:image id="Detail" prompt="明细" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="detail">
+                                 <ui:parameters>
+                                    <ui:parameter key="appraisalId" value="${oa.LevelProrateDetailsVO1.AppraisalId}"/>
+                                    <ui:parameter key="phaseId" value="${oa.LevelProrateDetailsVO1.PhaseId}"/>
+                                    <ui:parameter key="statusId" value="${oa.LevelProrateDetailsVO1.StatusId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="PhaseId" viewName="LevelProrateDetailsVO1" viewAttr="PhaseId"/>
+                        <oa:formValue id="StatusId" viewName="LevelProrateDetailsVO1" viewAttr="StatusId"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="Save" text="保存" prompt="保存"/>
+                              <oa:submitButton id="Return" text="返回" prompt="返回"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

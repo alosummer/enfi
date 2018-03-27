@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.aprprocess.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AddListVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AddListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AddVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AddVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprAM"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="AprAttendVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprAttendVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprCopyVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprCopyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprDetail"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprDetail"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprEmpSelfDetailVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprEmpSelfDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprEmpSelfListVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprEmpSelfListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprFinishDetailVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprFinishDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprKPIVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprKPIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprManagerDetailVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprManagerDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprManagerListVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprManagerListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprScoreVisibleVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprScoreVisibleVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprSourceManualVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprSourceManualVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprSourceSystemVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprSourceSystemVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AprTaskVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AprTaskVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AttendEO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AttendEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="AttendNoteVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AttendNoteVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="AttendVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.AttendVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BehavAddSubVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.BehavAddSubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BehaviourListVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.BehaviourListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BehaviourVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.BehaviourVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContractEO"
+      FullName="cux.oracle.apps.per.aprprocess.server.ContractEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ContractVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.ContractVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPIDetailVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.KPIDetailVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KPILovVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.KPILovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="SubListVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.SubListVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="SubVO"
+      FullName="cux.oracle.apps.per.aprprocess.server.SubVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

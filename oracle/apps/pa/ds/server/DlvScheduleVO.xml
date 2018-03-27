@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="DlvScheduleVO"
+   OrderBy="schedule_completion_date asc"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.ds.server.DlvScheduleVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.ds.server.DlvScheduleVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT 'N' selected_flag
+      ,pds.schedule_id
+      ,pds.project_id
+      ,pds.task_id
+      ,pds.approve_status
+      ,cux_common_pkg.get_lookup_meaning('CUX_PA_DLV_SCHEDULE_STATUS',
+                                         pds.approve_status) approve_status_name
+      ,pds.node_type
+      ,cux_pa_util_pkg.get_task_name(pds.task_id) task_name
+      ,pds.design_node
+      ,pdt.doc_name
+      ,pds.schedule_completion_date
+      ,cux_pa_dlv_schedule_pkg.get_actual_release_date(pds.schedule_id) actual_release_date
+      ,cux_pa_dlv_schedule_pkg.get_actual_completion_date(pds.schedule_id) actual_completion_date
+      ,cux_pa_dlv_schedule_pkg.get_dynamic_completion_date(pds.schedule_id) dynamic_completion_date
+      ,pds.release_dept
+      ,pds.release_specialty
+      ,pds.accept_specialty
+      ,pds.schedule_desc
+      ,pds.attribute1
+      ,pds.attribute2
+      ,pds.attribute3
+      ,pds.attribute4
+      ,pds.attribute5
+      ,pds.attribute6
+      ,pds.attribute7
+      ,pds.attribute8
+      ,pds.attribute9
+      ,pds.cux_dlv_id
+      ,1 update_allewed
+FROM   cux_pa_dlv_schedule_t pds
+      ,cux_pa_deliverable_t  pdt
+WHERE  pds.cux_dlv_id = pdt.cux_dlv_id(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="DlvScheduleEO"
+      Entity="cux.oracle.apps.pa.ds.server.DlvScheduleEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="SelectedFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="SELECTED_FLAG"
+      Expression="SELECTED_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduleId"
+      EntityAttrName="ScheduleId"
+      EntityUsage="DlvScheduleEO"
+      AliasName="SCHEDULE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="DlvScheduleEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      EntityAttrName="TaskId"
+      EntityUsage="DlvScheduleEO"
+      AliasName="TASK_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveStatus"
+      EntityAttrName="ApproveStatus"
+      EntityUsage="DlvScheduleEO"
+      AliasName="APPROVE_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveStatusName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_STATUS_NAME"
+      Expression="APPROVE_STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NodeType"
+      EntityAttrName="NodeType"
+      EntityUsage="DlvScheduleEO"
+      AliasName="NODE_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DesignNode"
+      EntityAttrName="DesignNode"
+      EntityUsage="DlvScheduleEO"
+      AliasName="DESIGN_NODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocName"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_NAME"
+      Expression="DOC_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduleCompletionDate"
+      EntityAttrName="ScheduleCompletionDate"
+      EntityUsage="DlvScheduleEO"
+      AliasName="SCHEDULE_COMPLETION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualReleaseDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="ACTUAL_RELEASE_DATE"
+      Expression="ACTUAL_RELEASE_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualCompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="ACTUAL_COMPLETION_DATE"
+      Expression="ACTUAL_COMPLETION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DynamicCompletionDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DYNAMIC_COMPLETION_DATE"
+      Expression="DYNAMIC_COMPLETION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleaseDept"
+      EntityAttrName="ReleaseDept"
+      EntityUsage="DlvScheduleEO"
+      AliasName="RELEASE_DEPT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleaseSpecialty"
+      EntityAttrName="ReleaseSpecialty"
+      EntityUsage="DlvScheduleEO"
+      AliasName="RELEASE_SPECIALTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AcceptSpecialty"
+      EntityAttrName="AcceptSpecialty"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ACCEPT_SPECIALTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScheduleDesc"
+      EntityAttrName="ScheduleDesc"
+      EntityUsage="DlvScheduleEO"
+      AliasName="SCHEDULE_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="DlvScheduleEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CuxDlvId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CUX_DLV_ID"
+      Expression="CUX_DLV_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UpdateAllewed"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="UPDATE_ALLEWED"
+      Expression="UPDATE_ALLEWED"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RepSepcVO"
+   SelectList="RepSepcEO.OBJECT_ID, 
+       RepSepcEO.OBJECT_TYPE, 
+       RepSepcEO.RESOURCE_TYPE_ID, 
+       RepSepcEO.RESOURCE_SOURCE_ID, 
+       RepSepcEO.PROJECT_ROLE_ID, 
+       RepSepcEO.START_DATE_ACTIVE, 
+       RepSepcEO.SPECIALTY_CODE, 
+       RepSepcEO.ATRRIBUTE1, 
+       RepSepcEO.ATRRIBUTE2, 
+       RepSepcEO.ATRRIBUTE3, 
+       RepSepcEO.ATRRIBUTE4, 
+       RepSepcEO.ATRRIBUTE5, 
+       RepSepcEO.ATRRIBUTE6, 
+       RepSepcEO.ATRRIBUTE7, 
+       RepSepcEO.ATRRIBUTE8, 
+       RepSepcEO.ATRRIBUTE9, 
+       RepSepcEO.CREATED_BY, 
+       RepSepcEO.CREATION_DATE, 
+       RepSepcEO.LAST_UPDATED_BY, 
+       RepSepcEO.LAST_UPDATE_DATE, 
+       RepSepcEO.LAST_UPDATE_LOGIN, 
+       RepSepcEO.ROWID"
+   FromList="CUX.CUX_PA_REP_SEPC_T RepSepcEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.pa.project.server.RepSepcVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.project.server.RepSepcVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RepSepcEO"
+      Entity="cux.oracle.apps.pa.project.server.RepSepcEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ObjectId"
+      EntityAttrName="ObjectId"
+      EntityUsage="RepSepcEO"
+      AliasName="OBJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ObjectType"
+      EntityAttrName="ObjectType"
+      EntityUsage="RepSepcEO"
+      AliasName="OBJECT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResourceTypeId"
+      EntityAttrName="ResourceTypeId"
+      EntityUsage="RepSepcEO"
+      AliasName="RESOURCE_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResourceSourceId"
+      EntityAttrName="ResourceSourceId"
+      EntityUsage="RepSepcEO"
+      AliasName="RESOURCE_SOURCE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRoleId"
+      EntityAttrName="ProjectRoleId"
+      EntityUsage="RepSepcEO"
+      AliasName="PROJECT_ROLE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDateActive"
+      EntityAttrName="StartDateActive"
+      EntityUsage="RepSepcEO"
+      AliasName="START_DATE_ACTIVE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpecialtyCode"
+      EntityAttrName="SpecialtyCode"
+      EntityUsage="RepSepcEO"
+      AliasName="SPECIALTY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute1"
+      EntityAttrName="Atrribute1"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute2"
+      EntityAttrName="Atrribute2"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute3"
+      EntityAttrName="Atrribute3"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute4"
+      EntityAttrName="Atrribute4"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute5"
+      EntityAttrName="Atrribute5"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute6"
+      EntityAttrName="Atrribute6"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute7"
+      EntityAttrName="Atrribute7"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute8"
+      EntityAttrName="Atrribute8"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Atrribute9"
+      EntityAttrName="Atrribute9"
+      EntityUsage="RepSepcEO"
+      AliasName="ATRRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RepSepcEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RepSepcEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RepSepcEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RepSepcEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RepSepcEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="RepSepcEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

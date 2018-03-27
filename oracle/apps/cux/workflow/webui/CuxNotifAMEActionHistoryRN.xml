@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:stackLayout version="10.1.3_" xml:lang="zh-CN" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.cux.workflow.webui.CuxNotifAMEActionHistoryRNCO" amDefName="cux.oracle.apps.cux.workflow.server.CuxNotifAM" standalone="true">
+   <ui:contents>
+      <oa:stackLayout id="AMEActionHistory" extends="/oracle/apps/ame/transactionhistory/webui/TransactionHistoryRN"/>
+      <oa:formValue id="a1" prompt="A1"/>
+   </ui:contents>
+</oa:stackLayout>

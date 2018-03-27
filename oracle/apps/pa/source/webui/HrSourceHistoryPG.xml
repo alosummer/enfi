@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.source.server.HrSourceAM" windowTitle="历史变动情况" title="历史变动情况" controllerClass="cux.oracle.apps.pa.source.webui.HrSourceHistoryCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="HrSourceHistoryVO1" width="100%">
+               <ui:contents>
+                  <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="HrSourceHistoryVO1" viewAttr="PersonId"/>
+                  <oa:messageStyledText id="PersonName" dataType="VARCHAR2" prompt="姓名" viewName="HrSourceHistoryVO1" viewAttr="PersonName" maximumLength="4000"/>
+                  <oa:messageStyledText id="PersonNum" dataType="VARCHAR2" prompt="财务编号" viewName="HrSourceHistoryVO1" viewAttr="PersonNum" maximumLength="4000"/>
+                  <oa:messageStyledText id="JobName" dataType="VARCHAR2" prompt="职级" viewName="HrSourceHistoryVO1" viewAttr="JobName" maximumLength="700"/>
+                  <oa:messageStyledText id="xlgm_gw" prompt="项目管理序列岗位名称" viewName="HrSourceHistoryVO1" viewAttr="XmglGw" rendered="false"/>
+                  <oa:messageStyledText id="xlgm_zj" prompt="项目管理序列职级" viewName="HrSourceHistoryVO1" viewAttr="XmglZj" rendered="false"/>
+                  <oa:messageStyledText id="EvaluateJobLevel" dataType="VARCHAR2" prompt="评定职级" viewName="HrSourceHistoryVO1" viewAttr="EvaluateJobLevel" maximumLength="300" rendered="false"/>
+                  <oa:messageStyledText id="HrsourceDate" dataType="DATE" prompt="入库时间" viewName="HrSourceHistoryVO1" viewAttr="HrsourceDate"/>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="item1" destination="OA.jsp?page=/cux/oracle/apps/pa/source/webui/HrSourcePG&amp;retainAM=Y" text="返回人才库"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

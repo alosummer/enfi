@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="DlvScheduleAM"
+   ComponentClass="cux.oracle.apps.pa.ds.server.DlvScheduleAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="DlvScheduleSpecVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DlvScheduleSpecVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DlvScheduleVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DlvScheduleVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialityVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.SpecialityVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsNodeTypeVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DsNodeTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsPVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DsPVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsTemplateVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DsTemplateVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsSummaryVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DsSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsStatus1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.DsStatus" >
+   </ViewUsage>
+   <ViewUsage
+      Name="QueryModeVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.QueryModeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectLovVO1"
+      ViewObjectName="cux.oracle.apps.pa.ds.server.ProjectLovVO" >
+   </ViewUsage>
+</AppModule>

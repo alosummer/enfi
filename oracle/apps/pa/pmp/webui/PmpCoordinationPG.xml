@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目管理协调关系" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpCoordinationCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="CoordinationHdr" text="项目管理协调关系">
+               <ui:contents>
+                  <oa:advancedTable id="PmpCoorditinoTB" viewName="PmpCoordinationVO1" rowHeaderViewAttr="" rowHeaderColumns="" rowheadercol="" width="100%" blockSize="17">
+                     <ui:contents>
+                        <oa:column id="column4" width="10%">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="协调范围"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="CoordinationRange" maximumLength="900" viewAttr="CoordinationRange"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column1" width="30%">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="协调对象"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="CoordinationObject" dataType="VARCHAR2" prompt="CoordinationObject" viewAttr="CoordinationObject" maximumLength="4000" rows="3" columns="50"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column2" width="30%">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="涉及事项"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="CoordinationReference" dataType="VARCHAR2" prompt="CoordinationReference" viewAttr="CoordinationReference" maximumLength="4000" rows="3" columns="50"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column3" width="30%">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="沟通原则"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="CoordinationPrinciple" dataType="VARCHAR2" prompt="CoordinationPrinciple" viewAttr="CoordinationPrinciple" maximumLength="4000" rows="3" columns="50"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="column5">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="删除"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="Delete" source="deleteicon_enabled.gif">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="Delete"/>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="Add" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Add"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

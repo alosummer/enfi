@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="CuxQualityPlanControlDetailViewPG" controllerClass="cux.oracle.apps.cux.qhse.quality.webui.CuxQualityPlanControlDetailViewPGCO" amDefName="cux.oracle.apps.cux.qhse.quality.server.CuxQualityAM" windowTitle="详细目标计划查看">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="CuxQualityMagDetailVO1" width="100%">
+               <ui:contents>
+                  <oa:messageChoice id="TargetClassCode" dataType="VARCHAR2" prompt="目标类型" viewName="CuxQualityMagDetailViewVO1" viewAttr="TargetClassCode" pickListViewDef="cux.oracle.apps.cux.qhse.quality.poplist.server.CuxTargetClassListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" readOnly="true"/>
+                  <oa:messageStyledText id="PlanControlName" dataType="VARCHAR2" prompt="目标计划控制项" viewName="CuxQualityMagDetailViewVO1" viewAttr="PlanControlName" maximumLength="80" required="yes"/>
+                  <oa:messageStyledText id="PlanControlDesc" dataType="VARCHAR2" prompt="目标计划控制项说明" viewName="CuxQualityMagDetailViewVO1" viewAttr="PlanControlDesc" maximumLength="240"/>
+                  <oa:messageChoice id="IsDeliverables" dataType="VARCHAR2" prompt="是否交付物" viewName="CuxQualityMagDetailViewVO1" viewAttr="IsDeliverables" pickListViewDef="cux.oracle.apps.cux.qhse.rectify.poplist.server.YesNoListVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" readOnly="true"/>
+                  <oa:messageStyledText id="TargetValue" dataType="VARCHAR2" prompt="目标控制值" viewName="CuxQualityMagDetailViewVO1" viewAttr="TargetValue" maximumLength="4000" required="yes"/>
+                  <oa:messageStyledText id="PlanDate" dataType="DATE" prompt="计划日期" viewName="CuxQualityMagDetailViewVO1" viewAttr="PlanDate" required="yes"/>
+                  <oa:messageStyledText id="ApproveDate" dataType="DATE" prompt="核准日期" viewName="CuxQualityMagDetailViewVO1" viewAttr="ApproveDate"/>
+                  <oa:messageStyledText id="DutePersonName" dataType="VARCHAR2" prompt="负责人" viewName="CuxQualityMagDetailViewVO1" viewAttr="DutePersonName" rendered="false"/>
+                  <oa:attachmentImage id="attachment" prompt="交付物附件">
+                     <oa:entityMappings>
+                        <oa:entityMap id="entityMap1" entityId="cux_quality_mag_detail" insertAllowed="false" updateAllowed="false" deleteAllowed="false">
+                           <oa:primaryKeys>
+                              <oa:primaryKey id="primaryKey1" viewAttr="DetailId"/>
+                           </oa:primaryKeys>
+                        </oa:entityMap>
+                     </oa:entityMappings>
+                  </oa:attachmentImage>
+                  <oa:messageStyledText id="Result" dataType="VARCHAR2" prompt="检查结果" viewName="CuxQualityMagDetailViewVO1" viewAttr="Result" maximumLength="4000"/>
+                  <oa:messageCheckBox id="IsConfirm" dataType="VARCHAR2" text="确认" prompt="确认" viewName="CuxQualityMagDetailViewVO1" viewAttr="IsConfirm" defaultValue="N" checkedValue="Y" unCheckedValue="N" readOnly="true"/>
+                  <oa:messageStyledText id="Remark" dataType="VARCHAR2" prompt="备注说明" viewName="CuxQualityMagDetailViewVO1" viewAttr="Remark" maximumLength="4000"/>
+               </ui:contents>
+            </oa:table>
+            <oa:pageButtonBar id="PBB">
+               <ui:contents>
+                  <oa:submitButton id="CancelBTN" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

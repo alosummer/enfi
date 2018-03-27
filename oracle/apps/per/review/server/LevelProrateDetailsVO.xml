@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="LevelProrateDetailsVO"
+   OrderBy="FINAL_MARK DESC"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.LevelProrateDetailsVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.LevelProrateDetailsVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT ROWNUM,
+       LevelAppraisalEO.APPRAISAL_ID,
+       LevelAppraisalEO.APPRAISAL_PERSON_ID,
+       LevelAppraisalEO.ORGANIZATION_ID,
+       LevelAppraisalEO.APPRAISAL_GROUP_ID,
+       LevelAppraisalEO.APPRAISAL_YEAR,
+       LevelAppraisalEO.PERIOD_TYPE_ID,
+       LevelAppraisalEO.STATUS_ID,
+       LevelAppraisalEO.ORI_MARK,
+       LevelAppraisalEO.FINAL_MARK,
+       LevelAppraisalEO.ORI_LEVEL,
+       LevelAppraisalEO.FINAL_LEVEL,
+       L1.MEANING AS PERIOD_NAME,
+       GRP.GROUP_NAME AS GROUP_NAME,
+       ORG.NAME AS ORG_NAME,
+       EMP.LAST_NAME AS EMP_NAME,
+       LevelAppraisalEO.PHASE_ID,
+       cux_jxkh_common_pkg.get_packet_num(LevelAppraisalEO.appraisal_group_id,
+                                          LevelAppraisalEO.ORGANIZATION_ID,nvl(LevelAppraisalEO.Sign_Date,SYSDATE)) PACKET_NUM
+                                  
+  FROM CUX_APPRAISAL_T           LevelAppraisalEO,
+       FND_LOOKUP_VALUES         L1,
+       HR_ALL_ORGANIZATION_UNITS ORG,
+       CUX_REVIEW_GROUP_T        GRP,
+       (SELECT DISTINCT PERSON_ID,LAST_NAME FROM PER_ALL_PEOPLE_F) EMP
+ WHERE LevelAppraisalEO.PHASE_ID in ('REVIEW','APPEAL')
+   AND LevelAppraisalEO.PERIOD_TYPE_ID = L1.LOOKUP_CODE
+   AND L1.LOOKUP_TYPE = 'EPM_PERIOD'
+   AND L1.LANGUAGE = USERENV('LANG')
+   AND L1.ENABLED_FLAG = 'Y'
+   AND LevelAppraisalEO.ORGANIZATION_ID = ORG.ORGANIZATION_ID
+   AND LevelAppraisalEO.APPRAISAL_GROUP_ID = GRP.GROUP_ID
+   AND LevelAppraisalEO.Appraisal_Person_Id = EMP.PERSON_ID
+   AND LevelAppraisalEO.STATUS_ID <> 'CLOSED'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="LevelAppraisalEO"
+      Entity="cux.oracle.apps.per.review.server.LevelAppraisalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalPersonId"
+      IsNotNull="true"
+      EntityAttrName="AppraisalPersonId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsNotNull="true"
+      EntityAttrName="OrganizationId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORGANIZATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalGroupId"
+      EntityAttrName="AppraisalGroupId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AppraisalYear"
+      EntityAttrName="AppraisalYear"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="APPRAISAL_YEAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodTypeId"
+      EntityAttrName="PeriodTypeId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="PERIOD_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusId"
+      EntityAttrName="StatusId"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="STATUS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriMark"
+      EntityAttrName="OriMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORI_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalMark"
+      EntityAttrName="FinalMark"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="FINAL_MARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriLevel"
+      EntityAttrName="OriLevel"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="ORI_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FinalLevel"
+      EntityAttrName="FinalLevel"
+      EntityUsage="LevelAppraisalEO"
+      AliasName="FINAL_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERIOD_NAME"
+      Expression="PERIOD_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupName"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="GROUP_NAME"
+      Expression="GROUP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhaseId"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PHASE_ID"
+      Expression="PHASE_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PacketNum"
+      IsPersistent="false"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PACKET_NUM"
+      Expression="PACKET_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

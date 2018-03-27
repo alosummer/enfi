@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="PerVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.lov.server.PerVORowImpl"
+   ComponentClass="cux.oracle.apps.per.lov.server.PerVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT papf.last_name
+     , papf.person_id
+     , papf.employee_number
+     , haou.Organization_Id
+     , haou.NAME AS organization_name
+  FROM per_all_people_f papf
+     , per_all_assignments_f paaf
+     , hr_all_organization_units haou
+ WHERE papf.person_id = paaf.person_id
+   AND paaf.primary_flag = 'Y'
+   AND paaf.Organization_Id = haou.organization_id
+   AND CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE BETWEEN nvl(paaf.effective_start_date, CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE) 
+                   AND nvl(paaf.effective_end_date, CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE)
+   AND CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE BETWEEN nvl(papf.effective_start_date, CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE) 
+                   AND nvl(papf.effective_end_date, CUX_JXKH_COMMON_PKG.GET_CONTRACT_EFFECTIVE_DATE)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LastName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_NAME"
+      Expression="LAST_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PERSON_ID"
+      Expression="PERSON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmployeeNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPLOYEE_NUMBER"
+      Expression="EMPLOYEE_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORGANIZATION_ID"
+      Expression="ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORGANIZATION_NAME"
+      Expression="ORGANIZATION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

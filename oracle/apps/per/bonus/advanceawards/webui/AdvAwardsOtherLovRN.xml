@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" styleClass="OraDataText" amDefName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAM" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.AdvAwardsOtherLovCO" scope="/">
+   <ui:contents>
+      <oa:table name="AdvAwardsOtherLovRN" id="AdvAwardsOtherLovTable" styleClass="OraDataText">
+         <ui:contents>
+            <oa:messageStyledText id="EmployeeNumber" dataType="VARCHAR2" prompt="工号" viewName="AdvAwardsOtherLovVO1" viewAttr="EmployeeNumber" maximumLength="30" queryable="true" selectiveSearchCriteria="false" styleClass="OraDataText"/>
+            <oa:messageStyledText id="LastName" dataType="VARCHAR2" prompt="姓名" viewName="AdvAwardsOtherLovVO1" viewAttr="LastName" maximumLength="150" queryable="true" selectiveSearchCriteria="false" warnAboutChanges="true" styleClass="OraDataText"/>
+            <oa:messageStyledText id="Deptname" dataType="VARCHAR2" prompt="部门" viewName="AdvAwardsOtherLovVO1" viewAttr="Deptname" maximumLength="240" styleClass="OraDataText" queryable="false"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

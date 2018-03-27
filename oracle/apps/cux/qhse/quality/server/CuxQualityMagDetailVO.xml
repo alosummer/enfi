@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxQualityMagDetailVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagDetailVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagDetailVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT cuxqualitymagdetaileo.detail_id,
+       cuxqualitymagdetaileo.task_id,
+       cuxqualitymagdetaileo.detail_number,
+       cuxqualitymagdetaileo.target_class_code,
+       cux_target_class.meaning AS target_class_name,
+       cuxqualitymagdetaileo.plan_control_code,
+       cux_quality_plan_control.meaning AS plan_control_name,
+       cux_quality_plan_control.description AS plan_control_desc,
+       cuxqualitymagdetaileo.is_deliverables,
+       is_deliverable.meaning AS is_deliverable_dis,
+       cuxqualitymagdetaileo.target_value,
+       cuxqualitymagdetaileo.plan_date,
+       cuxqualitymagdetaileo.approve_date,
+       cuxqualitymagdetaileo.dute_person,
+       pex.full_name || '(' || pex.employee_num || ')' AS dute_person_name,
+       cuxqualitymagdetaileo.result,
+       cuxqualitymagdetaileo.is_confirm,
+       cuxqualitymagdetaileo.remark,
+       cuxqualitymagdetaileo.creation_date,
+       cuxqualitymagdetaileo.created_by,
+       cuxqualitymagdetaileo.last_update_date,
+       cuxqualitymagdetaileo.last_updated_by,
+       cuxqualitymagdetaileo.last_update_login,
+       cuxqualitymagdetaileo.attribute_category,
+       cuxqualitymagdetaileo.attribute1,
+       cuxqualitymagdetaileo.attribute2,
+       cuxqualitymagdetaileo.attribute3,
+       cuxqualitymagdetaileo.attribute4,
+       cuxqualitymagdetaileo.attribute5
+  FROM cux_quality_mag_detail cuxqualitymagdetaileo,
+       pa_lookups             cux_target_class,
+       pa_lookups             cux_quality_plan_control,
+       fnd_lookup_values_vl   is_deliverable,
+       per_employees_x        pex
+ WHERE cuxqualitymagdetaileo.target_class_code =
+       cux_target_class.lookup_code
+   AND cux_target_class.lookup_type = 'CUX_TARGET_CLASS'
+   AND cux_target_class.enabled_flag = 'Y'
+   AND SYSDATE BETWEEN nvl(cux_target_class.start_date_active,
+                           SYSDATE - 1) AND
+       nvl(cux_target_class.end_date_active,
+           SYSDATE + 1)
+   AND cuxqualitymagdetaileo.plan_control_code =
+       cux_quality_plan_control.lookup_code
+   AND cux_quality_plan_control.lookup_type = 'CUX_QUALITY_PLAN_CONTROL'
+   AND cux_quality_plan_control.enabled_flag = 'Y'
+   AND SYSDATE BETWEEN nvl(cux_quality_plan_control.start_date_active,
+                           SYSDATE - 1) AND
+       nvl(cux_quality_plan_control.end_date_active,
+           SYSDATE + 1)
+   AND cuxqualitymagdetaileo.is_deliverables = is_deliverable.lookup_code
+   AND is_deliverable.lookup_type = 'YES_NO'
+   AND is_deliverable.enabled_flag = 'Y'
+   AND is_deliverable.view_application_id = 0
+   AND SYSDATE BETWEEN nvl(is_deliverable.start_date_active,
+                           SYSDATE - 1) AND
+       nvl(is_deliverable.end_date_active,
+           SYSDATE + 1)
+   AND cuxqualitymagdetaileo.dute_person = pex.employee_id(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxQualityMagDetailEO"
+      Entity="cux.oracle.apps.cux.qhse.quality.server.CuxQualityMagDetailEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="DetailId"
+      IsNotNull="true"
+      EntityAttrName="DetailId"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="DETAIL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      IsNotNull="true"
+      EntityAttrName="TaskId"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="TASK_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DetailNumber"
+      IsNotNull="true"
+      EntityAttrName="DetailNumber"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="DETAIL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetClassCode"
+      EntityAttrName="TargetClassCode"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="TARGET_CLASS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetClassName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TARGET_CLASS_NAME"
+      Expression="TARGET_CLASS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlanControlCode"
+      EntityAttrName="PlanControlCode"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="PLAN_CONTROL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlanControlName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PLAN_CONTROL_NAME"
+      Expression="PLAN_CONTROL_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlanControlDesc"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PLAN_CONTROL_DESC"
+      Expression="PLAN_CONTROL_DESC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsDeliverables"
+      EntityAttrName="IsDeliverables"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="IS_DELIVERABLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsDeliverableDis"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IS_DELIVERABLE_DIS"
+      Expression="IS_DELIVERABLE_DIS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetValue"
+      EntityAttrName="TargetValue"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="TARGET_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlanDate"
+      EntityAttrName="PlanDate"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="PLAN_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveDate"
+      EntityAttrName="ApproveDate"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="APPROVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutePerson"
+      EntityAttrName="DutePerson"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="DUTE_PERSON" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DutePersonName"
+      IsPersistent="false"
+      Precision="272"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DUTE_PERSON_NAME"
+      Expression="DUTE_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="272" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Result"
+      EntityAttrName="Result"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="RESULT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsConfirm"
+      EntityAttrName="IsConfirm"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="IS_CONFIRM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Remark"
+      EntityAttrName="Remark"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="REMARK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxQualityMagDetailEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjLovCO" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM">
+   <ui:contents>
+      <oa:table name="PrjLovRN" id="ProjectListTable">
+         <ui:contents>
+            <oa:messageStyledText id="ProjectNum" viewName="ProjectListVO1" viewAttr="ProjectNum" prompt="项目编号" queryable="true"/>
+            <oa:messageStyledText id="ProjectName" prompt="项目名称" viewName="ProjectListVO1" viewAttr="ProjectName" queryable="true"/>
+            <oa:messageStyledText id="ProjectManagerName" viewName="ProjectListVO1" viewAttr="ProjectManagerName" prompt="项目经理" queryable="true"/>
+            <oa:messageStyledText id="ProjectSupervisor" viewName="ProjectListVO1" viewAttr="ProjectSupervisor" prompt="主管领导" queryable="true"/>
+            <oa:messageStyledText id="ProjectStatusName" viewName="ProjectListVO1" viewAttr="ProjectStatusName" prompt="项目状态" queryable="true"/>
+            <oa:formValue id="ProjectManagerId" viewName="ProjectListVO1" viewAttr="ProjectManagerId" dataType="NUMBER"/>
+            <oa:formValue id="ProjectSupervisorId" viewName="ProjectListVO1" viewAttr="ProjectSupervisorId" dataType="NUMBER"/>
+            <oa:formValue id="ProjectStatusCode" dataType="VARCHAR2" viewName="ProjectListVO1" viewAttr="ProjectStatusCode"/>
+            <oa:formValue id="ProjectId" viewName="ProjectListVO1" viewAttr="ProjectId" dataType="NUMBER"/>
+            <oa:formValue id="ProjectCarryingOutOrgName" viewName="ProjectListVO1" viewAttr="ProjectCarryingOutOrgName"/>
+            <oa:formValue id="ProjectStartDate" viewName="ProjectListVO1" viewAttr="ProjectStartDate"/>
+            <oa:formValue id="ProjectEndDate" viewName="ProjectListVO1" viewAttr="ProjectEndDate"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

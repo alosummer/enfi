@@ -1,0 +1,93 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.offlinelist.server.OfflineListAM" windowTitle="线下人员维护" title="线下人员信息" controllerClass="cux.oracle.apps.per.bonus.offlinelist.webui.OfflineListAdminCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="TableHeader" text="线下人员表">
+               <ui:contents>
+                  <oa:advancedTable id="OfflineListTable" viewName="OfflineListVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="EmployeeNumberCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeNumber" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="EmployeeName" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeDeptCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeDept" viewAttr="DeptName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeNoteCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="备注"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="EmployeeNote" viewAttr="Note"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeStatusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="是否可修改"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="Status" viewAttr="Status"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeDeleteCol">
+                           <ui:columnHeader/>
+                           <ui:contents>
+                              <oa:switcher id="EmployeeDelete" viewAttr="Deletestatus">
+                                 <ui:case name="deleteEnabled">
+                                    <oa:image id="deleteEnabled" source="deleteicon_enabled.gif">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="delete">
+                                             <ui:parameters>
+                                                <ui:parameter key="deleteEmpNumber" value="${oa.OfflineListVO1.EmployeeNumber}"/>
+                                             </ui:parameters>
+                                          </ui:fireAction>
+                                       </ui:primaryClientAction>
+                                    </oa:image>
+                                 </ui:case>
+                                 <ui:case name="deleteDisabled">
+                                    <oa:image id="deleteDisabled" source="deleteicon_disabled.gif"/>
+                                 </ui:case>
+                              </oa:switcher>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:contents>
+                              <oa:submitButton id="AddRowButton" text="添加一行" prompt="添加一行"/>
+                           </ui:contents>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="SaveButton" text="保存" prompt="保存"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.pa.dlv.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="DeliverableEO"
+      FullName="cux.oracle.apps.pa.dlv.server.DeliverableEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="DeliverableVO"
+      FullName="cux.oracle.apps.pa.dlv.server.DeliverableVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DeliverAM"
+      FullName="cux.oracle.apps.pa.dlv.server.DeliverAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="DlvCfgEO"
+      FullName="cux.oracle.apps.pa.dlv.server.DlvCfgEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="DlvCfgVO"
+      FullName="cux.oracle.apps.pa.dlv.server.DlvCfgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpProjectSpecVO"
+      FullName="cux.oracle.apps.pa.dlv.server.EmpProjectSpecVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="SearchPVO"
+      FullName="cux.oracle.apps.pa.dlv.server.SearchPVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

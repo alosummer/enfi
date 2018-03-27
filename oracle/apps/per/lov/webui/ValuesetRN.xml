@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_798" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.lov.server.PerLovAM" scope="/">
+   <ui:contents>
+      <oa:table name="ValuesetRN" id="ValuesetVO1">
+         <ui:contents>
+            <oa:messageStyledText id="FlexValueSetName" dataType="VARCHAR2" prompt="值集名称" viewName="ValuesetVO1" viewAttr="FlexValueSetName" maximumLength="60" queryable="true"/>
+            <oa:formValue id="FlexValueSetId" dataType="NUMBER" prompt="FlexValueSetId" viewName="ValuesetVO1" viewAttr="FlexValueSetId"/>
+            <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="描述" viewName="ValuesetVO1" viewAttr="Description" maximumLength="240" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+   <ui:searchInstructions>
+      <oa:messageStyledText id="item1"/>
+   </ui:searchInstructions>
+</oa:listOfValues>

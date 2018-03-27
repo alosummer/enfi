@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="OfflineListAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>PTCH</JDBCName>
+         <jbo.project>HBWorkspace</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.bonus.offlinelist.server.OfflineListAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.bonus.offlinelist.server.OfflineListAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PayPlanAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>enfi_dev</JDBCName>
+         <jbo.project>OAProject1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.po.document.order.server.PayPlanAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.po.document.order.server.PayPlanAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

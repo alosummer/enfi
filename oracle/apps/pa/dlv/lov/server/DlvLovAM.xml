@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="DlvLovAM"
+   ComponentClass="cux.oracle.apps.pa.dlv.lov.server.DlvLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="DeptVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.DeptVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocTypeVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.DocTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PersonVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.PersonVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProjectVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.ProjectVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SpecialityVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.SpecialityVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="StatusVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.StatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="TaskVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.TaskVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EmpProjectSpecVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.server.EmpProjectSpecVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsHqdVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.DsHqdVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsJtdVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.DsJtdVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DsWjhzdVO1"
+      ViewObjectName="cux.oracle.apps.pa.dlv.lov.server.DsWjhzdVO" >
+   </ViewUsage>
+</AppModule>

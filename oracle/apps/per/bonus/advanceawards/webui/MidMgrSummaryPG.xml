@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.advanceawards.webui.MidMgrSummaryCO" windowTitle="人员奖金汇总页面" title="人员奖金汇总" amDefName="cux.oracle.apps.per.bonus.advanceawards.server.AdvanceAwardsAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="SummaryTableHdr" text="2012年预支奖发放汇总" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:messageTextInput id="DeptDistInfo" prompt="本部门员工奖金汇总" readOnly="true" styleClass="OraDataText"/>
+                  <oa:advancedTable id="SummaryTable" viewName="AdvAwardsSummaryVO1" blockSize="1000" width="80%">
+                     <ui:contents>
+                        <oa:column id="RowSNCol" width="40">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17312" prompt="序号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="RowSN" styleClass="OraDataText" viewAttr="RowSeq" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPerNumberCol" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader173" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPerNumber" styleClass="OraDataText" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPerNameCol" cellNoWrapFormat="true" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader174" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPerName" styleClass="OraDataText" viewAttr="LastName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DeptPerDeptCol" rendered="true" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader175" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DeptPerDept" styleClass="OraDataText" viewAttr="DepName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecMonthBonusCol" totalValue="true" columnDataFormat="numberFormat" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17611" prompt="月度奖金"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecMonthBonus" styleClass="OraDataText" viewAttr="DecMonthBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecDeptBonusCol" totalValue="true" columnDataFormat="numberFormat" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17711" prompt="部门嘉奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecDeptBonus" styleClass="OraDataText" viewAttr="DecDeptBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecYearBonusCol" totalValue="true" columnDataFormat="numberFormat" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader179122" prompt="年终奖"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecYearBonus" styleClass="OraDataText" viewAttr="DecYearBonus"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DPDecDistCol" totalValue="true" columnDataFormat="numberFormat" width="100">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader17911" prompt="实发"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DPDecDist" viewAttr="DecDist" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="checkHeader" styleClass="OraDataText"/>
+            <oa:pageButtonBar id="ButtonBar" styleClass="OraDataText">
+               <ui:contents>
+                  <oa:submitButton id="OKButton" text="确定" prompt="确定" styleClass="OraDataText"/>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:tip id="SummaryTips" text="&lt;p style=&quot;color:red&quot;>确定后数据将不能再修改&lt;/p>" styleClass="OraDataText"/>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

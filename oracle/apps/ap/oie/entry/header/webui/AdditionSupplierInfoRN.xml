@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:messageComponentLayout version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.ap.oie.entry.header.webui.AdditionSupplierInfoRNCO" rows="1" columns="2" promptWidth="1%">
+   <ui:contents>
+      <oa:messageChoice id="IsTempPurchase" viewName="ExpenseReportHeadersVO" viewAttr="Attribute15" prompt="是否非现金零星采购" pickListViewDef="cux.oracle.apps.ap.oie.entry.header.server.YesOrNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" allowBlankValue="false" pickListViewName="N" serverUnvalidated="true">
+         <ui:primaryClientAction>
+            <ui:fireAction event="CuxchangeTheChoice" unvalidated="true"/>
+         </ui:primaryClientAction>
+      </oa:messageChoice>
+      <oa:messageLovInput id="AdditionSupplierSiteCode" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxSupplierSiteLovRN" viewName="ExpenseReportHeadersVO" viewAttr="Attribute13" required="${oa.RenderVO1.RequiredFlag}" readOnly="${oa.RenderVO1.ReadonlyFlag}" prompt="业务类型">
+         <lovMappings>
+            <lovMap id="lovMap3" lovItem="VendorSiteCode" resultTo="AdditionSupplierSiteCode" criteriaFrom="AdditionSupplierSiteCode"/>
+            <lovMap id="lovMap4" lovItem="VendorName" criteriaFrom="AdditionSupplierName" requiredForLOV="true"/>
+         </lovMappings>
+      </oa:messageLovInput>
+      <oa:messageLovInput id="AdditionSupplierName" externalListOfValues="/cux/oracle/apps/ap/oie/entry/header/lov/webui/CuxSupplierLovRN" prompt="供应商名称" viewName="ExpenseReportHeadersVO" viewAttr="Attribute14" required="${oa.RenderVO1.RequiredFlag}" readOnly="${oa.RenderVO1.ReadonlyFlag}">
+         <lovMappings>
+            <lovMap id="lovMap2" lovItem="VendorName" resultTo="AdditionSupplierName" criteriaFrom="AdditionSupplierName"/>
+         </lovMappings>
+      </oa:messageLovInput>
+   </ui:contents>
+</oa:messageComponentLayout>

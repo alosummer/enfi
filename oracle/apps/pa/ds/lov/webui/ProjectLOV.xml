@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.pa.ds.lov.server.DsLovAM">
+   <ui:contents>
+      <oa:table name="ProjectLOV" id="DsProjectVO1">
+         <ui:contents>
+            <oa:formValue id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="DsProjectVO1" viewAttr="ProjectId"/>
+            <oa:messageStyledText id="Segment1" dataType="VARCHAR2" prompt="项目编号" viewName="DsProjectVO1" viewAttr="Segment1" maximumLength="25" queryable="true"/>
+            <oa:messageStyledText id="ProjectName" dataType="VARCHAR2" prompt="项目名称" viewName="DsProjectVO1" viewAttr="ProjectName" maximumLength="30" queryable="true"/>
+            <oa:messageStyledText id="CodeDescription" dataType="VARCHAR2" prompt="项目所属部门" viewName="DsProjectVO1" viewAttr="CodeDescription" maximumLength="250"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

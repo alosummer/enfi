@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="DocNumReqAM"
+   ComponentClass="cux.oracle.apps.pa.docnum.server.DocNumReqAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="GenDocNumPVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.GenDocNumPVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocnumReqVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocnumReqVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocNumStatusVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocNumStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocnumSummaryVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocnumSummaryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocnumSummaryPVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocnumSummaryPVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocnumDetailHeaderVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocnumDetailHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DocnumDetailLineVO1"
+      ViewObjectName="cux.oracle.apps.pa.docnum.server.DocnumDetailLineVO" >
+   </ViewUsage>
+</AppModule>

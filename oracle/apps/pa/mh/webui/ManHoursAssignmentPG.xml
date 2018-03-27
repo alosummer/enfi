@@ -1,0 +1,181 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <!--*[Enter Javadoc like developer documentation, delete this line once you fill the included template.] [Put a one line description of the region here.] [Put a brief description of the usage of the region here.] @param [Parameter_name] [Put parameter use here.] @param [Parameter_name] [Put parameter use here.] @see [Put any additional links apart from controller class and BC4J objects directly referenced by this region]-->
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.mh.server.MHAssignmentAM" windowTitle="价值工时分配" controllerClass="cux.oracle.apps.pa.mh.webui.ManHoursAssignmentCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:button id="Save" text="保存" prompt="保存">
+                     <ui:primaryClientAction>
+                        <ui:firePartialAction event="Save" id="firePartialAction1"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="Submit" text="提交" prompt="提交">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="Submit"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:header id="SummaryHdr">
+               <ui:contents>
+                  <oa:rowLayout id="region2" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="region3" width="20%">
+                           <ui:contents>
+                              <oa:messageLovInput id="project" prompt="项目名" externalListOfValues="/cux/oracle/apps/pa/mh/lov/webui/ProjectLOV">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="ProjectId" resultTo="projectId"/>
+                                    <lovMap id="lovMap2" lovItem="ProjectName" resultTo="project" criteriaFrom="project"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:formValue id="projectId"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region4" width="5%"/>
+                        <oa:cellFormat id="region41" width="75%"/>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="region21" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="region31" width="20%">
+                           <ui:contents>
+                              <oa:messageChoice id="MhCategory" prompt="工时类别" pickListViewName="MhCategoryVO1" pickListValAttr="ExpenditureTypeId" pickListDispAttr="ExpenditureType">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="MhCategoryChange"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageChoice>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region42" width="5%">
+                           <ui:contents>
+                              <oa:button id="OK" text="确定" prompt="确定">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="OK"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region411" width="20%">
+                           <ui:contents>
+                              <oa:messageTextInput id="MhTotal" prompt="本类价值工时预算总额"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region4153" width="20%">
+                           <ui:contents>
+                              <oa:messageStyledText id="MhAssignTotal" prompt="本类价值工时已分配工时总额"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region41531" width="35%">
+                           <ui:contents>
+                              <oa:messageStyledText id="SpecialtyName" dataType="VARCHAR2" prompt="专业" viewName="MhAssignHeaderVO1" viewAttr="SpecialtyName" maximumLength="4000"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:table id="MhAssignedSummaryVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="MhCategoryName" dataType="VARCHAR2" prompt="工时类别" viewName="MhAssignedSummaryVO1" viewAttr="MhCategoryName" maximumLength="4000"/>
+                        <oa:messageStyledText id="TaskName1" dataType="VARCHAR2" prompt="任务(子项、合同包)" viewName="MhAssignedSummaryVO1" viewAttr="TaskName" maximumLength="4000"/>
+                        <oa:messageStyledText id="TaskBudget" dataType="NUMBER" prompt="工时预算值" viewName="MhAssignedSummaryVO1" viewAttr="TaskBudget"/>
+                        <oa:messageStyledText id="MhAssigned" dataType="NUMBER" prompt="已分配工时" viewName="MhAssignedSummaryVO1" viewAttr="MhAssigned"/>
+                        <oa:messageStyledText id="StatusName" dataType="VARCHAR2" prompt="审批状态" viewName="MhAssignedSummaryVO1" viewAttr="StatusName" maximumLength="4000"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="DetailHdr">
+               <ui:contents>
+                  <oa:rowLayout id="region412" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="region414" width="15%">
+                           <ui:contents>
+                              <oa:messageChoice id="TaskName" dataType="VARCHAR2" prompt="任务(子项、合同包)" pickListViewName="TaskVO1" pickListDispAttr="Name" pickListValAttr="ProjElementId">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="taskChange"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageChoice>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region415" width="70%">
+                           <ui:contents>
+                              <oa:messageStyledText id="MhBudget" dataType="NUMBER" prompt="价值工时预算总额" viewName="MhAssignHeaderVO1" viewAttr="MhBudget"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="region4121" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="region4131" width="15%">
+                           <ui:contents>
+                              <oa:messageStyledText id="ApproveStatusName" dataType="VARCHAR2" prompt="审批状态" viewName="MhAssignHeaderVO1" viewAttr="ApproveStatusName" maximumLength="4000"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region4141" width="15%">
+                           <ui:contents>
+                              <oa:button id="modifyAssign" text="修改分配" prompt="修改分配" rendered="true">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="modifyAssign"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region4151" width="70%"/>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:table id="MhAssignLinesVO1" width="100%" blockSize="3">
+                     <ui:contents>
+                        <oa:messageStyledText id="SortSeq" dataType="NUMBER" prompt="序号" viewName="MhAssignLinesVO1" viewAttr="SortSeq"/>
+                        <oa:messageLovInput id="PersonName" dataType="VARCHAR2" prompt="姓名" viewName="MhAssignLinesVO1" viewAttr="PersonName" maximumLength="4000" externalListOfValues="/cux/oracle/apps/pa/mh/lov/webui/PersonLOV" readOnly="${oa.MhAssignLinesVO1.ReadonlyFlag}">
+                           <lovMappings>
+                              <lovMap id="lovMap3" lovItem="PersonId" resultTo="personId"/>
+                              <lovMap id="lovMap4" lovItem="LastName" resultTo="PersonName" criteriaFrom="PersonName"/>
+                              <lovMap id="lovMap6" criteriaFrom="projectId" lovItem="projectId"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:messageLovInput id="ProjectRoleName" dataType="VARCHAR2" prompt="项目角色" viewName="MhAssignLinesVO1" viewAttr="ProjectRoleName" externalListOfValues="/cux/oracle/apps/pa/mh/lov/webui/ProjectRoleLOV">
+                           <lovMappings>
+                              <lovMap id="lovMap7" lovItem="ResourceSourceId" criteriaFrom="personId"/>
+                              <lovMap id="lovMap8" lovItem="ProjectId" criteriaFrom="projectId"/>
+                              <lovMap id="lovMap9" lovItem="Meaning" resultTo="ProjectRoleName" criteriaFrom="ProjectRoleName"/>
+                              <lovMap id="lovMap10" lovItem="ProjectRoleId" resultTo="ProjectRole"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="ProjectRole" viewName="MhAssignLinesVO1" viewAttr="ProjectRole"/>
+                        <oa:messageTextInput id="ManHours" dataType="NUMBER" prompt="价值工时" viewName="MhAssignLinesVO1" viewAttr="ManHours" readOnly="${oa.MhAssignLinesVO1.ReadonlyFlag}"/>
+                        <oa:switcher id="switcher" use="/oracle/apps/fnd/attributesets/Buttons/Delete" viewName="MhAssignLinesVO1" viewAttr="DeleteSwitcher">
+                           <ui:case name="DeleteDisabled">
+                              <oa:image id="DeleteDisabled" source="deleteicon_disabled.gif"/>
+                           </ui:case>
+                           <ui:case name="DeleteEnabled">
+                              <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="DeleteLine"/>
+                                 </ui:primaryClientAction>
+                              </oa:image>
+                           </ui:case>
+                        </oa:switcher>
+                        <oa:formValue id="personId" viewName="MhAssignLinesVO1" viewAttr="PersonId" dataType="NUMBER"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region4152">
+                           <ui:contents>
+                              <oa:button id="add" text="添加行" prompt="添加行">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="Add"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PayAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>DBPTCH</JDBCName>
+         <jbo.project>per_review1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.hr.bonus.pay.server.PayAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.hr.bonus.pay.server.PayAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="PayAMLocal1">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>DBPTCH</JDBCName>
+         <jbo.project>per_review1</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.bonus.pay.server.PayAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.bonus.pay.server.PayAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

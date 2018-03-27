@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.cux.docinfo.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxDocinfoManageAM"
+      FullName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoManageResultVO"
+      FullName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageResultVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoManageTEO"
+      FullName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageTEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxDocinfoManageTVO"
+      FullName="cux.oracle.apps.cux.docinfo.server.CuxDocinfoManageTVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

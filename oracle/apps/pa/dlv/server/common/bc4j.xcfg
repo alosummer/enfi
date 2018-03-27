@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="DeliverAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <jbo.project>CUXPA</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.pa.dlv.server.DeliverAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.pa.dlv.server.DeliverAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

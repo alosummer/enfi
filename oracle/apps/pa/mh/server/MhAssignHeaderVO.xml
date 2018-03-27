@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="MhAssignHeaderVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.mh.server.MhAssignHeaderVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.mh.server.MhAssignHeaderVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT mhassignheadereo.assign_id
+      ,mhassignheadereo.project_id
+      ,mhassignheadereo.task_id
+      ,cux_pa_util_pkg.get_task_name(p_task_id => mhassignheadereo.task_id) task_name
+      ,mhassignheadereo.specialty
+      ,cux_pa_util_pkg.get_lookup_meaning(p_lookup_type => 'ENFI_SPECIALITY',
+                                          p_lookup_code => mhassignheadereo.specialty) specialty_name
+      ,round(pmt.mh_budget,2) mh_budget
+      ,mhassignheadereo.approve_status
+      ,cux_pa_util_pkg.get_lookup_meaning(p_lookup_type => 'CUX_PA_MH_STATUS',
+                                          p_lookup_code => mhassignheadereo.approve_status) approve_status_name
+      ,mhassignheadereo.attribute1
+      ,mhassignheadereo.attribute2
+      ,mhassignheadereo.attribute3
+      ,mhassignheadereo.attribute4
+      ,mhassignheadereo.attribute5
+      ,mhassignheadereo.attribute6
+      ,mhassignheadereo.attribute7
+      ,mhassignheadereo.attribute8
+      ,mhassignheadereo.attribute9
+      ,mhassignheadereo.created_by
+      ,mhassignheadereo.creation_date
+      ,mhassignheadereo.last_updated_by
+      ,mhassignheadereo.last_update_date
+      ,mhassignheadereo.last_update_login
+      ,mhassignheadereo.mh_category
+      ,DECODE(mhassignheadereo.approve_status,'APPROVED',1,0) rendered_flag
+FROM   cux.cux_pa_mh_assign_header_t mhassignheadereo
+      ,cux_pa_mh_t                   pmt
+WHERE  mhassignheadereo.project_id = pmt.project_id(+)
+AND    mhassignheadereo.mh_category = pmt.mh_category(+)
+AND    mhassignheadereo.task_id = pmt.task_id(+)
+AND    mhassignheadereo.specialty = pmt.specialty(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="MhAssignHeaderEO"
+      Entity="cux.oracle.apps.pa.mh.server.MhAssignHeaderEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="AssignId"
+      EntityAttrName="AssignId"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ASSIGN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectId"
+      EntityAttrName="ProjectId"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="PROJECT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskId"
+      EntityAttrName="TaskId"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="TASK_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TaskName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TASK_NAME"
+      Expression="TASK_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Specialty"
+      EntityAttrName="Specialty"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="SPECIALTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpecialtyName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SPECIALTY_NAME"
+      Expression="SPECIALTY_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MhBudget"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MH_BUDGET"
+      Expression="MH_BUDGET"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveStatus"
+      EntityAttrName="ApproveStatus"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="APPROVE_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApproveStatusName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVE_STATUS_NAME"
+      Expression="APPROVE_STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MhCategory"
+      EntityAttrName="MhCategory"
+      EntityUsage="MhAssignHeaderEO"
+      AliasName="MH_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RenderedFlag"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="RENDERED_FLAG"
+      Expression="RENDERED_FLAG"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

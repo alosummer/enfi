@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.cux.qhse.rectify.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxRectifyAM"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyHeaderResultVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeaderResultVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyHeadersEO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeadersEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyHeadersVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyHeadersVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyLinesEO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyLinesResultVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesResultVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxRectifyNotifyLinesVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="HeaderResultTOLineVL"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.HeaderResultTOLineVL"
+      ObjectType="ViewLink" >
+   </Containee>
+   <Containee
+      Name="PersonQueryVO"
+      FullName="cux.oracle.apps.cux.qhse.rectify.server.PersonQueryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

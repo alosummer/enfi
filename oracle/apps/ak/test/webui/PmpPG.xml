@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.ak.test.server.PmpAM" windowTitle="增删改" title="增加" controllerClass="cux.oracle.apps.ak.test.webui.PmpCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="PmpVO1">
+               <ui:contents>
+                  <oa:messageTextInput id="ProjectId" dataType="NUMBER" prompt="ProjectId" viewName="PmpVO1" viewAttr="ProjectId"/>
+                  <oa:messageTextInput id="VersionNum" dataType="NUMBER" prompt="VersionNum" viewName="PmpVO1" viewAttr="VersionNum"/>
+                  <oa:messageTextInput id="VerifyStatus" dataType="VARCHAR2" prompt="VerifyStatus" viewName="PmpVO1" viewAttr="VerifyStatus" maximumLength="30"/>
+                  <oa:messageTextInput id="ApproveStatus" dataType="VARCHAR2" prompt="ApproveStatus" viewName="PmpVO1" viewAttr="ApproveStatus" maximumLength="30"/>
+                  <oa:messageTextInput id="VerifyWfItemtype" dataType="VARCHAR2" prompt="VerifyWfItemtype" viewName="PmpVO1" viewAttr="VerifyWfItemtype" maximumLength="100"/>
+                  <oa:messageTextInput id="VerifyWfItemkey" dataType="VARCHAR2" prompt="VerifyWfItemkey" viewName="PmpVO1" viewAttr="VerifyWfItemkey" maximumLength="100"/>
+                  <oa:messageTextInput id="ApproveWfItemtype" dataType="VARCHAR2" prompt="ApproveWfItemtype" viewName="PmpVO1" viewAttr="ApproveWfItemtype" maximumLength="100"/>
+                  <oa:messageTextInput id="ApproveWfItemkey" dataType="VARCHAR2" prompt="ApproveWfItemkey" viewName="PmpVO1" viewAttr="ApproveWfItemkey" maximumLength="100"/>
+                  <oa:messageTextInput id="Attribute1" dataType="VARCHAR2" prompt="Attribute1" viewName="PmpVO1" viewAttr="Attribute1" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute2" dataType="VARCHAR2" prompt="Attribute2" viewName="PmpVO1" viewAttr="Attribute2" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute3" dataType="VARCHAR2" prompt="Attribute3" viewName="PmpVO1" viewAttr="Attribute3" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute4" dataType="VARCHAR2" prompt="Attribute4" viewName="PmpVO1" viewAttr="Attribute4" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute5" dataType="VARCHAR2" prompt="Attribute5" viewName="PmpVO1" viewAttr="Attribute5" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute6" dataType="VARCHAR2" prompt="Attribute6" viewName="PmpVO1" viewAttr="Attribute6" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute7" dataType="VARCHAR2" prompt="Attribute7" viewName="PmpVO1" viewAttr="Attribute7" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute8" dataType="VARCHAR2" prompt="Attribute8" viewName="PmpVO1" viewAttr="Attribute8" maximumLength="300"/>
+                  <oa:messageTextInput id="Attribute9" dataType="VARCHAR2" prompt="Attribute9" viewName="PmpVO1" viewAttr="Attribute9" maximumLength="300"/>
+                  <oa:messageTextInput id="CreatedBy" dataType="NUMBER" prompt="CreatedBy" viewName="PmpVO1" viewAttr="CreatedBy"/>
+                  <oa:messageTextInput id="CreationDate" dataType="DATE" prompt="CreationDate" viewName="PmpVO1" viewAttr="CreationDate"/>
+                  <oa:messageTextInput id="LastUpdatedBy" dataType="NUMBER" prompt="LastUpdatedBy" viewName="PmpVO1" viewAttr="LastUpdatedBy"/>
+                  <oa:messageTextInput id="LastUpdateDate" dataType="DATE" prompt="LastUpdateDate" viewName="PmpVO1" viewAttr="LastUpdateDate"/>
+                  <oa:messageTextInput id="LastUpdateLogin" dataType="NUMBER" prompt="LastUpdateLogin" viewName="PmpVO1" viewAttr="LastUpdateLogin"/>
+                  <oa:messageTextInput id="PmpId" dataType="NUMBER" prompt="PmpId" viewName="PmpVO1" viewAttr="PmpId"/>
+               </ui:contents>
+            </oa:table>
+            <oa:submitButton id="item1" text="保存" prompt="保存"/>
+            <oa:header id="query">
+               <ui:contents>
+                  <oa:messageLovInput id="item2" required="yes" viewName="PmpVO1" viewAttr="ProjectId">
+                     <lovContents>
+                        <oa:listOfValues id="region2"/>
+                     </lovContents>
+                     <lovMappings>
+                        <lovMap id="lovMap1"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="DocnumDetailLineVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.docnum.server.DocnumDetailLineVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.docnum.server.DocnumDetailLineVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT pdrl.req_line_id
+      ,pdr.docnum_req_id
+      ,row_number() over(PARTITION BY pdr.docnum_req_id ORDER BY pdr.creation_date) seq_num
+      ,pdrl.doc_num
+      ,pdt.doc_name
+      ,cux_pa_dlv_pkg.get_doc_type_name(pdt.doc_type) doc_type_name
+      ,ppe.element_number
+      ,cux_pa_dlv_pkg.get_name_by_persionid(pdt.designer) designer_name
+      ,cux_pa_dlv_pkg.get_name_by_persionid(pdt.checker) checker_name
+      ,cux_pa_dlv_pkg.get_name_by_persionid(pdt.verifier) verifier_name
+      ,cux_pa_dlv_pkg.get_name_by_persionid(pdt.authorizer) authorizer_name
+      ,cux_pa_dlv_pkg.get_dept_name(pdt.release_dept) release_dept_name
+      ,cux_pa_dlv_pkg.get_specialty_name(pdt.release_specialty) release_specialty_name
+      ,pdrl.line_desc
+      ,decode(pdt.doc_type, '3.3.004', 0, 1) readonly_flag
+FROM   cux_pa_docnum_req_t      pdr
+      ,cux_pa_docnum_req_line_t pdrl
+      ,cux_pa_deliverable_t     pdt
+      ,pa_proj_elements         ppe
+WHERE  pdr.docnum_req_id = pdrl.docnum_req_id
+AND    pdrl.cux_dlv_id = pdt.cux_dlv_id
+AND    pdt.task_id = ppe.proj_element_id
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="DocnumReqLineEO"
+      Entity="cux.oracle.apps.pa.docnum.server.DocnumReqLineEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ReqLineId"
+      EntityAttrName="ReqLineId"
+      EntityUsage="DocnumReqLineEO"
+      AliasName="REQ_LINE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocnumReqId"
+      EntityAttrName="DocnumReqId"
+      EntityUsage="DocnumReqLineEO"
+      AliasName="DOCNUM_REQ_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SeqNum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SEQ_NUM"
+      Expression="SEQ_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocNum"
+      EntityAttrName="DocNum"
+      EntityUsage="DocnumReqLineEO"
+      AliasName="DOC_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocName"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_NAME"
+      Expression="DOC_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocTypeName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOC_TYPE_NAME"
+      Expression="DOC_TYPE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ElementNumber"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ELEMENT_NUMBER"
+      Expression="ELEMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DesignerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESIGNER_NAME"
+      Expression="DESIGNER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CheckerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CHECKER_NAME"
+      Expression="CHECKER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VerifierName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VERIFIER_NAME"
+      Expression="VERIFIER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AuthorizerName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AUTHORIZER_NAME"
+      Expression="AUTHORIZER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleaseDeptName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RELEASE_DEPT_NAME"
+      Expression="RELEASE_DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleaseSpecialtyName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RELEASE_SPECIALTY_NAME"
+      Expression="RELEASE_SPECIALTY_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineDesc"
+      EntityAttrName="LineDesc"
+      EntityUsage="DocnumReqLineEO"
+      AliasName="LINE_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReadonlyFlag"
+      IsPersistent="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="READONLY_FLAG"
+      Expression="READONLY_FLAG"
+      SQLType="BIT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

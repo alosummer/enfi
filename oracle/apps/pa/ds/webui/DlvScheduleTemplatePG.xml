@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.ds.server.DlvScheduleAM" windowTitle="选择交付物进度计划模板" title="选择交付物进度计划模板" controllerClass="cux.oracle.apps.pa.ds.webui.DsScheduleTemplateCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="Back" text="返回" prompt="返回">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="Back"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+                  <oa:submitButton id="Select" text="选择" prompt="选择">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="Select" id="fireAction1"/>
+                     </ui:primaryClientAction>
+                  </oa:submitButton>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:query id="region2" dispSimple="false" dispCustomized="false" mode="autoCustomizationCriteria">
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="queryCriteriaMap1" criteriaItem="templateName" resultsItem="TemplateName"/>
+               </oa:simpleSearchMappings>
+               <ui:contents>
+                  <oa:table id="DsTemplateVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="NodeName" dataType="VARCHAR2" prompt="设计节点名称" viewName="DsTemplateVO1" viewAttr="NodeName" maximumLength="600"/>
+                        <oa:messageStyledText id="ReleaseSpecialty" dataType="VARCHAR2" prompt="提出条件专业" viewName="DsTemplateVO1" viewAttr="ReleaseSpecialty" maximumLength="300"/>
+                        <oa:messageStyledText id="AcceptSpecialty" dataType="VARCHAR2" prompt="接收条件专业" viewName="DsTemplateVO1" viewAttr="AcceptSpecialty" maximumLength="1500"/>
+                        <oa:formValue id="TemplateName" viewName="DsTemplateVO1" viewAttr="TemplateName"/>
+                     </ui:contents>
+                     <ui:tableSelection>
+                        <oa:multipleSelection id="multipleSelection1" viewName="DsTemplateVO1" viewAttr="SelectedFlag"/>
+                     </ui:tableSelection>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="搜索" id="region4">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="region3">
+                           <ui:contents>
+                              <oa:messageLovInput id="templateName" externalListOfValues="/cux/oracle/apps/pa/ds/lov/webui/DsTemplateLOV" prompt="模板名称">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="TemplateName" resultTo="templateName" criteriaFrom="templateName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

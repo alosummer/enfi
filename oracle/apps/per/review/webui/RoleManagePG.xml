@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="MainRN" amDefName="cux.oracle.apps.per.review.server.RoleManageAM" title="角色查询及维护" windowTitle="角色维护">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="RoleSearchRN" mode="autoCustomizationCriteria" controllerClass="cux.oracle.apps.per.review.webui.RoleManageCO">
+               <ui:contents>
+                  <oa:table id="RoleManageVO1" text="定义角色" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="RoleManageVO1" viewAttr="Rownum" sortState="yes" initSortSeq="first"/>
+                        <oa:messageStyledText id="GroupName" dataType="VARCHAR2" viewName="RoleManageVO1" viewAttr="GroupName" prompt="考群" sortState="yes" initSortSeq="third"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" viewName="RoleManageVO1" viewAttr="OrgName" prompt="组织" sortState="yes" initSortSeq="second"/>
+                        <oa:messageStyledText id="RoleCode" viewName="RoleManageVO1" viewAttr="RoleCode" prompt="角色"/>
+                        <oa:messageStyledText id="EmpName" viewName="RoleManageVO1" viewAttr="EmpName" prompt="人员" sortState="yes"/>
+                        <oa:messageStyledText id="Attribute1" dataType="VARCHAR2" prompt="是否审批人" viewName="RoleManageVO1" viewAttr="Attribute1" maximumLength="150"/>
+                        <oa:formValue id="PersonId" dataType="NUMBER" viewName="RoleManageVO1" viewAttr="PersonId" prompt="PersonId"/>
+                        <oa:image id="Upd" prompt="更新" source="detailsicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateReviewRole">
+                                 <ui:parameters>
+                                    <ui:parameter key="roleId" value="${oa.RoleManageVO1.RoleId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="Del" prompt="删除" source="deleteicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delReviewRole">
+                                 <ui:parameters>
+                                    <ui:parameter key="roleId" value="${oa.RoleManageVO1.RoleId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="OrgId" dataType="NUMBER" viewName="RoleManageVO1" viewAttr="OrgId" prompt="OrgId"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="ButtonLayout">
+                           <ui:contents>
+                              <oa:submitButton id="CreateReviewRole" text="创建角色" prompt="创建角色"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="" id="ReviewRoleSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageTextInput id="SearchGroupName" prompt="考群"/>
+                              <oa:messageLovInput id="SearchOrgName" dataType="VARCHAR2" prompt="组织" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN">
+                                 <lovMappings>
+                                    <lovMap id="ToOrgName" lovItem="OrganizationName" resultTo="SearchOrgName" criteriaFrom="SearchOrgName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageLovInput id="SearchEmpName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmpRN" unvalidated="true" queryable="true" prompt="人员">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="LastName" resultTo="SearchEmpName" criteriaFrom="SearchEmpName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="groupNameMap" criteriaItem="SearchGroupName" resultsItem="GroupName"/>
+                  <oa:queryCriteriaMap id="orgNameMap" criteriaItem="SearchOrgName" resultsItem="OrgName"/>
+                  <oa:queryCriteriaMap id="empName" criteriaItem="SearchEmpName" resultsItem="EmpName"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

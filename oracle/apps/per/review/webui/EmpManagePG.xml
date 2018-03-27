@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.review.server.EmpManageAM" title="考群人员管理" windowTitle="考群人员管理">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:productBranding>
+            <oa:image id="ProdBrand" source="FNDTAPPBRAND.gif" shortDesc="OA Framework"/>
+         </ui:productBranding>
+         <ui:pageStatus>
+            <oa:flowLayout id="PageStatusRN">
+               <ui:contents>
+                  <oa:staticStyledText id="PageHelp" messageAppShortName="AK"/>
+               </ui:contents>
+            </oa:flowLayout>
+         </ui:pageStatus>
+         <ui:contents>
+            <oa:query id="QueryRN" mode="autoCustomizationCriteria" dispSimple="true" dispCustomized="false" dispAdvanced="false">
+               <ui:contents>
+                  <oa:table id="ResultsTable" width="100%" userCustomizable="true" controllerClass="cux.oracle.apps.per.review.webui.EmpManageCO">
+                     <ui:contents>
+                        <oa:messageStyledText id="Rownum" dataType="NUMBER" prompt="序号" viewName="EmpManageVO1" initSortSeq="none" sortState="yes" viewAttr="Rownum"/>
+                        <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="姓名" viewName="EmpManageVO1" viewAttr="EmpName" maximumLength="150" queryable="true" selectiveSearchCriteria="true" userCustomizable="true"/>
+                        <oa:messageStyledText id="EmpNum" dataType="VARCHAR2" prompt="员工编号" viewName="EmpManageVO1" viewAttr="EmpNum" maximumLength="30" queryable="true" sortState="yes" initSortSeq="none" selectiveSearchCriteria="true" userCustomizable="true"/>
+                        <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="原组织" viewName="EmpManageVO1" viewAttr="OrgName" maximumLength="240" queryable="true" selectiveSearchCriteria="true" userCustomizable="true" sortState="yes" initSortSeq="none"/>
+                        <oa:messageStyledText id="JobName" dataType="VARCHAR2" prompt="职务" viewName="EmpManageVO1" viewAttr="JobName" maximumLength="200" sortState="no"/>
+                        <oa:messageStyledText id="PositionName" prompt="原岗位" viewName="EmpManageVO1" viewAttr="PositionName" sortState="yes"/>
+                        <oa:messageStyledText id="OriginalGroup" dataType="VARCHAR2" prompt="原考群" viewName="EmpManageVO1" viewAttr="OriginalGroup" maximumLength="200" queryable="true" selectiveSearchCriteria="true" userCustomizable="true" sortState="yes"/>
+                        <oa:messageStyledText id="SupervisorName" dataType="VARCHAR2" prompt="原主管" viewName="EmpManageVO1" viewAttr="SupervisorName" maximumLength="150" sortState="yes"/>
+                        <oa:messageStyledText id="HireDate" dataType="DATE" prompt="入职时间" viewName="EmpManageVO1" viewAttr="HireDate" sortState="yes"/>
+                        <oa:messageStyledText id="ChangeOrg" dataType="VARCHAR2" prompt="变更组织" viewName="EmpManageVO1" viewAttr="ChangeOrg" maximumLength="240" queryable="true" userCustomizable="true" sortState="yes"/>
+                        <oa:messageStyledText id="ChangeGroup" dataType="VARCHAR2" prompt="变更考群" viewName="EmpManageVO1" viewAttr="ChangeGroup" maximumLength="200" queryable="true" userCustomizable="true" sortState="yes"/>
+                        <oa:messageStyledText id="ChangeSupervisor" dataType="VARCHAR2" prompt="变更主管" viewName="EmpManageVO1" viewAttr="ChangeSupervisor" maximumLength="150" sortState="yes"/>
+                        <oa:messageStyledText id="ChangePosition" sortState="yes" viewName="EmpManageVO1" viewAttr="ChangePosition" prompt="变更岗位"/>
+                        <oa:messageStyledText id="ChangeJob" sortState="yes" prompt="变更职务" viewName="EmpManageVO1" viewAttr="ChangeJob"/>
+                        <oa:messageStyledText id="ExcludeFlag" viewName="EmpManageVO1" viewAttr="ExcludeFlag" prompt="排除" sortState="yes"/>
+                        <oa:image id="UpdateImage" source="updateicon_enabled.gif" prompt="更新" imageHeight="24" imageWidth="24">
+                           <ui:primaryClientAction>
+                              <ui:fireAction>
+                                 <ui:parameters>
+                                    <ui:parameter key="personId" value="${oa.EmpManageVO1.EmpId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="查询员工" id="SimpleSearchHdr">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="CustomSimpleSearch" controllerClass="cux.oracle.apps.per.review.webui.EmpManageSearchCO">
+                           <ui:contents>
+                              <oa:messageLovInput id="SearchEmpName" selectiveSearchCriteria="false" prompt="姓名" styleClass="OraFieldText" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" unvalidated="true">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="EmployeeName" resultTo="SearchEmpName" criteriaFrom="SearchEmpName"/>
+                                    <lovMap id="lovMap2" lovItem="EmployeeNumber" resultTo="SearchEmpNum" criteriaFrom="SearchEmpNum"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageTextInput id="SearchEmpNum" selectiveSearchCriteria="false" prompt="员工编号" dataType="VARCHAR2" styleClass="OraFieldText" columns="15"/>
+                              <oa:messageTextInput id="SearchPosition" styleClass="OraFieldText" prompt="原岗位"/>
+                              <oa:messageTextInput id="SearchJob" prompt="变更职务" styleClass="OraFieldText"/>
+                              <oa:messageChoice id="SearchGroup" prompt="原考群" styleClass="OraFieldText" selectiveSearchCriteria="false" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupName" dataType="VARCHAR2"/>
+                              <oa:messageTextInput id="SearchHROrg" unvalidated="true" prompt="原组织"/>
+                              <oa:messageTextInput id="SearchChangeOrg" unvalidated="true" prompt="变更组织"/>
+                              <oa:messageChoice id="SearchChangeGroup" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupName" prompt="变更考群"/>
+                              <oa:messageTextInput id="SearchChangePosition" styleClass="OraFieldText" prompt="变更岗位"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="EmpNameMap" criteriaItem="SearchEmpName" resultsItem="EmpName"/>
+                  <oa:queryCriteriaMap id="EmpNumMap" criteriaItem="SearchEmpNum" resultsItem="EmpNum"/>
+                  <oa:queryCriteriaMap id="EmpGruopMap" criteriaItem="SearchGroup" resultsItem="OriginalGroup"/>
+                  <oa:queryCriteriaMap id="EmpHROrg" criteriaItem="SearchHROrg" resultsItem="OrgName"/>
+                  <oa:queryCriteriaMap id="EmpChangeOrg" criteriaItem="SearchChangeOrg" resultsItem="ChangeOrg"/>
+                  <oa:queryCriteriaMap id="EmpChangeGroup" criteriaItem="SearchChangeGroup" resultsItem="ChangeGroup"/>
+                  <oa:queryCriteriaMap id="EmpPosition" criteriaItem="SearchPosition" resultsItem="PositionName"/>
+                  <oa:queryCriteriaMap id="EmpChangePosition" criteriaItem="SearchChangePosition" resultsItem="ChangePosition"/>
+                  <oa:queryCriteriaMap id="empChangeJob" criteriaItem="SearchJob" resultsItem="ChangeJob"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

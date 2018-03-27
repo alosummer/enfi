@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.ap.oie.entry.header.lov.webui.CuxOATravelDetailLovRNCO">
+   <ui:contents>
+      <oa:table name="CuxOATravelDetailLovRN" id="CuxOATravelDetailLovVO1">
+         <ui:contents>
+            <oa:formValue id="RowNumber" dataType="NUMBER" prompt="RowNumber" viewName="CuxOATravelDetailLovVO1" viewAttr="RowNumber"/>
+            <oa:formValue id="OaTravelHeaderId" dataType="NUMBER" prompt="OaTravelHeaderId" viewName="CuxOATravelDetailLovVO1" viewAttr="OaTravelHeaderId"/>
+            <oa:formValue id="OaTravelLineId" dataType="NUMBER" prompt="OaTravelLineId" viewName="CuxOATravelDetailLovVO1" viewAttr="OaTravelLineId"/>
+            <oa:formValue id="EmpId" dataType="NUMBER" prompt="EmpId" viewName="CuxOATravelDetailLovVO1" viewAttr="EmpId"/>
+            <oa:messageStyledText id="EmpNumber" dataType="VARCHAR2" prompt="员工编号" viewName="CuxOATravelDetailLovVO1" viewAttr="EmpNumber" maximumLength="6" queryable="true"/>
+            <oa:messageStyledText id="EmpName" dataType="VARCHAR2" prompt="员工姓名" viewName="CuxOATravelDetailLovVO1" viewAttr="EmpName" maximumLength="9" queryable="true"/>
+            <oa:messageStyledText id="EmpDept" dataType="VARCHAR2" prompt="部门" viewName="CuxOATravelDetailLovVO1" viewAttr="EmpDept" maximumLength="15"/>
+            <oa:messageStyledText id="TravelReason" dataType="VARCHAR2" prompt="出差事由" viewName="CuxOATravelDetailLovVO1" viewAttr="TravelReason" maximumLength="12"/>
+            <oa:messageStyledText id="TravelType" dataType="VARCHAR2" prompt="出差类型" viewName="CuxOATravelDetailLovVO1" viewAttr="TravelType" maximumLength="6"/>
+            <oa:messageStyledText id="TravelSite" dataType="VARCHAR2" prompt="出差地点" viewName="CuxOATravelDetailLovVO1" viewAttr="TravelSite" maximumLength="6"/>
+            <oa:messageStyledText id="PlanBeginDate" dataType="DATE" prompt="计划开始日期" viewName="CuxOATravelDetailLovVO1" viewAttr="PlanBeginDate"/>
+            <oa:messageStyledText id="PlanEndDate" dataType="DATE" prompt="计划返回日期" viewName="CuxOATravelDetailLovVO1" viewAttr="PlanEndDate"/>
+            <oa:formValue id="RelationshipId" viewName="CuxOATravelDetailLovVO1" viewAttr="RelationshipId"/>
+            <oa:formValue id="RelateOaTravelLineId" viewName="CuxOATravelDetailLovVO1" viewAttr="RelateOaTravelLineId"/>
+            <oa:formValue id="AboardFlag" viewAttr="AboardFlag" viewName="CuxOATravelDetailLovVO1"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

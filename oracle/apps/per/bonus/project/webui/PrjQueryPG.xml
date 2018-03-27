@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" controllerClass="cux.oracle.apps.per.bonus.project.webui.PrjQueryCO" windowTitle="项目管理奖——项目查询页面" title="项目管理奖——项目查询" amDefName="cux.oracle.apps.per.bonus.project.server.ProjectAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:messageComponentLayout id="SearchRN">
+               <ui:contents>
+                  <oa:messageLovInput id="PrjName" prompt="项目名称" externalListOfValues="/cux/oracle/apps/per/bonus/project/webui/PrjLovRN" readOnly="false" unvalidated="true" styleClass="OraDataText">
+                     <lovMappings>
+                        <lovMap id="lovMapPrjName" lovItem="ProjectName" resultTo="PrjName" criteriaFrom="PrjName"/>
+                        <lovMap id="lovMapPrjNum" lovItem="ProjectNum" resultTo="ProjectNum"/>
+                        <lovMap id="lovMapProjectManagerId" lovItem="ProjectManagerId" resultTo="ProjectManagerId"/>
+                        <lovMap id="lovMapPrjSupervisorId" lovItem="ProjectSupervisorId" resultTo="ProjectSupervisorId"/>
+                        <lovMap id="lovMapPrjId" lovItem="ProjectId" resultTo="ProjectId"/>
+                        <lovMap id="lovMapPrjStatusCode" lovItem="ProjectStatusCode" resultTo="ProjectStatusCode"/>
+                        <lovMap id="lovMapProjectCarryingOutOrgName" lovItem="ProjectCarryingOutOrgName" resultTo="ProjectCarryingOutOrgName"/>
+                        <lovMap id="lovMapPrjManagerName" lovItem="ProjectManagerName" resultTo="ProjectManagerName"/>
+                        <lovMap id="lovMapPrjSupervisor" lovItem="ProjectSupervisor" resultTo="ProjectSupervisor"/>
+                        <lovMap id="lovMapPrjStartDate" lovItem="ProjectStartDate" resultTo="ProjectStartDate"/>
+                        <lovMap id="lovMapPrjEndDate" lovItem="ProjectEndDate" resultTo="ProjectEndDate"/>
+                        <lovMap id="lovMapPrjStatusName" lovItem="ProjectStatusName" resultTo="ProjectStatusName"/>
+                        <lovMap id="lovMapProjectNumTxt" lovItem="ProjectNum" resultTo="ProjectNumTxt"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageStyledText id="item47"/>
+                  <oa:messageLovInput id="ProjectNumTxt" prompt="项目编号" styleClass="OraDataText" externalListOfValues="/cux/oracle/apps/per/bonus/project/webui/PrjLovRN" unvalidated="true">
+                     <lovMappings>
+                        <lovMap id="lovMapPrjName1" lovItem="ProjectName" resultTo="PrjName"/>
+                        <lovMap id="lovMapPrjNum1" lovItem="ProjectNum" resultTo="ProjectNum"/>
+                        <lovMap id="lovMapProjectManagerId1" lovItem="ProjectManagerId" resultTo="ProjectManagerId"/>
+                        <lovMap id="lovMapPrjSupervisorId1" lovItem="ProjectSupervisorId" resultTo="ProjectSupervisorId"/>
+                        <lovMap id="lovMapPrjId1" lovItem="ProjectId" resultTo="ProjectId"/>
+                        <lovMap id="lovMapPrjStatusCode1" lovItem="ProjectStatusCode" resultTo="ProjectStatusCode"/>
+                        <lovMap id="lovMapProjectCarryingOutOrgName1" lovItem="ProjectCarryingOutOrgName" resultTo="ProjectCarryingOutOrgName"/>
+                        <lovMap id="lovMapPrjManagerName1" lovItem="ProjectManagerName" resultTo="ProjectManagerName"/>
+                        <lovMap id="lovMapPrjSupervisor1" lovItem="ProjectSupervisor" resultTo="ProjectSupervisor"/>
+                        <lovMap id="lovMapPrjStartDate1" lovItem="ProjectStartDate" resultTo="ProjectStartDate"/>
+                        <lovMap id="lovMapPrjEndDate1" lovItem="ProjectEndDate" resultTo="ProjectEndDate"/>
+                        <lovMap id="lovMapPrjStatusName1" lovItem="ProjectStatusName" resultTo="ProjectStatusName"/>
+                        <lovMap id="lovMapProjectNumTxt1" lovItem="ProjectNum" resultTo="ProjectNumTxt" criteriaFrom="ProjectNumTxt"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageStyledText id="item46"/>
+                  <oa:messageLayout id="messageLayout1">
+                     <ui:contents>
+                        <oa:submitButton id="OKButton" text="确定" prompt="确定" hAlign="right"/>
+                        <oa:separator id="item48"/>
+                        <oa:separator id="item481"/>
+                        <oa:submitButton id="DeptButton" text="部门项目管理奖分配" prompt="部门项目管理奖分配" hAlign="right" rendered="false"/>
+                        <oa:formValue id="ProjectId" dataType="NUMBER"/>
+                        <oa:formValue id="ProjectManagerId" dataType="NUMBER"/>
+                        <oa:formValue id="ProjectSupervisorId" dataType="NUMBER"/>
+                        <oa:formValue id="ProjectStatusCode"/>
+                        <oa:formValue id="ProjectNum"/>
+                        <oa:formValue id="ProjectCarryingOutOrgName" prompt="组织"/>
+                        <oa:formValue id="ProjectManagerName" prompt="项目经理"/>
+                        <oa:formValue id="ProjectSupervisor" prompt="主管领导"/>
+                        <oa:formValue id="ProjectStartDate"/>
+                        <oa:formValue id="ProjectEndDate" prompt="项目完成日期"/>
+                        <oa:formValue id="ProjectStatusName" prompt="项目状态"/>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

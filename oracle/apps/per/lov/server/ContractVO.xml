@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ContractVO"
+   SelectList="ContractEO.CONTRACT_ID, 
+       ContractEO.TMPL_ID, 
+       ContractEO.YEAR, 
+       ContractEO.EFFECTIVE_DATE, 
+       ContractEO.SIGN_DATE, 
+       ContractEO.PROMISEE_PERSON_ID, 
+       ContractEO.PROMISER_PERSON_ID, 
+       ContractEO.PROMISEE_DEPT_ID, 
+       ContractEO.WEIGHT, 
+       ContractEO.TARGET_VALUE, 
+       ContractEO.MINIMUM_VALUE, 
+       ContractEO.RATING_METHOD, 
+       ContractEO.SHOW_SEQ, 
+       ContractEO.KPI_ID, 
+       ContractEO.KPI_AREA, 
+       ContractEO.KPI_NAME, 
+       ContractEO.KPI_DESC, 
+       ContractEO.KPI_CLASS, 
+       ContractEO.KPI_DATA_SOURCE, 
+       ContractEO.KPI_DATA_DIMENSION, 
+       ContractEO.KPI_SCORING_METHOD, 
+       ContractEO.ATTRIBUTE1, 
+       ContractEO.ATTRIBUTE2, 
+       ContractEO.ATTRIBUTE3, 
+       ContractEO.ATTRIBUTE4, 
+       ContractEO.ATTRIBUTE5, 
+       ContractEO.LAST_UPDATE_DATE, 
+       ContractEO.LAST_UPDATED_BY, 
+       ContractEO.LAST_UPDATE_LOGIN, 
+       ContractEO.CREATED_BY, 
+       ContractEO.CREATION_DATE"
+   FromList="CUX_CONTRACT_T ContractEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="cux.oracle.apps.per.lov.server.ContractVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ContractEO"
+      Entity="cux.oracle.apps.per.lov.server.ContractEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="ContractId"
+      IsNotNull="true"
+      EntityAttrName="ContractId"
+      EntityUsage="ContractEO"
+      AliasName="CONTRACT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TmplId"
+      EntityAttrName="TmplId"
+      EntityUsage="ContractEO"
+      AliasName="TMPL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Year"
+      EntityAttrName="Year"
+      EntityUsage="ContractEO"
+      AliasName="YEAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EffectiveDate"
+      EntityAttrName="EffectiveDate"
+      EntityUsage="ContractEO"
+      AliasName="EFFECTIVE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignDate"
+      EntityAttrName="SignDate"
+      EntityUsage="ContractEO"
+      AliasName="SIGN_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiseePersonId"
+      EntityAttrName="PromiseePersonId"
+      EntityUsage="ContractEO"
+      AliasName="PROMISEE_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiserPersonId"
+      EntityAttrName="PromiserPersonId"
+      EntityUsage="ContractEO"
+      AliasName="PROMISER_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromiseeDeptId"
+      EntityAttrName="PromiseeDeptId"
+      EntityUsage="ContractEO"
+      AliasName="PROMISEE_DEPT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="ContractEO"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TargetValue"
+      EntityAttrName="TargetValue"
+      EntityUsage="ContractEO"
+      AliasName="TARGET_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MinimumValue"
+      EntityAttrName="MinimumValue"
+      EntityUsage="ContractEO"
+      AliasName="MINIMUM_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RatingMethod"
+      EntityAttrName="RatingMethod"
+      EntityUsage="ContractEO"
+      AliasName="RATING_METHOD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShowSeq"
+      EntityAttrName="ShowSeq"
+      EntityUsage="ContractEO"
+      AliasName="SHOW_SEQ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      EntityAttrName="KpiId"
+      EntityUsage="ContractEO"
+      AliasName="KPI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiArea"
+      EntityAttrName="KpiArea"
+      EntityUsage="ContractEO"
+      AliasName="KPI_AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiName"
+      EntityAttrName="KpiName"
+      EntityUsage="ContractEO"
+      AliasName="KPI_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDesc"
+      EntityAttrName="KpiDesc"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiClass"
+      EntityAttrName="KpiClass"
+      EntityUsage="ContractEO"
+      AliasName="KPI_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataSource"
+      EntityAttrName="KpiDataSource"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DATA_SOURCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiDataDimension"
+      EntityAttrName="KpiDataDimension"
+      EntityUsage="ContractEO"
+      AliasName="KPI_DATA_DIMENSION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiScoringMethod"
+      EntityAttrName="KpiScoringMethod"
+      EntityUsage="ContractEO"
+      AliasName="KPI_SCORING_METHOD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ContractEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="ContractEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ContractEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="ContractEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

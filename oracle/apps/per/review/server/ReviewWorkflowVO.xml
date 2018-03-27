@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ReviewWorkflowVO"
+   SelectList="ReviewWorkflowEO.ATTRIBUTE1, 
+       ReviewWorkflowEO.ATTRIBUTE2, 
+       ReviewWorkflowEO.ATTRIBUTE3, 
+       ReviewWorkflowEO.ATTRIBUTE4, 
+       ReviewWorkflowEO.ATTRIBUTE5, 
+       ReviewWorkflowEO.CREATED_BY, 
+       ReviewWorkflowEO.CREATION_DATE, 
+       ReviewWorkflowEO.EPM_PERIOD_CODE, 
+       ReviewWorkflowEO.EPM_PHASE_CLASS_CODE, 
+       ReviewWorkflowEO.GROUP_ID, 
+       ReviewWorkflowEO.IS_ATTENDED, 
+       ReviewWorkflowEO.LAST_UPDATED_BY, 
+       ReviewWorkflowEO.LAST_UPDATE_DATE, 
+       ReviewWorkflowEO.LAST_UPDATE_LOGIN, 
+       ReviewWorkflowEO.ORG_ID, 
+       ReviewWorkflowEO.EPM_WORKFLOW_ID"
+   FromList="CUX_REVIEW_WORKFLOW_T ReviewWorkflowEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="cux.oracle.apps.per.review.server.ReviewWorkflowVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.ReviewWorkflowVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.39.81" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ReviewWorkflowEO"
+      Entity="cux.oracle.apps.per.review.server.ReviewWorkflowEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Attribute1"
+      IsUpdateable="false"
+      EntityAttrName="Attribute1"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmPeriodCode"
+      EntityAttrName="EpmPeriodCode"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="EPM_PERIOD_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmPhaseClassCode"
+      EntityAttrName="EpmPhaseClassCode"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="EPM_PHASE_CLASS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      EntityAttrName="GroupId"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsAttended"
+      EntityAttrName="IsAttended"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="IS_ATTENDED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      EntityAttrName="OrgId"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmWorkflowId"
+      EntityAttrName="EpmWorkflowId"
+      EntityUsage="ReviewWorkflowEO"
+      AliasName="EPM_WORKFLOW_ID" >
+   </ViewAttribute>
+</ViewObject>

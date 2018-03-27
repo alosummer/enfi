@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PerLovAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.lov.server.PerLovAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.lov.server.PerLovAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="EmpLovAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>PTCH</JDBCName>
+         <jbo.project>HBWorkspace</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.lov.server.EmpLovAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.lov.server.EmpLovAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

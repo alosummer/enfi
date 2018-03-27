@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目风险管理" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpRiskCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr">
+               <ui:contents>
+                  <oa:table id="PmpRiskVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum" dataType="NUMBER" prompt="序号" viewName="PmpRiskVO1" viewAttr="SeqNum"/>
+                        <oa:messageTextInput id="RiskFactor" dataType="VARCHAR2" prompt="风险因素" viewName="PmpRiskVO1" viewAttr="RiskFactor" maximumLength="900"/>
+                        <oa:messageTextInput id="RiskEvent" dataType="VARCHAR2" prompt="风险事件" viewName="PmpRiskVO1" viewAttr="RiskEvent" maximumLength="900"/>
+                        <oa:messageTextInput id="RiskDesc" dataType="VARCHAR2" prompt="风险描述、影响或损失" viewName="PmpRiskVO1" viewAttr="RiskDesc" maximumLength="3000"/>
+                        <oa:messageTextInput id="RiskCounterMeasure" dataType="VARCHAR2" prompt="风险应对措施(规避、控制、转移或承担)" viewName="PmpRiskVO1" viewAttr="RiskCounterMeasure" maximumLength="3000"/>
+                        <oa:messageTextInput id="Memo" dataType="VARCHAR2" prompt="备注" viewName="PmpRiskVO1" viewAttr="Memo" maximumLength="3000"/>
+                        <oa:image id="Delete" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="Delete"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="Add" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="Add"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

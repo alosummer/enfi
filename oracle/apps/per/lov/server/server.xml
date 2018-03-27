@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.per.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="ContractEO"
+      FullName="cux.oracle.apps.per.lov.server.ContractEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="ContractVO"
+      FullName="cux.oracle.apps.per.lov.server.ContractVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpLovAM"
+      FullName="cux.oracle.apps.per.lov.server.EmpLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="EmpNameVO"
+      FullName="cux.oracle.apps.per.lov.server.EmpNameVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="HROrganizationVO"
+      FullName="cux.oracle.apps.per.lov.server.HROrganizationVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="KpiConJobLovVO"
+      FullName="cux.oracle.apps.per.lov.server.KpiConJobLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OrganizationVO"
+      FullName="cux.oracle.apps.per.lov.server.OrganizationVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerEmpVO"
+      FullName="cux.oracle.apps.per.lov.server.PerEmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerJobVO"
+      FullName="cux.oracle.apps.per.lov.server.PerJobVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerKPITmp1VO"
+      FullName="cux.oracle.apps.per.lov.server.PerKPITmp1VO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerKPITmpVO"
+      FullName="cux.oracle.apps.per.lov.server.PerKPITmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerKPIVO"
+      FullName="cux.oracle.apps.per.lov.server.PerKPIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerLovAM"
+      FullName="cux.oracle.apps.per.lov.server.PerLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="PerOrganizationVO"
+      FullName="cux.oracle.apps.per.lov.server.PerOrganizationVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerVO"
+      FullName="cux.oracle.apps.per.lov.server.PerVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PositionLovVO"
+      FullName="cux.oracle.apps.per.lov.server.PositionLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ValueSetDynVO"
+      FullName="cux.oracle.apps.per.lov.server.ValueSetDynVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ValuesetVO"
+      FullName="cux.oracle.apps.per.lov.server.ValuesetVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="WfStatusVO"
+      FullName="cux.oracle.apps.per.lov.server.WfStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

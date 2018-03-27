@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PerReviewAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.PerReviewAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.PerReviewAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="KeyPIAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.KeyPIAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.KeyPIAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="TmplManageAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.TmplManageAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.TmplManageAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="AppraisalAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.AppraisalAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.AppraisalAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="WorkflowControlAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>cux.REP</JDBCName>
+         <jbo.project>per_review</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.WorkflowControlAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.WorkflowControlAM</ApplicationName>
+      </AppModuleConfig>
+      <AppModuleConfig name="WorkflowUpdateAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>PTCH</JDBCName>
+         <jbo.project>HBWorkspace</jbo.project>
+         <AppModuleJndiName>cux.oracle.apps.per.review.server.WorkflowUpdateAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>cux.oracle.apps.per.review.server.WorkflowUpdateAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

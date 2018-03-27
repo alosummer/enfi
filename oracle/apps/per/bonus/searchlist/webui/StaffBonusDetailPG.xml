@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.searchlist.MonthAndDeptAM" windowTitle="员工奖金明细查询" title="员工奖金明细查询" controllerClass="cux.oracle.apps.per.bonus.searchlist.webui.StaffBonusDetailCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="searchHD">
+               <ui:contents>
+                  <oa:messageComponentLayout id="MC">
+                     <ui:contents>
+                        <oa:messageChoice id="deptMC" prompt="员工所在部门" defaultValue="" required="yes" allowBlankValue="false" pickListViewDef="" pickListViewName="DeptOV1" pickListDispAttr="DepName" pickListValAttr="DepName"/>
+                        <oa:messageChoice id="monthMC" prompt="月份" defaultValue="" required="yes" allowBlankValue="false" pickListViewDef="" pickListDispAttr="PeriodName" pickListValAttr="PeriodName" dataType="VARCHAR2" pickListViewName="MonthVO1"/>
+                        <oa:messageLayout id="buttonLayout">
+                           <ui:contents>
+                              <oa:submitButton id="searchBN" hAlign="center" text="搜索" prompt="搜索">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="search" id="fireAction11"/>
+                                 </ui:primaryClientAction>
+                              </oa:submitButton>
+                           </ui:contents>
+                        </oa:messageLayout>
+                     </ui:contents>
+                  </oa:messageComponentLayout>
+                  <oa:stackLayout id="Query1Layout">
+                     <ui:contents>
+                        <oa:staticStyledText id="ResultsHelp" text="员工奖金明细查询" prompt="员工奖金明细查询"/>
+                        <oa:tip id="Decription" text="点击“导出”按钮导出到Excel。  单位：元"/>
+                        <oa:exportButton id="Exportbt" exportAllRows="true" text="导出Excel" viewName="searchVO1"/>
+                        <oa:table id="ResultTable" width="100%" blockSize="50">
+                           <ui:contents>
+                              <oa:messageStyledText id="PersonId" dataType="NUMBER" prompt="工号" viewName="searchVO1" viewAttr="PersonId"/>
+                              <oa:messageStyledText id="LastName" dataType="VARCHAR2" prompt="姓名" viewName="searchVO1" viewAttr="LastName" maximumLength="150"/>
+                              <oa:messageStyledText id="ElementName" dataType="VARCHAR2" prompt="薪资项" viewName="searchVO1" viewAttr="ElementName" maximumLength="80"/>
+                              <oa:messageStyledText id="DistributionAmount" dataType="NUMBER" prompt="金额" viewName="searchVO1" viewAttr="DistributionAmount"/>
+                              <oa:messageStyledText id="DistributiondepName" dataType="VARCHAR2" prompt="发放部门" viewName="searchVO1" viewAttr="DistributiondepName" maximumLength="150"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:stackLayout>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" windowTitle="调整审批序列" title="调整审批序列" controllerClass="cux.oracle.apps.per.review.webui.WorkflowControlAdjustCO" amDefName="cux.oracle.apps.per.review.server.WorkflowControlAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="WorkflowAttendVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="AppSeq" dataType="NUMBER" prompt="审批顺序" viewName="WorkflowAttendVO1" viewAttr="AppSeq"/>
+                  <oa:messageLovInput id="EmpName" dataType="VARCHAR2" prompt="审批人" viewName="WorkflowAttendVO1" viewAttr="EmpName" maximumLength="150" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerEmployeeRN" queryable="true">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="LastName" resultTo="EmpName" criteriaFrom="EmpName"/>
+                        <lovMap id="lovMap3" lovItem="PersonId" resultTo="PersonId"/>
+                        <lovMap id="lovMap4" lovItem="OrganizationName" resultTo="OrganizationName" criteriaFrom="OrganizationName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageStyledText id="OrganizationName1" dataType="VARCHAR2" prompt="所在组织" viewName="WorkflowAttendVO1" viewAttr="OrganizationName" maximumLength="240"/>
+                  <oa:formValue id="OrganizationName" dataType="VARCHAR2" prompt="所在组织" viewName="WorkflowAttendVO1" viewAttr="OrganizationName"/>
+                  <oa:formValue id="AttendId" dataType="NUMBER" prompt="AttendId" viewName="WorkflowAttendVO1" viewAttr="AttendId"/>
+                  <oa:formValue id="AppraisalId" dataType="NUMBER" prompt="AppraisalId" viewName="WorkflowAttendVO1" viewAttr="AppraisalId"/>
+                  <oa:formValue id="PersonId" dataType="NUMBER" prompt="PersonId" viewName="WorkflowAttendVO1" viewAttr="PersonId"/>
+                  <oa:switcher regionName="Toolbox Orders Update Switch" viewName="WorkflowAttendVO1" viewAttr="UpdateImage" id="UpdateSwitcher" use="/oracle/apps/fnd/attributesets/Buttons/Update" rendered="false">
+                     <ui:case name="case3">
+                        <oa:image source="updateicon_enabled.gif" destination="" shortDesc="Select to update information." id="UpdateEnabled" imageHeight="24" imageWidth="24">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateContractChild" id="fireAction1"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:case>
+                     <ui:case name="case4">
+                        <oa:image source="updateicon_disabled.gif" shortDesc="Update functionality disabled" id="UpdateDisabled" imageHeight="24" imageWidth="24"/>
+                     </ui:case>
+                  </oa:switcher>
+                  <oa:switcher regionName="" viewName="WorkflowAttendVO1" viewAttr="DeleteImage" id="DeleteSwitcher" use="/oracle/apps/fnd/attributesets/Buttons/Delete">
+                     <ui:case name="DeleteEnabled">
+                        <oa:image id="DeleteEnabled" source="deleteicon_enabled.gif" imageHeight="24" imageWidth="24" shortDesc="Select to delete information.">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delete" id="fireAction11">
+                                 <ui:parameters>
+                                    <ui:parameter key="attendId" value="${oa.WorkflowAttendVO1.AttendId}"/>
+                                    <ui:parameter key="appraisalId" value="${oa.WorkflowAttendVO1.AppraisalId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:case>
+                     <ui:case name="case2">
+                        <oa:image source="deleteicon_disabled.gif" shortDesc="Delete functionality disabled." id="DeleteDisabled" imageHeight="24" imageWidth="24"/>
+                     </ui:case>
+                  </oa:switcher>
+               </ui:contents>
+            </oa:table>
+         </ui:contents>
+         <ui:contentFooter>
+            <oa:contentFooter id="region1">
+               <ui:contents>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+                  <oa:spacer id="item1" width="10"/>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" serverUnvalidated="true" unvalidated="true"/>
+               </ui:contents>
+            </oa:contentFooter>
+         </ui:contentFooter>
+      </oa:pageLayout>
+   </content>
+</page>

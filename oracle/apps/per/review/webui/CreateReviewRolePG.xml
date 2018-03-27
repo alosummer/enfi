@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" windowTitle="定义角色" title="定义角色" controllerClass="cux.oracle.apps.per.review.webui.CreateReviewRoleCO" amDefName="cux.oracle.apps.per.review.server.RoleManageAM">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:formValue id="OrgId" viewName="RoleManageCreateVO1" viewAttr="OrgId" dataType="NUMBER"/>
+                  <oa:messageChoice id="GroupId" viewName="RoleManageCreateVO1" prompt="考群" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" dataType="NUMBER" pickListDispAttr="GroupName" viewAttr="GroupId" pickListValAttr="GroupId" required="yes"/>
+                  <oa:messageLovInput id="PersonName" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" unvalidated="false" prompt="人员" viewName="RoleManageCreateVO1" viewAttr="EmpName" required="yes">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="EmployeeName" resultTo="PersonName" criteriaFrom="PersonName"/>
+                        <lovMap id="lovMap2" lovItem="PersonId" resultTo="PersonId" criteriaFrom="PersonId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="PersonId" viewName="RoleManageCreateVO1" viewAttr="PersonId" dataType="NUMBER"/>
+                  <oa:messageLovInput id="OrgName" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" prompt="组织" viewName="RoleManageCreateVO1" viewAttr="OrgName" required="yes">
+                     <lovMappings>
+                        <lovMap id="ToOrgNmae" lovItem="OrganizationName" resultTo="OrgName" criteriaFrom="OrgName"/>
+                        <lovMap id="ToOrgId" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageChoice id="RoleCode" dataType="VARCHAR2" prompt="角色" viewName="RoleManageCreateVO1" viewAttr="RoleCode" pickListViewDef="cux.oracle.apps.per.poplist.server.RoleTypeVO" pickListDispAttr="Meaning" pickListValAttr="Meaning" required="yes"/>
+                  <oa:messageChoice id="Attribute1" dataType="VARCHAR2" prompt="是否审批人" viewName="RoleManageCreateVO1" viewAttr="Attribute1" defaultValue="N" pickListViewDef="cux.oracle.apps.per.poplist.server.FlagVO" pickListDispAttr="FlagMeanig" pickListValAttr="FlagCode"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" serverUnvalidated="true" unvalidated="true" text="取消" prompt="取消" hAlign="right"/>
+                  <oa:submitButton id="Apply" text="保存" prompt="保存" hAlign="right"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

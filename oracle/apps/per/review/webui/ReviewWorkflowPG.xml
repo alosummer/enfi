@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.ReviewWorkflowAM" windowTitle="考核流程设置" title="考核流程设置" controllerClass="cux.oracle.apps.per.review.webui.ReviewWorkflowCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="MainRN" mode="autoCustomizationCriteria">
+               <ui:contents>
+                  <oa:table id="ReviewWorkflowVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="RowNum" dataType="NUMBER" viewName="ReviewWorkflowFilVO1" viewAttr="Rownum" prompt="序号" sortState="yes" initSortSeq="first"/>
+                        <oa:messageStyledText id="PeriodName" required="yes" viewName="ReviewWorkflowFilVO1" viewAttr="PeriodName" prompt="周期" sortState="yes"/>
+                        <oa:messageStyledText id="PhaseName" required="yes" viewName="ReviewWorkflowFilVO1" viewAttr="PhaseName" prompt="阶段" sortState="yes"/>
+                        <oa:messageStyledText id="GroupName" required="no" viewName="ReviewWorkflowFilVO1" viewAttr="GroupName" prompt="考群" dataType="VARCHAR2" sortState="yes"/>
+                        <oa:messageStyledText id="OrgName" required="yes" viewName="ReviewWorkflowFilVO1" viewAttr="OrgName" prompt="组织" dataType="VARCHAR2" sortState="yes"/>
+                        <oa:messageStyledText id="IsAtended" required="no" prompt="被评估人参与" viewName="ReviewWorkflowFilVO1" viewAttr="IsAttended" sortState="yes"/>
+                        <oa:messageStyledText id="Workflow1" viewName="ReviewWorkflowFilVO1" viewAttr="Workflow1" prompt="一级审批/受理人" sortState="yes"/>
+                        <oa:messageStyledText id="Workflow2" viewName="ReviewWorkflowFilVO1" viewAttr="Workflow2" prompt="二级审批/受理人" sortState="yes"/>
+                        <oa:messageStyledText id="Workflow3" viewName="ReviewWorkflowFilVO1" viewAttr="Workflow3" prompt="三级审批/受理人" sortState="yes"/>
+                        <oa:messageStyledText id="Workflow4" viewName="ReviewWorkflowFilVO1" viewAttr="Workflow4" prompt="四级审批/受理人" sortState="yes"/>
+                        <oa:image id="update" source="updateicon_enabled.gif" shortDesc="Select to update this workflow" imageHeight="24" imageWidth="24" prompt="更新">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="updateReviewWorkflow">
+                                 <ui:parameters>
+                                    <ui:parameter key="EpmWorkflowId" value="${oa.ReviewWorkflowFilVO1.EpmWorkflowId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:image id="delete" prompt="删除" source="deleteicon_enabled.gif">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="delReviewWorkflow">
+                                 <ui:parameters>
+                                    <ui:parameter key="EpmWorkflowId" value="${oa.ReviewWorkflowFilVO1.EpmWorkflowId}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                        <oa:formValue id="GroupId" dataType="NUMBER" viewName="ReviewWorkflowFilVO1" viewAttr="GroupId"/>
+                        <oa:formValue id="OrgId" dataType="NUMBER" viewName="ReviewWorkflowFilVO1" viewAttr="OrgId"/>
+                        <oa:formValue id="EpmPhaseClassCode" viewName="ReviewWorkflowFilVO1" viewAttr="EpmPhaseClassCode"/>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="TableActionRN">
+                           <ui:contents>
+                              <oa:submitButton id="CreateReviewWorkflow" text="创建考核流程" prompt="创建考核流程"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+               <oa:simpleSearchPanel>
+                  <oa:header text="查询考核流程" id="ReviewWorkflowSearchRN">
+                     <ui:contents>
+                        <oa:messageComponentLayout id="SearchRN">
+                           <ui:contents>
+                              <oa:messageChoice id="SearchGroupName" dataType="NUMBER" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId" prompt="考群"/>
+                              <oa:messageLovInput id="SearchOrgName" dataType="VARCHAR2" prompt="组织" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN" unvalidated="true">
+                                 <lovMappings>
+                                    <lovMap id="OrgNameMap" lovItem="OrganizationName" resultTo="SearchOrgName" criteriaFrom="SearchOrgName"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                              <oa:messageChoice id="SearchPhase" pickListViewDef="cux.oracle.apps.per.poplist.server.EmpPhaseVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="阶段"/>
+                           </ui:contents>
+                        </oa:messageComponentLayout>
+                     </ui:contents>
+                  </oa:header>
+               </oa:simpleSearchPanel>
+               <oa:simpleSearchMappings>
+                  <oa:queryCriteriaMap id="groupNameMap" criteriaItem="SearchGroupName" resultsItem="GroupId"/>
+                  <oa:queryCriteriaMap id="orgNameMap" criteriaItem="SearchOrgName" resultsItem="OrgName"/>
+                  <oa:queryCriteriaMap id="phaseMap" criteriaItem="SearchPhase" resultsItem="EpmPhaseClassCode"/>
+               </oa:simpleSearchMappings>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.pa.ds.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="DsLovAM"
+      FullName="cux.oracle.apps.pa.ds.lov.server.DsLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="DsProjectVO"
+      FullName="cux.oracle.apps.pa.ds.lov.server.DsProjectVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DsSpecialityVO"
+      FullName="cux.oracle.apps.pa.ds.lov.server.DsSpecialityVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DsTemplateLovVO"
+      FullName="cux.oracle.apps.pa.ds.lov.server.DsTemplateLovVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="SpecPersonVO"
+      FullName="cux.oracle.apps.pa.ds.lov.server.SpecPersonVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TaskVO"
+      FullName="cux.oracle.apps.pa.ds.lov.server.TaskVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

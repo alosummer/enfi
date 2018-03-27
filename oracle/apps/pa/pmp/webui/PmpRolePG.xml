@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="项目主要管理人员名单" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpRoleCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="ContentHdr">
+               <ui:contents>
+                  <oa:table id="PmpRoleVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageStyledText id="SeqNum" dataType="NUMBER" prompt="序号" viewName="PmpRoleVO1" viewAttr="SeqNum"/>
+                        <oa:messageStyledText id="ProjectRole" dataType="VARCHAR2" prompt="职务" viewName="PmpRoleVO1" viewAttr="ProjectRole" maximumLength="80"/>
+                        <oa:messageStyledText id="FullName" dataType="VARCHAR2" prompt="姓名" viewName="PmpRoleVO1" viewAttr="FullName" maximumLength="240"/>
+                        <oa:messageStyledText id="OfficeNumber" dataType="VARCHAR2" prompt="电话" viewName="PmpRoleVO1" viewAttr="OfficeNumber" maximumLength="45"/>
+                        <oa:messageStyledText id="InternalLocation" dataType="VARCHAR2" prompt="手机" viewName="PmpRoleVO1" viewAttr="InternalLocation" maximumLength="45"/>
+                        <oa:messageStyledText id="EmailAddress" dataType="VARCHAR2" prompt="E-Mail" viewName="PmpRoleVO1" viewAttr="EmailAddress" maximumLength="240"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

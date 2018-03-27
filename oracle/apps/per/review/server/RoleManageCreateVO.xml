@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RoleManageCreateVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.RoleManageCreateVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.RoleManageCreateVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RoleManageEO.ROLE_ID, 
+       RoleManageEO.GROUP_ID, 
+       RoleManageEO.ORG_ID, 
+       RoleManageEO.PERSON_ID, 
+       RoleManageEO.ROLE_CODE, 
+       RoleManageEO.ATTRIBUTE1, 
+       RoleManageEO.ATTRIBUTE2, 
+       RoleManageEO.ATTRIBUTE3, 
+       RoleManageEO.ATTRIBUTE4, 
+       RoleManageEO.ATTRIBUTE5, 
+       RoleManageEO.ATTRIBUTE6, 
+       RoleManageEO.ATTRIBUTE7, 
+       RoleManageEO.ATTRIBUTE8, 
+       RoleManageEO.ATTRIBUTE9, 
+       RoleManageEO.ATTRIBUTE10, 
+       RoleManageEO.LAST_UPDATE_DATE, 
+       RoleManageEO.LAST_UPDATED_BY, 
+       RoleManageEO.LAST_UPDATE_LOGIN, 
+       RoleManageEO.CREATED_BY, 
+       RoleManageEO.CREATION_DATE,
+       houv.name org_name,
+       ppx.LAST_NAME emp_name
+FROM CUX_GROUP_ROLE_T RoleManageEO,
+     hr_all_organization_units houv,
+     per_all_people_f ppx
+where RoleManageEO.Org_Id = houv.organization_id(+)
+  and RoleManageEO.Person_Id = ppx.PERSON_ID(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RoleManageEO"
+      Entity="cux.oracle.apps.per.review.server.RoleManageEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RoleId"
+      IsNotNull="true"
+      EntityAttrName="RoleId"
+      EntityUsage="RoleManageEO"
+      AliasName="ROLE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GroupId"
+      IsNotNull="true"
+      EntityAttrName="GroupId"
+      EntityUsage="RoleManageEO"
+      AliasName="GROUP_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgId"
+      IsNotNull="true"
+      EntityAttrName="OrgId"
+      EntityUsage="RoleManageEO"
+      AliasName="ORG_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonId"
+      IsNotNull="true"
+      EntityAttrName="PersonId"
+      EntityUsage="RoleManageEO"
+      AliasName="PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoleCode"
+      EntityAttrName="RoleCode"
+      EntityUsage="RoleManageEO"
+      AliasName="ROLE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      EntityAttrName="Attribute6"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE6" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      EntityAttrName="Attribute7"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE7" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      EntityAttrName="Attribute8"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE8" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute9"
+      EntityAttrName="Attribute9"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE9" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute10"
+      EntityAttrName="Attribute10"
+      EntityUsage="RoleManageEO"
+      AliasName="ATTRIBUTE10" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RoleManageEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RoleManageEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RoleManageEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RoleManageEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RoleManageEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrgName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORG_NAME"
+      Expression="ORG_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpName"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMP_NAME"
+      Expression="EMP_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

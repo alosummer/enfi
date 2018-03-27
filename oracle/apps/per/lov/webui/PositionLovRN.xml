@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/" amDefName="cux.oracle.apps.per.lov.server.EmpLovAM">
+   <ui:contents>
+      <oa:table name="PositionLovRN" id="PositionLovVO1">
+         <ui:contents>
+            <oa:formValue id="PositionDefinitionId" dataType="NUMBER" prompt="PositionDefinitionId" viewName="PositionLovVO1" viewAttr="PositionDefinitionId"/>
+            <oa:messageStyledText id="LastPosition" dataType="VARCHAR2" prompt="岗位简称" viewName="PositionLovVO1" viewAttr="LastPosition" maximumLength="60" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

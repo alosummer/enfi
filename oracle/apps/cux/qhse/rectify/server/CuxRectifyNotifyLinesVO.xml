@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="CuxRectifyNotifyLinesVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesVORowImpl"
+   ComponentClass="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT cuxrectifynotifylineseo.header_id,
+       cuxrectifynotifylineseo.line_id,
+       cuxrectifynotifylineseo.problem_name,
+       cuxrectifynotifylineseo.problem_desc,
+       cuxrectifynotifylineseo.status_code,
+       pps.project_status_name status_name,
+       cuxrectifynotifylineseo.problem_category,
+       cuxrectifynotifylineseo.pro_duty_person_id,
+       ppf.full_name || '(' || ppf.employee_number || ')' pro_duty_person_name,
+       cuxrectifynotifylineseo.complete_date,
+       cuxrectifynotifylineseo.check_date,
+       cuxrectifynotifylineseo.check_range,
+       cuxrectifynotifylineseo.creation_date,
+       cuxrectifynotifylineseo.created_by,
+       cuxrectifynotifylineseo.last_update_date,
+       cuxrectifynotifylineseo.last_updated_by,
+       cuxrectifynotifylineseo.last_update_login,
+       cuxrectifynotifylineseo.attribute_category,
+       cuxrectifynotifylineseo.attribute1,
+       cuxrectifynotifylineseo.attribute2,
+       cuxrectifynotifylineseo.attribute3,
+       cuxrectifynotifylineseo.attribute4,
+       cuxrectifynotifylineseo.attribute5
+  FROM cux.cux_rectify_notify_lines cuxrectifynotifylineseo,
+       per_all_people_f             ppf,
+       pa_project_statuses          pps
+ WHERE cuxrectifynotifylineseo.status_code = pps.project_status_code
+   AND pps.status_type = 'CONTROL_ITEM'
+   AND ppf.person_id = cuxrectifynotifylineseo.pro_duty_person_id
+   AND trunc(SYSDATE) BETWEEN nvl(ppf.effective_start_date,
+                                  SYSDATE) AND
+       nvl(ppf.effective_end_date,
+           SYSDATE)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="CuxRectifyNotifyLinesEO"
+      Entity="cux.oracle.apps.cux.qhse.rectify.server.CuxRectifyNotifyLinesEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="HeaderId"
+      IsNotNull="true"
+      EntityAttrName="HeaderId"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineId"
+      IsNotNull="true"
+      EntityAttrName="LineId"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="LINE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemName"
+      EntityAttrName="ProblemName"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="PROBLEM_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemDesc"
+      EntityAttrName="ProblemDesc"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="PROBLEM_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusCode"
+      EntityAttrName="StatusCode"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusName"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_NAME"
+      Expression="STATUS_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProblemCategory"
+      EntityAttrName="ProblemCategory"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="PROBLEM_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProDutyPersonId"
+      EntityAttrName="ProDutyPersonId"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="PRO_DUTY_PERSON_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProDutyPersonName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRO_DUTY_PERSON_NAME"
+      Expression="PRO_DUTY_PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CompleteDate"
+      EntityAttrName="CompleteDate"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="COMPLETE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CheckDate"
+      EntityAttrName="CheckDate"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="CHECK_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CheckRange"
+      EntityAttrName="CheckRange"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="CHECK_RANGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="CuxRectifyNotifyLinesEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

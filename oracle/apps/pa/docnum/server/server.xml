@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.pa.docnum.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="DocnumDetailHeaderVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumDetailHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DocnumDetailLineVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumDetailLineVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DocNumReqAM"
+      FullName="cux.oracle.apps.pa.docnum.server.DocNumReqAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="DocnumReqEO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumReqEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="DocnumReqLineEO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumReqLineEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="DocnumReqVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumReqVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DocNumStatusVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocNumStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DocnumSummaryPVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumSummaryPVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DocnumSummaryVO"
+      FullName="cux.oracle.apps.pa.docnum.server.DocnumSummaryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="GenDocNumPVO"
+      FullName="cux.oracle.apps.pa.docnum.server.GenDocNumPVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

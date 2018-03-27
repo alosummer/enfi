@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" amDefName="cux.oracle.apps.per.review.server.PerReviewAM" controllerClass="cux.oracle.apps.per.review.webui.CreateGrpRangeCO" windowTitle="定义考群范围" title="定义考群范围">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:formValue id="JobId" dataType="NUMBER" viewName="PerGrpRangeVO1" viewAttr="JobId"/>
+                  <oa:messageLovInput id="JobName" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerJobRN" prompt="职务">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="JobName" resultTo="JobName" criteriaFrom="JobName"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+            <oa:pageButtonBar id="pageButtonBar">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" text="取消" prompt="取消" unvalidated="true" serverUnvalidated="true"/>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

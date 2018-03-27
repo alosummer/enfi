@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.review.server.EmpManageAM" warnAboutChanges="true" windowTitle="更新考核人员信息" title="更新考核人员信息" controllerClass="cux.oracle.apps.per.review.webui.EmpUpdateCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="PageButtons">
+               <ui:contents>
+                  <oa:submitButton id="Cancel" serverUnvalidated="true" unvalidated="true" text="取消" prompt="取消" shortDesc="select to cancel this tracnsaction"/>
+                  <oa:submitButton id="Apply" text="应用" prompt="应用" shortDesc="select to save this employee"/>
+                  <oa:submitButton id="Delete" text="删除" prompt="删除" shortDesc="select to delete this employee's change"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:defaultSingleColumn id="MainRN">
+               <ui:contents>
+                  <oa:messageChoice id="ChangeGroup" dataType="NUMBER" prompt="变更考群" viewName="EmpChangeVO1" viewAttr="GroupId" pickListViewDef="cux.oracle.apps.per.poplist.server.PerGroupVO" pickListDispAttr="GroupName" pickListValAttr="GroupId"/>
+                  <oa:formValue id="GroupId" dataType="NUMBER" prompt="GroupId" viewName="EmpChangeVO1" viewAttr="GroupId"/>
+                  <oa:messageLovInput id="ChangeOrg" dataType="VARCHAR2" prompt="变更组织" viewName="EmpChangeVO1" viewAttr="ChangeOrg" maximumLength="240" externalListOfValues="/cux/oracle/apps/per/lov/webui/HROrgLovRN">
+                     <lovMappings>
+                        <lovMap id="ToChangeOrg" lovItem="OrganizationName" resultTo="ChangeOrg" criteriaFrom="ChangeOrg"/>
+                        <lovMap id="ToCOrgId" lovItem="OrganizationId" resultTo="OrgId" criteriaFrom="OrgId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="OrgId" dataType="NUMBER" prompt="OrgId" viewName="EmpChangeVO1" viewAttr="OrgId"/>
+                  <oa:messageLovInput id="SupervisorName" dataType="VARCHAR2" prompt="变更主管" viewName="EmpChangeVO1" viewAttr="SupervisorName" maximumLength="150" externalListOfValues="/cux/oracle/apps/per/lov/webui/EmpLovRN" styleClass="OraFieldText">
+                     <lovMappings>
+                        <lovMap id="ToFromMgrName" lovItem="EmployeeName" resultTo="SupervisorName" criteriaFrom="SupervisorName"/>
+                        <lovMap id="ToCSupervisorId" lovItem="PersonId" resultTo="SupervisorId" criteriaFrom="SupervisorId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="SupervisorId" dataType="NUMBER" prompt="SupervisorId" viewName="EmpChangeVO1" viewAttr="SupervisorId"/>
+                  <oa:messageLovInput id="ChangePosition" prompt="变更岗位" viewName="EmpChangeVO1" viewAttr="ChangePosition" externalListOfValues="/cux/oracle/apps/per/lov/webui/PositionLovRN">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="LastPosition" resultTo="ChangePosition" criteriaFrom="ChangePosition"/>
+                        <lovMap id="lovMap2" lovItem="PositionDefinitionId" resultTo="PositionId" criteriaFrom="PositionId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="PositionId" prompt="PositionId" viewName="EmpChangeVO1" viewAttr="Attribute2" dataType="VARCHAR2"/>
+                  <oa:messageLovInput id="Changejob" prompt="变更职务" viewName="EmpChangeVO1" viewAttr="ChangeJob" externalListOfValues="/cux/oracle/apps/per/lov/webui/PerJobRN">
+                     <lovMappings>
+                        <lovMap id="lovMap11" lovItem="JobName" resultTo="Changejob" criteriaFrom="Changejob"/>
+                        <lovMap id="lovMap21" lovItem="JobId" resultTo="JobId" criteriaFrom="JobId"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:formValue id="JobId" viewName="EmpChangeVO1" viewAttr="Attribute3"/>
+                  <oa:messageChoice id="ExcludeFlag" prompt="排除" viewName="EmpChangeVO1" viewAttr="Attribute1" pickListViewDef="cux.oracle.apps.per.poplist.server.FlagVO" pickListDispAttr="FlagMeanig" pickListValAttr="FlagCode"/>
+               </ui:contents>
+            </oa:defaultSingleColumn>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

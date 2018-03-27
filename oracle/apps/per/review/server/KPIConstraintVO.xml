@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='GBK' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="KPIConstraintVO"
+   OrderBy="rownum"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.per.review.server.KPIConstraintVORowImpl"
+   ComponentClass="cux.oracle.apps.per.review.server.KPIConstraintVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT rownum,
+       KPIConstraintEO.CONSTRAINT_ID,
+       KPIConstraintEO.KPI_ID,
+       KPIConstraintEO.CONSTRAINT_TYPE,
+       KPIConstraintEO.CONSTRAINT_OBJ,
+       KPIConstraintEO.CONSTRAINT_JOB,
+       KPIConstraintEO.CONSTRAINT_DATA_DIM,
+       KPIConstraintEO.ATTRIBUTE1,
+       KPIConstraintEO.ATTRIBUTE2,
+       KPIConstraintEO.ATTRIBUTE3,
+       KPIConstraintEO.ATTRIBUTE4,
+       KPIConstraintEO.ATTRIBUTE5,
+       KPIConstraintEO.LAST_UPDATE_DATE,
+       KPIConstraintEO.LAST_UPDATED_BY,
+       KPIConstraintEO.LAST_UPDATE_LOGIN,
+       KPIConstraintEO.CREATED_BY,
+       KPIConstraintEO.CREATION_DATE,
+       lv.meaning,
+       cjc.epm_cj_name,
+       cov.NAME ORGANIZATION_NAME
+  FROM CUX_KPI_CONSTRAINT_T KPIConstraintEO,
+       fnd_lookup_values    lv,
+       cux_epm_cjo_v        cjc,
+       cux_organization_v   cov
+ where lv.lookup_type = 'EPM_OBJECT_CLASS'
+   AND lv.LANGUAGE = userenv('LANG')
+   AND nvl(lv.start_date_active, SYSDATE) <= SYSDATE
+   AND nvl(lv.end_date_active, SYSDATE) >= SYSDATE
+   and KPIConstraintEO.Constraint_Type = lv.lookup_code(+)
+   and KPIConstraintEO.Constraint_Job = cjc.epm_cj_code(+)
+   and KPIConstraintEO.Constraint_Type = cjc.Constraint_Type(+)
+   and KPIConstraintEO.Constraint_Obj = cov.organization_id(+)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="KPIConstraintEO"
+      Entity="cux.oracle.apps.per.review.server.KPIConstraintEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rownum"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ROWNUM"
+      Expression="ROWNUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintId"
+      IsNotNull="true"
+      EntityAttrName="ConstraintId"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CONSTRAINT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KpiId"
+      EntityAttrName="KpiId"
+      EntityUsage="KPIConstraintEO"
+      AliasName="KPI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintType"
+      EntityAttrName="ConstraintType"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CONSTRAINT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintObj"
+      EntityAttrName="ConstraintObj"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CONSTRAINT_OBJ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintJob"
+      EntityAttrName="ConstraintJob"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CONSTRAINT_JOB" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstraintDataDim"
+      EntityAttrName="ConstraintDataDim"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CONSTRAINT_DATA_DIM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="KPIConstraintEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="KPIConstraintEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="KPIConstraintEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="KPIConstraintEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="KPIConstraintEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="KPIConstraintEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="KPIConstraintEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="KPIConstraintEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="KPIConstraintEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EpmCjName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EPM_CJ_NAME"
+      Expression="EPM_CJ_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORGANIZATION_NAME"
+      Expression="ORGANIZATION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="KeyPIVO"
+      ViewLink="cux.oracle.apps.per.review.server.KPIConstraintVL"
+      Type="oracle.jbo.Row"
+      Reversed="true"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+</ViewObject>

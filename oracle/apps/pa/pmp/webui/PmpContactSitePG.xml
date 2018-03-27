@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="region1" amDefName="cux.oracle.apps.pa.pmp.server.PmpAM" windowTitle="办公地点" controllerClass="cux.oracle.apps.pa.pmp.webui.PmpContactSiteCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:pageButtonBar id="pageButtonBar" extends="/cux/oracle/apps/pa/pmp/webui/PageButtonsRN" controllerClass="cux.oracle.apps.pa.pmp.webui.PageButtonActionCO"/>
+            <oa:tableLayout id="ProjectInfoRN" extends="/cux/oracle/apps/pa/pmp/webui/ProjectInfoRN" hAlign="center"/>
+            <oa:header id="FirstPartyHdr">
+               <ui:contents>
+                  <oa:table id="PmpContractSiteFirstVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageTextInput id="SiteNameN" dataType="VARCHAR2" prompt="甲方" viewName="PmpContractSiteFirstVO1" viewAttr="SiteName" maximumLength="900"/>
+                        <oa:messageTextInput id="OfficeLocationN" dataType="VARCHAR2" prompt="办公地点" viewName="PmpContractSiteFirstVO1" viewAttr="OfficeLocation" maximumLength="900"/>
+                        <oa:messageTextInput id="PostcodeN" dataType="VARCHAR2" prompt="邮编" viewName="PmpContractSiteFirstVO1" viewAttr="Postcode" maximumLength="30"/>
+                        <oa:messageTextInput id="TelN" dataType="VARCHAR2" prompt="电话" viewName="PmpContractSiteFirstVO1" viewAttr="Tel" maximumLength="30"/>
+                        <oa:messageTextInput id="FaxN" dataType="VARCHAR2" prompt="传真" viewName="PmpContractSiteFirstVO1" viewAttr="Fax" maximumLength="30"/>
+                        <oa:image id="DeleteF" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteF"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region2">
+                           <ui:contents>
+                              <oa:button id="AddF" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddF"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+            <oa:header id="SecondPartyHdr">
+               <ui:contents>
+                  <oa:table id="PmpContractSiteSecondVO1" width="100%">
+                     <ui:contents>
+                        <oa:messageTextInput id="SiteNameS" dataType="VARCHAR2" prompt="乙方" viewName="PmpContractSiteSecondVO1" viewAttr="SiteName" maximumLength="900"/>
+                        <oa:messageTextInput id="OfficeLocationS" dataType="VARCHAR2" prompt="办公地点" viewName="PmpContractSiteSecondVO1" viewAttr="OfficeLocation" maximumLength="900"/>
+                        <oa:messageTextInput id="PostcodeS" dataType="VARCHAR2" prompt="邮编" viewName="PmpContractSiteSecondVO1" viewAttr="Postcode" maximumLength="30"/>
+                        <oa:messageTextInput id="TelS" dataType="VARCHAR2" prompt="电话" viewName="PmpContractSiteSecondVO1" viewAttr="Tel" maximumLength="30"/>
+                        <oa:messageTextInput id="FaxS" dataType="VARCHAR2" prompt="传真" viewName="PmpContractSiteSecondVO1" viewAttr="Fax" maximumLength="30"/>
+                        <oa:image id="DeleteS" source="deleteicon_enabled.gif" prompt="删除" warnAboutChanges="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteS" id="fireAction1"/>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="region3">
+                           <ui:contents>
+                              <oa:button id="AddS" text="新增" prompt="新增">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="AddS"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:table>
+               </ui:contents>
+            </oa:header>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

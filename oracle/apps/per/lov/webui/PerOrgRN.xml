@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_798" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" amDefName="cux.oracle.apps.per.lov.server.PerLovAM" scope="/">
+   <ui:contents>
+      <oa:table name="PerOrgRN" id="PerOrganizationVO1">
+         <ui:contents>
+            <oa:messageStyledText id="OrgId" dataType="NUMBER" prompt="组织ID" viewName="PerOrganizationVO1" viewAttr="OrganizationId" maximumLength="15" selectiveSearchCriteria="false" queryable="false"/>
+            <oa:messageStyledText id="OrgName" dataType="VARCHAR2" prompt="名称" viewName="PerOrganizationVO1" viewAttr="Name" maximumLength="240" queryable="true" selectiveSearchCriteria="false"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+   <ui:searchInstructions>
+      <oa:messageStyledText id="OrgSearchTip" styleClass="OraInstructionText" tipMessageName="CUX_ORG_LOV_TIP" tipMessageAppShortName="CUX"/>
+   </ui:searchInstructions>
+</oa:listOfValues>

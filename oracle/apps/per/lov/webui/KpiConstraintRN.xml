@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1086" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="cux.oracle.apps.per.lov.webui.KpiConstraintLovCO" amDefName="cux.oracle.apps.per.lov.server.PerLovAM" securityMode="standard" scope="/">
+   <ui:contents>
+      <oa:table name="KpiConstraintRN" id="KpiConJobLovVO1">
+         <ui:contents>
+            <oa:messageStyledText id="EpmCjCode" dataType="NUMBER" prompt="受约对象编号" viewName="KpiConJobLovVO1" viewAttr="EpmCjCode" queryable="true"/>
+            <oa:messageStyledText id="EpmCjName" dataType="VARCHAR2" prompt="受约对象" viewName="KpiConJobLovVO1" viewAttr="EpmCjName" maximumLength="4000" queryable="true"/>
+            <oa:messageStyledText id="ConstraintType" dataType="VARCHAR2" prompt="类别内部名" viewName="KpiConJobLovVO1" viewAttr="ConstraintType" maximumLength="10" queryable="true"/>
+            <oa:messageStyledText id="ConstraintTypeDis" dataType="VARCHAR2" prompt="类别" viewName="KpiConJobLovVO1" viewAttr="ConstraintTypeDis" maximumLength="12" queryable="true"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

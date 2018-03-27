@@ -1,0 +1,610 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="HrSourceVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="cux.oracle.apps.pa.source.server.HrSourceVORowImpl"
+   ComponentClass="cux.oracle.apps.pa.source.server.HrSourceVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT phs.hrsource_id
+      ,phs.person_id
+      ,cux_common_pkg.get_last_name_by_persionid(phs.person_id) person_name
+      ,cux_common_pkg.get_emp_num_by_persion_id(phs.person_id) person_num
+      ,cux_common_pkg.get_person_primary_deptid(phs.person_id) dept_id
+      ,cux_common_pkg.get_org_name_byid(cux_common_pkg.get_person_primary_deptid(phs.person_id)) dept_name
+      ,papf.date_of_birth
+      ,edu.segment4 education
+      ,edu.segment1 college
+      ,edu.segment3 graduation_date
+      ,papf.attribute1 first_working_time
+      ,phs.work_experience
+      ,cux_common_pkg.get_person_spec(phs.person_id) speciality
+      ,jszw.zc
+      ,jszw.prrq
+      ,pj.name job_name
+      ,pp.position_id
+      ,pp.name position_name
+       --,phs.competent_job
+       --,phs.competent_manage_job
+      ,phs.evaluate_job_level
+      ,decode(phs.zyfzr, 'Y', '是', '否') zyfzr
+      ,decode(phs.ztr, 'Y', '是', '否') ztr
+      ,decode(phs.sjr, 'Y', '是', '否') sjr
+      ,decode(phs.jhr, 'Y', '是', '否') jhr
+      ,decode(phs.shr, 'Y', '是', '否') shr
+      ,decode(phs.sdr, 'Y', '是', '否') sdr
+      ,decode(phs.ylgdzz, 'Y', '是', '否') ylgdzz
+      ,phs.zcly
+      ,phs.hrsource_date
+      ,paaf.organization_id
+      ,pj.job_id
+      ,phs.hrsource_type
+      ,cux_pa_hrsource_pkg.get_year_grade_level(phs.person_id, 0) current_year_grade
+      ,cux_pa_hrsource_pkg.get_year_grade_level(phs.person_id, 1) last_year_grade
+      ,cux_pa_hrsource_pkg.get_year_grade_level(phs.person_id, 2) year_before_last_grade
+      ,zyzg.zg
+      ,phs.xmgl_gw
+      ,phs.xmgl_zj
+      ,phs.zz_qz
+FROM   cux_pa_hrsource_t phs
+      ,per_all_assignments_f paaf
+      ,per_jobs pj
+      ,per_positions pp
+      ,per_all_people_f papf
+      ,(SELECT DISTINCT ppa.person_id
+                       ,pac.segment1
+                       ,pac.segment2
+                       ,pac.segment3
+                       ,pac.segment4
+                       ,pac.segment5
+                       ,pac.segment6
+                       ,pac.segment7
+                       ,pac.segment8
+        FROM   per_person_analyses   ppa
+              ,per_analysis_criteria pac
+        WHERE  ppa.analysis_criteria_id = pac.analysis_criteria_id
+        AND    pac.id_flex_num = 50428) edu
+      ,(SELECT max_zc.person_id
+              ,max_zc.zc
+              ,max_zc.prrq
+        FROM   (SELECT ppa.person_id
+                      ,pac.segment1 zc
+                      ,fnd_conc_date.string_to_date(pac.segment7) prrq
+                      ,MAX(fnd_conc_date.string_to_date(pac.segment7)) over(PARTITION BY ppa.person_id) max_prrq
+                FROM   per_person_analyses   ppa
+                      ,per_analysis_criteria pac
+                WHERE  ppa.analysis_criteria_id = pac.analysis_criteria_id
+                AND    pac.id_flex_num = 50432) max_zc
+        WHERE  nvl(max_zc.prrq, SYSDATE) = nvl(max_zc.max_prrq, SYSDATE)) jszw
+      ,(SELECT DISTINCT ppa.person_id
+                       ,listagg(pac.segment1, ',') within GROUP(ORDER BY ppa.person_id) over(PARTITION BY ppa.person_id) zg
+        FROM   per_person_analyses   ppa
+              ,per_analysis_criteria pac
+        WHERE  ppa.analysis_criteria_id = pac.analysis_criteria_id
+        AND    pac.id_flex_num = 50431
+        AND    trunc(SYSDATE) BETWEEN
+               trunc(nvl(pac.start_date_active, SYSDATE - 1)) AND
+               trunc(nvl(pac.end_date_active, SYSDATE + 1))) zyzg
+WHERE  phs.person_id = paaf.person_id(+)
+AND    papf.person_id = edu.person_id(+)
+AND    papf.person_id = jszw.person_id(+)
+AND    papf.person_id = zyzg.person_id(+)
+AND    phs.person_id = papf.person_id(+)
+AND    papf.person_id = paaf.person_id(+)
+AND    paaf.position_id = pp.position_id(+)
+AND    paaf.job_id = pj.job_id(+)
+AND    trunc(SYSDATE) BETWEEN trunc(paaf.effective_start_date) AND
+       trunc(nvl(paaf.effective_end_date, SYSDATE + 1))
+AND    trunc(SYSDATE) BETWEEN trunc(papf.effective_start_date) AND
+       trunc(nvl(papf.effective_end_date, SYSDATE + 1))
+AND    paaf.primary_flag(+) = 'Y'
+AND    (phs.person_id, phs.hrsource_date) IN
+       (SELECT a.person_id
+               ,MAX(a.hrsource_date) over(PARTITION BY a.person_id)
+         FROM   cux_pa_hrsource_t a)
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PaHrsourceEO"
+      Entity="cux.oracle.apps.pa.source.server.PaHrsourceEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="HrsourceId"
+      EntityAttrName="HrsourceId"
+      EntityUsage="PaHrsourceEO"
+      AliasName="HRSOURCE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PERSON_ID"
+      Expression="PERSON_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERSON_NAME"
+      Expression="PERSON_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PersonNum"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PERSON_NUM"
+      Expression="PERSON_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeptId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DEPT_ID"
+      Expression="DEPT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeptName"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DEPT_NAME"
+      Expression="DEPT_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfBirth"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DATE_OF_BIRTH"
+      Expression="DATE_OF_BIRTH"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Education"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EDUCATION"
+      Expression="EDUCATION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="College"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="COLLEGE"
+      Expression="COLLEGE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GraduationDate"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="GRADUATION_DATE"
+      Expression="GRADUATION_DATE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FirstWorkingTime"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FIRST_WORKING_TIME"
+      Expression="FIRST_WORKING_TIME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkExperience"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WORK_EXPERIENCE"
+      Expression="WORK_EXPERIENCE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Speciality"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SPECIALITY"
+      Expression="SPECIALITY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Zc"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZC"
+      Expression="ZC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Prrq"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="PRRQ"
+      Expression="PRRQ"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="JobName"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="JOB_NAME"
+      Expression="JOB_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PositionId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="POSITION_ID"
+      Expression="POSITION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PositionName"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="POSITION_NAME"
+      Expression="POSITION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EvaluateJobLevel"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EVALUATE_JOB_LEVEL"
+      Expression="EVALUATE_JOB_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Zyfzr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZYFZR"
+      Expression="ZYFZR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ztr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZTR"
+      Expression="ZTR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sjr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SJR"
+      Expression="SJR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jhr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="JHR"
+      Expression="JHR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Shr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SHR"
+      Expression="SHR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sdr"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SDR"
+      Expression="SDR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ylgdzz"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="YLGDZZ"
+      Expression="YLGDZZ"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Zcly"
+      IsPersistent="false"
+      Precision="3000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZCLY"
+      Expression="ZCLY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HrsourceDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="HRSOURCE_DATE"
+      Expression="HRSOURCE_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrganizationId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ORGANIZATION_ID"
+      Expression="ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="JobId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="JOB_ID"
+      Expression="JOB_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HrsourceType"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="HRSOURCE_TYPE"
+      Expression="HRSOURCE_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrentYearGrade"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CURRENT_YEAR_GRADE"
+      Expression="CURRENT_YEAR_GRADE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastYearGrade"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_YEAR_GRADE"
+      Expression="LAST_YEAR_GRADE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="YearBeforeLastGrade"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="YEAR_BEFORE_LAST_GRADE"
+      Expression="YEAR_BEFORE_LAST_GRADE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Zg"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZG"
+      Expression="ZG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="XmglGw"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="XMGL_GW"
+      Expression="XMGL_GW"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="XmglZj"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="XMGL_ZJ"
+      Expression="XMGL_ZJ"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ZzQz"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ZZ_QZ"
+      Expression="ZZ_QZ"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="300" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

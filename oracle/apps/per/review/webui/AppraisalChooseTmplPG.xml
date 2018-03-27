@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_798" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="pageLayoutRN" windowTitle="选择绩效考核模板" title="选择绩效考核模板" amDefName="cux.oracle.apps.per.review.server.AppraisalAM" controllerClass="cux.oracle.apps.per.review.webui.AppraisalChooseTmplCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:table id="TmplDetailVO1" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="TmplId" dataType="NUMBER" prompt="序号" viewName="TmplDetailVO1" viewAttr="TmplId" maximumLength="10"/>
+                  <oa:messageStyledText id="TmplName" dataType="VARCHAR2" prompt="模板名称" viewName="TmplDetailVO1" viewAttr="TmplName" maximumLength="240"/>
+                  <oa:messageStyledText id="GroupName" dataType="VARCHAR2" prompt="适用考群" viewName="TmplDetailVO1" viewAttr="GroupName" maximumLength="200"/>
+                  <oa:formValue id="GroupId" dataType="NUMBER" prompt="GroupId" viewName="TmplDetailVO1" viewAttr="GroupId"/>
+               </ui:contents>
+               <ui:tableSelection>
+                  <oa:singleSelection id="singleSelection" viewName="TmplDetailVO1" viewAttr="Selected" shortDesc="选择"/>
+               </ui:tableSelection>
+               <ui:tableActions>
+                  <oa:flowLayout id="region1">
+                     <ui:contents>
+                        <oa:submitButton id="ApplyTmpl" text="应用模板" prompt="应用模板"/>
+                        <oa:spacer id="item2" width="10"/>
+                        <oa:submitButton id="Return" text="返回绩效合同" prompt="返回绩效合同"/>
+                     </ui:contents>
+                  </oa:flowLayout>
+               </ui:tableActions>
+            </oa:table>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

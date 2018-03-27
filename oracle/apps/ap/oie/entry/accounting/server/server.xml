@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="cux.oracle.apps.ap.oie.entry.accounting.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.43.6" />
+   </DesignTime>
+   <Containee
+      Name="CuxCurrentEmpOrgQueryVO"
+      FullName="cux.oracle.apps.ap.oie.entry.accounting.server.CuxCurrentEmpOrgQueryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxProjectsQueryVO"
+      FullName="cux.oracle.apps.ap.oie.entry.accounting.server.CuxProjectsQueryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CuxTasksQueryVO"
+      FullName="cux.oracle.apps.ap.oie.entry.accounting.server.CuxTasksQueryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

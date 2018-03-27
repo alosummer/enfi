@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1086" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="cux.oracle.apps.per.bonus.awardsreport.server.AwardsReportAM" windowTitle="项目管理奖明细" title="项目管理奖明细" controllerClass="cux.oracle.apps.per.bonus.awardsreport.webui.ProjectAwardsDetailsCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:header id="ProjectAwardsDetailsHeader" text="项目管理奖发放明细表">
+               <ui:contents>
+                  <oa:advancedTable id="ProjectAwardsDetailsTable" viewName="ProjectAwardsDetailsVO1" width="100%">
+                     <ui:contents>
+                        <oa:column id="EmployeeNumberCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader1" prompt="工号"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeNumber" viewAttr="EmployeeNumber"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeNameCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader2" prompt="姓名"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeName" viewAttr="EmployeeName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EmployeeDeptCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader3" prompt="部门"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="EmployeeDept" viewAttr="DeptName"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistributionDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader4" prompt="下发日期"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistributionDate" viewAttr="DistributionDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DistributionAmountCol" columnDataFormat="numberFormat" totalValue="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="sortableHeader5" prompt="下发金额"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DistributionAmount" viewAttr="DistributionAmount" dataType="NUMBER"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:total>
+                              <oa:totalRow id="totalRow1" readOnly="true"/>
+                           </ui:total>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:header>
+            <oa:pageButtonBar id="PageButtonRN">
+               <ui:contents>
+                  <oa:submitButton id="ReturnButton" text="返回" prompt="返回"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>
