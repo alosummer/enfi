@@ -52,7 +52,6 @@ public class PageButtonActionCO extends PmpBaseCO {
         vo.setWhereClause(null);
         vo.setWhereClause(" PMP_ID = " + pageContext.getSessionValue("PmpId"));
         vo.executeQuery();
-        
         Row row = vo.first();
         String verifyStatus = (String)row.getAttribute("VerifyStatus");
         String approveStatus = (String)row.getAttribute("ApproveStatus");
@@ -92,13 +91,13 @@ public class PageButtonActionCO extends PmpBaseCO {
         if ("MTREJECTED".equals(verifyStatus) && 
             "UNAPPROVED".equals(approveStatus)) {
             OAWebBean submitD = webBean.findChildRecursive("submitd");
-            submitD.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
+            submitD.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
             OAWebBean submitC = webBean.findChildRecursive("submitc");
             submitC.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
             OAWebBean back = webBean.findChildRecursive("back");
             back.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
             OAWebBean save = webBean.findChildRecursive("save");
-            save.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
+            save.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
         }
         if ("VERIFIED".equals(verifyStatus) && 
             "UNAPPROVED".equals(approveStatus)) {
@@ -143,6 +142,7 @@ public class PageButtonActionCO extends PmpBaseCO {
             OAWebBean save = webBean.findChildRecursive("save");
             save.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
         }
+        
     }
 
     /**
