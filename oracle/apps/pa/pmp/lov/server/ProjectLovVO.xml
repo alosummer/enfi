@@ -9,15 +9,12 @@
    ComponentClass="cux.oracle.apps.pa.pmp.lov.server.ProjectLovVOImpl"
    UseGlueCode="false" >
    <SQLQuery><![CDATA[
-SELECT * FROM(
-  SELECT project_id, segment1, NAME,template_flag
+SELECT project_id, segment1, NAME,template_flag
   FROM pa_projects_all
   WHERE fnd_global.EMPLOYEE_ID =
       cux_pa_util_pkg.get_project_roles_emp(project_id, '项目经理')
-  or fnd_global.EMPLOYEE_ID  in
-     (1515, 1116, 1401, 1106, 1117, 1111, 1115, 1513, 1109,
-      1679, 1407, 1776, 160, 1190, 252, 256, 258, 1546, 1545)) ppa
- WHERE  ppa.template_flag = 'N'
+  or cux_pa_pmp_pkg.query_all_project > 0
+ AND template_flag = 'N'
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isExpertMode" Value="true" />

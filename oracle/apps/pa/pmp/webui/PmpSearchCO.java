@@ -42,12 +42,12 @@ public class PmpSearchCO extends PmpBaseCO {
     public void processRequest(OAPageContext pageContext, OAWebBean webBean) {
         super.processRequest(pageContext, webBean);
         OAApplicationModule am = pageContext.getApplicationModule(webBean);
-        int employeeId = pageContext.getEmployeeId();
         if(am.getOADBTransaction().isDirty()){
             am.getOADBTransaction().rollback();
         }
-        if (employeeId == 
-            258) { //Whether the person who landed is zhang xiaoming.
+        Number flag = 
+            (Number)this.getSqlValue(am, this.SQL_PMP_STATUS_VAL);//判断登陆人是否是张小明
+        if (flag.intValue() > 0 ) { 
             OAWebBean save = webBean.findChildRecursive("save");
             save.setAttributeValue(RENDERED_ATTR, Boolean.TRUE);
             OAWebBean attribute1 = webBean.findChildRecursive("Attribute1");
@@ -70,7 +70,9 @@ public class PmpSearchCO extends PmpBaseCO {
         String event = pageContext.getParameter(EVENT_PARAM);
         OAApplicationModule am = pageContext.getApplicationModule(webBean);
         if ("Search".equals(event)) { 
-            am.getOADBTransaction().rollback();
+            if(am.getOADBTransaction().isDirty()){
+                am.getOADBTransaction().rollback();
+            }
             String projectId = pageContext.getParameter("projectId");
             Serializable paras[] = { projectId };
             am.invokeMethod("searchPmp", paras);
@@ -123,6 +125,24 @@ public class PmpSearchCO extends PmpBaseCO {
         for (int i = 0; i < paras.length; i++) {
             vo.setWhereClauseParam(i, paras[i]);
         }
+        vo.executeQuery();
+        if (vo.hasNext()) {
+            result = vo.next().getAttribute(0);
+        }
+        return result;
+        
+        return result;
+    
+    }
+    
+    public Object getSqlValue(OAApplicationModule am,String sql) {
+        ViewObject vo = am.findViewObject("QueryVO");
+        Object result = null;
+        if (vo != null) {
+            vo.remove();
+        }
+        vo = am.createViewObjectFromQueryStmt("QueryVO", sql);
+        vo.setMaxFetchSize(-1);
         vo.executeQuery();
         if (vo.hasNext()) {
             result = vo.next().getAttribute(0);

@@ -30,4 +30,11 @@ public interface PmpConstants {
         "                          WHERE  cp.project_id = :2)\n" + 
 //        "AND    ppt.VERIFY_STATUS <> 'MTREJECTED'\n" + 
         "AND    ppt.APPROVE_STATUS <> 'APPROVED'";
+    public static final String SQL_LOGIN_PEO = 
+        "SELECT COUNT(0)\n" + "FROM  per_all_people_f papf\n" + 
+        "WHERE  trunc(sysdate) between\n" + 
+        "trunc(nvl(papf.EFFECTIVE_START_DATE, sysdate - 1)) and\n" + 
+        "trunc(nvl(papf.EFFECTIVE_END_DATE, sysdate + 1))\n" + 
+        "and papf.LAST_NAME in ('张小明')\n" + 
+        "and papf.PERSON_ID = fnd_global.EMPLOYEE_ID";    
 }
