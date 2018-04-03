@@ -66,7 +66,7 @@ public class PageButtonActionCO extends PmpBaseCO {
             OAWebBean save = webBean.findChildRecursive("save");
             save.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
         }
-        if ("BTVERIFYING".equals(verifyStatus) && 
+        if ("VERIFYING".equals(verifyStatus) && 
             "UNAPPROVED".equals(approveStatus)) {
             OAWebBean submitD = webBean.findChildRecursive("submitd");
             submitD.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
@@ -76,28 +76,6 @@ public class PageButtonActionCO extends PmpBaseCO {
             back.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
             OAWebBean save = webBean.findChildRecursive("save");
             save.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
-        }
-        if ("MTVERIFYING".equals(verifyStatus) && 
-            "UNAPPROVED".equals(approveStatus)) {
-            OAWebBean submitD = webBean.findChildRecursive("submitd");
-            submitD.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
-            OAWebBean submitC = webBean.findChildRecursive("submitc");
-            submitC.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
-            OAWebBean back = webBean.findChildRecursive("back");
-            back.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
-            OAWebBean save = webBean.findChildRecursive("save");
-            save.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
-        }
-        if ("MTREJECTED".equals(verifyStatus) && 
-            "UNAPPROVED".equals(approveStatus)) {
-            OAWebBean submitD = webBean.findChildRecursive("submitd");
-            submitD.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
-            OAWebBean submitC = webBean.findChildRecursive("submitc");
-            submitC.setAttributeValue(DISABLED_ATTR, Boolean.TRUE);
-            OAWebBean back = webBean.findChildRecursive("back");
-            back.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
-            OAWebBean save = webBean.findChildRecursive("save");
-            save.setAttributeValue(DISABLED_ATTR, Boolean.FALSE);
         }
         if ("VERIFIED".equals(verifyStatus) && 
             "UNAPPROVED".equals(approveStatus)) {
